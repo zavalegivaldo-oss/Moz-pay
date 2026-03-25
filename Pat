@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAY MOZAMBIQUE 🇲🇿</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #00ffcc;
+            --success: #28a745;
+            --danger: #dc3545;
+            --card-bg: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            margin: 0; font-family: 'Segoe UI', sans-serif;
+            background: #0a0a0a; color: white; padding-bottom: 80px;
+        }
+
+        .container { padding: 15px; max-width: 480px; margin: auto; }
+        .hidden { display: none; }
+
+        /* NOTIFICAÇÕES */
+        #notify-bar {
+            position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: #000; padding: 10px 20px;
+            border-radius: 25px; font-size: 12px; font-weight: bold; z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,255,204,0.3); transition: 0.5s;
+        }
+
+        .header { text-align: center; padding: 25px 0; border-bottom: 1px solid #222; }
+        .logo { font-size: 22px; font-weight: 900; color: var(--primary); }
+
+        .card {
+            background: var(--card-bg); backdrop-filter: blur(10px);
+            padding: 20px; margin-top: 15px; border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        input, select, textarea {
+            width: 100%; padding: 14px; margin-top: 10px; border-radius: 8px;
+            border: 1px solid #333; background: #000; color: white; box-sizing: border-box;
+        }
+
+        button {
+            width: 100%; padding: 15px; margin-top: 15px; border-radius: 8px;
+            border: none; font-weight: bold; cursor: pointer; text-transform: uppercase;
+        }
+
+        .btn-main { background: var(--primary); color: #000; }
+        .btn-sec { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+
+        /* COMENTÁRIOS */
+        .comment { border-bottom: 1px solid #222; padding: 10px 0; font-size: 13px; }
+        .comment b { color: var(--primary); }
+
+        nav {
+            position: fixed; bottom: 0; width: 100%; display: flex;
+            background: #000; border-top: 1px solid #222; z-index: 100;
+        }
+        nav button { flex: 1; background: none; font-size: 10px; color: #666; padding: 15px 0; margin:0; }
+        nav button.active { color: var(--primary); border-top: 2px solid var(--primary); }
+
+        .hist-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #222; font-size: 12px; }
+        
+        /* TABELA VISÍVEL */
+        .tabela-precos { font-size: 12px; width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .tabela-precos td { padding: 5px; border-bottom: 1px solid #333; }
+        .tabela-precos .retorno { color: var(--primary); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div id="notify-bar" class="hidden"></div>
+
+<div class="header">
+    <div class="logo">PAY MOZAMBIQUE 🇲🇿</div>
+</div>
+
+<div id="loginPage" class="container">
+    <div class="card">
+        <h3>ACESSAR TERMINAL</h3>
+        <input id="email" type="email" placeholder="E-mail">
+        <input id="senha" type="password" placeholder="PIN de Segurança">
+        <button class="btn-main" onclick="register()">CRIAR CONTA GRATUITA</button>
+        <button class="btn-sec" onclick="login()">ENTRAR</button>
+    </div>
+</div>
+
+<div id="app" class="hidden">
+    
+    <div id="home" class="container section">
+        <div class="card">
+            <small style="color:#aaa">SALDO DISPONÍVEL</small>
+            <h2 style="margin:5px 0"><span id="valSaldo">0.00</span> MZN</h2>
+            <p id="msgMineracao" style="font-size: 10px; color: var(--primary); margin: 0;"></p>
+        </div>
+
+        <div class="card">
+            <h4>TABELA DE RENDIMENTOS</h4>
+            <table class="tabela-precos">
+                <tr><td>55 MT</td><td class="retorno">➜ 100 MT (BÓNUS ÚNICO)</td></tr>
+                <tr><td>120 MT</td><td class="retorno">➜ 250 MT</td></tr>
+                <tr><td>300 MT</td><td class="retorno">➜ 800 MT</td></tr>
+                <tr><td>1.000 MT</td><td class="retorno">➜ 2.000 MT</td></tr>
+                <tr><td>5.000 MT</td><td class="retorno">➜ 10.000 MT</td></tr>
+                <tr><td>10.000 MT</td><td class="retorno">➜ 20.000 MT</td></tr>
+            </table>
+            <p style="font-size: 10px; color: #888; margin-top: 10px;">* O retorno é adicionado em 30 a 40 minutos.</p>
+        </div>
+
+        <div class="card">
+            <h4>FEEDBACK DA COMUNIDADE</h4>
+            <div id="boxComentarios" style="max-height: 200px; overflow-y: auto;">
+                <div class="comment"><b>Admin_Pay</b>: ⚠️ Oferta de 55MT disponível apenas para o primeiro investimento!</div>
+                <div class="comment"><b>lucas_invest</b>: Coloquei 1000MT e em 35 min caiu 2000MT. Top!</div>
+                <div class="comment"><b>marta_moza</b>: Fiz meu 2º levantamento de hoje. Limite diário atingido! ✅</div>
+                <div class="comment"><b>zelio_invest</b>: Os 800MT do investimento de 300MT já estão na conta.</div>
+            </div>
+            <input id="meuComentario" placeholder="Escreva sua experiência...">
+            <button class="btn-main" style="padding:8px" onclick="addComentario()">PUBLICAR</button>
+        </div>
+    </div>
+
+    <div id="investir" class="hidden container section">
+        <h3>DEPOSITAR CAPITAL</h3>
+        <div class="card">
+            <p style="font-size: 12px; color: var(--primary);">Mínimo: 55 MT | Máximo: 10.000 MT</p>
+            <input id="depValor" type="number" placeholder="Valor do Investimento">
+            <select id="depMetodo">
+                <option value="M-Pesa">M-Pesa (845646041)</option>
+                <option value="E-Mola">E-Mola (876353251)</option>
+            </select>
+            <button class="btn-main" onclick="gerarPagamento()">OBTER DADOS DE PAGAMENTO</button>
+        </div>
+
+        <div id="areaConfirmacao" class="card hidden">
+            <p id="txtInstrucao" style="font-size: 12px; line-height: 1.5;"></p>
+            <textarea id="idTransacao" placeholder="Cole aqui a mensagem de confirmação ou ID da Transação"></textarea>
+            <button class="btn-main" style="background: var(--success)" onclick="confirmar()">ENVIAR COMPROVATIVO</button>
+        </div>
+    </div>
+
+    <div id="saque" class="hidden container section">
+        <h3>SOLICITAR RETIRADA</h3>
+        <div class="card">
+            <input id="sacarValor" type="number" placeholder="Valor MZN">
+            <input type="text" placeholder="Número da Conta (M-Pesa/Emola)">
+            <p style="font-size: 11px; color: #888;">
+                * Limite: <b>2 levantamentos por dia</b><br>
+                * Processamento: <b>30-40 Minutos</b>
+            </p>
+            <button class="btn-main" onclick="processarSaque()">SACAR AGORA</button>
+        </div>
+    </div>
+
+    <div id="historico" class="hidden container section">
+        <h3>EXTRATO COMPLETO</h3>
+        <div id="listaHistorico"></div>
+    </div>
+
+</div>
+
+<nav id="navbar" class="hidden">
+    <button onclick="nav('home', this)" class="active">HOME</button>
+    <button onclick="nav('investir', this)">DEPOSITAR</button>
+    <button onclick="nav('saque', this)">SACAR</button>
+    <button onclick="nav('historico', this)">EXTRATO</button>
+</nav>
+
+<script>
+let user = JSON.parse(localStorage.getItem("paymoz_data")) || null;
+
+const fakeLogs = ["84*** investiu 55 MT", "87*** sacou 2000 MT", "user99 investiu 300 MT", "84*** lucrou 800 MT"];
+setInterval(() => {
+    if(user) {
+        const bar = document.getElementById("notify-bar");
+        bar.innerText = fakeLogs[Math.floor(Math.random() * fakeLogs.length)];
+        bar.classList.remove("hidden");
+        setTimeout(() => bar.classList.add("hidden"), 3000);
+    }
+}, 6000);
+
+function register() {
+    const e = document.getElementById("email").value;
+    const s = document.getElementById("senha").value;
+    if(!e || !s) return alert("Preencha os campos.");
+    user = {
+        email: e,
+        saldo: 0, // Saldo inicial zerado conforme solicitado
+        investiu55: false,
+        jaInvestiu: false, // Nova flag para verificar investimento
+        levantamentosHoje: 0,
+        ultimoAcesso: new Date().getTime(),
+        historico: [{tipo: "Conta Criada", valor: 0, data: "Hoje", status: "Sucesso"}]
+    };
+    save();
+    boot();
+}
+
+function login() {
+    const saved = JSON.parse(localStorage.getItem("paymoz_data"));
+    if(saved) { 
+        user = saved; 
+        processarRendimentoDiario(); // Verifica rendimento ao entrar
+        boot(); 
+    } else { 
+        alert("Conta não encontrada."); 
+    }
+}
+
+// Lógica de rendimento passivo: +24MT por dia até 500MT (se não investiu)
+function processarRendimentoDiario() {
+    if (user.jaInvestiu) return; // Se investiu, o sistema de +24MT para
+
+    const agora = new Date().getTime();
+    const umDiaEmMs = 24 * 60 * 60 * 1000;
+    const diferenca = agora - user.ultimoAcesso;
+
+    if (diferenca >= umDiaEmMs && user.saldo < 500) {
+        const diasPassados = Math.floor(diferenca / umDiaEmMs);
+        let ganho = diasPassados * 24;
+        
+        // Limita o saldo automático a 500MT
+        if ((user.saldo + ganho) > 500) {
+            ganho = 500 - user.saldo;
+        }
+
+        if (ganho > 0) {
+            user.saldo += ganho;
+            user.historico.push({tipo: "Rendimento Diário", valor: ganho, data: "Automático", status: "Sucesso"});
+            user.ultimoAcesso = agora;
+            save();
+        }
+    }
+
+    // Exibe aviso na tela sobre a mineração/rendimento
+    if (!user.jaInvestiu && user.saldo < 500) {
+        document.getElementById("msgMineracao").innerText = "• Rendimento ativo: +24 MT/dia (Limite 500MT)";
+    } else if (!user.jaInvestiu && user.saldo >= 500) {
+        document.getElementById("msgMineracao").innerText = "• Limite de rendimento passivo atingido.";
+    } else {
+        document.getElementById("msgMineracao").innerText = "• Investidor Ativo";
+    }
+}
+
+function boot() {
+    document.getElementById("loginPage").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+    document.getElementById("navbar").classList.remove("hidden");
+    updateUI();
+}
+
+function updateUI() {
+    document.getElementById("valSaldo").innerText = user.saldo.toFixed(2);
+    const list = document.getElementById("listaHistorico");
+    list.innerHTML = user.historico.map(h => `
+        <div class="hist-item">
+            <div><b>${h.tipo}</b><br><small>${h.data}</small></div>
+            <div style="color:${h.valor > 0 ? '#0ffc' : '#f55'}">${h.valor > 0 ? '+' : ''}${h.valor} MT<br><small>${h.status}</small></div>
+        </div>
+    `).reverse().join('');
+}
+
+function gerarPagamento() {
+    const v = parseFloat(document.getElementById("depValor").value);
+    const m = document.getElementById("depMetodo").value;
+    
+    if(v === 55 && user.investiu55) return alert("A oferta de 55 MT é válida apenas uma vez por conta.");
+    if(v < 55) return alert("Investimento mínimo é 55 MT");
+    
+    const conta = m === "M-Pesa" ? "845646041" : "876353251";
+    document.getElementById("txtInstrucao").innerHTML = `<b>PAGAMENTO VIA ${m.toUpperCase()}</b><br>Envie ${v} MT para: <b>${conta}</b><br><br>O seu retorno será creditado em 30-40 minutos após confirmação.`;
+    document.getElementById("areaConfirmacao").classList.remove("hidden");
+}
+
+function confirmar() {
+    const id = document.getElementById("idTransacao").value;
+    const v = parseFloat(document.getElementById("depValor").value);
+    if(id.length < 5) return alert("Insira um ID de transação válido.");
+
+    if(v === 55) user.investiu55 = true;
+    user.jaInvestiu = true; // Marca que o usuário investiu (para parar o +24MT)
+
+    user.historico.push({tipo: "Processando Investimento", valor: v, data: "Agora", status: "30-40 min"});
+    save();
+    updateUI();
+    alert("Comprovativo recebido! O lucro será adicionado automaticamente em instantes.");
+    
+    setTimeout(() => {
+        let retorno = v * 2;
+        if(v === 55) retorno = 100;
+        if(v === 120) retorno = 250;
+        if(v === 300) retorno = 800;
+
+        user.saldo += retorno;
+        user.historico.push({tipo: "Retorno de Investimento", valor: retorno, data: "Hoje", status: "Sucesso"});
+        save();
+        updateUI();
+    }, 5000); 
+}
+
+function processarSaque() {
+    if(user.levantamentosHoje >= 2) return alert("Limite de 2 levantamentos por dia atingido.");
+    
+    const v = parseFloat(document.getElementById("sacarValor").value);
+    if(v > user.saldo) return alert("Saldo insuficiente.");
+    
+    user.saldo -= v;
+    user.levantamentosHoje += 1;
+    user.historico.push({tipo: "Levantamento", valor: -v, data: "Agora", status: "Enviando..."});
+    save();
+    updateUI();
+    alert("Pedido de levantamento enviado com sucesso!");
+}
+
+function addComentario() {
+    const msg = document.getElementById("meuComentario").value;
+    if(!msg) return;
+    const div = document.createElement("div");
+    div.className = "comment";
+    div.innerHTML = `<b>Você</b>: ${msg}`;
+    document.getElementById("boxComentarios").prepend(div);
+    document.getElementById("meuComentario").value = "";
+}
+
+function nav(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.remove('hidden');
+    btn.classList.add('active');
+}
+
+function save() { localStorage.setItem("paymoz_data", JSON.stringify(user)); }
+</script>
+</body>
+</html>

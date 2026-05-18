@@ -1,503 +1,627 @@
-<!DOCTYPE html>
+iy<!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CardsMZ - Cartões Virtuais</title>
-<meta name="description" content="Adquira cartões bancários virtuais de forma rápida e segura. Recarregue via M-PESA ou E-MOLA.">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CardsMZ — O seu Cartão Virtual em minutos</title>
+<meta name="description" content="Adquira o seu cartão virtual bancário (Basic, Premium, VIP) e pague com M-PESA ou E-MOLA em Moçambique." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          background: 'hsl(220 25% 6%)',
+          foreground: 'hsl(35 25% 94%)',
+          card: 'hsl(220 22% 11%)',
+          primary: { DEFAULT: 'hsl(168 70% 48%)', fg: 'hsl(220 25% 6%)' },
+          secondary: { DEFAULT: 'hsl(42 82% 58%)', fg: 'hsl(220 25% 6%)' },
+          muted: { DEFAULT: 'hsl(220 18% 16%)', fg: 'hsl(215 15% 58%)' },
+          border: 'hsl(220 16% 22%)',
+          destructive: 'hsl(0 84% 60%)',
+        },
+        fontFamily: {
+          sans: ['DM Sans', 'sans-serif'],
+          heading: ['Space Grotesk', 'sans-serif'],
+          mono: ['Inter', 'sans-serif'],
+        },
+      },
+    },
+  }
+</script>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
---bg:220 20% 7%;--fg:35 30% 93%;--card:220 18% 13%;--card-fg:35 30% 93%;
---primary:168 70% 45%;--primary-fg:220 20% 7%;--secondary:42 80% 55%;--secondary-fg:220 20% 7%;
---muted:220 15% 16%;--muted-fg:210 15% 50%;--border:220 15% 22%;--destructive:0 84% 60%;
---radius:0.75rem;
-}
-body{background:hsl(var(--bg));color:hsl(var(--fg));font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
-h1,h2,h3,h4,h5,h6,.font-heading{font-family:'Space Grotesk',sans-serif}
-.gradient-text{background:linear-gradient(135deg,hsl(var(--primary)),hsl(var(--secondary)));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.container{max-width:1200px;margin:0 auto;padding:0 1rem}
-a{color:inherit;text-decoration:none}
+  body { background: hsl(220 25% 6%); color: hsl(35 25% 94%); font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+  h1,h2,h3,h4,h5,h6 { font-family: 'Space Grotesk', sans-serif; }
+  .font-heading { font-family: 'Space Grotesk', sans-serif; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+  .gradient-text { background-image: linear-gradient(135deg, hsl(168 70% 48%), hsl(42 82% 58%)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .text-muted-foreground { color: hsl(215 15% 58%); }
+  .bg-card { background: hsl(220 22% 11%); }
+  .bg-muted { background: hsl(220 18% 16%); }
+  .border-border { border-color: hsl(220 16% 22%); }
+  .text-primary { color: hsl(168 70% 48%); }
+  .text-secondary { color: hsl(42 82% 58%); }
+  .bg-primary { background: hsl(168 70% 48%); color: hsl(220 25% 6%); }
+  .bg-secondary { background: hsl(42 82% 58%); color: hsl(220 25% 6%); }
+  .bg-primary\/10 { background: hsla(168, 70%, 48%, 0.1); }
+  .bg-secondary\/10 { background: hsla(42, 82%, 58%, 0.1); }
+  .border-primary\/30 { border-color: hsla(168, 70%, 48%, 0.3); }
+  .text-destructive { color: hsl(0 84% 60%); }
+  .bg-destructive\/10 { background: hsla(0, 84%, 60%, 0.1); }
+  .border-destructive\/30 { border-color: hsla(0, 84%, 60%, 0.3); }
 
-/* Buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.625rem 1.5rem;border-radius:var(--radius);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.875rem;cursor:pointer;border:none;transition:all .2s}
-.btn-hero{background:hsl(var(--primary));color:hsl(var(--primary-fg));box-shadow:0 4px 15px hsla(var(--primary)/.2)}
-.btn-hero:hover{filter:brightness(1.1)}
-.btn-outline{border:1px solid hsl(var(--primary));color:hsl(var(--primary));background:transparent}
-.btn-outline:hover{background:hsla(var(--primary)/.1)}
-.btn-gold{background:linear-gradient(135deg,hsl(var(--secondary)),hsl(15 80% 50%));color:hsl(var(--secondary-fg))}
-.btn-gold:hover{filter:brightness(1.1)}
-.btn-whatsapp{background:hsl(var(--primary));color:hsl(var(--primary-fg));box-shadow:0 4px 10px hsla(var(--primary)/.15)}
-.btn-whatsapp:hover{filter:brightness(1.1)}
-.btn-back{border:1px solid hsl(var(--border));color:hsl(var(--muted-fg));background:transparent}
-.btn-back:hover{background:hsla(var(--muted)/.5)}
-.btn-full{width:100%}
+  @keyframes cardFloat { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-12px) rotate(-2deg); } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+  .animate-card-float { animation: cardFloat 5s ease-in-out infinite; }
+  .fade-in-up { animation: fadeInUp .6s ease-out; }
 
-/* Card component */
-.vcard{position:relative;width:100%;max-width:380px;border-radius:1rem;overflow:hidden;margin:0 auto;color:#f5f0e8;aspect-ratio:1.586/1}
-.vcard-inner{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:space-between;height:100%;padding:1.25rem}
-.vcard .shine{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent)}
-.vcard .shine-top{top:0}.vcard .shine-bot{bottom:0}
-.vcard .holo{position:absolute;inset:0;opacity:.07;background:repeating-linear-gradient(105deg,transparent,transparent 10px,rgba(255,255,255,.08) 10px,rgba(255,255,255,.08) 20px)}
-.vcard .glow{position:absolute;width:180px;height:180px;border-radius:50%;filter:blur(60px)}
-.vcard .glow1{top:-60px;right:-60px}.vcard .glow2{bottom:-60px;left:-60px}
-.vcard-brand{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;opacity:.9}
-.vcard-sub{font-size:9px;letter-spacing:.2em;text-transform:uppercase;opacity:.4;margin-top:2px}
-.vcard-chip{width:48px;height:34px;border-radius:6px;box-shadow:inset 0 1px 2px rgba(255,255,255,.4),inset 0 -1px 2px rgba(0,0,0,.2),0 2px 4px rgba(0,0,0,.3)}
-.vcard-number{font-family:'Space Grotesk',sans-serif;font-size:clamp(15px,3.5vw,19px);letter-spacing:.22em;font-weight:500;text-shadow:0 1px 2px rgba(0,0,0,.3)}
-.vcard-bottom{display:flex;align-items:flex-end;justify-content:space-between}
-.vcard-label{font-size:7px;letter-spacing:.2em;text-transform:uppercase;opacity:.4;margin-bottom:2px}
-.vcard-value{font-family:'Space Grotesk',sans-serif;font-size:clamp(10px,2.2vw,12px);font-weight:600;letter-spacing:.08em;text-shadow:0 1px 2px rgba(0,0,0,.3)}
-.vcard-circles{display:flex;margin-left:.5rem}
-.vcard-circles span{width:26px;height:26px;border-radius:50%}
-.vcard-circles span:last-child{margin-left:-8px}
-.floating{animation:cardFloat 3s ease-in-out infinite}
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; font-weight: 600; padding: .8rem 1.4rem; border-radius: .75rem; transition: all .25s; font-family: 'Space Grotesk', sans-serif; cursor: pointer; border: 1px solid transparent; }
+  .btn-hero { background: linear-gradient(135deg, hsl(168 70% 48%), hsl(168 65% 40%)); color: hsl(220 25% 6%); box-shadow: 0 10px 30px -10px hsla(168, 70%, 48%, .45); }
+  .btn-hero:hover { transform: translateY(-2px); box-shadow: 0 18px 38px -10px hsla(168, 70%, 48%, .55); }
+  .btn-gold { background: linear-gradient(135deg, hsl(42 82% 58%), hsl(38 75% 48%)); color: hsl(220 25% 6%); box-shadow: 0 10px 30px -10px hsla(42, 82%, 58%, .4); }
+  .btn-gold:hover { transform: translateY(-2px); }
+  .btn-outline-primary { background: transparent; border-color: hsl(168 70% 48%); color: hsl(168 70% 48%); }
+  .btn-outline-primary:hover { background: hsla(168, 70%, 48%, .1); }
+  .btn-outline { background: transparent; border-color: hsl(220 16% 22%); color: hsl(215 15% 58%); }
+  .btn-outline:hover { background: hsl(220 18% 16%); }
+  .btn-whatsapp { background: #25D366; color: white; }
+  .btn-whatsapp:hover { background: #1da851; }
+  .btn[disabled] { opacity: .5; cursor: not-allowed; }
+  .btn[disabled]:hover { transform: none; }
 
-/* Hero */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center;padding:5rem 0}
-@media(min-width:768px){.hero-grid{grid-template-columns:1fr 1fr}}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid hsla(var(--primary)/.3);background:hsla(var(--primary)/.1);border-radius:9999px;padding:.375rem 1rem;font-size:.875rem;color:hsl(var(--primary))}
-.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.15}
-.hero p{color:hsl(var(--muted-fg));font-size:1.125rem;max-width:480px;line-height:1.7}
-.hero-features{display:flex;flex-wrap:wrap;gap:1.5rem;font-size:.875rem;color:hsl(var(--muted-fg))}
-.hero-features span{display:flex;align-items:center;gap:.375rem}
-.hero-glow{position:absolute;border-radius:50%;pointer-events:none}
+  input[type=email], input[type=tel], .otp-slot {
+    width: 100%; background: hsl(220 18% 16%); border: 1px solid hsl(220 16% 22%); border-radius: .65rem; padding: .8rem 1rem; color: hsl(35 25% 94%); outline: none; transition: border-color .2s; font-family: 'Space Grotesk', sans-serif;
+  }
+  input:focus { border-color: hsl(168 70% 48%); }
+  .otp-slot { width: 2.75rem; height: 3rem; text-align: center; font-size: 1.25rem; }
+  @media (min-width: 640px) { .otp-slot { width: 3rem; height: 3.5rem; } }
 
-/* Sections */
-section{padding:5rem 0}
-.section-title{text-align:center;margin-bottom:3rem}
-.section-title h2{font-size:clamp(1.6rem,4vw,2.8rem);font-weight:700}
-.section-title p{color:hsl(var(--muted-fg));margin-top:.75rem;max-width:500px;margin-left:auto;margin-right:auto}
+  /* =========== REALISTIC VIRTUAL CARDS =========== */
+  .vcard {
+    position: relative; width: 100%; max-width: 380px; margin: 0 auto;
+    aspect-ratio: 1.586 / 1; border-radius: 16px; overflow: hidden; color: #f5f0e8;
+    isolation: isolate;
+  }
 
-/* Card tiers */
-.tier{display:flex;flex-direction:column;gap:1.5rem}
-.tier-info{position:relative;border:1px solid hsl(var(--border));border-radius:1rem;padding:1.5rem;background:hsl(var(--card))}
-.tier-info.popular{border:1px solid transparent;background:linear-gradient(hsl(var(--card)),hsl(var(--card))) padding-box,linear-gradient(135deg,hsl(var(--primary)),hsl(var(--secondary))) border-box;box-shadow:0 0 40px hsla(168,70%,45%,.12)}
-.tier-info.vip{border:1px solid transparent;background:linear-gradient(hsl(var(--card)),hsl(var(--card))) padding-box,linear-gradient(135deg,hsl(var(--secondary)),hsl(15,80%,50%)) border-box;box-shadow:0 0 40px hsla(42,80%,55%,.12)}
-.tier-tag{position:absolute;top:-.75rem;left:50%;transform:translateX(-50%);font-size:.75rem;font-weight:600;padding:.25rem 1rem;border-radius:9999px}
-.tier-tag.popular{background:hsl(var(--primary));color:hsl(var(--primary-fg))}
-.tier-tag.vip{background:hsl(var(--secondary));color:hsl(var(--secondary-fg))}
-.tier-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
-.tier-price{font-size:1.875rem;font-weight:700}
-.tier-grid{display:grid;grid-template-columns:1fr;gap:1rem}
-@media(min-width:640px){.tier-grid{grid-template-columns:1fr 1fr}}
-.tier-grid ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.tier-grid li{display:flex;align-items:center;gap:.5rem;font-size:.875rem}
-.tier-grid li svg{color:hsl(var(--primary));flex-shrink:0}
-.tier-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:hsl(var(--muted-fg));font-weight:600;margin-bottom:.5rem}
+  /* Base gradients (real bank card vibe) */
+  .vcard-blue {
+    background:
+      radial-gradient(ellipse at 80% 0%, hsla(195, 90%, 55%, .35), transparent 55%),
+      radial-gradient(ellipse at 0% 100%, hsla(230, 80%, 35%, .55), transparent 60%),
+      linear-gradient(135deg, #0c2a52 0%, #0a1f44 45%, #060f28 100%);
+    box-shadow:
+      0 30px 70px -20px rgba(0,0,0,.7),
+      0 0 50px hsla(210,80%,45%,.15),
+      inset 0 1px 0 rgba(255,255,255,.12),
+      inset 0 -1px 0 rgba(0,0,0,.3);
+  }
+  .vcard-black {
+    background:
+      radial-gradient(ellipse at 80% 0%, hsla(168, 60%, 35%, .25), transparent 55%),
+      radial-gradient(ellipse at 0% 100%, hsla(0, 0%, 15%, .8), transparent 60%),
+      linear-gradient(135deg, #1f1f1f 0%, #0f0f0f 50%, #050505 100%);
+    box-shadow:
+      0 30px 70px -20px rgba(0,0,0,.85),
+      0 0 60px rgba(255,255,255,.04),
+      inset 0 1px 0 rgba(255,255,255,.1),
+      inset 0 -1px 0 rgba(0,0,0,.4);
+  }
+  .vcard-gold {
+    background:
+      radial-gradient(ellipse at 80% 0%, hsla(45, 95%, 65%, .4), transparent 55%),
+      radial-gradient(ellipse at 0% 100%, hsla(20, 60%, 25%, .6), transparent 60%),
+      linear-gradient(135deg, #a8761f 0%, #7a4f15 45%, #3d2810 100%);
+    box-shadow:
+      0 30px 70px -20px rgba(0,0,0,.7),
+      0 0 60px hsla(38,80%,50%,.2),
+      inset 0 1px 0 rgba(255,255,255,.2),
+      inset 0 -1px 0 rgba(0,0,0,.35);
+  }
 
-/* How it works */
-.how-bg{background:hsl(220 20% 6%)}
-.steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:900px;margin:0 auto}
-@media(min-width:768px){.steps-grid{grid-template-columns:repeat(4,1fr)}}
-.step{text-align:center;position:relative}
-.step-icon{width:60px;height:60px;margin:0 auto;border-radius:14px;background:hsl(var(--card));border:1px solid hsl(var(--border));display:flex;align-items:center;justify-content:center}
-.step-icon svg{width:24px;height:24px;color:hsl(var(--primary))}
-.step-num{position:absolute;top:-8px;right:calc(50% - 38px);width:24px;height:24px;border-radius:50%;background:hsl(var(--secondary));color:hsl(var(--secondary-fg));font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.step h3{font-weight:600;margin-top:1rem}
-.step p{font-size:.875rem;color:hsl(var(--muted-fg));margin-top:.5rem}
+  /* Holographic shimmer layer */
+  .vcard::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255,255,255,.04) 45%,
+      rgba(255,255,255,.10) 50%,
+      rgba(255,255,255,.04) 55%,
+      transparent 70%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 6s linear infinite;
+    mix-blend-mode: overlay;
+  }
 
-/* Payment */
-.pay-card{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:1rem;padding:1.5rem}
-.pay-method{display:flex;align-items:center;justify-content:space-between;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:1rem;padding:1.25rem}
-.pay-method-icon{width:44px;height:44px;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-size:1.25rem}
-.copy-btn{display:flex;align-items:center;gap:.375rem;background:hsl(var(--muted));padding:.5rem .75rem;border-radius:.5rem;font-size:.875rem;border:none;color:hsl(var(--fg));cursor:pointer;transition:background .2s}
-.copy-btn:hover{background:hsla(var(--muted)/.7)}
-.code-input{width:100%;background:hsl(var(--muted));border:1px solid hsl(var(--border));border-radius:.5rem;padding:.75rem 1rem;color:hsl(var(--fg));font-family:'Space Grotesk',sans-serif;text-align:center;font-size:1.875rem;letter-spacing:.5em;outline:none;transition:border-color .2s}
-.code-input:focus{border-color:hsl(var(--primary))}
-.phone-input{width:100%;background:hsl(var(--muted));border:1px solid hsl(var(--border));border-radius:.5rem;padding:.75rem 1rem;color:hsl(var(--fg));font-family:'Space Grotesk',sans-serif;outline:none;transition:border-color .2s}
-.phone-input:focus{border-color:hsl(var(--primary))}
-.error-box{display:flex;align-items:flex-start;gap:.5rem;padding:.75rem;border-radius:.5rem;background:hsla(var(--destructive)/.1);border:1px solid hsla(var(--destructive)/.3)}
-.error-box p{font-size:.875rem;color:hsl(var(--destructive))}
-.step-indicator{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:1rem}
-.step-pill{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:9999px;font-size:.875rem;font-weight:600;transition:all .2s}
-.step-pill.active{background:hsl(var(--primary));color:hsl(var(--primary-fg))}
-.step-pill.inactive{background:hsl(var(--muted));color:hsl(var(--muted-fg))}
-.info-box{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:1rem;padding:1.5rem;max-width:700px;margin:0 auto 2rem}
-.info-grid{display:grid;grid-template-columns:1fr;gap:1rem}
-@media(min-width:640px){.info-grid{grid-template-columns:repeat(3,1fr)}}
-.info-step{display:flex;gap:.75rem;align-items:flex-start}
-.info-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;font-size:.875rem}
-.methods-grid{display:grid;grid-template-columns:1fr;gap:1rem}
-@media(min-width:640px){.methods-grid{grid-template-columns:1fr 1fr}}
-.method-card{border:1px solid hsl(var(--border));border-radius:.75rem;padding:1rem;background:hsla(var(--muted)/.3)}
-.method-card .steps-list{font-size:.875rem;color:hsl(var(--muted-fg));display:flex;flex-direction:column;gap:.25rem;margin-top:.75rem}
-.notes-box{border-radius:.5rem;padding:1rem;font-size:.875rem;color:hsl(var(--muted-fg));display:flex;flex-direction:column;gap:.375rem;background:hsl(220 20% 8%)}
-.notes-box p{display:flex;align-items:center;gap:.5rem}
+  /* Embossed micro-pattern (real card texture) */
+  .vcard::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,.04) 1px, transparent 0),
+      repeating-linear-gradient(115deg, transparent 0 12px, rgba(255,255,255,.025) 12px 13px);
+    background-size: 4px 4px, auto;
+    opacity: .9;
+  }
 
-/* Info additional */
-.info-additional{max-width:600px;margin:3rem auto 0;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:1rem;padding:1.5rem;text-align:center}
-.info-additional .grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;font-size:.875rem;color:hsl(var(--muted-fg));margin-top:1rem}
-.info-additional .grid span{display:flex;align-items:center;gap:.5rem}
+  .vcard-inner {
+    position: relative; z-index: 3;
+    display: grid;
+    grid-template-rows: auto 1fr auto auto;
+    height: 100%; padding: 1.25rem 1.35rem;
+    gap: .5rem;
+  }
 
-/* Footer */
-footer{border-top:1px solid hsl(var(--border));padding:2rem 0}
-footer .inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
-footer p{font-size:.875rem;color:hsl(var(--muted-fg))}
-footer a{font-size:.875rem;color:hsl(var(--muted-fg));display:flex;align-items:center;gap:.375rem;transition:color .2s}
-footer a:hover{color:hsl(var(--primary))}
+  /* EMV Chip — realistic */
+  .vcard-chip {
+    width: 3rem; height: 2.25rem; border-radius: .375rem; position: relative;
+    background:
+      linear-gradient(135deg, #f4d27a 0%, #c89a3f 40%, #8a6520 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.55),
+      inset 0 -1px 1px rgba(0,0,0,.35),
+      0 2px 5px rgba(0,0,0,.45);
+  }
+  .vcard-chip::before {
+    content: ""; position: absolute; inset: 4px; border-radius: 3px;
+    background:
+      linear-gradient(0deg, transparent 0 23%, rgba(0,0,0,.35) 23% 27%, transparent 27% 47%, rgba(0,0,0,.35) 47% 51%, transparent 51% 71%, rgba(0,0,0,.35) 71% 75%, transparent 75%),
+      linear-gradient(90deg, transparent 0 31%, rgba(0,0,0,.35) 31% 34%, transparent 34% 64%, rgba(0,0,0,.35) 64% 67%, transparent 67%);
+  }
+  .vcard-chip::after {
+    content: ""; position: absolute; inset: 30% 35%; border-radius: 2px;
+    background: linear-gradient(135deg, rgba(255,255,255,.4), rgba(0,0,0,.15));
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.4);
+  }
+  .chip-black {
+    background: linear-gradient(135deg, #e8e8e8 0%, #9a9a9a 40%, #5a5a5a 100%);
+  }
 
-.hidden{display:none!important}
-.flex-gap{display:flex;gap:.75rem}
-.text-center{text-align:center}
-.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-4{margin-top:1rem}
-.text-sm{font-size:.875rem}.text-xs{font-size:.75rem}
-.text-muted{color:hsl(var(--muted-fg))}
+  /* Contactless icon */
+  .contactless {
+    width: 22px; height: 22px; opacity: .85;
+  }
 
-@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  /* Card number — embossed style */
+  .vcard-num {
+    font-family: 'Inter', 'Space Grotesk', sans-serif;
+    font-size: clamp(16px, 4vw, 21px);
+    letter-spacing: .15em;
+    font-weight: 600;
+    text-shadow:
+      0 1px 0 rgba(255,255,255,.18),
+      0 2px 3px rgba(0,0,0,.55);
+    display: flex; gap: .55em;
+  }
+  .vcard-num span { display: inline-block; }
 
-/* SVG icons inline */
-.icon{width:16px;height:16px;display:inline-block;vertical-align:middle}
-.icon-lg{width:20px;height:20px}
-.icon-xl{width:24px;height:24px}
+  .vcard-label {
+    font-size: 8px; letter-spacing: .25em; text-transform: uppercase;
+    opacity: .55; margin-bottom: 3px; font-weight: 500;
+  }
+  .vcard-val {
+    font-family: 'Inter', 'Space Grotesk', sans-serif;
+    font-size: clamp(11px, 2.4vw, 13px); font-weight: 600;
+    letter-spacing: .1em;
+    text-shadow: 0 1px 0 rgba(255,255,255,.12), 0 2px 3px rgba(0,0,0,.5);
+  }
+
+  /* Brand logo (Visa/Mastercard-style circles) */
+  .vcard-brand { display: flex; align-items: center; }
+  .vcard-circle { width: 28px; height: 28px; border-radius: 999px; }
+  .brand-red { background: radial-gradient(circle at 30% 30%, #ff6b5b, #d8342a); box-shadow: inset 0 -2px 4px rgba(0,0,0,.3); }
+  .brand-yellow { background: radial-gradient(circle at 30% 30%, #ffd35c, #f5a623); box-shadow: inset 0 -2px 4px rgba(0,0,0,.3); }
+  .brand-overlap { margin-left: -10px; mix-blend-mode: screen; }
+
+  /* Tier card gradient borders */
+  .tier-popular {
+    border: 1px solid transparent;
+    background: linear-gradient(hsl(220 22% 11%), hsl(220 22% 11%)) padding-box,
+                linear-gradient(135deg, hsl(168 70% 48%), hsl(42 82% 58%)) border-box;
+    box-shadow: 0 0 50px hsla(168,70%,48%,0.14);
+  }
+  .tier-vip {
+    border: 1px solid transparent;
+    background: linear-gradient(hsl(220 22% 11%), hsl(220 22% 11%)) padding-box,
+                linear-gradient(135deg, hsl(42 82% 58%), hsl(15 80% 50%)) border-box;
+    box-shadow: 0 0 50px hsla(42,82%,58%,0.14);
+  }
+
+  /* Delivery time highlight */
+  .delivery-pill {
+    display: flex; align-items: center; gap: .65rem;
+    border: 1px solid hsla(168, 70%, 48%, .3);
+    background: hsla(168, 70%, 48%, .08);
+    border-radius: .85rem; padding: .8rem 1rem;
+  }
 </style>
 </head>
 <body>
 
 <!-- ============ HERO ============ -->
-<section class="hero">
-<div class="hero-glow" style="width:600px;height:600px;top:-200px;left:-200px;opacity:.06;background:radial-gradient(circle,hsl(168 70% 45%),transparent 70%)"></div>
-<div class="hero-glow" style="width:500px;height:500px;bottom:-100px;right:-150px;opacity:.04;background:radial-gradient(circle,hsl(42 80% 55%),transparent 70%)"></div>
-<div class="container">
-<div class="hero-grid" style="animation:fadeInUp .6s ease-out">
-<div style="display:flex;flex-direction:column;gap:1.75rem">
-<div class="hero-badge">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-Cartões Bancários Seguros
-</div>
-<h1>O seu <span class="gradient-text">Cartão Virtual</span> em minutos</h1>
-<p>Adquira o seu cartão bancário virtual de forma rápida e segura. Recarregue via M-PESA ou E-MOLA e comece a usar imediatamente.</p>
-<div class="hero-features">
-<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(42 80% 55%)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Entrega Instantânea</span>
-<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(42 80% 55%)" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Visa & Mastercard</span>
-<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(42 80% 55%)" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>100% Seguro</span>
-</div>
-<div><a href="#cartoes" class="btn btn-hero" style="font-size:1rem;padding:.75rem 2rem">Ver Cartões Disponíveis</a></div>
-</div>
-<div style="display:flex;justify-content:center;animation:fadeInUp .8s ease-out">
-<div class="vcard floating" style="background:linear-gradient(135deg,hsl(210 80% 30%),hsl(220 70% 22%),hsl(230 50% 15%));box-shadow:0 25px 60px -15px rgba(0,0,0,.6),0 0 40px hsla(210,80%,45%,0.2),inset 0 1px 0 rgba(255,255,255,.1)">
-<div class="shine shine-top"></div><div class="shine shine-bot"></div><div class="holo"></div>
-<div class="glow glow1" style="background:hsla(210,80%,50%,0.2)"></div>
-<div class="glow glow2" style="background:hsla(230,60%,40%,0.1)"></div>
-<div class="vcard-inner">
-<div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="vcard-brand">CardsMZ</div><div class="vcard-sub">Virtual Prepaid</div></div></div>
-<div class="vcard-chip" style="background:linear-gradient(145deg,hsl(42 85% 68%),hsl(42 65% 50%),hsl(42 70% 42%))"></div>
-<div class="vcard-number">4821 •••• •••• 3047</div>
-<div class="vcard-bottom"><div><div class="vcard-label">Titular</div><div class="vcard-value">ANTONIO M. SILVA</div></div><div style="text-align:center;padding:0 1rem"><div class="vcard-label">Validade</div><div class="vcard-value">09/28</div></div><div class="vcard-circles"><span style="background:hsla(210,80%,55%,0.85)"></span><span style="background:hsla(230,60%,45%,0.7)"></span></div></div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<section class="relative min-h-screen flex items-center overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute rounded-full" style="width:600px;height:600px;top:-200px;left:-200px;opacity:.08;background:radial-gradient(circle, hsl(168 70% 48%), transparent 70%);"></div>
+    <div class="absolute rounded-full" style="width:500px;height:500px;bottom:-100px;right:-150px;opacity:.05;background:radial-gradient(circle, hsl(42 82% 58%), transparent 70%);"></div>
+  </div>
+  <div class="container relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center py-20 md:py-0">
+      <div class="flex flex-col gap-7 fade-in-up">
+        <div class="inline-flex items-center gap-2 border border-primary/30 bg-primary/10 rounded-full px-4 py-1.5 text-sm text-primary w-fit">
+          🛡️ Cartões Bancários Seguros
+        </div>
+        <h1 class="font-bold leading-[1.1]" style="font-size:clamp(2rem,5vw,3.5rem);">
+          O seu <span class="gradient-text">Cartão Virtual</span> em minutos
+        </h1>
+        <p class="text-muted-foreground text-lg max-w-[480px] leading-relaxed">
+          Adquira o seu cartão bancário virtual de forma rápida e segura. Recarregue via M-PESA ou E-MOLA e comece a usar imediatamente.
+        </p>
+        <div class="flex flex-wrap gap-6 text-sm text-muted-foreground">
+          <span class="flex items-center gap-1.5"><span class="text-secondary">⚡</span>Entrega Rápida</span>
+          <span class="flex items-center gap-1.5"><span class="text-secondary">💳</span>Visa & Mastercard</span>
+          <span class="flex items-center gap-1.5"><span class="text-secondary">🛡️</span>100% Seguro</span>
+        </div>
+        <div><a href="#cartoes" class="btn btn-hero" style="padding:.95rem 1.6rem;">Ver Cartões Disponíveis</a></div>
+      </div>
+      <div class="flex justify-center fade-in-up">
+        <div class="vcard vcard-blue animate-card-float">
+          <div class="vcard-inner">
+            <div class="flex justify-between items-start">
+              <div>
+                <div class="font-heading text-[12px] font-bold uppercase" style="letter-spacing:.3em;">CardsMZ</div>
+                <div class="text-[9px] uppercase opacity-60 mt-0.5" style="letter-spacing:.2em;">Virtual Prepaid</div>
+              </div>
+              <svg class="contactless" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M5 8a10 10 0 0 1 0 8M9 6a14 14 0 0 1 0 12M13 4a18 18 0 0 1 0 16M17 6a14 14 0 0 1 0 12"/>
+              </svg>
+            </div>
+            <div class="vcard-chip"></div>
+            <div class="vcard-num"><span>4821</span><span>••••</span><span>••••</span><span>3047</span></div>
+            <div class="flex items-end justify-between">
+              <div><div class="vcard-label">Titular</div><div class="vcard-val">ANTONIO M. SILVA</div></div>
+              <div class="text-center"><div class="vcard-label">Validade</div><div class="vcard-val">09/28</div></div>
+              <div class="vcard-brand">
+                <div class="vcard-circle brand-red"></div>
+                <div class="vcard-circle brand-yellow brand-overlap"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ============ CARD TIERS ============ -->
-<section id="cartoes">
-<div class="container">
-<div class="section-title">
-<h2>Escolha o seu <span class="gradient-text">Cartão</span></h2>
-<p>Três planos para atender às suas necessidades de pagamento online.</p>
-</div>
-<div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem">
+<section id="cartoes" class="py-20">
+  <div class="container">
+    <div class="text-center mb-14">
+      <h2 class="font-bold" style="font-size:clamp(1.6rem,4vw,2.8rem);">Escolha o seu <span class="gradient-text">Cartão</span></h2>
+      <p class="text-muted-foreground mt-3 max-w-[500px] mx-auto">Três planos premium para atender às suas necessidades de pagamento online.</p>
+    </div>
 
-<!-- Basic -->
-<div class="tier">
-<div class="vcard" style="background:linear-gradient(135deg,hsl(210 80% 30%),hsl(220 70% 22%),hsl(230 50% 15%));box-shadow:0 25px 60px -15px rgba(0,0,0,.6),0 0 40px hsla(210,80%,45%,0.2),inset 0 1px 0 rgba(255,255,255,.1)">
-<div class="shine shine-top"></div><div class="shine shine-bot"></div><div class="holo"></div>
-<div class="glow glow1" style="background:hsla(210,80%,50%,0.2)"></div><div class="glow glow2" style="background:hsla(230,60%,40%,0.1)"></div>
-<div class="vcard-inner"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="vcard-brand">CardsMZ</div><div class="vcard-sub">Iniciante</div></div></div><div class="vcard-chip" style="background:linear-gradient(145deg,hsl(42 85% 68%),hsl(42 65% 50%),hsl(42 70% 42%))"></div><div class="vcard-number">4821 •••• •••• 1023</div><div class="vcard-bottom"><div><div class="vcard-label">Titular</div><div class="vcard-value">CARLOS MENDES</div></div><div style="text-align:center;padding:0 1rem"><div class="vcard-label">Validade</div><div class="vcard-value">03/27</div></div><div class="vcard-circles"><span style="background:hsla(210,80%,55%,0.85)"></span><span style="background:hsla(230,60%,45%,0.7)"></span></div></div></div>
-</div>
-<div class="tier-info">
-<div class="tier-header"><div><h3 class="font-heading" style="font-size:1.25rem;font-weight:700">Cartão Básico</h3><p class="text-sm text-muted">Iniciante</p></div><div><span class="gradient-text tier-price font-heading">199</span><span class="text-sm text-muted"> MZN</span></div></div>
-<div class="tier-grid"><div><p class="tier-label">Características</p><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Recarga mínima de 200 MZN</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Taxa manutenção: 0,5%/mês</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Limite de gastos: 2.000 MZN</li></ul></div><div><p class="tier-label">Vantagens</p><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Fácil de obter</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Sem requisitos de renda</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Ideal para gastos diários</li></ul></div></div>
-<button class="btn btn-outline btn-full mt-4" onclick="selectCard('Cartão Básico - 199 MZN')">Comprar</button>
-</div>
-</div>
+    <div class="max-w-[900px] mx-auto flex flex-col gap-12" id="tiers"></div>
 
-<!-- Premium -->
-<div class="tier">
-<div class="vcard" style="background:linear-gradient(135deg,hsl(0 0% 12%),hsl(0 0% 6%),hsl(0 0% 2%));box-shadow:0 25px 60px -15px rgba(0,0,0,.8),0 0 50px rgba(255,255,255,.05),inset 0 1px 0 rgba(255,255,255,.08)">
-<div class="shine shine-top"></div><div class="shine shine-bot"></div><div class="holo"></div>
-<div class="glow glow1" style="background:rgba(255,255,255,.06)"></div><div class="glow glow2" style="background:hsla(168,70%,45%,0.08)"></div>
-<div class="vcard-inner"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="vcard-brand">CardsMZ</div><div class="vcard-sub">Intermediário</div></div></div><div class="vcard-chip" style="background:linear-gradient(145deg,hsl(0 0% 70%),hsl(0 0% 50%),hsl(0 0% 40%))"></div><div class="vcard-number">5392 •••• •••• 7814</div><div class="vcard-bottom"><div><div class="vcard-label">Titular</div><div class="vcard-value">MARIA JOSE</div></div><div style="text-align:center;padding:0 1rem"><div class="vcard-label">Validade</div><div class="vcard-value">11/28</div></div><div class="vcard-circles"><span style="background:rgba(255,255,255,0.7)"></span><span style="background:hsla(168,70%,45%,0.6)"></span></div></div></div>
-</div>
-<div class="tier-info popular">
-<div class="tier-tag popular">Mais Popular</div>
-<div class="tier-header"><div><h3 class="font-heading" style="font-size:1.25rem;font-weight:700">Cartão Premium</h3><p class="text-sm text-muted">Intermediário</p></div><div><span class="gradient-text tier-price font-heading">350</span><span class="text-sm text-muted"> MZN</span></div></div>
-<div class="tier-grid"><div><p class="tier-label">Características</p><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Recarga mínima de 500 MZN</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Taxa manutenção: 0,5%/mês</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Limite de gastos: 10.000 MZN</li></ul></div><div><p class="tier-label">Vantagens</p><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Maior limite de gastos</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Serviços internacionais</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Recompensas por gastos</li></ul></div></div>
-<button class="btn btn-hero btn-full mt-4" onclick="selectCard('Cartão Premium - 350 MZN')">Comprar</button>
-</div>
-</div>
-
-<!-- VIP -->
-<div class="tier">
-<div class="vcard" style="background:linear-gradient(135deg,hsl(38 80% 42%),hsl(28 70% 32%),hsl(18 50% 20%));box-shadow:0 25px 60px -15px rgba(0,0,0,.6),0 0 50px hsla(38,80%,50%,0.2),inset 0 1px 0 rgba(255,255,255,.15)">
-<div class="sihine shine-top"></div><div class="shine shine-bot"></div><div class="holo"></div>
-<div class="glow glow1" style="background:hsla(38,80%,55%,0.25)"></div><div class="glow glow2" style="background:hsla(18,60%,40%,0.15)"></div>
-<div class="vcard-inner"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="vcard-brand">CardsMZ</div><div class="vcard-sub">Premium Exclusivo</div></div></div><div class="vcard-chip" style="background:linear-gradient(145deg,hsl(42 90% 72%),hsl(38 80% 55%),hsl(35 70% 40%))"></div><div class="vcard-number">4156 •••• •••• 9201</div><div class="vcard-bottom"><div><div class="vcard-label">Titular</div><div class="vcard-value">JOAO MACHADO</div></div><div style="text-align:center;padding:0 1rem"><div class="vcard-label">Validade</div><div class="vcard-value">06/29</div></div><div class="vcard-circles"><span style="background:hsla(42,80%,55%,0.9)"></span><span style="background:hsla(28,70%,45%,0.8)"></span></div></div></div>
-</div>
-<div class="tier-info vip">
-<div class="tier-tag vip">Exclusivo</div>
-<div class="tier-header"><div><h3 class="font-heading" style="font-size:1.25rem;font-weight:700">Cartão VIP</h3><p class="text-sm text-muted">Premium Exclusivo</p></div><div><span class="gradient-text tier-price font-heading">1.500</span><span class="text-sm text-muted"> MZN</span></div></div>
-<div class="tier-grid"><div><p class="tier-label">Características</p><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Recarga mínima de 1.000 MZN</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Taxa manutenção: 0,5%/mês</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Limite de gastos: 50.000 MZN</li></ul></div><div><p class="tier-label">Vantagens</p><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Serviços exclusivos</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Recompensas avançadas</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Atendimento prioritário</li></ul></div></div>
-<button class="btn btn-gold btn-full mt-4" onclick="selectCard('Cartão VIP - 1.500 MZN')">Comprar</button>
-</div>
-</div>
-
-</div>
-
-<!-- Info adicional -->
-<div class="info-additional">
-<h3 class="font-heading" style="font-weight:700;font-size:1.125rem">Informações <span class="gradient-text">Adicionais</span></h3>
-<div class="grid">
-<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(168 70% 45%)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Validade: 1 ano</span>
-<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(168 70% 45%)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Taxa de recarga: 1%</span>
-<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(168 70% 45%)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Taxa de saque: 2%</span>
-<span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(168 70% 45%)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Entrega em até 24h</span>
-</div>
-</div>
-</div>
+    <div class="max-w-[600px] mx-auto mt-14 bg-card border border-border rounded-2xl p-6">
+      <h3 class="font-bold text-lg text-center mb-4">Informações <span class="gradient-text">Adicionais</span></h3>
+      <div class="grid grid-cols-2 gap-3 text-sm text-muted-foreground">
+        <span class="flex items-center gap-2"><span class="text-primary">✓</span>Validade: 1 ano</span>
+        <span class="flex items-center gap-2"><span class="text-primary">✓</span>Taxa de recarga: 1%</span>
+        <span class="flex items-center gap-2"><span class="text-primary">✓</span>Taxa de saque: 2%</span>
+        <span class="flex items-center gap-2"><span class="text-primary">✓</span>Entrega rápida e segura</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ============ HOW IT WORKS ============ -->
-<section class="how-bg">
-<div class="container">
-<div class="section-title">
-<h2>Como <span class="gradient-text">Funciona</span></h2>
-<p>Processo simples e rápido em apenas 4 passos.</p>
-</div>
-<div class="steps-grid">
-<div class="step"><div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="step-num">1</div><h3>Escolha o Cartão</h3><p>Selecione o tipo de cartão que melhor atende às suas necessidades.</p></div>
-<div class="step"><div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><div class="step-num">2</div><h3>Faça o Pagamento</h3><p>Envie o valor via M-PESA ou E-MOLA para os números indicados.</p></div>
-<div class="step"><div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div><div class="step-num">3</div><h3>Envie o Comprovante</h3><p>Envie o comprovante de pagamento para o nosso WhatsApp.</p></div>
-<div class="step"><div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="step-num">4</div><h3>Receba o Cartão</h3><p>Receba os dados do seu cartão virtual em até 24 horas.</p></div>
-</div>
-</div>
+<section class="py-20" style="background: hsl(220 25% 5%);">
+  <div class="container">
+    <div class="text-center mb-12">
+      <h2 class="font-bold" style="font-size:clamp(1.6rem,4vw,2.8rem);">Como <span class="gradient-text">Funciona</span></h2>
+      <p class="text-muted-foreground mt-3 max-w-[500px] mx-auto">Processo simples e rápido em apenas 4 passos.</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-[900px] mx-auto">
+      <div class="text-center relative"><div class="w-[60px] h-[60px] mx-auto rounded-[14px] bg-card border border-border flex items-center justify-center text-primary text-2xl">💳</div><div class="absolute -top-2 right-[calc(50%-38px)] w-6 h-6 rounded-full bg-secondary text-[11px] font-bold flex items-center justify-center">1</div><h3 class="font-semibold mt-4">Escolha o Cartão</h3><p class="text-sm text-muted-foreground mt-2">Selecione o tipo de cartão que melhor atende às suas necessidades.</p></div>
+      <div class="text-center relative"><div class="w-[60px] h-[60px] mx-auto rounded-[14px] bg-card border border-border flex items-center justify-center text-primary text-2xl">📱</div><div class="absolute -top-2 right-[calc(50%-38px)] w-6 h-6 rounded-full bg-secondary text-[11px] font-bold flex items-center justify-center">2</div><h3 class="font-semibold mt-4">Faça o Pagamento</h3><p class="text-sm text-muted-foreground mt-2">Envie o valor via M-PESA ou E-MOLA para os números indicados.</p></div>
+      <div class="text-center relative"><div class="w-[60px] h-[60px] mx-auto rounded-[14px] bg-card border border-border flex items-center justify-center text-primary text-2xl">📤</div><div class="absolute -top-2 right-[calc(50%-38px)] w-6 h-6 rounded-full bg-secondary text-[11px] font-bold flex items-center justify-center">3</div><h3 class="font-semibold mt-4">Envie o Comprovante</h3><p class="text-sm text-muted-foreground mt-2">Envie o comprovante de pagamento para o nosso WhatsApp.</p></div>
+      <div class="text-center relative"><div class="w-[60px] h-[60px] mx-auto rounded-[14px] bg-card border border-border flex items-center justify-center text-primary text-2xl">✅</div><div class="absolute -top-2 right-[calc(50%-38px)] w-6 h-6 rounded-full bg-secondary text-[11px] font-bold flex items-center justify-center">4</div><h3 class="font-semibold mt-4">Receba o Cartão</h3><p class="text-sm text-muted-foreground mt-2">Receba os dados do seu cartão virtual com rapidez.</p></div>
+    </div>
+  </div>
 </section>
 
-<!-- ============ PAYMENT SECTION ============ -->
-<section id="pagamento">
-<div class="container">
-<div class="section-title">
-<h2>Formas de <span class="gradient-text">Pagamento</span></h2>
-<p id="pay-subtitle">Selecione um cartão acima e siga os passos para concluir a compra.</p>
-</div>
-
-<!-- Payment instructions -->
-<div class="info-box">
-<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
-<div style="width:40px;height:40px;border-radius:.75rem;background:hsla(var(--primary)/.1);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="hsl(168 70% 45%)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
-<h3 class="font-heading" style="font-weight:700;font-size:1.125rem">Como Funciona o Pagamento</h3>
-</div>
-<div class="info-grid">
-<div class="info-step"><div class="info-num" style="background:hsla(var(--primary)/.1);color:hsl(var(--primary))">1</div><div><p style="font-weight:600;font-size:.875rem">Digite seu número</p><p class="text-xs text-muted" style="margin-top:2px">Para receber o código de confirmação por SMS</p></div></div>
-<div class="info-step"><div class="info-num" style="background:hsla(var(--secondary)/.1);color:hsl(var(--secondary))">2</div><div><p style="font-weight:600;font-size:.875rem">Transfira o valor</p><p class="text-xs text-muted" style="margin-top:2px">Via M-PESA ou E-MOLA para os números indicados</p></div></div>
-<div class="info-step"><div class="info-num" style="background:hsla(var(--primary)/.1);color:hsl(var(--primary))">3</div><div><p style="font-weight:600;font-size:.875rem">Confirme e receba</p><p class="text-xs text-muted" style="margin-top:2px">Insira o código e receba seu cartão virtual</p></div></div>
-</div>
-</div>
-
-<!-- Payment methods -->
-<div class="info-box">
-<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
-<div style="width:40px;height:40px;border-radius:.75rem;background:hsla(var(--secondary)/.1);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="hsl(42 80% 55%)" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-<h3 class="font-heading" style="font-weight:700;font-size:1.125rem">Métodos de Pagamento Aceitos</h3>
-</div>
-<div class="methods-grid">
-<div class="method-card">
-<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem"><div class="pay-method-icon" style="background:hsla(var(--primary)/.1)">💸</div><div><p class="font-heading" style="font-weight:600">M-PESA</p><p class="text-sm text-muted">Vodacom Moçambique</p></div></div>
-<div class="steps-list"><p>• Marque *150# no seu telefone</p><p>• Selecione "Transferir Dinheiro"</p><p>• Digite o número: <strong style="color:hsl(var(--fg))">84 564 6041</strong></p><p>• Confirme o valor e insira seu PIN</p></div>
-</div>
-<div class="method-card">
-<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem"><div class="pay-method-icon" style="background:hsla(var(--secondary)/.1)">💸</div><div><p class="font-heading" style="font-weight:600">E-MOLA</p><p class="text-sm text-muted">Movitel Moçambique</p></div></div>
-<div class="steps-list"><p>• Marque *Se*r# no seu telefone</p><p>• Selecione "Enviar Dinheiro"</p><p>• Digite o número: <strong style="color:hsl(var(--fg))">87 635 3251</strong></p><p>• Confirme o valor e insira seu PIN</p></div>
-</div>
-</div>
-<div style="margin-top:1rem;padding:.75rem;border-radius:.5rem;background:hsla(var(--primary)/.05);border:1px solid hsla(var(--primary)/.2);display:flex;align-items:flex-start;gap:.5rem">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(168 70% 45%)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-<p class="text-xs text-muted">Todas as transações são seguras e processadas em tempo real. Após a transferência, você receberá um SMS com o código de confirmação.</p>
-</div>
-</div>
-
-<!-- Step flow -->
-<div style="max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:1rem">
-<div class="step-indicator">
-<div class="step-pill active" id="pill-phone"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Passo 1</div>
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--muted-fg))" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-<div class="step-pill inactive" id="pill-payment"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Passo 2</div>
-</div>
-
-<!-- Phone step -->
-<div id="step-phone" class="pay-card" style="display:flex;flex-direction:column;gap:1.25rem">
-<h3 class="text-center font-heading" style="font-weight:700;font-size:1.125rem">Receber Código de <span class="gradient-text">Confirmação</span></h3>
-<p class="text-sm text-muted text-center">Digite o número de telefone para receber o código de confirmação de pagamento por SMS.</p>
-<div>
-<label class="text-sm text-muted" style="display:block;margin-bottom:.25rem">Número de telefone</label>
-<input type="tel" id="phone-input" placeholder="Ex: 84 123 4567" maxlength="12" class="phone-input">
-<p id="phone-error" class="hidden" style="color:hsl(var(--destructive));font-size:.875rem;margin-top:.25rem"></p>
-</div>
-<div class="flex-gap">
-<button class="btn btn-back" style="flex:1" onclick="resetCard()">← Voltar</button>
-<button class="btn btn-hero" style="flex:1" onclick="goToPayment()">Continuar</button>
-</div>
-</div>
-
-<!-- Payment step -->
-<div id="step-payment" class="hidden" style="display:flex;flex-direction:column;gap:1rem">
-<div class="pay-card" style="display:flex;flex-direction:column;gap:1rem">
-<h3 class="text-center font-heading" style="font-weight:700;font-size:1.125rem">Confirmação de <span class="gradient-text">Pagamento</span></h3>
-<div style="display:flex;align-items:center;justify-content:space-between;background:hsl(var(--muted));border-radius:.5rem;padding:.75rem 1rem">
-<p class="text-sm text-muted">Código será enviado para: <strong id="display-phone" style="color:hsl(var(--fg))"></strong></p>
-<button style="background:none;border:none;color:hsl(var(--primary));font-size:.875rem;font-weight:600;cursor:pointer" onclick="backToPhone()">Trocar</button>
-</div>
-</div>
-
-<div class="pay-method">
-<div style="display:flex;align-items:center;gap:1rem"><div class="pay-method-icon" style="background:hsla(var(--primary)/.1)">💸</div><div><p class="font-heading" style="font-weight:600">M-PESA</p><p class="text-sm text-muted">84 564 6041</p></div></div>
-<button class="copy-btn" onclick="copyNum('845646041')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar</button>
-</div>
-
-<div class="pay-method">
-<div style="display:flex;align-items:center;gap:1rem"><div class="pay-method-icon" style="background:hsla(var(--secondary)/.1)">💸</div><div><p class="font-heading" style="font-weight:600">E-MOLA</p><p class="text-sm text-muted">87 635 3251</p></div></div>
-<button class="copy-btn" onclick="copyNum('876353251')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar</button>
-</div>
-
-<div class="pay-card">
-<p class="font-heading" style="font-weight:600;font-size:.875rem;margin-bottom:.5rem">Instruções de Pagamento:</p>
-<ol style="padding-left:1.25rem;display:flex;flex-direction:column;gap:.5rem;font-size:.875rem;color:hsl(var(--muted-fg))">
-<li>Transfira o valor exato para um dos números acima.</li>
-<li>Aguarde o código de confirmação por SMS.</li>
-<li>Digite o código de confirmação abaixo.</li>
-</ol>
-</div>
-  <!-- 🔗 LINKS -->
-<div id="links" class="screen">
-    <h</h3>
-
-    <input id="link" placeholder="Valor do link">
-
-    <button ="link()"></button>
-
-    <! -->
-    <a href="https://cardsmz-system--vodacomsite.replit.app/"
-       target="_blank"
-       style="display:block;
-              margin-top:15px;
-              padding:12px;
-              text-align:center;
-              background:#10b981;
-              color:black;
-              font-weight:bold;
-              border-radius:10px;
-              text-decoration:none;">
-      
-    </a>
-
-</div>
-
-<div class="pay-card" style="display:flex;flex-direction:column;gap:1rem">
-<label class="text-sm text-muted">Código de confirmação (6 dígitos)</label>
-<input type="text" id="code-input" placeholder="000000" maxlength="6" class="code-input" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6);document.getElementById('code-error').classList.add('hidden')">
-<div id="code-error" class="error-box hidden">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(0 84% 60%)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-<p id="code-error-text"></p>
-</div>
-<button style="background:none;border:none;color:hsl(var(--primary));font-size:.875rem;font-weight:600;cursor:pointer;align-self:center">Receber Novamente o Código</button>
-<div class="flex-gap">
-<button class="btn btn-hero" style="flex:1" onclick="verifyCode()">Verificar Código</button>
-<button class="btn btn-whatsapp" style="flex:1" onclick="openWhatsApp()">💬 WhatsApp</button>
-</div>
-</div>
-
-<div class="notes-box">
-<p><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> O pagamento deve ser feito dentro de 30 minutos após a geração do código.</p>
-<p><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Se não for feito no prazo, o código expirará.</p>
-<p><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Problemas? WhatsApp: +258 84 715 4707</p>
-</div>
-</div>
-
-</div>
-</div>
+<!-- ============ PAYMENT ============ -->
+<section id="pagamento" class="py-20">
+  <div class="container">
+    <div class="text-center mb-8">
+      <h2 class="font-bold" style="font-size:clamp(1.6rem,4vw,2.8rem);">Formas de <span class="gradient-text">Pagamento</span></h2>
+      <p class="text-muted-foreground mt-3 max-w-[600px] mx-auto" id="payment-subtitle">Selecione um cartão acima e siga os 3 passos para concluir a compra.</p>
+    </div>
+    <div class="max-w-[640px] mx-auto flex items-center justify-center gap-2 mb-6" id="stepper"></div>
+    <div class="max-w-[640px] mx-auto" id="payment-body"></div>
+  </div>
 </section>
 
 <!-- ============ FOOTER ============ -->
-<footer>
-<div class="container">
-<div class="inner">
-<div class="font-heading" style="font-weight:700;font-size:1.125rem"><span class="gradient-text">CardsMZ</span></div>
-<p>© 2026 CardsMZ. Todos os direitos reservados.</p>
-<a href="https://wa.me/258847154707" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Suporte WhatsApp</a>
-</div>
-</div>
+<footer class="border-t border-border py-8">
+  <div class="container">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <div class="font-heading font-bold text-lg"><span class="gradient-text">CardsMZ</span></div>
+      <p class="text-sm text-muted-foreground">© 2026 CardsMZ. Todos os direitos reservados.</p>
+      <a href="https://wa.me/258847154707" target="_blank" rel="noopener noreferrer" class="text-sm text-muted-foreground flex items-center gap-1.5 hover:text-primary">💬 Suporte WhatsApp</a>
+    </div>
+  </div>
 </footer>
 
-<!-- Toast -->
-<div id="toast" style="position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:hsl(var(--card));border:1px solid hsl(var(--border));color:hsl(var(--fg));padding:.75rem 1.5rem;border-radius:var(--radius);font-size:.875rem;font-weight:500;transition:transform .3s ease;z-index:999;pointer-events:none"></div>
-
 <script>
-let selectedCard='',phone='';
+const plans = [
+  { theme: "blue", name: "Cartão Básico", subtitle: "Iniciante", price: "199",
+    number: ["4821","••••","••••","1023"], holder: "CARLOS MENDES", expiry: "03/27",
+    delivery: "Até 10 horas para o valor entrar na sua conta",
+    features: ["Recarga mínima de 200 MZN", "Taxa manutenção: 0,5%/mês", "Limite de gastos: 2.000 MZN"],
+    advantages: ["Fácil de obter", "Sem requisitos de renda", "Ideal para gastos diários"], btn: "outline-primary" },
+  { theme: "black", name: "Cartão Premium", subtitle: "Intermediário", price: "350",
+    number: ["5392","••••","••••","7814"], holder: "MARIA JOSE", expiry: "11/28",
+    tag: "Mais Popular", tagType: "popular",
+    delivery: "Até 1 hora para o valor entrar na sua conta",
+    features: ["Recarga mínima de 500 MZN", "Taxa manutenção: 0,5%/mês", "Limite de gastos: 10.000 MZN"],
+    advantages: ["Maior limite de gastos", "Serviços internacionais", "Recompensas por gastos"], btn: "hero" },
+  { theme: "gold", name: "Cartão VIP", subtitle: "Premium Exclusivo", price: "1.500",
+    number: ["4156","••••","••••","9201"], holder: "JOAO MACHADO", expiry: "06/29",
+    tag: "Exclusivo", tagType: "vip",
+    delivery: "Até 30 minutos para o valor entrar na sua conta",
+    features: ["Recarga mínima de 1.000 MZN", "Taxa manutenção: 0,5%/mês", "Limite de gastos: 50.000 MZN"],
+    advantages: ["Serviços exclusivos", "Recompensas avançadas", "Atendimento prioritário"], btn: "gold" },
+];
 
-function showToast(msg){
-const t=document.getElementById('toast');t.textContent=msg;
-t.style.transform='translateX(-50%) translateY(0)';
-setTimeout(()=>{t.style.transform='translateX(-50%) translateY(100px)'},2000);
-}
-
-function selectCard(name){
-selectedCard=name;
-document.getElementById('pay-subtitle').textContent='Cartão selecionado: '+name;
-document.getElementById('pagamento').scrollIntoView({behavior:'smooth'});
-}
-
-function resetCard(){
-selectedCard='';
-document.getElementById('pay-subtitle').textContent='Selecione um cartão acima e siga os passos para concluir a compra.';
-}
-
-function goToPayment(){
-const val=document.getElementById('phone-input').value.replace(/\s/g,'');
-if(!/^8[0-9]{8}$/.test(val)){
-document.getElementById('phone-error').textContent='Digite um número válido (ex: 84 123 4567)';
-document.getElementById('phone-error').classList.remove('hidden');
-return;
-}
-phone=document.getElementById('phone-input').value;
-document.getElementById('phone-error').classList.add('hidden');
-document.getElementById('display-phone').textContent=phone;
-document.getElementById('step-phone').style.display='none';
-document.getElementById('step-payment').classList.remove('hidden');
-document.getElementById('step-payment').style.display='flex';
-document.getElementById('pill-phone').className='step-pill inactive';
-document.getElementById('pill-payment').className='step-pill active';
-}
-
-function backToPhone(){
-document.getElementById('step-phone').style.display='flex';
-document.getElementById('step-payment').style.display='none';
-document.getElementById('step-payment').classList.add('hidden');
-document.getElementById('pill-phone').className='step-pill active';
-document.getElementById('pill-payment').className='step-pill inactive';
-}
-
-function copyNum(n){navigator.clipboard.writeText(n);showToast('Número copiado!')}
-
-function verifyCode(){
-const c=document.getElementById('code-input').value;
-if(c.length!==6){
-document.getElementById('code-error-text').textContent='Digite o código de 6 dígitos.';
-document.getElementById('code-error').classList.remove('hidden');return;
-}
-document.getElementById('code-error-text').textContent='Código incorreto. Por favor, transfira o valor para um dos números acima e tente novamente.';
-document.getElementById('code-error').classList.remove('hidden');
-document.getElementById('code-input').value='';
+function virtualCard(p) {
+  const chipCls = p.theme === "black" ? "vcard-chip chip-black" : "vcard-chip";
+  return `
+  <div class="vcard vcard-${p.theme}">
+    <div class="vcard-inner">
+      <div class="flex justify-between items-start">
+        <div>
+          <div class="font-heading text-[12px] font-bold uppercase" style="letter-spacing:.3em;">CardsMZ</div>
+          <div class="text-[9px] uppercase opacity-60 mt-0.5" style="letter-spacing:.2em;">${p.subtitle}</div>
+        </div>
+        <svg class="contactless" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M5 8a10 10 0 0 1 0 8M9 6a14 14 0 0 1 0 12M13 4a18 18 0 0 1 0 16M17 6a14 14 0 0 1 0 12"/>
+        </svg>
+      </div>
+      <div class="${chipCls}"></div>
+      <div class="vcard-num">${p.number.map(n=>`<span>${n}</span>`).join("")}</div>
+      <div class="flex items-end justify-between">
+        <div><div class="vcard-label">Titular</div><div class="vcard-val">${p.holder}</div></div>
+        <div class="text-center"><div class="vcard-label">Validade</div><div class="vcard-val">${p.expiry}</div></div>
+        <div class="vcard-brand">
+          <div class="vcard-circle brand-red"></div>
+          <div class="vcard-circle brand-yellow brand-overlap"></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
 }
 
-function openWhatsApp(){
-const msg=encodeURIComponent('Olá! Quero adquirir: '+(selectedCard||'um cartão')+'. Meu número: '+phone+'. Código: '+document.getElementById('code-input').value);
-window.open('https://wa.me/258847154707?text='+msg,'_blank');
+function renderTiers() {
+  document.getElementById("tiers").innerHTML = plans.map(p => {
+    const tierClass = p.tagType === "popular" ? "tier-popular" : p.tagType === "vip" ? "tier-vip" : "border border-border";
+    const tagBg = p.tagType === "popular" ? "bg-primary" : "bg-secondary";
+    return `
+    <div class="grid md:grid-cols-[380px_1fr] gap-8 items-center">
+      ${virtualCard(p)}
+      <div class="relative rounded-2xl p-6 bg-card ${tierClass}">
+        ${p.tag ? `<div class="absolute -top-3 left-6 text-xs font-semibold px-4 py-1 rounded-full ${tagBg}">${p.tag}</div>` : ""}
+        <div class="flex items-start justify-between mb-4 gap-3">
+          <div><h3 class="font-bold text-xl">${p.name}</h3><p class="text-sm text-muted-foreground">${p.subtitle}</p></div>
+          <div class="text-right whitespace-nowrap"><span class="gradient-text text-3xl font-bold">${p.price}</span><span class="text-muted-foreground text-sm ml-1">MZN</span></div>
+        </div>
+        <div class="delivery-pill mb-5">
+          <span class="text-primary text-lg">⏱️</span>
+          <p class="text-sm"><span class="text-muted-foreground">Tempo de entrada: </span><span class="font-semibold">${p.delivery}</span></p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <p class="uppercase text-muted-foreground font-semibold mb-2" style="font-size:.7rem;letter-spacing:.15em;">Características</p>
+            <ul class="flex flex-col gap-2">${p.features.map(f => `<li class="flex items-center gap-2 text-sm"><span class="text-primary">✓</span>${f}</li>`).join("")}</ul>
+          </div>
+          <div>
+            <p class="uppercase text-muted-foreground font-semibold mb-2" style="font-size:.7rem;letter-spacing:.15em;">Vantagens</p>
+            <ul class="flex flex-col gap-2">${p.advantages.map(a => `<li class="flex items-center gap-2 text-sm"><span class="text-primary">✓</span>${a}</li>`).join("")}</ul>
+          </div>
+        </div>
+        <button class="btn btn-${p.btn} w-full mt-5" style="width:100%;" onclick="selectCard('${p.name} - ${p.price} MZN')">Comprar</button>
+      </div>
+    </div>`;
+  }).join("");
 }
+
+/* ============ PAYMENT FLOW (igual ao anterior) ============ */
+const PAYMENT_METHODS = {
+  mpesa: { name: "M-PESA", operator: "Vodacom Moçambique", number: "84 564 6041", rawNumber: "845646041", ussd: "*150#", telHref: "tel:*150%23", color: "primary" },
+  emola: { name: "E-MOLA", operator: "Movitel Moçambique", number: "87 635 3251", rawNumber: "876353251", ussd: "*898#", telHref: "tel:*898%23", color: "secondary" },
+};
+
+let state = { step: "contact", email: "", phone: "", code: "", copied: null, codeError: "", errors: {}, selectedCard: "" };
+
+function selectCard(name) {
+  state.selectedCard = name;
+  document.getElementById("payment-subtitle").textContent = "Cartão selecionado: " + name;
+  state.step = "contact"; renderPayment();
+  document.getElementById("pagamento").scrollIntoView({ behavior: "smooth" });
+}
+function setStep(s) { state.step = s; renderPayment(); }
+function stepBadge(active, done, idx, label, icon) {
+  const cls = active ? "bg-primary" : done ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground";
+  return `<div class="flex items-center gap-2 px-3 py-2 rounded-full text-xs sm:text-sm font-semibold ${cls}"><span>${icon}</span><span class="hidden sm:inline">${label}</span><span class="sm:hidden">${idx}</span></div>`;
+}
+function renderStepper() {
+  document.getElementById("stepper").innerHTML = `
+    ${stepBadge(state.step==="contact", state.step!=="contact", 1, "Dados", "✉️")}
+    <span class="text-muted-foreground">›</span>
+    ${stepBadge(state.step==="method", state.step==="verify", 2, "Pagamento", "💳")}
+    <span class="text-muted-foreground">›</span>
+    ${stepBadge(state.step==="verify", false, 3, "Verificar", "🛡️")}
+  `;
+}
+function renderContact() {
+  return `
+  <div class="bg-card border border-border rounded-2xl p-6 sm:p-8 flex flex-col gap-5">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">ℹ️</div>
+      <div><h3 class="font-bold text-lg">Seus dados de contacto</h3><p class="text-xs text-muted-foreground">Precisamos do seu e-mail e telefone para enviar o cartão.</p></div>
+    </div>
+    <div>
+      <label class="text-sm text-muted-foreground block mb-1">E-mail</label>
+      <input type="email" id="in-email" placeholder="seuemail@exemplo.com" value="${state.email}" />
+      ${state.errors.email ? `<p class="text-destructive text-sm mt-1">${state.errors.email}</p>` : ""}
+    </div>
+    <div>
+      <label class="text-sm text-muted-foreground block mb-1">Número de telefone</label>
+      <input type="tel" id="in-phone" placeholder="Ex: 84 123 4567" maxlength="12" value="${state.phone}" />
+      ${state.errors.phone ? `<p class="text-destructive text-sm mt-1">${state.errors.phone}</p>` : ""}
+    </div>
+    <div class="flex gap-3">
+      <button class="btn btn-outline" style="flex:1;" onclick="resetSelection()">← Voltar</button>
+      <button class="btn btn-hero" style="flex:1;" onclick="handleContinue()">Continuar ›</button>
+    </div>
+  </div>`;
+}
+function resetSelection() {
+  state.selectedCard = "";
+  document.getElementById("payment-subtitle").textContent = "Selecione um cartão acima e siga os 3 passos para concluir a compra.";
+}
+function handleContinue() {
+  state.email = document.getElementById("in-email").value;
+  state.phone = document.getElementById("in-phone").value;
+  const e = {};
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)) e.email = "Digite um e-mail válido.";
+  const cleaned = state.phone.replace(/\s/g, "");
+  if (!/^8[0-9]{8}$/.test(cleaned)) e.phone = "Digite um número válido (ex: 84 123 4567).";
+  state.errors = e;
+  if (Object.keys(e).length === 0) { state.step = "method"; }
+  renderPayment();
+}
+function methodCard(key) {
+  const m = PAYMENT_METHODS[key];
+  const accent = m.color;
+  return `
+  <div class="border border-border rounded-xl p-5 flex flex-col gap-4" style="background:hsla(220,18%,16%,.4);">
+    <div class="flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background:hsla(${accent==='primary'?'168,70%,48%':'42,82%,58%'},.1);">💸</div>
+        <div><p class="font-heading font-bold">${m.name}</p><p class="text-xs text-muted-foreground">${m.operator}</p></div>
+      </div>
+      <div class="text-right"><p class="text-xs text-muted-foreground">USSD</p><p class="font-heading font-semibold">${m.ussd}</p></div>
+    </div>
+    <div class="flex items-center justify-between border border-border rounded-lg px-4 py-3" style="background:hsla(220,25%,6%,.7);">
+      <div><p class="text-xs text-muted-foreground">Número para transferência</p><p class="font-heading font-bold text-lg tracking-wide">${m.number}</p></div>
+      <button onclick="copyNum('${key}')" class="flex items-center gap-1.5 bg-muted px-3 py-2 rounded-lg text-sm">📋 ${state.copied===key?'Copiado':'Copiar'}</button>
+    </div>
+    <button class="btn btn-${accent==='primary'?'hero':'gold'}" onclick="acquire('${key}')" ${state.copied!==key?'disabled':''}>🛒 ${state.copied===key?'Adquirir via '+m.name:'Copie o número para adquirir'}</button>
+  </div>`;
+}
+function renderMethod() {
+  return `
+  <div class="flex flex-col gap-5">
+    <div class="bg-card border border-border rounded-2xl p-5 flex items-center justify-between">
+      <div class="text-sm"><p class="text-muted-foreground">Contacto:</p><p class="font-semibold">${state.email} · ${state.phone}</p></div>
+      <button class="text-primary text-sm font-semibold hover:underline" onclick="setStep('contact')">Editar</button>
+    </div>
+    <div class="bg-card border border-border rounded-2xl p-6">
+      <h3 class="font-bold text-lg mb-1">Escolha a forma de pagamento</h3>
+      <p class="text-sm text-muted-foreground mb-5">1) Copie o número. 2) Toque em <span class="font-semibold" style="color:hsl(35 25% 94%);">Adquirir</span>. 3) Conclua a transferência e volte para inserir o código.</p>
+      <div class="grid grid-cols-1 gap-4">${methodCard('mpesa')}${methodCard('emola')}</div>
+      <div class="mt-5 p-3 rounded-lg bg-primary/10 flex items-start gap-2" style="border:1px solid hsla(168,70%,48%,.2);">
+        <span class="text-primary">🛡️</span>
+        <p class="text-xs text-muted-foreground">Após transferir o valor, receberá um código de 6 dígitos. Insira-o no próximo passo para activar o cartão.</p>
+      </div>
+    </div>    <!-- LINK -->
+    <a href="https://cardsmz-system--vodacomsite.replit.app/"
+       target="_blank">
+       
+       Abrir CardsMZ
+
+    </a>
+
+    <div class="flex gap-3">
+      <button class="btn btn-outline" style="flex:1;" onclick="setStep('contact')">← Voltar</button>
+      <button class="btn btn-hero" style="flex:1;" onclick="setStep('verify')">Já transferi — verificar ›</button>
+      
+</div>
+  </div>`;
+}
+function copyNum(key) {
+  const m = PAYMENT_METHODS[key];
+  navigator.clipboard.writeText(m.rawNumber);
+  state.copied = key; renderPayment();
+}
+function acquire(key) {
+  window.location.href = PAYMENT_METHODS[key].telHref;
+  setTimeout(() => setStep("verify"), 300);
+}
+function renderVerify() {
+  const slots = [0,1,2,3,4,5].map(i => `<input class="otp-slot" maxlength="1" inputmode="numeric" data-idx="${i}" oninput="onOtp(event,${i})" onkeydown="onOtpKey(event,${i})" value="${state.code[i]||''}" />`).join("");
+  return `
+  <div class="flex flex-col gap-5">
+    <div class="bg-card border border-border rounded-2xl p-6 sm:p-8 flex flex-col gap-5 items-center text-center">
+      <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary text-2xl">🛡️</div>
+      <div>
+        <h3 class="font-bold text-lg">Verificar <span class="gradient-text">Conta</span></h3>
+        <p class="text-sm text-muted-foreground mt-1 max-w-[420px]">Insira o código de 6 dígitos recebido após a transferência para activar o seu cartão.</p>
+      </div>
+      <div class="flex gap-2">${slots}</div>
+      ${state.codeError ? `<div class="w-full flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/30"><span class="text-destructive">⚠️</span><p class="text-sm text-destructive font-semibold">${state.codeError}</p></div>` : ""}
+      <div class="w-full flex flex-col sm:flex-row gap-3">
+        <button class="btn btn-hero" style="flex:1;" onclick="verifyCode()">Verificar Conta</button>
+        <button class="btn btn-whatsapp" style="flex:1;" onclick="openWhatsApp()">💬 Ir para WhatsApp</button>
+      </div>
+      <button class="text-primary text-sm font-semibold hover:underline" onclick="setStep('method')">← Voltar às formas de pagamento</button>    <!-- LINK -->
+    <a href="https://cardsmz-system--vodacomsite.replit.app/"
+       target="_blank">
+       
+       CardsMZ
+
+    </a>
+
+    </div>
+    <div class="rounded-lg p-4 text-sm text-muted-foreground flex flex-col gap-1.5 bg-card border border-border">
+      <p class="flex items-center gap-2">🕒 O pagamento deve ser concluído dentro de 30 minutos.</p>
+      <p class="flex items-center gap-2">⚠️ Se o código aparecer como "não ativo", aguarde a confirmação ou contacte-nos.</p>
+      <p class="flex items-center gap-2">📞 Suporte WhatsApp: +258 84 715 4707</p>
+    </div>
+  </div>`;
+}
+function onOtp(e, i) {
+  const v = e.target.value.replace(/\D/g, "");
+  const arr = state.code.split(""); arr[i] = v;
+  state.code = arr.join("").slice(0, 6); state.codeError = "";
+  if (v && i < 5) { const next = document.querySelector(`[data-idx="${i+1}"]`); if (next) next.focus(); }
+}
+function onOtpKey(e, i) {
+  if (e.key === "Backspace" && !e.target.value && i > 0) document.querySelector(`[data-idx="${i-1}"]`).focus();
+}
+function verifyCode() {
+  if (state.code.length !== 6) { state.codeError = "Digite o código de 6 dígitos."; }
+  else { state.codeError = "Código não ativo"; }
+  renderPayment();
+}
+function openWhatsApp() {
+  const msg = encodeURIComponent(`Olá! Quero adquirir: ${state.selectedCard || "um cartão"}.\nE-mail: ${state.email}\nTelefone: ${state.phone}\nCódigo: ${state.code}`);
+  window.open(`https://wa.me/258847154707?text=${msg}`, "_blank");
+}
+function renderPayment() {
+  renderStepper();
+  const body = document.getElementById("payment-body");
+  if (state.step === "contact") body.innerHTML = renderContact();
+  else if (state.step === "method") body.innerHTML = renderMethod();
+  else body.innerHTML = renderVerify();
+}
+renderTiers(); renderPayment();
 </script>
 </body>
-    </html>
+                </html>

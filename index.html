@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>CardsMZ — O seu Cartão Virtual em minutos</title>
-<meta name="description" content="Adquira o seu cartão virtual bancário (Basic, Premium, VIP) e pague com M-PESA ou E-MOLA em Moçambique." />
+<meta name="description" content="Adquira o seu cartão virtual bancário (Starter, Basic, Premium, VIP) e pague com M-PESA ou E-MOLA em Moçambique." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
@@ -87,85 +87,67 @@
     aspect-ratio: 1.586 / 1; border-radius: 16px; overflow: hidden; color: #f5f0e8;
     isolation: isolate;
   }
-
-  /* Base gradients (real bank card vibe) */
   .vcard-blue {
     background:
       radial-gradient(ellipse at 80% 0%, hsla(195, 90%, 55%, .35), transparent 55%),
       radial-gradient(ellipse at 0% 100%, hsla(230, 80%, 35%, .55), transparent 60%),
       linear-gradient(135deg, #0c2a52 0%, #0a1f44 45%, #060f28 100%);
-    box-shadow:
-      0 30px 70px -20px rgba(0,0,0,.7),
-      0 0 50px hsla(210,80%,45%,.15),
-      inset 0 1px 0 rgba(255,255,255,.12),
-      inset 0 -1px 0 rgba(0,0,0,.3);
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,.7), 0 0 50px hsla(210,80%,45%,.15),
+      inset 0 1px 0 rgba(255,255,255,.12), inset 0 -1px 0 rgba(0,0,0,.3);
   }
   .vcard-black {
     background:
       radial-gradient(ellipse at 80% 0%, hsla(168, 60%, 35%, .25), transparent 55%),
       radial-gradient(ellipse at 0% 100%, hsla(0, 0%, 15%, .8), transparent 60%),
       linear-gradient(135deg, #1f1f1f 0%, #0f0f0f 50%, #050505 100%);
-    box-shadow:
-      0 30px 70px -20px rgba(0,0,0,.85),
-      0 0 60px rgba(255,255,255,.04),
-      inset 0 1px 0 rgba(255,255,255,.1),
-      inset 0 -1px 0 rgba(0,0,0,.4);
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,.85), 0 0 60px rgba(255,255,255,.04),
+      inset 0 1px 0 rgba(255,255,255,.1), inset 0 -1px 0 rgba(0,0,0,.4);
   }
   .vcard-gold {
     background:
       radial-gradient(ellipse at 80% 0%, hsla(45, 95%, 65%, .4), transparent 55%),
       radial-gradient(ellipse at 0% 100%, hsla(20, 60%, 25%, .6), transparent 60%),
       linear-gradient(135deg, #a8761f 0%, #7a4f15 45%, #3d2810 100%);
-    box-shadow:
-      0 30px 70px -20px rgba(0,0,0,.7),
-      0 0 60px hsla(38,80%,50%,.2),
-      inset 0 1px 0 rgba(255,255,255,.2),
-      inset 0 -1px 0 rgba(0,0,0,.35);
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,.7), 0 0 60px hsla(38,80%,50%,.2),
+      inset 0 1px 0 rgba(255,255,255,.2), inset 0 -1px 0 rgba(0,0,0,.35);
+  }
+  /* ===== NOVO: Cartão Teal (Starter) ===== */
+  .vcard-teal {
+    background:
+      radial-gradient(ellipse at 80% 0%, hsla(168, 80%, 50%, .35), transparent 55%),
+      radial-gradient(ellipse at 0% 100%, hsla(185, 70%, 20%, .7), transparent 60%),
+      linear-gradient(135deg, #0a3028 0%, #082420 50%, #041410 100%);
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,.75), 0 0 55px hsla(168,70%,48%,.2),
+      inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(0,0,0,.35);
   }
 
   /* Holographic shimmer layer */
   .vcard::before {
     content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
     background: linear-gradient(
-      105deg,
-      transparent 30%,
-      rgba(255,255,255,.04) 45%,
-      rgba(255,255,255,.10) 50%,
-      rgba(255,255,255,.04) 55%,
-      transparent 70%
+      105deg, transparent 30%, rgba(255,255,255,.04) 45%,
+      rgba(255,255,255,.10) 50%, rgba(255,255,255,.04) 55%, transparent 70%
     );
     background-size: 200% 100%;
     animation: shimmer 6s linear infinite;
     mix-blend-mode: overlay;
   }
-
-  /* Embossed micro-pattern (real card texture) */
   .vcard::after {
     content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
     background-image:
       radial-gradient(circle at 1px 1px, rgba(255,255,255,.04) 1px, transparent 0),
       repeating-linear-gradient(115deg, transparent 0 12px, rgba(255,255,255,.025) 12px 13px);
-    background-size: 4px 4px, auto;
-    opacity: .9;
+    background-size: 4px 4px, auto; opacity: .9;
   }
-
   .vcard-inner {
     position: relative; z-index: 3;
-    display: grid;
-    grid-template-rows: auto 1fr auto auto;
-    height: 100%; padding: 1.25rem 1.35rem;
-    gap: .5rem;
+    display: grid; grid-template-rows: auto 1fr auto auto;
+    height: 100%; padding: 1.25rem 1.35rem; gap: .5rem;
   }
-
-  /* EMV Chip — realistic */
   .vcard-chip {
     width: 3rem; height: 2.25rem; border-radius: .375rem; position: relative;
-    background:
-      linear-gradient(135deg, #f4d27a 0%, #c89a3f 40%, #8a6520 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.55),
-      inset 0 -1px 1px rgba(0,0,0,.35),
-      0 2px 5px rgba(0,0,0,.45);
+    background: linear-gradient(135deg, #f4d27a 0%, #c89a3f 40%, #8a6520 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 -1px 1px rgba(0,0,0,.35), 0 2px 5px rgba(0,0,0,.45);
   }
   .vcard-chip::before {
     content: ""; position: absolute; inset: 4px; border-radius: 3px;
@@ -178,47 +160,28 @@
     background: linear-gradient(135deg, rgba(255,255,255,.4), rgba(0,0,0,.15));
     box-shadow: inset 0 0 0 1px rgba(0,0,0,.4);
   }
-  .chip-black {
-    background: linear-gradient(135deg, #e8e8e8 0%, #9a9a9a 40%, #5a5a5a 100%);
-  }
-
-  /* Contactless icon */
-  .contactless {
-    width: 22px; height: 22px; opacity: .85;
-  }
-
-  /* Card number — embossed style */
+  .chip-black { background: linear-gradient(135deg, #e8e8e8 0%, #9a9a9a 40%, #5a5a5a 100%); }
+  .chip-teal  { background: linear-gradient(135deg, #7effd4 0%, #2bb385 40%, #185e48 100%); }
+  .contactless { width: 22px; height: 22px; opacity: .85; }
   .vcard-num {
     font-family: 'Inter', 'Space Grotesk', sans-serif;
-    font-size: clamp(16px, 4vw, 21px);
-    letter-spacing: .15em;
-    font-weight: 600;
-    text-shadow:
-      0 1px 0 rgba(255,255,255,.18),
-      0 2px 3px rgba(0,0,0,.55);
+    font-size: clamp(16px, 4vw, 21px); letter-spacing: .15em; font-weight: 600;
+    text-shadow: 0 1px 0 rgba(255,255,255,.18), 0 2px 3px rgba(0,0,0,.55);
     display: flex; gap: .55em;
   }
-  .vcard-num span { display: inline-block; }
-
-  .vcard-label {
-    font-size: 8px; letter-spacing: .25em; text-transform: uppercase;
-    opacity: .55; margin-bottom: 3px; font-weight: 500;
-  }
+  .vcard-label { font-size: 8px; letter-spacing: .25em; text-transform: uppercase; opacity: .55; margin-bottom: 3px; font-weight: 500; }
   .vcard-val {
     font-family: 'Inter', 'Space Grotesk', sans-serif;
-    font-size: clamp(11px, 2.4vw, 13px); font-weight: 600;
-    letter-spacing: .1em;
+    font-size: clamp(11px, 2.4vw, 13px); font-weight: 600; letter-spacing: .1em;
     text-shadow: 0 1px 0 rgba(255,255,255,.12), 0 2px 3px rgba(0,0,0,.5);
   }
-
-  /* Brand logo (Visa/Mastercard-style circles) */
   .vcard-brand { display: flex; align-items: center; }
   .vcard-circle { width: 28px; height: 28px; border-radius: 999px; }
   .brand-red { background: radial-gradient(circle at 30% 30%, #ff6b5b, #d8342a); box-shadow: inset 0 -2px 4px rgba(0,0,0,.3); }
   .brand-yellow { background: radial-gradient(circle at 30% 30%, #ffd35c, #f5a623); box-shadow: inset 0 -2px 4px rgba(0,0,0,.3); }
   .brand-overlap { margin-left: -10px; mix-blend-mode: screen; }
 
-  /* Tier card gradient borders */
+  /* Tier card borders */
   .tier-popular {
     border: 1px solid transparent;
     background: linear-gradient(hsl(220 22% 11%), hsl(220 22% 11%)) padding-box,
@@ -231,13 +194,27 @@
                 linear-gradient(135deg, hsl(42 82% 58%), hsl(15 80% 50%)) border-box;
     box-shadow: 0 0 50px hsla(42,82%,58%,0.14);
   }
-
-  /* Delivery time highlight */
+  .tier-starter {
+    border: 1px solid transparent;
+    background: linear-gradient(hsl(220 22% 11%), hsl(220 22% 11%)) padding-box,
+                linear-gradient(135deg, hsl(168 70% 48%), hsl(185 70% 38%)) border-box;
+    box-shadow: 0 0 40px hsla(168,70%,48%,0.10);
+  }
   .delivery-pill {
     display: flex; align-items: center; gap: .65rem;
     border: 1px solid hsla(168, 70%, 48%, .3);
     background: hsla(168, 70%, 48%, .08);
     border-radius: .85rem; padding: .8rem 1rem;
+  }
+  /* Countdown badge */
+  .countdown-badge {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: hsla(0, 84%, 60%, 0.12);
+    border: 1px solid hsla(0, 84%, 60%, 0.35);
+    border-radius: 999px; padding: .35rem .85rem;
+    font-size: .78rem; font-weight: 700;
+    color: hsl(0 84% 70%);
+    font-family: 'Space Grotesk', sans-serif;
   }
 </style>
 </head>
@@ -302,11 +279,9 @@
   <div class="container">
     <div class="text-center mb-14">
       <h2 class="font-bold" style="font-size:clamp(1.6rem,4vw,2.8rem);">Escolha o seu <span class="gradient-text">Cartão</span></h2>
-      <p class="text-muted-foreground mt-3 max-w-[500px] mx-auto">Três planos premium para atender às suas necessidades de pagamento online.</p>
+      <p class="text-muted-foreground mt-3 max-w-[500px] mx-auto">Quatro planos premium para atender às suas necessidades de pagamento online.</p>
     </div>
-
     <div class="max-w-[900px] mx-auto flex flex-col gap-12" id="tiers"></div>
-
     <div class="max-w-[600px] mx-auto mt-14 bg-card border border-border rounded-2xl p-6">
       <h3 class="font-bold text-lg text-center mb-4">Informações <span class="gradient-text">Adicionais</span></h3>
       <div class="grid grid-cols-2 gap-3 text-sm text-muted-foreground">
@@ -359,18 +334,42 @@
 </footer>
 
 <script>
+/* ============ COUNTDOWN ============ */
+let countdown = { d: 6, h: 23, m: 59, s: 59 };
+setInterval(() => {
+  countdown.s--;
+  if (countdown.s < 0) { countdown.s = 59; countdown.m--; }
+  if (countdown.m < 0) { countdown.m = 59; countdown.h--; }
+  if (countdown.h < 0) { countdown.h = 23; countdown.d--; }
+  if (countdown.d < 0) { countdown.d = 0; countdown.h = 0; countdown.m = 0; countdown.s = 0; }
+  const el = document.getElementById("starter-countdown");
+  if (el) el.textContent = `⏳ Oferta expira em: ${countdown.d}d ${String(countdown.h).padStart(2,"0")}:${String(countdown.m).padStart(2,"0")}:${String(countdown.s).padStart(2,"0")}`;
+}, 1000);
+
+/* ============ PLANS ============ */
 const plans = [
+  /* ── NOVO: Cartão Starter ── */
+  { theme: "teal", name: "Cartão Starter", subtitle: "Oferta Especial", price: "155",
+    number: ["4821","••••","••••","5512"], holder: "JOSE MACHADO", expiry: "12/26",
+    tag: "Promoção 7 Dias", tagType: "starter", limitedOffer: true,
+    delivery: "Até 24 horas para o valor entrar na sua conta",
+    features: ["Recarga mínima de 150 MZN", "Taxa manutenção: 0,5%/mês", "Limite de gastos: 1.000 MZN"],
+    advantages: ["Promoção por tempo limitado", "Sem taxa de adesão", "Ideal para começar"],
+    btn: "outline-primary" },
+
   { theme: "blue", name: "Cartão Básico", subtitle: "Iniciante", price: "199",
     number: ["4821","••••","••••","1023"], holder: "CARLOS MENDES", expiry: "03/27",
     delivery: "Até 10 horas para o valor entrar na sua conta",
     features: ["Recarga mínima de 200 MZN", "Taxa manutenção: 0,5%/mês", "Limite de gastos: 2.000 MZN"],
     advantages: ["Fácil de obter", "Sem requisitos de renda", "Ideal para gastos diários"], btn: "outline-primary" },
+
   { theme: "black", name: "Cartão Premium", subtitle: "Intermediário", price: "350",
     number: ["5392","••••","••••","7814"], holder: "MARIA JOSE", expiry: "11/28",
     tag: "Mais Popular", tagType: "popular",
     delivery: "Até 1 hora para o valor entrar na sua conta",
     features: ["Recarga mínima de 500 MZN", "Taxa manutenção: 0,5%/mês", "Limite de gastos: 10.000 MZN"],
     advantages: ["Maior limite de gastos", "Serviços internacionais", "Recompensas por gastos"], btn: "hero" },
+
   { theme: "gold", name: "Cartão VIP", subtitle: "Premium Exclusivo", price: "1.500",
     number: ["4156","••••","••••","9201"], holder: "JOAO MACHADO", expiry: "06/29",
     tag: "Exclusivo", tagType: "vip",
@@ -380,7 +379,9 @@ const plans = [
 ];
 
 function virtualCard(p) {
-  const chipCls = p.theme === "black" ? "vcard-chip chip-black" : "vcard-chip";
+  const chipCls = p.theme === "black" ? "vcard-chip chip-black"
+                : p.theme === "teal"  ? "vcard-chip chip-teal"
+                : "vcard-chip";
   return `
   <div class="vcard vcard-${p.theme}">
     <div class="vcard-inner">
@@ -409,8 +410,17 @@ function virtualCard(p) {
 
 function renderTiers() {
   document.getElementById("tiers").innerHTML = plans.map(p => {
-    const tierClass = p.tagType === "popular" ? "tier-popular" : p.tagType === "vip" ? "tier-vip" : "border border-border";
-    const tagBg = p.tagType === "popular" ? "bg-primary" : "bg-secondary";
+    const tierClass = p.tagType === "popular" ? "tier-popular"
+                    : p.tagType === "vip"     ? "tier-vip"
+                    : p.tagType === "starter" ? "tier-starter"
+                    : "border border-border";
+    const tagBg = p.tagType === "popular" ? "bg-primary"
+                : p.tagType === "vip"     ? "bg-secondary"
+                : p.tagType === "starter" ? "bg-primary"
+                : "";
+    const countdownHtml = p.limitedOffer
+      ? `<div class="mb-4"><span class="countdown-badge" id="starter-countdown">⏳ Oferta expira em: ${countdown.d}d ${String(countdown.h).padStart(2,"0")}:${String(countdown.m).padStart(2,"0")}:${String(countdown.s).padStart(2,"0")}</span></div>`
+      : "";
     return `
     <div class="grid md:grid-cols-[380px_1fr] gap-8 items-center">
       ${virtualCard(p)}
@@ -420,6 +430,7 @@ function renderTiers() {
           <div><h3 class="font-bold text-xl">${p.name}</h3><p class="text-sm text-muted-foreground">${p.subtitle}</p></div>
           <div class="text-right whitespace-nowrap"><span class="gradient-text text-3xl font-bold">${p.price}</span><span class="text-muted-foreground text-sm ml-1">MZN</span></div>
         </div>
+        ${countdownHtml}
         <div class="delivery-pill mb-5">
           <span class="text-primary text-lg">⏱️</span>
           <p class="text-sm"><span class="text-muted-foreground">Tempo de entrada: </span><span class="font-semibold">${p.delivery}</span></p>
@@ -427,11 +438,11 @@ function renderTiers() {
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <p class="uppercase text-muted-foreground font-semibold mb-2" style="font-size:.7rem;letter-spacing:.15em;">Características</p>
-            <ul class="flex flex-col gap-2">${p.features.map(f => `<li class="flex items-center gap-2 text-sm"><span class="text-primary">✓</span>${f}</li>`).join("")}</ul>
+            <ul class="flex flex-col gap-2">${p.features.map(f=>`<li class="flex items-center gap-2 text-sm"><span class="text-primary">✓</span>${f}</li>`).join("")}</ul>
           </div>
           <div>
             <p class="uppercase text-muted-foreground font-semibold mb-2" style="font-size:.7rem;letter-spacing:.15em;">Vantagens</p>
-            <ul class="flex flex-col gap-2">${p.advantages.map(a => `<li class="flex items-center gap-2 text-sm"><span class="text-primary">✓</span>${a}</li>`).join("")}</ul>
+            <ul class="flex flex-col gap-2">${p.advantages.map(a=>`<li class="flex items-center gap-2 text-sm"><span class="text-primary">✓</span>${a}</li>`).join("")}</ul>
           </div>
         </div>
         <button class="btn btn-${p.btn} w-full mt-5" style="width:100%;" onclick="selectCard('${p.name} - ${p.price} MZN')">Comprar</button>
@@ -440,7 +451,7 @@ function renderTiers() {
   }).join("");
 }
 
-/* ============ PAYMENT FLOW (igual ao anterior) ============ */
+/* ============ PAYMENT FLOW ============ */
 const PAYMENT_METHODS = {
   mpesa: { name: "M-PESA", operator: "Vodacom Moçambique", number: "84 564 6041", rawNumber: "845646041", ussd: "*150#", telHref: "tel:*150%23", color: "primary" },
   emola: { name: "E-MOLA", operator: "Movitel Moçambique", number: "87 635 3251", rawNumber: "876353251", ussd: "*898#", telHref: "tel:*898%23", color: "secondary" },
@@ -449,9 +460,9 @@ const PAYMENT_METHODS = {
 let state = { step: "contact", email: "", phone: "", code: "", copied: null, codeError: "", errors: {}, selectedCard: "" };
 
 function selectCard(name) {
-  state.selectedCard = name;
+  state.selectedCard = name; state.step = "contact"; state.errors = {}; state.copied = null; state.code = ""; state.codeError = "";
   document.getElementById("payment-subtitle").textContent = "Cartão selecionado: " + name;
-  state.step = "contact"; renderPayment();
+  renderPayment();
   document.getElementById("pagamento").scrollIntoView({ behavior: "smooth" });
 }
 function setStep(s) { state.step = s; renderPayment(); }
@@ -494,6 +505,7 @@ function renderContact() {
 function resetSelection() {
   state.selectedCard = "";
   document.getElementById("payment-subtitle").textContent = "Selecione um cartão acima e siga os 3 passos para concluir a compra.";
+  renderPayment();
 }
 function handleContinue() {
   state.email = document.getElementById("in-email").value;
@@ -503,26 +515,27 @@ function handleContinue() {
   const cleaned = state.phone.replace(/\s/g, "");
   if (!/^8[0-9]{8}$/.test(cleaned)) e.phone = "Digite um número válido (ex: 84 123 4567).";
   state.errors = e;
-  if (Object.keys(e).length === 0) { state.step = "method"; }
+  if (Object.keys(e).length === 0) state.step = "method";
   renderPayment();
 }
 function methodCard(key) {
   const m = PAYMENT_METHODS[key];
-  const accent = m.color;
+  const isPrimary = m.color === "primary";
+  const copied = state.copied === key;
   return `
   <div class="border border-border rounded-xl p-5 flex flex-col gap-4" style="background:hsla(220,18%,16%,.4);">
     <div class="flex items-center justify-between gap-3">
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background:hsla(${accent==='primary'?'168,70%,48%':'42,82%,58%'},.1);">💸</div>
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background:hsla(${isPrimary?'168,70%,48%':'42,82%,58%'},.1);">💸</div>
         <div><p class="font-heading font-bold">${m.name}</p><p class="text-xs text-muted-foreground">${m.operator}</p></div>
       </div>
       <div class="text-right"><p class="text-xs text-muted-foreground">USSD</p><p class="font-heading font-semibold">${m.ussd}</p></div>
     </div>
     <div class="flex items-center justify-between border border-border rounded-lg px-4 py-3" style="background:hsla(220,25%,6%,.7);">
       <div><p class="text-xs text-muted-foreground">Número para transferência</p><p class="font-heading font-bold text-lg tracking-wide">${m.number}</p></div>
-      <button onclick="copyNum('${key}')" class="flex items-center gap-1.5 bg-muted px-3 py-2 rounded-lg text-sm">📋 ${state.copied===key?'Copiado':'Copiar'}</button>
+      <button onclick="copyNum('${key}')" class="flex items-center gap-1.5 bg-muted px-3 py-2 rounded-lg text-sm">📋 ${copied?'Copiado':'Copiar'}</button>
     </div>
-    <button class="btn btn-${accent==='primary'?'hero':'gold'}" onclick="acquire('${key}')" ${state.copied!==key?'disabled':''}>🛒 ${state.copied===key?'Adquirir via '+m.name:'Copie o número para adquirir'}</button>
+    <button class="btn btn-${isPrimary?'hero':'gold'}" onclick="acquire('${key}')" ${!copied?'disabled':''}>🛒 ${copied?'Adquirir via '+m.name:'Copie o número para adquirir'}</button>
   </div>`;
 }
 function renderMethod() {
@@ -540,24 +553,15 @@ function renderMethod() {
         <span class="text-primary">🛡️</span>
         <p class="text-xs text-muted-foreground">Após transferir o valor, receberá um código de 6 dígitos. Insira-o no próximo passo para activar o cartão.</p>
       </div>
-    </div>    <!-- LINK -->
-    <a href="https://cardsmz-system--vodacomsite.replit.app/"
-       target="_blank">
-       
-       Abrir CardsMZ
-
-    </a>
-
+    </div>
     <div class="flex gap-3">
       <button class="btn btn-outline" style="flex:1;" onclick="setStep('contact')">← Voltar</button>
       <button class="btn btn-hero" style="flex:1;" onclick="setStep('verify')">Já transferi — verificar ›</button>
-      
-</div>
+    </div>
   </div>`;
 }
 function copyNum(key) {
-  const m = PAYMENT_METHODS[key];
-  navigator.clipboard.writeText(m.rawNumber);
+  navigator.clipboard.writeText(PAYMENT_METHODS[key].rawNumber);
   state.copied = key; renderPayment();
 }
 function acquire(key) {
@@ -565,7 +569,7 @@ function acquire(key) {
   setTimeout(() => setStep("verify"), 300);
 }
 function renderVerify() {
-  const slots = [0,1,2,3,4,5].map(i => `<input class="otp-slot" maxlength="1" inputmode="numeric" data-idx="${i}" oninput="onOtp(event,${i})" onkeydown="onOtpKey(event,${i})" value="${state.code[i]||''}" />`).join("");
+  const slots = [0,1,2,3,4,5].map(i=>`<input class="otp-slot" maxlength="1" inputmode="numeric" data-idx="${i}" oninput="onOtp(event,${i})" onkeydown="onOtpKey(event,${i})" value="${state.code[i]||''}" />`).join("");
   return `
   <div class="flex flex-col gap-5">
     <div class="bg-card border border-border rounded-2xl p-6 sm:p-8 flex flex-col gap-5 items-center text-center">
@@ -580,14 +584,7 @@ function renderVerify() {
         <button class="btn btn-hero" style="flex:1;" onclick="verifyCode()">Verificar Conta</button>
         <button class="btn btn-whatsapp" style="flex:1;" onclick="openWhatsApp()">💬 Ir para WhatsApp</button>
       </div>
-      <button class="text-primary text-sm font-semibold hover:underline" onclick="setStep('method')">← Voltar às formas de pagamento</button>    <!-- LINK -->
-    <a href="https://hello-world--matinaalia20.replit.app/"
-       target="_blank">
-       
-       CardsMZ
-
-    </a>
-
+      <button class="text-primary text-sm font-semibold hover:underline" onclick="setStep('method')">← Voltar às formas de pagamento</button>
     </div>
     <div class="rounded-lg p-4 text-sm text-muted-foreground flex flex-col gap-1.5 bg-card border border-border">
       <p class="flex items-center gap-2">🕒 O pagamento deve ser concluído dentro de 30 minutos.</p>
@@ -598,16 +595,16 @@ function renderVerify() {
 }
 function onOtp(e, i) {
   const v = e.target.value.replace(/\D/g, "");
-  const arr = state.code.split(""); arr[i] = v;
-  state.code = arr.join("").slice(0, 6); state.codeError = "";
+  const arr = (state.code + "      ").slice(0,6).split(""); arr[i] = v;
+  state.code = arr.join("").trim().slice(0,6); state.codeError = "";
   if (v && i < 5) { const next = document.querySelector(`[data-idx="${i+1}"]`); if (next) next.focus(); }
 }
 function onOtpKey(e, i) {
   if (e.key === "Backspace" && !e.target.value && i > 0) document.querySelector(`[data-idx="${i-1}"]`).focus();
 }
 function verifyCode() {
-  if (state.code.length !== 6) { state.codeError = "Digite o código de 6 dígitos."; }
-  else { state.codeError = "Código não ativo"; }
+  if (state.code.replace(/\s/g,"").length < 6) state.codeError = "Digite o código de 6 dígitos.";
+  else state.codeError = "Código não ativo";
   renderPayment();
 }
 function openWhatsApp() {
@@ -624,4 +621,4 @@ function renderPayment() {
 renderTiers(); renderPayment();
 </script>
 </body>
-                </html>
+          </html>

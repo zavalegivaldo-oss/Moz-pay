@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt">
+<!DOCTYPE html><html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>CardsMZ — Cartões Virtuais</title>
-<meta name="description" content="Escolha o seu cartão virtual, personalize as suas preferências e acompanhe o pedido.">
-
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
+<meta name="description" content="Escolha o seu cartão virtual, personalize as suas preferências e acompanhe o pedido."><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"><style>
 *,
 *::before,
 *::after{
@@ -49,9 +44,7 @@ body.locked{
 overflow:hidden
 }
 
-button,
-input,
-select{
+button,input,select{
 font:inherit
 }
 
@@ -89,8 +82,6 @@ background:linear-gradient(135deg,var(--primary),var(--gold));
 -webkit-text-fill-color:transparent
 }
 
-/* BOTÕES */
-
 .btn{
 border:0;
 border-radius:13px;
@@ -124,8 +115,6 @@ color:var(--text)
 background:var(--gold);
 color:#171208
 }
-
-/* PROCESSAMENTO */
 
 .processing{
 position:fixed;
@@ -164,8 +153,6 @@ font-size:1.1rem
 color:var(--muted);
 font-size:.85rem
 }
-
-/* ONBOARDING */
 
 .overlay{
 position:fixed;
@@ -280,8 +267,7 @@ font-weight:600;
 margin-bottom:7px
 }
 
-.input,
-.select{
+.input,.select{
 width:100%;
 padding:14px;
 border-radius:11px;
@@ -291,8 +277,7 @@ color:var(--text);
 outline:none
 }
 
-.input:focus,
-.select:focus{
+.input:focus,.select:focus{
 border-color:var(--primary)
 }
 
@@ -380,8 +365,6 @@ margin-bottom:2px
 .hero-point span{
 color:var(--muted)
 }
-
-/* CARTÃO GRANDE */
 
 .card-stage{
 display:flex;
@@ -487,8 +470,6 @@ font-size:.9rem;
 font-weight:600
 }
 
-/* SEÇÕES */
-
 section{
 padding:100px 0
 }
@@ -508,8 +489,6 @@ font-size:clamp(1.9rem,4vw,3rem)
 color:var(--muted);
 margin-top:9px
 }
-
-/* RESUMO DO UTILIZADOR */
 
 .account-strip{
 background:var(--panel);
@@ -562,8 +541,6 @@ border-radius:999px;
 background:rgba(25,199,154,.08);
 color:var(--primary)
 }
-
-/* CARTÕES */
 
 .cards-area{
 display:grid;
@@ -700,8 +677,6 @@ font-weight:700;
 margin-right:7px
 }
 
-/* INFO FRONT */
-
 .front-info{
 margin-top:55px;
 display:grid;
@@ -730,8 +705,6 @@ margin-bottom:5px
 font-size:.82rem;
 color:var(--muted)
 }
-
-/* COMO FUNCIONA */
 
 .dark-section{
 background:#060a0f;
@@ -776,11 +749,11 @@ color:var(--muted)
 position:fixed;
 inset:0;
 z-index:25000;
-background:rgba(2,5,8,.98);
+background:rgba(2,5,8,.99);
 display:none;
 align-items:center;
 justify-content:center;
-padding:10px
+padding:4px
 }
 
 .checkout-overlay.active{
@@ -789,24 +762,26 @@ display:flex
 
 .checkout-box{
 width:100%;
-height:98vh;
-max-width:1000px;
+height:99vh;
+max-width:1280px;
 background:var(--panel);
 border:1px solid var(--line);
-border-radius:20px;
+border-radius:14px;
 display:flex;
 flex-direction:column;
 overflow:hidden;
-box-shadow:0 40px 120px rgba(0,0,0,.8)
+box-shadow:0 40px 120px rgba(0,0,0,.85)
 }
 
 .checkout-header{
-padding:16px 19px;
+min-height:68px;
+padding:13px 17px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 gap:15px;
-border-bottom:1px solid var(--line)
+border-bottom:1px solid var(--line);
+flex-shrink:0
 }
 
 .checkout-title{
@@ -831,19 +806,22 @@ border-radius:10px;
 font-size:1.2rem
 }
 
+/* somente informações do pedido */
+
 .checkout-user{
-padding:13px 18px;
-display:grid;
-grid-template-columns:1fr 1fr;
+padding:10px 14px;
+display:flex;
 gap:10px;
-border-bottom:1px solid var(--line)
+border-bottom:1px solid var(--line);
+flex-shrink:0
 }
 
 .checkout-user-card{
+flex:1;
 background:var(--panel2);
 border:1px solid var(--line);
 border-radius:10px;
-padding:9px 12px
+padding:8px 12px
 }
 
 .checkout-user-card small{
@@ -864,29 +842,43 @@ text-overflow:ellipsis
 
 .checkout-frame-wrap{
 flex:1;
-padding:10px;
+min-height:0;
+padding:5px;
 background:#030609
 }
 
 .checkout-frame{
 width:100%;
 height:100%;
+min-height:100%;
 border:1px solid var(--line);
-border-radius:12px;
+border-radius:10px;
 background:#fff
 }
 
 .checkout-footer{
-padding:12px;
+padding:9px;
 border-top:1px solid var(--line);
-background:var(--panel)
+background:var(--panel);
+display:flex;
+gap:9px;
+flex-shrink:0
+}
+
+.checkout-footer .btn{
+padding:13px
 }
 
 .paid{
 background:var(--primary);
 color:#03100b;
-font-size:1rem;
-padding:15px
+font-size:1rem
+}
+
+.checkout-back{
+background:transparent;
+border:1px solid var(--line);
+color:var(--text)
 }
 
 /* ANÁLISE */
@@ -1025,8 +1017,6 @@ flex-shrink:0
 background:var(--primary)
 }
 
-/* RODAPÉ */
-
 footer{
 border-top:1px solid var(--line);
 padding:32px 0
@@ -1063,7 +1053,14 @@ transition:.25s
 transform:translate(-50%,0)
 }
 
-/* RESPONSIVO */
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+
+@keyframes up{
+from{opacity:0;transform:translateY(15px)}
+to{opacity:1;transform:translateY(0)}
+}
 
 @media(max-width:850px){
 
@@ -1150,15 +1147,28 @@ grid-template-columns:1fr
 
 .checkout-box{
 height:100vh;
-border-radius:0
-}
-
-.checkout-user{
-grid-template-columns:1fr
+max-width:none;
+border-radius:0;
+border-left:0;
+border-right:0
 }
 
 .checkout-overlay{
 padding:0
+}
+
+.checkout-user{
+display:grid;
+grid-template-columns:1fr
+}
+
+.checkout-frame-wrap{
+padding:3px
+}
+
+.checkout-footer{
+display:grid;
+grid-template-columns:1fr 1fr
 }
 
 .analysis-box{
@@ -1170,112 +1180,55 @@ align-items:flex-start
 }
 
 }
-</style>
-</head>
-
-<body class="locked">
-
-<!-- PROCESSAMENTO -->
-<div id="processing" class="processing">
+</style></head><body class="locked"><div id="processing" class="processing">
 <div class="spinner"></div>
 <div id="processingTitle" class="processing-title">Processando...</div>
 <div id="processingSub" class="processing-sub">Aguarde um momento</div>
-</div>
-
-<!-- ONBOARDING -->
-<div id="onboarding" class="overlay">
-
-<div class="onboarding-box">
-
-<div class="onboarding-progress">
+</div><div id="onboarding" class="overlay"><div class="onboarding-box"><div class="onboarding-progress">
 <span id="bar1" class="active"></span>
 <span id="bar2"></span>
 <span id="bar3"></span>
 <span id="bar4"></span>
 <span id="bar5"></span>
 <span id="bar6"></span>
-</div>
-
-<!-- 1 -->
-<div id="step1" class="onboarding-step active">
-
-<div class="onboarding-icon">
+</div><div id="step1" class="onboarding-step active"><div class="onboarding-icon">
 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 <rect x="1" y="4" width="22" height="16" rx="2"/>
 <line x1="1" y1="10" x2="23" y2="10"/>
 </svg>
-</div>
-
-<h1>Cartões Virtuais</h1>
-
-<p class="onboarding-description">
+</div><h1>Cartões Virtuais</h1><p class="onboarding-description">
 Comece configurando algumas informações básicas para personalizar a sua experiência.
-</p>
-
-<div class="features">
+</p><div class="features">
 <div class="feature"><span class="feature-check">✓</span> Escolha entre diferentes cartões virtuais</div>
 <div class="feature"><span class="feature-check">✓</span> Checkout integrado para cada opção</div>
 <div class="feature"><span class="feature-check">✓</span> Processo organizado por etapas</div>
 <div class="feature"><span class="feature-check">✓</span> Acompanhamento do pedido após o pagamento</div>
-</div>
-
-<button class="btn btn-primary" onclick="nextStep(2)">
+</div><button class="btn btn-primary" onclick="nextStep(2)">
 Começar
-</button>
-
-</div>
-
-<!-- 2 EMAIL -->
-<div id="step2" class="onboarding-step">
-
-<div class="onboarding-icon">
+</button></div><div id="step2" class="onboarding-step"><div class="onboarding-icon">
 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 <rect x="3" y="5" width="18" height="14" rx="2"/>
 <polyline points="3 7 12 13 21 7"/>
 </svg>
-</div>
-
-<h2>Seu e-mail</h2>
-
-<p class="onboarding-description">
+</div><h2>Seu e-mail</h2><p class="onboarding-description">
 Informe um e-mail válido para identificar as informações do seu pedido.
-</p>
-
-<div class="field">
+</p><div class="field">
 <label>E-mail</label>
 <input id="emailInput" class="input" type="email" placeholder="seuemail@gmail.com" autocomplete="email">
-<div id="emailError" class="error hidden">
-Digite um e-mail válido.
-</div>
-</div>
-
-<div class="onboarding-actions">
+<div id="emailError" class="error hidden">Digite um e-mail válido.</div>
+</div><div class="onboarding-actions">
 <button class="btn btn-outline" onclick="nextStep(1)">Voltar</button>
 <button class="btn btn-primary" onclick="validateEmail()">Continuar</button>
-</div>
-
-</div>
-
-<!-- 3 PAÍS -->
-<div id="step3" class="onboarding-step">
-
-<div class="onboarding-icon">
+</div></div><div id="step3" class="onboarding-step"><div class="onboarding-icon">
 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 <circle cx="12" cy="12" r="9"/>
 <path d="M3 12h18"/>
 <path d="M12 3c3 3 3 15 0 18"/>
 <path d="M12 3c-3 3-3 15 0 18"/>
 </svg>
-</div>
-
-<h2>Escolha o país</h2>
-
-<p class="onboarding-description">
+</div><h2>Escolha o país</h2><p class="onboarding-description">
 Selecione o país onde pretende utilizar principalmente o serviço.
-</p>
-
-<div class="field">
-<label>País</label>
+</p><div class="field"><label>País</label>
 
 <select id="countryInput" class="select">
 <option value="">Selecione o seu país</option>
@@ -1303,42 +1256,20 @@ Selecione o país onde pretende utilizar principalmente o serviço.
 <option>Uganda</option>
 <option>Zâmbia</option>
 <option>Zimbabwe</option>
-
-<!-- MOÇAMBIQUE PROPOSITADAMENTE NO FIM -->
 <option>Moçambique</option>
-</select>
-
-<div id="countryError" class="error hidden">
+</select><div id="countryError" class="error hidden">
 Selecione um país para continuar.
-</div>
-
-</div>
-
-<div class="onboarding-actions">
+</div></div><div class="onboarding-actions">
 <button class="btn btn-outline" onclick="nextStep(2)">Voltar</button>
 <button class="btn btn-primary" onclick="validateCountry()">Continuar</button>
-</div>
-
-</div>
-
-<!-- 4 REGIÃO -->
-<div id="step4" class="onboarding-step">
-
-<div class="onboarding-icon">
+</div></div><div id="step4" class="onboarding-step"><div class="onboarding-icon">
 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 <path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"/>
 <circle cx="12" cy="9" r="2.5"/>
 </svg>
-</div>
-
-<h2>Região</h2>
-
-<p class="onboarding-description">
+</div><h2>Região</h2><p class="onboarding-description">
 Escolha a região ou província que corresponde à sua localização.
-</p>
-
-<div class="field">
-<label>Região / Província</label>
+</p><div class="field"><label>Região / Província</label>
 
 <select id="regionInput" class="select">
 <option value="">Selecione uma opção</option>
@@ -1347,40 +1278,20 @@ Escolha a região ou província que corresponde à sua localização.
 <option>Região Sul</option>
 <option>Capital / Região Metropolitana</option>
 <option>Outra região</option>
-</select>
-
-<div id="regionError" class="error hidden">
+</select><div id="regionError" class="error hidden">
 Selecione uma região.
-</div>
-
-</div>
-
-<div class="onboarding-actions">
+</div></div><div class="onboarding-actions">
 <button class="btn btn-outline" onclick="nextStep(3)">Voltar</button>
 <button class="btn btn-primary" onclick="validateRegion()">Continuar</button>
-</div>
-
-</div>
-
-<!-- 5 OBJETIVO -->
-<div id="step5" class="onboarding-step">
-
-<div class="onboarding-icon">
+</div></div><div id="step5" class="onboarding-step"><div class="onboarding-icon">
 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 <path d="M4 19h16"/>
 <path d="M5 16l4-5 3 3 5-7"/>
 <path d="M16 7h2v2"/>
 </svg>
-</div>
-
-<h2>Objetivo de utilização</h2>
-
-<p class="onboarding-description">
+</div><h2>Objetivo de utilização</h2><p class="onboarding-description">
 Indique como pretende utilizar principalmente o cartão virtual.
-</p>
-
-<div class="field">
-<label>Principal interesse</label>
+</p><div class="field"><label>Principal interesse</label>
 
 <select id="purposeInput" class="select">
 <option value="">Selecione uma opção</option>
@@ -1392,700 +1303,280 @@ Indique como pretende utilizar principalmente o cartão virtual.
 <option>Transferências e pagamentos</option>
 <option>Uso pessoal</option>
 <option>Outro objetivo</option>
-</select>
-
-<div id="purposeError" class="error hidden">
+</select><div id="purposeError" class="error hidden">
 Selecione o seu principal interesse.
-</div>
-
-</div>
-
-<div class="onboarding-actions">
+</div></div><div class="onboarding-actions">
 <button class="btn btn-outline" onclick="nextStep(4)">Voltar</button>
 <button class="btn btn-primary" onclick="validatePurpose()">Continuar</button>
-</div>
-
-</div>
-
-<!-- 6 PERFIL -->
-<div id="step6" class="onboarding-step">
-
-<div class="onboarding-icon">
+</div></div><div id="step6" class="onboarding-step"><div class="onboarding-icon">
 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 <circle cx="12" cy="8" r="4"/>
 <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
 </svg>
-</div>
-
-<h2>Finalizar perfil</h2>
-
-<p class="onboarding-description">
+</div><h2>Finalizar perfil</h2><p class="onboarding-description">
 Informe o seu nome completo para concluir a configuração inicial.
-</p>
+</p><div class="field"><label>Nome completo</label>
 
-<div class="field">
-<label>Nome completo</label>
-<input id="nameInput" class="input" type="text" placeholder="Digite seu nome completo" autocomplete="name">
-
-<div id="nameError" class="error hidden">
+<input id="nameInput" class="input" type="text" placeholder="Digite seu nome completo" autocomplete="name"><div id="nameError" class="error hidden">
 Digite o seu nome completo.
-</div>
-
-</div>
-
-<button class="btn btn-primary" onclick="finishOnboarding()">
+</div></div><button class="btn btn-primary" onclick="finishOnboarding()">
 Entrar na plataforma
-</button>
-
-<button class="btn btn-outline" style="margin-top:9px" onclick="nextStep(5)">
+</button><button class="btn btn-outline" style="margin-top:9px" onclick="nextStep(5)">
 Voltar
-</button>
-
-</div>
-
-</div>
-</div>
-
-<!-- BARRA DE CONTA -->
-<div class="account-strip">
-<div class="container">
-<div class="account-strip-inner">
-
-<div class="account-user">
-
-<div id="avatar" class="avatar">C</div>
-
-<div>
+</button></div></div>
+</div><div class="account-strip"><div class="container"><div class="account-strip-inner"><div class="account-user"><div id="avatar" class="avatar">C</div><div>
 <small>Bem-vindo</small>
 <strong id="accountName">Cliente</strong>
-</div>
-
-</div>
-
-<div class="account-status">
+</div></div><div class="account-status">
 Perfil configurado
+</div></div>
 </div>
-
-</div>
-</div>
-</div>
-
-<!-- HERO / ABA FRONTAL -->
-<section class="hero">
-
-<div class="container">
-
-<div class="hero-grid">
-
-<div>
-
-<div class="badge">
+</div><section class="hero"><div class="container"><div class="hero-grid"><div><div class="badge">
 CARDSMZ • EXPERIÊNCIA DIGITAL
-</div>
-
-<h1>
+</div><h1>
 Tenha mais liberdade para fazer
 <span class="gradient">compras online</span>
-</h1>
-
-<p>
+</h1><p>
 Escolha o cartão virtual adequado ao seu objetivo, veja todos os detalhes antes de comprar e conclua o pagamento através do checkout correspondente.
-</p>
-
-<div class="hero-points">
-
-<div class="hero-point">
+</p><div class="hero-points"><div class="hero-point">
 <strong>Cartões virtuais</strong>
 <span>Opções pensadas para diferentes necessidades.</span>
-</div>
-
-<div class="hero-point">
+</div><div class="hero-point">
 <strong>Checkout integrado</strong>
 <span>O pagamento abre diretamente na plataforma.</span>
-</div>
-
-<div class="hero-point">
+</div><div class="hero-point">
 <strong>Pedido organizado</strong>
 <span>Acompanhe o processo depois do pagamento.</span>
-</div>
-
-<div class="hero-point">
+</div><div class="hero-point">
 <strong>Experiência simples</strong>
 <span>Escolha, pague e acompanhe a análise.</span>
-</div>
-
-</div>
-
-<a href="#cartoes" class="btn btn-primary" style="max-width:290px">
+</div></div><a href="#cartoes" class="btn btn-primary" style="max-width:290px">
 Explorar cartões
-</a>
-
-</div>
-
-<div class="card-stage">
-
-<!-- CARTÃO INICIAL MAIOR -->
-<div class="virtual-card" style="background:linear-gradient(135deg,#16465b,#102333 55%,#080d14)">
-
-<div class="card-top">
-<div>
+</a></div><div class="card-stage"><div class="virtual-card" style="background:linear-gradient(135deg,#16465b,#102333 55%,#080d14)"><div class="card-top"><div>
 <div class="card-brand">CardsMZ</div>
 <div class="card-sub">Virtual Card</div>
-</div>
-
-<div class="chip"></div>
-</div>
-
-<div class="card-number">
+</div><div class="chip"></div></div><div class="card-number">
 4821 •••• •••• 3047
-</div>
-
-<div class="card-bottom">
-
-<div>
+</div><div class="card-bottom"><div>
 <div class="card-label">Titular</div>
 <div class="card-value">CARD MEMBER</div>
-</div>
-
-<div>
+</div><div>
 <div class="card-label">Validade</div>
 <div class="card-value">09/28</div>
+</div></div></div></div></div>
 </div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-</section>
-
-<!-- INFORMAÇÕES FRONTAIS -->
-<section style="padding-top:20px">
-
-<div class="container">
-
-<div class="section-head">
+</section><section style="padding-top:20px"><div class="container"><div class="section-head">
 <h2>Uma experiência pensada para você</h2>
-<p>
-Tenha as informações essenciais antes de escolher o seu cartão.
-</p>
-</div>
-
-<div class="front-info">
-
-<div class="info-card">
+<p>Tenha as informações essenciais antes de escolher o seu cartão.</p>
+</div><div class="front-info"><div class="info-card">
 <div class="info-card-icon">01</div>
 <h3>Escolha com clareza</h3>
-<p>
-Compare preço, características, limites e vantagens antes de selecionar uma opção.
-</p>
-</div>
-
-<div class="info-card">
+<p>Compare preço, características, limites e vantagens antes de selecionar uma opção.</p>
+</div><div class="info-card">
 <div class="info-card-icon">02</div>
 <h3>Pagamento integrado</h3>
-<p>
-Cada cartão possui o seu próprio checkout para facilitar a conclusão da compra.
-</p>
-</div>
-
-<div class="info-card">
+<p>Cada cartão possui o seu próprio checkout para facilitar a conclusão da compra.</p>
+</div><div class="info-card">
 <div class="info-card-icon">03</div>
 <h3>Análise do pedido</h3>
-<p>
-Depois de indicar que pagou, o pedido passa para a etapa de análise.
-</p>
+<p>Depois de indicar que pagou, o pedido passa para a etapa de análise.</p>
+</div></div>
 </div>
-
-</div>
-
-</div>
-</section>
-
-<!-- CARTÕES -->
-<section id="cartoes">
-
-<div class="container">
-
-<div class="section-head">
-
-<h2>
+</section><section id="cartoes"><div class="container"><div class="section-head"><h2>
 Escolha o seu
 <span class="gradient">cartão virtual</span>
-</h2>
-
-<p>
+</h2><p>
 Conheça as opções disponíveis e escolha a que melhor corresponde ao seu objetivo.
-</p>
-
-</div>
-
-<div class="cards-area">
-
-<!-- CARTÃO 199 -->
-<div class="product">
-
-<div class="product-inner">
-
-<div class="product-card">
-
-<div class="virtual-card" style="background:linear-gradient(135deg,#174961,#10283a 55%,#080e15)">
-
-<div class="card-top">
-
-<div>
+</p></div><div class="cards-area"><div class="product"><div class="product-inner"><div class="product-card"><div class="virtual-card" style="background:linear-gradient(135deg,#174961,#10283a 55%,#080e15)"><div class="card-top"><div>
 <div class="card-brand">CardsMZ</div>
 <div class="card-sub">Virtual Basic</div>
-</div>
-
-<div class="chip"></div>
-
-</div>
-
-<div class="card-number">
+</div><div class="chip"></div></div><div class="card-number">
 4821 •••• •••• 1023
-</div>
-
-<div class="card-bottom">
-
-<div>
+</div><div class="card-bottom"><div>
 <div class="card-label">Titular</div>
 <div class="card-value">CARD MEMBER</div>
-</div>
-
-<div>
+</div><div>
 <div class="card-label">Validade</div>
 <div class="card-value">03/27</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="product-heading">
-
-<div>
+</div></div></div>
+</div><div class="product-heading"><div>
 <h3>Cartão Básico</h3>
 <div class="product-type">Plano inicial</div>
-</div>
-
-<div class="product-price">
+</div><div class="product-price">
 350 <small>MZN</small>
-</div>
-
-</div>
-
-<p class="product-description">
+</div></div><p class="product-description">
 Uma opção inicial para quem procura uma solução virtual para compras e serviços digitais.
-</p>
-
-<div class="details-grid">
-
-<div class="detail-box">
+</p><div class="details-grid"><div class="detail-box">
 <small>Categoria</small>
 <strong>Básico</strong>
-</div>
-
-<div class="detail-box">
+</div><div class="detail-box">
 <small>Valor</small>
 <strong>350 MZN</strong>
-</div>
-
-<div class="detail-box">
+</div><div class="detail-box">
 <small>Limite indicado</small>
 <strong>2.000 MZN</strong>
-</div>
-
-<div class="detail-box">
+</div><div class="detail-box">
 <small>Recarga mínima</small>
 <strong>200 MZN</strong>
-</div>
-
-</div>
-
-<div class="benefits">
-
-<div class="benefit">Compras online</div>
+</div></div><div class="benefits"><div class="benefit">Compras online</div>
 <div class="benefit">Serviços digitais</div>
 <div class="benefit">Processo simplificado</div>
-<div class="benefit">Acompanhamento do pedido</div>
-
-</div>
-
-<button
+<div class="benefit">Acompanhamento do pedido</div></div><button
 class="btn btn-primary"
 onclick="openCheckout(
 'Cartão Básico',
-'199 MZN',
+'350 MZN',
 'https://ratixpay.co.mz/checkout.html?produto=C6AHBL7X2'
 )">
 Comprar este cartão
 </button>
 
 </div>
-
-</div>
-
-<!-- CARTÃO 199-->
-<div class="product recommended">
-
-<div class="product-inner">
-
-<div class="tag">
+</div><div class="product recommended"><div class="product-inner"><div class="tag">
 RECOMENDADO
-</div>
-
-<div class="product-card">
-
-<div class="virtual-card" style="background:linear-gradient(135deg,#1b242e,#0c1117 55%,#05070a)">
-
-<div class="card-top">
-
-<div>
+</div><div class="product-card"><div class="virtual-card" style="background:linear-gradient(135deg,#1b242e,#0c1117 55%,#05070a)"><div class="card-top"><div>
 <div class="card-brand">CardsMZ</div>
 <div class="card-sub">Virtual Premium</div>
-</div>
-
-<div class="chip"></div>
-
-</div>
-
-<div class="card-number">
+</div><div class="chip"></div></div><div class="card-number">
 5392 •••• •••• 7814
-</div>
-
-<div class="card-bottom">
-
-<div>
+</div><div class="card-bottom"><div>
 <div class="card-label">Titular</div>
 <div class="card-value">CARD MEMBER</div>
-</div>
-
-<div>
+</div><div>
 <div class="card-label">Validade</div>
 <div class="card-value">11/28</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="product-heading">
-
-<div>
+</div></div></div>
+</div><div class="product-heading"><div>
 <h3>Cartão Premium</h3>
 <div class="product-type">Plano intermediário</div>
-</div>
-
-<div class="product-price">
-199<small>MZN</small>
-</div>
-
-</div>
-
-<p class="product-description">
+</div><div class="product-price">
+250 <small>MZN</small>
+</div></div><p class="product-description">
 Uma opção mais completa para quem procura maior capacidade de utilização e uma experiência premium.
-</p>
-
-<div class="details-grid">
-
-<div class="detail-box">
+</p><div class="details-grid"><div class="detail-box">
 <small>Categoria</small>
 <strong>Premium</strong>
-</div>
-
-<div class="detail-box">
+</div><div class="detail-box">
 <small>Valor</small>
-<strong>199 MZN</strong>
-</div>
-
-<div class="detail-box">
+<strong>250 MZN</strong>
+</div><div class="detail-box">
 <small>Limite indicado</small>
 <strong>10.000 MZN</strong>
-</div>
-
-<div class="detail-box">
+</div><div class="detail-box">
 <small>Recarga mínima</small>
 <strong>500 MZN</strong>
-</div>
-
-</div>
-
-<div class="benefits">
-
-<div class="benefit">Maior limite indicado</div>
+</div></div><div class="benefits"><div class="benefit">Maior limite indicado</div>
 <div class="benefit">Compras online</div>
 <div class="benefit">Serviços digitais</div>
-<div class="benefit">Experiência premium</div>
-
-</div>
-
-<button
+<div class="benefit">Experiência premium</div></div><button
 class="btn btn-primary"
 onclick="openCheckout(
 'Cartão Premium',
-'350 MZN',
+'250 MZN',
 'https://ratixpay.co.mz/checkout.html?produto=QSP3ABA9M'
 )">
 Comprar este cartão
 </button>
 
 </div>
-
+</div></div>
 </div>
-
-</div>
-
-</div>
-</section>
-
-<!-- PROCESSO -->
-<section class="dark-section">
-
-<div class="container">
-
-<div class="section-head">
-
-<h2>
+</section><section class="dark-section"><div class="container"><div class="section-head"><h2>
 Como funciona o
 <span class="gradient">processo</span>
-</h2>
-
-<p>
+</h2><p>
 Tudo organizado em etapas para tornar a experiência mais simples.
-</p>
-
-</div>
-
-<div class="process-grid">
-
-<div class="process-card">
+</p></div><div class="process-grid"><div class="process-card">
 <div class="process-number">ETAPA 01</div>
 <h3>Escolha</h3>
-<p>
-Selecione o cartão que corresponde ao seu objetivo e veja os seus detalhes.
-</p>
-</div>
-
-<div class="process-card">
+<p>Selecione o cartão que corresponde ao seu objetivo e veja os seus detalhes.</p>
+</div><div class="process-card">
 <div class="process-number">ETAPA 02</div>
 <h3>Checkout</h3>
-<p>
-Clique em comprar e o checkout será aberto numa área ampla da plataforma.
-</p>
-</div>
-
-<div class="process-card">
+<p>Clique em comprar e o checkout será aberto numa área ampla da plataforma.</p>
+</div><div class="process-card">
 <div class="process-number">ETAPA 03</div>
 <h3>Pagamento</h3>
-<p>
-Conclua o pagamento seguindo as instruções apresentadas no checkout.
-</p>
-</div>
-
-<div class="process-card">
+<p>Conclua o pagamento seguindo as instruções apresentadas no checkout.</p>
+</div><div class="process-card">
 <div class="process-number">ETAPA 04</div>
 <h3>Análise</h3>
-<p>
-Depois de indicar que pagou, o pedido entra na etapa de análise.
-</p>
+<p>Depois de indicar que pagou, o pedido entra na etapa de análise.</p>
+</div></div>
 </div>
-
-</div>
-
-</div>
-</section>
-
-<!-- CHECKOUT GRANDE -->
-<div id="checkoutOverlay" class="checkout-overlay">
-
-<div class="checkout-box">
-
-<div class="checkout-header">
-
-<div>
-
-<div class="checkout-title">
-Finalizar pagamento
-</div>
-
+</section><!-- CHECKOUT --><div id="checkoutOverlay" class="checkout-overlay"><div class="checkout-box"><div class="checkout-header"><div>
+<div class="checkout-title">Finalizar pagamento</div>
 <div id="checkoutSubtitle" class="checkout-subtitle">
 Cartão selecionado
 </div>
-
-</div>
-
-<button class="close" onclick="closeCheckout()">
+</div><button class="close" onclick="closeCheckout()">
 ×
-</button>
-
-</div>
-
-<div class="checkout-user">
-
-<div class="checkout-user-card">
-<small>Nome</small>
-<strong id="checkoutName">—</strong>
-</div>
-
-<div class="checkout-user-card">
-<small>E-mail</small>
-<strong id="checkoutEmail">—</strong>
-</div>
-
-</div>
-
-<div class="checkout-frame-wrap">
-
-<iframe
+</button></div><div class="checkout-user"><div class="checkout-user-card">
+<small>Produto</small>
+<strong id="checkoutProduct">—</strong>
+</div><div class="checkout-user-card">
+<small>Valor</small>
+<strong id="checkoutPrice">—</strong>
+</div></div><div class="checkout-frame-wrap"><iframe
 id="checkoutFrame"
 class="checkout-frame"
 title="Checkout de pagamento"
 loading="eager"
 referrerpolicy="strict-origin-when-cross-origin">
-</iframe>
-
-</div>
-
-<div class="checkout-footer">
-
-<button class="btn paid" onclick="markPaid()">
+</iframe></div><div class="checkout-footer"><button class="btn checkout-back" onclick="closeCheckout()">
+Voltar
+</button><button class="btn paid" onclick="markPaid()">
 Já paguei
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- PEDIDO EM ANÁLISE -->
-<div id="analysisOverlay" class="analysis-overlay">
-
-<div class="analysis-box">
-
-<div class="analysis-icon">
-
-<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+</button></div></div>
+</div><div id="analysisOverlay" class="analysis-overlay"><div class="analysis-box"><div class="analysis-icon"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 <circle cx="12" cy="12" r="9"/>
 <path d="M12 7v5l3 2"/>
-</svg>
-
-</div>
-
-<h2>Pedido em análise</h2>
-
-<p>
+</svg></div><h2>Pedido em análise</h2><p>
 A indicação de pagamento foi recebida. O pedido está agora no processo de análise.
-</p>
-
-<div class="order-summary">
-
-<div class="order-row">
+</p><div class="order-summary"><div class="order-row">
 <span>Cartão</span>
 <strong id="analysisProduct">—</strong>
-</div>
-
-<div class="order-row">
+</div><div class="order-row">
 <span>Valor</span>
 <strong id="analysisPrice">—</strong>
-</div>
-
-<div class="order-row">
+</div><div class="order-row">
 <span>Nome</span>
 <strong id="analysisName">—</strong>
-</div>
-
-<div class="order-row">
+</div><div class="order-row">
 <span>E-mail</span>
 <strong id="analysisEmail">—</strong>
-</div>
-
-<div class="order-row">
+</div><div class="order-row">
 <span>País</span>
 <strong id="analysisCountry">—</strong>
-</div>
-
-</div>
-
-<div class="security-note">
-
-<strong>Apoio e confirmação</strong>
+</div></div><div class="security-note"><strong>Apoio e confirmação</strong>
 
 <p>
 Para sua segurança, nunca envie PIN, senha, palavra-passe ou códigos de segurança.
 A confirmação deve ocorrer apenas através do processo oficial.
-</p>
-
-</div>
-
-<div class="analysis-steps">
-
-<div id="analysisStep1" class="analysis-step active">
+</p></div><div class="analysis-steps"><div id="analysisStep1" class="analysis-step active">
 <span class="dot"></span>
 Pagamento indicado como concluído
-</div>
-
-<div id="analysisStep2" class="analysis-step active">
+</div><div id="analysisStep2" class="analysis-step active">
 <span class="dot"></span>
 Pedido enviado para análise
-</div>
-
-<div id="analysisStep3" class="analysis-step">
+</div><div id="analysisStep3" class="analysis-step">
 <span class="dot"></span>
 Análise do pedido
-</div>
-
-<div id="analysisStep4" class="analysis-step">
+</div><div id="analysisStep4" class="analysis-step">
 <span class="dot"></span>
 Aprovação do cartão virtual
-</div>
-
-</div>
-
-<button class="btn btn-primary" onclick="analyzeOrder()">
+</div></div><button class="btn btn-primary" onclick="analyzeOrder()">
 Analisar pedido
-</button>
-
-<button class="btn btn-outline" style="margin-top:9px" onclick="closeAnalysis()">
+</button><button class="btn btn-outline" style="margin-top:9px" onclick="closeAnalysis()">
 Voltar
-</button>
-
-</div>
-
-</div>
-
-<footer>
-
-<div class="container">
-
-<div class="footer">
-
-<strong class="gradient">
+</button></div>
+</div><footer><div class="container"><div class="footer"><strong class="gradient">
 CardsMZ
-</strong>
-
-<p>
+</strong><p>
 © 2026 CardsMZ. Todos os direitos reservados.
-</p>
+</p></div></div>
+</footer><div id="toast" class="toast"></div><script>
 
-</div>
-
-</div>
-
-</footer>
-
-<div id="toast" class="toast"></div>
-
-<script>
 let userName='';
 let userEmail='';
 let userCountry='';
@@ -2287,6 +1778,12 @@ userName
 : 'C';
 }
 
+/*
+CHECKOUT
+O checkout ocupa praticamente toda a tela.
+Os dados de nome/e-mail foram removidos da área superior.
+*/
+
 function openCheckout(product,price,url){
 
 selectedProduct=product;
@@ -2296,11 +1793,11 @@ selectedCheckout=url;
 document.getElementById('checkoutSubtitle').textContent=
 product+' — '+price;
 
-document.getElementById('checkoutName').textContent=
-userName || '—';
+document.getElementById('checkoutProduct').textContent=
+product;
 
-document.getElementById('checkoutEmail').textContent=
-userEmail || '—';
+document.getElementById('checkoutPrice').textContent=
+price;
 
 document.getElementById('checkoutFrame').src=url;
 
@@ -2428,7 +1925,6 @@ finishOnboarding();
 }
 
 });
-</script>
 
-</body>
+</script></body>
    </html>

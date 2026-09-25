@@ -2,226 +2,1097 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Cartão Virtual</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>CardsMZ — Cartões Virtuais</title>
+<meta name="description" content="Protótipo de avaliação de cartões virtuais, países, métodos de pagamento, taxas e condições de utilização.">
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#05080c;
+  --panel:#0b1219;
+  --panel2:#101a23;
+  --panel3:#17232e;
+  --line:#23313d;
+  --text:#f4f7f9;
+  --muted:#8796a4;
+  --primary:#19c79a;
+  --primary2:#0d9876;
+  --gold:#e6b94f;
+  --blue:#398cff;
+  --danger:#ef5350;
+  --success:#25d79e;
+  --radius:18px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
-  background:#070b10;
-  color:#fff;
-  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"DM Sans",sans-serif;
   min-height:100vh;
-  padding:20px;
+  overflow-x:hidden;
+}
+
+button,input,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
 }
 
 .app{
-  max-width:440px;
+  width:100%;
+  max-width:540px;
   margin:auto;
-}
-
-.logo{
-  text-align:center;
-  font-size:27px;
-  font-weight:800;
-  margin:10px 0 24px;
-}
-
-.card{
+  min-height:100vh;
   position:relative;
-  height:225px;
-  padding:25px;
-  border-radius:24px;
-  background:linear-gradient(135deg,#27313c,#0c1117);
-  border:1px solid #303b47;
-  box-shadow:0 20px 55px #0009;
   overflow:hidden;
+  background:
+    radial-gradient(circle at 50% -10%,rgba(25,199,154,.12),transparent 30%),
+    var(--bg);
 }
 
-.card:after{
-  content:"";
-  position:absolute;
-  width:190px;
-  height:190px;
-  right:-90px;
-  top:-80px;
-  border-radius:50%;
-  background:#ffffff0d;
-}
+/* =====================================================
+   TOPO
+===================================================== */
 
-.cardTop{
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  min-height:70px;
+  padding:14px 18px;
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  font-size:13px;
+  gap:12px;
+  background:rgba(5,8,12,.91);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.05);
 }
 
-.chip{
-  width:46px;
-  height:35px;
-  margin-top:42px;
-  border-radius:8px;
-  background:linear-gradient(135deg,#ddd,#777);
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.number{
-  margin-top:21px;
-  letter-spacing:3px;
+.brand-mark{
+  width:40px;
+  height:40px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#19c79a,#087a60);
+  color:#03100c;
+  font-family:"Space Grotesk",sans-serif;
   font-size:18px;
+  font-weight:800;
+  box-shadow:0 8px 25px rgba(25,199,154,.2);
 }
 
-.cardBottom{
-  position:absolute;
-  left:25px;
-  right:25px;
-  bottom:22px;
+.brand-text{
+  font-family:"Space Grotesk",sans-serif;
+  font-weight:700;
+  font-size:16px;
+}
+
+.brand-sub{
+  color:var(--muted);
+  font-size:9px;
+  margin-top:2px;
+}
+
+.status-pill{
+  padding:7px 11px;
+  border-radius:999px;
+  color:var(--primary);
+  background:rgba(25,199,154,.07);
+  border:1px solid rgba(25,199,154,.2);
+  font-size:10px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+/* =====================================================
+   NAVEGAÇÃO
+===================================================== */
+
+.tabs{
+  position:sticky;
+  top:70px;
+  z-index:40;
   display:flex;
-  justify-content:space-between;
+  gap:6px;
+  overflow-x:auto;
+  padding:10px 14px;
+  background:rgba(5,8,12,.95);
+  border-bottom:1px solid rgba(255,255,255,.04);
+  scrollbar-width:none;
 }
 
-.label{
-  color:#8995a3;
+.tabs::-webkit-scrollbar{
+  display:none;
+}
+
+.tab{
+  flex:none;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:9px 12px;
+  background:var(--panel);
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.tab.active{
+  color:var(--text);
+  border-color:rgba(25,199,154,.45);
+  background:rgba(25,199,154,.09);
+}
+
+.page{
+  padding:18px;
+}
+
+.section{
+  margin-bottom:26px;
+}
+
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:13px;
+}
+
+.section-title{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:19px;
+  font-weight:700;
+}
+
+.section-subtitle{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:4px;
+  line-height:1.45;
+}
+
+.section-label{
+  color:var(--primary);
+  font-size:10px;
+  font-weight:800;
+}
+
+/* =====================================================
+   ABAS
+===================================================== */
+
+.tab-page{
+  display:none;
+  animation:fadeIn .25s ease;
+}
+
+.tab-page.active{
+  display:block;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(6px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =====================================================
+   INÍCIO
+===================================================== */
+
+.account-strip{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 14px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:15px;
+  margin-bottom:18px;
+}
+
+.account-label{
+  color:var(--muted);
   font-size:9px;
   text-transform:uppercase;
+  letter-spacing:.08em;
 }
 
-.value{
-  font-size:12px;
-  margin-top:4px;
+.account-name{
+  font-size:13px;
+  font-weight:700;
+  margin-top:3px;
 }
 
-.infoGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:18px;
+.account-state{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--success);
+  box-shadow:0 0 0 5px rgba(37,215,158,.08);
 }
 
-.info{
-  padding:16px;
-  border-radius:15px;
-  background:#10161e;
-  border:1px solid #202a34;
+.hero{
+  padding:10px 0 25px;
 }
 
-.info strong{
-  display:block;
-  font-size:18px;
-  margin-bottom:5px;
-}
-
-.info span{
-  color:#8995a3;
-  font-size:11px;
-}
-
-.panel{
-  margin-top:18px;
-  padding:20px;
-  border-radius:17px;
-  background:#10161e;
-  border:1px solid #202a34;
-}
-
-h2{
-  font-size:19px;
+.hero-eyebrow{
+  color:var(--primary);
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.13em;
   margin-bottom:9px;
 }
 
-h3{
+.hero h1{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:34px;
+  line-height:1.04;
+  letter-spacing:-1.5px;
+  margin-bottom:13px;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.65;
+}
+
+.notice{
+  border:1px solid rgba(57,140,255,.2);
+  background:rgba(57,140,255,.06);
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:20px;
+}
+
+.notice-title{
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.notice p{
+  color:#9dacb9;
+  font-size:10px;
+  line-height:1.55;
+}
+
+/* =====================================================
+   PAÍSES
+===================================================== */
+
+.country-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.country{
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:15px;
+  padding:13px 8px;
+  text-align:center;
+  transition:.2s;
+}
+
+.country.active{
+  border-color:rgba(25,199,154,.5);
+  background:rgba(25,199,154,.07);
+}
+
+.country-flag{
+  font-size:23px;
+  margin-bottom:6px;
+}
+
+.country-name{
+  font-size:10px;
+  font-weight:700;
+}
+
+.country-code{
+  color:var(--muted);
+  font-size:8px;
+  margin-top:2px;
+}
+
+/* =====================================================
+   CARTÕES
+===================================================== */
+
+.cards{
+  display:grid;
+  gap:30px;
+}
+
+.card-product{
+  border:1px solid var(--line);
+  border-radius:24px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(25,199,154,.13),transparent 32%),
+    linear-gradient(145deg,#111b25,#080e14);
+  box-shadow:0 20px 60px rgba(0,0,0,.28);
+}
+
+.card-product.premium{
+  border-color:rgba(230,185,79,.25);
+  background:
+    radial-gradient(circle at 100% 0%,rgba(230,185,79,.16),transparent 33%),
+    linear-gradient(145deg,#181812,#0a0c0a);
+}
+
+.card-content{
+  padding:19px;
+}
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+}
+
+.card-label{
+  color:var(--muted);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-weight:700;
+}
+
+.card-title{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:22px;
+  margin-top:5px;
+}
+
+.card-description{
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.5;
+  margin-top:7px;
+  max-width:280px;
+}
+
+.card-price{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:24px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.card-visual{
+  height:190px;
+  margin:20px 0 17px;
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+  border-radius:19px;
+  border:1px solid rgba(255,255,255,.1);
+  background:
+    linear-gradient(135deg,#203440,#071016);
+}
+
+.premium .card-visual{
+  background:
+    linear-gradient(135deg,#302a19,#0b0c09);
+}
+
+.card-visual:before{
+  content:"";
+  position:absolute;
+  width:210px;
+  height:210px;
+  border-radius:50%;
+  right:-90px;
+  top:-95px;
+  background:rgba(25,199,154,.12);
+}
+
+.premium .card-visual:before{
+  background:rgba(230,185,79,.13);
+}
+
+.card-logo{
+  position:absolute;
+  top:19px;
+  right:20px;
+  font-family:"Space Grotesk",sans-serif;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.virtual-chip{
+  width:44px;
+  height:32px;
+  border-radius:8px;
+  background:linear-gradient(135deg,#d3d9dc,#707b80);
+  position:relative;
+  margin-bottom:28px;
+}
+
+.virtual-chip:after{
+  content:"";
+  position:absolute;
+  inset:7px 10px;
+  border:1px solid rgba(0,0,0,.4);
+  border-radius:4px;
+}
+
+.card-number{
+  font-family:"Space Grotesk",sans-serif;
   font-size:15px;
+  letter-spacing:2px;
+  margin-bottom:18px;
+}
+
+.card-bottom{
+  display:flex;
+  justify-content:space-between;
+  color:#aebac2;
+  font-size:8px;
+}
+
+.feature-list{
+  display:grid;
+  gap:8px;
+  margin-bottom:17px;
+}
+
+.feature{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  padding:9px 10px;
+  border-radius:11px;
+  background:rgba(255,255,255,.025);
+  font-size:10px;
+  color:#cbd4da;
+}
+
+.feature-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  margin-top:4px;
+  flex:none;
+  background:var(--primary);
+}
+
+.premium .feature-dot{
+  background:var(--gold);
+}
+
+.spec-table{
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  margin-bottom:17px;
+}
+
+.spec-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 11px;
+  border-bottom:1px solid rgba(255,255,255,.045);
+  font-size:9px;
+}
+
+.spec-row:last-child{
+  border-bottom:0;
+}
+
+.spec-row span:first-child{
+  color:var(--muted);
+}
+
+.spec-row span:last-child{
+  text-align:right;
+  font-weight:700;
+}
+
+.buy-btn{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:14px;
+  background:var(--primary);
+  color:#03100c;
+  font-size:12px;
+  font-weight:800;
+}
+
+.premium .buy-btn{
+  background:var(--gold);
+  color:#171205;
+}
+
+.disclaimer{
+  color:#697986;
+  font-size:8px;
+  line-height:1.5;
+  margin-top:9px;
+  text-align:center;
+}
+
+/* =====================================================
+   INFORMAÇÕES
+===================================================== */
+
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.info-card{
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--panel);
+}
+
+.info-icon{
+  width:31px;
+  height:31px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  background:var(--panel3);
+  margin-bottom:9px;
+  color:var(--primary);
+  font-size:10px;
+  font-weight:800;
+}
+
+.info-card h3{
+  font-size:11px;
+  margin-bottom:5px;
+}
+
+.info-card p{
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.5;
+}
+
+/* =====================================================
+   MÉTODOS POR PAÍS
+===================================================== */
+
+.method-box{
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:var(--panel);
+  overflow:hidden;
+}
+
+.method-head{
+  padding:14px;
+  border-bottom:1px solid var(--line);
+}
+
+.method-head strong{
+  font-size:12px;
+}
+
+.method-head p{
+  color:var(--muted);
+  font-size:9px;
+  margin-top:4px;
+}
+
+.method-list{
+  display:grid;
+}
+
+.method{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:13px 14px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+
+.method:last-child{
+  border-bottom:0;
+}
+
+.method-name{
+  font-size:10px;
+  font-weight:700;
+}
+
+.method-type{
+  color:var(--muted);
+  font-size:8px;
+  margin-top:2px;
+}
+
+.method-status{
+  color:var(--primary);
+  font-size:8px;
+  font-weight:800;
+}
+
+/* =====================================================
+   FAQ / PROCESSO
+===================================================== */
+
+.process-list{
+  display:grid;
+  gap:9px;
+}
+
+.process-item{
+  display:flex;
+  align-items:flex-start;
+  gap:11px;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--panel);
+}
+
+.process-number{
+  width:29px;
+  height:29px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  background:var(--panel3);
+  color:var(--primary);
+  font-size:9px;
+  font-weight:800;
+  flex:none;
+}
+
+.process-item h3{
+  font-size:11px;
+  margin-bottom:4px;
+}
+
+.process-item p{
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.5;
+}
+
+/* =====================================================
+   RODAPÉ
+===================================================== */
+
+.footer{
+  padding:15px 18px 38px;
+  color:#596875;
+  text-align:center;
+  font-size:8px;
+  line-height:1.6;
+}
+
+/* =====================================================
+   OVERLAYS
+===================================================== */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  background:rgba(2,5,8,.84);
+  backdrop-filter:blur(15px);
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.modal{
+  width:100%;
+  max-width:540px;
+  max-height:94vh;
+  overflow-y:auto;
+  border:1px solid var(--line);
+  border-radius:25px 25px 0 0;
+  background:#080d12;
+  box-shadow:0 -20px 80px rgba(0,0,0,.5);
+}
+
+.modal-header{
+  padding:20px 18px 15px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.modal-kicker{
+  color:var(--primary);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.modal-title{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:22px;
+}
+
+.modal-subtitle{
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.5;
+  margin-top:5px;
+}
+
+.modal-body{
+  padding:18px;
+}
+
+.modal-footer{
+  padding:14px 18px 22px;
+  border-top:1px solid rgba(255,255,255,.05);
+  display:grid;
+  gap:8px;
+}
+
+.step-indicator{
+  display:flex;
+  gap:5px;
+  margin-bottom:19px;
+}
+
+.step-line{
+  height:3px;
+  flex:1;
+  border-radius:999px;
+  background:#1a252e;
+}
+
+.step-line.active{
+  background:var(--primary);
+}
+
+.step-page{
+  display:none;
+}
+
+.step-page.active{
+  display:block;
+}
+
+.step-title{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:22px;
+  line-height:1.1;
   margin-bottom:8px;
 }
 
-p{
-  color:#929daa;
-  font-size:13px;
+.step-description{
+  color:var(--muted);
+  font-size:10px;
   line-height:1.55;
-  margin-bottom:15px;
+  margin-bottom:16px;
 }
 
-.countries{
+.input-group{
+  margin-bottom:12px;
+}
+
+.input-label{
+  display:block;
+  color:#b7c3cb;
+  font-size:9px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.input{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:13px;
+  outline:none;
+  color:var(--text);
+  background:var(--panel);
+  font-size:11px;
+}
+
+.input:focus{
+  border-color:rgba(25,199,154,.5);
+}
+
+.option-grid{
+  display:grid;
+  gap:8px;
+}
+
+.choice-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
 }
 
-.country{
-  padding:11px;
-  border-radius:10px;
-  background:#171e27;
-  color:#cbd3dc;
-  font-size:12px;
+.option{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px;
+  text-align:left;
+  color:var(--text);
+  background:var(--panel);
 }
 
-.methods{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
-
-.method{
-  padding:9px 12px;
-  border-radius:9px;
-  background:#171e27;
+.option strong{
+  display:block;
   font-size:11px;
 }
 
-button{
-  width:100%;
-  padding:14px;
-  margin-top:10px;
-  border:0;
-  border-radius:11px;
-  background:#fff;
-  color:#080b10;
-  font-weight:bold;
-  cursor:pointer;
+.option span{
+  display:block;
+  color:var(--muted);
+  font-size:8px;
+  margin-top:3px;
 }
 
-.secondary{
-  background:#19212b;
-  color:#fff;
-  border:1px solid #303b47;
+.option.selected{
+  border-color:rgba(25,199,154,.5);
+  background:rgba(25,199,154,.07);
 }
 
-input{
-  width:100%;
-  padding:14px;
-  margin-bottom:10px;
-  border-radius:11px;
-  border:1px solid #29333e;
-  background:#080c11;
-  color:#fff;
-  outline:none;
-}
-
-.hidden{
-  display:none;
-}
-
-.status{
+.country-choice{
   text-align:center;
 }
 
-.icon{
-  width:55px;
-  height:55px;
-  margin:0 auto 15px;
+.country-choice .country-flag{
+  font-size:25px;
+}
+
+.primary-btn,
+.paid-btn{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:14px;
+  background:var(--primary);
+  color:#03100c;
+  font-size:12px;
+  font-weight:800;
+}
+
+.back-btn,
+.secondary-btn{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:13px;
+  background:transparent;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+}
+
+/* =====================================================
+   CHECKOUT
+===================================================== */
+
+.checkout-summary{
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--panel);
+  padding:13px;
+  margin-bottom:13px;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:8px 0;
+  font-size:10px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+
+.summary-row:last-child{
+  border-bottom:0;
+}
+
+.summary-label{
+  color:var(--muted);
+}
+
+.summary-value{
+  font-weight:700;
+  text-align:right;
+}
+
+.checkout-frame{
+  width:100%;
+  height:460px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  background:#fff;
+}
+
+.checkout-frame iframe{
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+/* =====================================================
+   PROCESSAMENTO
+===================================================== */
+
+.processing{
+  position:fixed;
+  inset:0;
+  z-index:500;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:50%;
-  background:#292f38;
-  font-size:24px;
+  padding:25px;
+  background:#05080c;
 }
 
-.back{
+.processing-inner{
+  width:100%;
+  max-width:390px;
   text-align:center;
-  margin-top:15px;
-  color:#8f9aa7;
-  font-size:13px;
-  cursor:pointer;
+}
+
+.loader-ring{
+  width:64px;
+  height:64px;
+  margin:0 auto 21px;
+  border:3px solid #1c2831;
+  border-top-color:var(--primary);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+
+.processing h2{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:21px;
+  margin-bottom:7px;
+}
+
+.processing p{
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.5;
+}
+
+.progress-track{
+  height:5px;
+  margin-top:19px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#16212a;
+}
+
+.progress-bar{
+  width:12%;
+  height:100%;
+  border-radius:999px;
+  background:var(--primary);
+  transition:width .45s ease;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+  position:fixed;
+  z-index:700;
+  left:50%;
+  bottom:20px;
+  max-width:90%;
+  padding:11px 14px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#17222b;
+  color:#dce5ea;
+  font-size:9px;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%,20px);
+  transition:.25s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:390px){
+
+  .hero h1{
+    font-size:29px;
+  }
+
+  .country-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .choice-grid{
+    grid-template-columns:1fr;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
 }
 </style>
 </head>
@@ -230,38 +1101,1884 @@ input{
 
 <div class="app">
 
-<div class="logo">CARTÃO</div>
+  <!-- ===================================================
+       TOPO
+  ==================================================== -->
 
-<!-- CARTÃO -->
+  <header class="topbar">
 
-<div class="card">
+    <div class="brand">
 
-  <div class="cardTop">
-    <span>Cartão Virtual</span>
-    <strong>VIRTUAL</strong>
-  </div>
+      <div class="brand-mark">
+        C
+      </div>
 
-  <div class="chip"></div>
+      <div>
+        <div class="brand-text">
+          CardsMZ
+        </div>
 
-  <div class="number">
-    •••• •••• •••• ••••
-  </div>
+        <div class="brand-sub">
+          Cartões virtuais
+        </div>
+      </div>
 
-  <div class="cardBottom">
-
-    <div>
-      <div class="label">Titular</div>
-      <div class="value">UTILIZADOR</div>
     </div>
 
-    <div>
-      <div class="label">Validade</div>
-      <div class="value">--/--</div>
+    <div
+      class="status-pill"
+      id="globalStatus">
+      Perfil
     </div>
 
-    <div>
-      <div class="label">Estado</div>
-      <div class="value">PENDENTE</div>
+  </header>
+
+
+  <!-- ===================================================
+       7 ABAS
+  ==================================================== -->
+
+  <nav class="tabs">
+
+    <button
+      class="tab active"
+      data-tab="inicio">
+      Início
+    </button>
+
+    <button
+      class="tab"
+      data-tab="cartoes">
+      Cartões
+    </button>
+
+    <button
+      class="tab"
+      data-tab="paises">
+      Países
+    </button>
+
+    <button
+      class="tab"
+      data-tab="pagamentos">
+      Pagamentos
+    </button>
+
+    <button
+      class="tab"
+      data-tab="processo">
+      Processo
+    </button>
+
+    <button
+      class="tab"
+      data-tab="detalhes">
+      Detalhes
+    </button>
+
+    <button
+      class="tab"
+      data-tab="ajuda">
+      Ajuda
+    </button>
+
+  </nav>
+
+
+  <main class="page">
+
+    <!-- =================================================
+         ABA 1 — INÍCIO
+    ================================================== -->
+
+    <section
+      class="tab-page active"
+      id="tab-inicio">
+
+      <div class="account-strip">
+
+        <div>
+
+          <div class="account-label">
+            Perfil atual
+          </div>
+
+          <div
+            class="account-name"
+            id="accountName">
+            Novo utilizador
+          </div>
+
+        </div>
+
+        <div class="account-state"></div>
+
+      </div>
+
+
+      <section class="hero">
+
+        <div class="hero-eyebrow">
+          Plataforma de cartões virtuais
+        </div>
+
+        <h1>
+          Mais liberdade para as suas compras online.
+        </h1>
+
+        <p>
+          Consulte as opções disponíveis, compare condições,
+          selecione o país de utilização e acompanhe as etapas
+          do pedido numa única experiência.
+        </p>
+
+      </section>
+
+
+      <div class="notice">
+
+        <div class="notice-title">
+          Informação importante
+        </div>
+
+        <p>
+          Os valores, prazos, taxas, métodos de pagamento e
+          funcionalidades apresentados nesta interface são
+          parâmetros de demonstração do protótipo. A disponibilidade
+          real deve ser confirmada pelo fornecedor responsável
+          antes de qualquer pagamento ou utilização financeira.
+        </p>
+
+      </div>
+
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="section-title">
+              Cartões disponíveis
+            </div>
+
+            <div class="section-subtitle">
+              Duas opções com condições diferentes
+            </div>
+
+          </div>
+
+          <div class="section-label">
+            2 opções
+          </div>
+
+        </div>
+
+
+        <div class="cards">
+
+          <!-- CARTÃO 1 -->
+
+          <article class="card-product premium">
+
+            <div class="card-content">
+
+              <div class="card-top">
+
+                <div>
+
+                  <div class="card-label">
+                    Opção premium
+                  </div>
+
+                  <div class="card-title">
+                    Cartão Premium
+                  </div>
+
+                  <div class="card-description">
+                    Opção apresentada para utilizadores que procuram
+                    mais recursos, acompanhamento detalhado e
+                    maior flexibilidade dentro das condições do serviço.
+                  </div>
+
+                </div>
+
+                <div class="card-price">
+                  300 MZN
+                </div>
+
+              </div>
+
+
+              <div class="card-visual">
+
+                <div class="card-logo">
+                  CARDSMZ
+                </div>
+
+                <div class="virtual-chip"></div>
+
+                <div class="card-number">
+                  •••• •••• •••• 4826
+                </div>
+
+                <div class="card-bottom">
+                  <span>VIRTUAL</span>
+                  <span>PREMIUM</span>
+                </div>
+
+              </div>
+
+
+              <div class="feature-list">
+
+                <div class="feature">
+                  <span class="feature-dot"></span>
+                  Compras em plataformas online compatíveis
+                </div>
+
+                <div class="feature">
+                  <span class="feature-dot"></span>
+                  Pagamentos digitais conforme aceitação do comerciante
+                </div>
+
+                <div class="feature">
+                  <span class="feature-dot"></span>
+                  Possibilidade de utilização em serviços internacionais compatíveis
+                </div>
+
+                <div class="feature">
+                  <span class="feature-dot"></span>
+                  Conversão de moeda sujeita à taxa aplicada pelo serviço
+                </div>
+
+                <div class="feature">
+                  <span class="feature-dot"></span>
+                  Opções de entrada e retirada dependentes do país
+                </div>
+
+              </div>
+
+
+              <div class="spec-table">
+
+                <div class="spec-row">
+                  <span>Preço do pedido</span>
+                  <span>300 MZN</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Taxa de serviço</span>
+                  <span>Consultar no checkout</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Entrada estimada</span>
+                  <span>Até 60 segundos*</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Moeda principal</span>
+                  <span>MZN / conforme região</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Conversão USD</span>
+                  <span>Conforme câmbio aplicado</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Retirada</span>
+                  <span>Disponível apenas quando suportada</span>
+                </div>
+
+              </div>
+
+
+              <button
+                class="buy-btn"
+                onclick="openCheckout(
+                  'Cartão Premium',
+                  '300 MZN',
+                  'https://pagaja.site/p/mais-liberdade-para-as-suas-compras-onlinetenha-mais-liberdade-para-fazer-as-suas-compras-online-com-o-nosso-cartao-de-forma-pratica-e-conveniente-o-que-voce-podera-fazer-fazer-compras-online-efetuar-pagamentos-digitais-realizar-vendas-online-receber-pagamentos-solicitar-levantamentos-online-quando-disponiveis-utilizar-diferentes-servicos-digitais-compativeis-lv0i8'
+                )">
+                Escolher cartão
+              </button>
+
+              <div class="disclaimer">
+                *Prazo meramente demonstrativo. O tempo real depende
+                do processamento e das condições do fornecedor.
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- CARTÃO 2 -->
+
+          <article class="card-product">
+
+            <div class="card-content">
+
+              <div class="card-top">
+
+                <div>
+
+                  <div class="card-label">
+                    Opção simples
+                  </div>
+
+                  <div class="card-title">
+                    Cartão Básico
+                  </div>
+
+                  <div class="card-description">
+                    Alternativa de entrada com estrutura mais simples
+                    para utilização digital, sujeita às condições
+                    da região selecionada.
+                  </div>
+
+                </div>
+
+                <div class="card-price">
+                  200 MZN
+                </div>
+
+              </div>
+
+
+              <div class="card-visual">
+
+                <div class="card-logo">
+                  CARDSMZ
+                </div>
+
+                <div class="virtual-chip"></div>
+
+                <div class="card-number">
+                  •••• •••• •••• 7194
+                </div>
+
+                <div class="card-bottom">
+                  <span>VIRTUAL</span>
+                  <span>BASIC</span>
+                </div>
+
+              </div>
+
+
+              <div class="feature-list">
+
+                <div class="feature">
+                  <span class="feature-dot"></span>
+                  Compras online em serviços compatíveis
+                </div>
+
+                <div class="feature">
+                  <span class="feature-dot"></span>
+                  Pagamentos digitais conforme aceitação
+                </div>
+
+                <div class="feature">
+                  <span class="feature-dot"></span>
+                  Taxa de referência de 5% no modelo demonstrativo
+                </div>
+
+                <div class="feature">
+                  <span class="feature-dot"></span>
+                  Entrada estimada em até 10 horas no modelo apresentado
+                </div>
+
+                <div class="feature">
+                  <span class="feature-dot"></span>
+                  Condições de pagamento e retirada variam por região
+                </div>
+
+              </div>
+
+
+              <div class="spec-table">
+
+                <div class="spec-row">
+                  <span>Preço do pedido</span>
+                  <span>200 MZN</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Taxa de referência</span>
+                  <span>5%</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Entrada estimada</span>
+                  <span>Até 10 horas*</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Pagamentos</span>
+                  <span>Conforme calendário do serviço</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Conversão</span>
+                  <span>Conforme câmbio aplicável</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Retirada</span>
+                  <span>Conforme suporte regional</span>
+                </div>
+
+              </div>
+
+
+              <button
+                class="buy-btn"
+                onclick="openCheckout(
+                  'Cartão Básico',
+                  '200 MZN',
+                  'https://pagaja.site/p/tenha-mais-liberdade-para-fazer-as-suas-compras-online-com-o-nosso-cartao-de-forma-pratica-e-conveniente-o-que-voce-podera-fazer-fazer-compras-online-efetuar-pagamentos-digitais-realizar-vendas-online-receber-pagamentos-solicitar-levantamentos-online-quando-disponiveis-utilizar-diferentes-servicos-digitais-compativeis-gme0l'
+                )">
+                Escolher cartão
+              </button>
+
+              <div class="disclaimer">
+                *O prazo apresentado é apenas uma referência de protótipo
+                e não constitui garantia de crédito ou processamento.
+              </div>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="section-title">
+              Visão geral
+            </div>
+
+            <div class="section-subtitle">
+              O que deve ser analisado antes de escolher
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+          <div class="info-card">
+            <div class="info-icon">01</div>
+            <h3>País</h3>
+            <p>
+              O país selecionado pode alterar moeda, métodos de pagamento
+              e funcionalidades disponíveis.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">02</div>
+            <h3>Taxas</h3>
+            <p>
+              Taxas podem existir na emissão, conversão, utilização
+              ou retirada, conforme o serviço.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">03</div>
+            <h3>Conversão</h3>
+            <p>
+              Valores em USD ou outras moedas dependem do câmbio
+              e das regras aplicadas no momento da operação.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">04</div>
+            <h3>Retirada</h3>
+            <p>
+              M-Pesa, E-Mola ou outros meios só devem aparecer como
+              disponíveis quando forem realmente suportados.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+
+    <!-- =================================================
+         ABA 2 — CARTÕES
+    ================================================== -->
+
+    <section
+      class="tab-page"
+      id="tab-cartoes">
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="section-title">
+              Comparação dos cartões
+            </div>
+
+            <div class="section-subtitle">
+              Consulte os parâmetros de cada opção.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="cards">
+
+          <article class="card-product premium">
+
+            <div class="card-content">
+
+              <div class="card-label">
+                Premium
+              </div>
+
+              <div class="card-title">
+                300 MZN
+              </div>
+
+              <div class="card-description">
+                Estrutura com mais parâmetros de utilização e
+                acompanhamento.
+              </div>
+
+              <div class="spec-table">
+
+                <div class="spec-row">
+                  <span>Categoria</span>
+                  <span>Premium</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Compras online</span>
+                  <span>Compatível conforme comerciante</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Pagamentos digitais</span>
+                  <span>Sim, quando suportado</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Conversão</span>
+                  <span>Moeda local / estrangeira</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Entrada</span>
+                  <span>Referência: até 60 segundos*</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Retirada</span>
+                  <span>Conforme país</span>
+                </div>
+
+              </div>
+
+              <button
+                class="buy-btn"
+                onclick="openCheckout(
+                  'Cartão Premium',
+                  '300 MZN',
+                  'https://pagaja.site/p/mais-liberdade-para-as-suas-compras-onlinetenha-mais-liberdade-para-fazer-as-suas-compras-online-com-o-nosso-cartao-de-forma-pratica-e-conveniente-o-que-voce-podera-fazer-fazer-compras-online-efetuar-pagamentos-digitais-realizar-vendas-online-receber-pagamentos-solicitar-levantamentos-online-quando-disponiveis-utilizar-diferentes-servicos-digitais-compativeis-lv0i8'
+                )">
+                Selecionar Premium
+              </button>
+
+            </div>
+
+          </article>
+
+
+          <article class="card-product">
+
+            <div class="card-content">
+
+              <div class="card-label">
+                Básico
+              </div>
+
+              <div class="card-title">
+                200 MZN
+              </div>
+
+              <div class="card-description">
+                Estrutura simples para utilização digital,
+                com parâmetros próprios.
+              </div>
+
+              <div class="spec-table">
+
+                <div class="spec-row">
+                  <span>Categoria</span>
+                  <span>Básico</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Compras online</span>
+                  <span>Compatível conforme comerciante</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Taxa de referência</span>
+                  <span>5%</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Entrada</span>
+                  <span>Referência: até 10 horas*</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Conversão</span>
+                  <span>Conforme câmbio</span>
+                </div>
+
+                <div class="spec-row">
+                  <span>Retirada</span>
+                  <span>Conforme país</span>
+                </div>
+
+              </div>
+
+              <button
+                class="buy-btn"
+                onclick="openCheckout(
+                  'Cartão Básico',
+                  '200 MZN',
+                  'https://pagaja.site/p/tenha-mais-liberdade-para-fazer-as-suas-compras-online-com-o-nosso-cartao-de-forma-pratica-e-conveniente-o-que-voce-podera-fazer-fazer-compras-online-efetuar-pagamentos-digitais-realizar-vendas-online-receber-pagamentos-solicitar-levantamentos-online-quando-disponiveis-utilizar-diferentes-servicos-digitais-compativeis-gme0l'
+                )">
+                Selecionar Básico
+              </button>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
+
+    </section>
+
+
+    <!-- =================================================
+         ABA 3 — PAÍSES
+    ================================================== -->
+
+    <section
+      class="tab-page"
+      id="tab-paises">
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="section-title">
+              País de utilização
+            </div>
+
+            <div class="section-subtitle">
+              Selecione uma região para consultar os meios
+              normalmente associados ao protótipo.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="country-grid">
+
+          <button class="country active" data-country="Moçambique">
+            <div class="country-flag">🇲🇿</div>
+            <div class="country-name">Moçambique</div>
+            <div class="country-code">MZN</div>
+          </button>
+
+          <button class="country" data-country="África do Sul">
+            <div class="country-flag">🇿🇦</div>
+            <div class="country-name">África do Sul</div>
+            <div class="country-code">ZAR</div>
+          </button>
+
+          <button class="country" data-country="Brasil">
+            <div class="country-flag">🇧🇷</div>
+            <div class="country-name">Brasil</div>
+            <div class="country-code">BRL</div>
+          </button>
+
+          <button class="country" data-country="Portugal">
+            <div class="country-flag">🇵🇹</div>
+            <div class="country-name">Portugal</div>
+            <div class="country-code">EUR</div>
+          </button>
+
+          <button class="country" data-country="Estados Unidos">
+            <div class="country-flag">🇺🇸</div>
+            <div class="country-name">Estados Unidos</div>
+            <div class="country-code">USD</div>
+          </button>
+
+          <button class="country" data-country="Reino Unido">
+            <div class="country-flag">🇬🇧</div>
+            <div class="country-name">Reino Unido</div>
+            <div class="country-code">GBP</div>
+          </button>
+
+          <button class="country" data-country="Angola">
+            <div class="country-flag">🇦🇴</div>
+            <div class="country-name">Angola</div>
+            <div class="country-code">AOA</div>
+          </button>
+
+          <button class="country" data-country="Quénia">
+            <div class="country-flag">🇰🇪</div>
+            <div class="country-name">Quénia</div>
+            <div class="country-code">KES</div>
+          </button>
+
+          <button class="country" data-country="Nigéria">
+            <div class="country-flag">🇳🇬</div>
+            <div class="country-name">Nigéria</div>
+            <div class="country-code">NGN</div>
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <div class="notice">
+
+        <div class="notice-title">
+          País selecionado
+        </div>
+
+        <p id="selectedCountryText">
+          Moçambique foi selecionado. Consulte a aba
+          “Pagamentos” para visualizar os meios configurados.
+        </p>
+
+      </div>
+
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="section-title">
+              O que muda por região
+            </div>
+
+            <div class="section-subtitle">
+              A disponibilidade não é necessariamente igual em todos os países.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+          <div class="info-card">
+            <div class="info-icon">FX</div>
+            <h3>Moeda</h3>
+            <p>
+              A moeda de referência muda de acordo com o país selecionado.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">PAY</div>
+            <h3>Pagamento</h3>
+            <p>
+              O método de pagamento deve ser compatível com a região.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">OUT</div>
+            <h3>Retirada</h3>
+            <p>
+              Nem todo método de entrada permite retirada para o mesmo canal.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">USD</div>
+            <h3>Conversão</h3>
+            <p>
+              Conversões internacionais podem utilizar taxas diferentes.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+
+    <!-- =================================================
+         ABA 4 — PAGAMENTOS
+    ================================================== -->
+
+    <section
+      class="tab-page"
+      id="tab-pagamentos">
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="section-title">
+              Métodos por país
+            </div>
+
+            <div class="section-subtitle">
+              A lista abaixo funciona como configuração do protótipo.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="method-box"
+          id="paymentMethods">
+
+          <div class="method-head">
+
+            <strong id="paymentCountry">
+              Moçambique
+            </strong>
+
+            <p>
+              Métodos configurados para a região selecionada.
+            </p>
+
+          </div>
+
+
+          <div class="method-list">
+
+            <div class="method">
+              <div>
+                <div class="method-name">M-Pesa</div>
+                <div class="method-type">Carteira móvel</div>
+              </div>
+              <div class="method-status">SUPORTE REGIONAL</div>
+            </div>
+
+            <div class="method">
+              <div>
+                <div class="method-name">E-Mola</div>
+                <div class="method-type">Carteira móvel</div>
+              </div>
+              <div class="method-status">SUPORTE REGIONAL</div>
+            </div>
+
+            <div class="method">
+              <div>
+                <div class="method-name">Transferência bancária</div>
+                <div class="method-type">Método bancário</div>
+              </div>
+              <div class="method-status">CONFORME SERVIÇO</div>
+            </div>
+
+            <div class="method">
+              <div>
+                <div class="method-name">Cartão bancário</div>
+                <div class="method-type">Débito / crédito</div>
+              </div>
+              <div class="method-status">CONFORME CHECKOUT</div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="section-title">
+              Entrada e retirada
+            </div>
+
+            <div class="section-subtitle">
+              Diferença entre adicionar fundos e retirar fundos.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="process-list">
+
+          <div class="process-item">
+
+            <div class="process-number">
+              IN
+            </div>
+
+            <div>
+
+              <h3>
+                Entrada de valor
+              </h3>
+
+              <p>
+                O método de entrada depende do país, do checkout
+                e do serviço responsável pela operação.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <div class="process-number">
+              OUT
+            </div>
+
+            <div>
+
+              <h3>
+                Retirada para carteira móvel
+              </h3>
+
+              <p>
+                M-Pesa ou E-Mola só devem ser utilizados para retirada
+                quando essa funcionalidade estiver efetivamente disponível
+                para o país e para a conta.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <div class="process-number">
+              FX
+            </div>
+
+            <div>
+
+              <h3>
+                Conversão para USD
+              </h3>
+
+              <p>
+                Quando uma operação envolve USD, o valor final depende
+                da taxa de câmbio e das eventuais tarifas de conversão.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+
+    <!-- =================================================
+         ABA 5 — PROCESSO
+    ================================================== -->
+
+    <section
+      class="tab-page"
+      id="tab-processo">
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="section-title">
+              Processo completo
+            </div>
+
+            <div class="section-subtitle">
+              Cada mudança de etapa possui processamento visual.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="process-list">
+
+          <div class="process-item">
+            <div class="process-number">01</div>
+            <div>
+              <h3>Configuração</h3>
+              <p>
+                O utilizador informa nome, e-mail e região.
+              </p>
+            </div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-number">02</div>
+            <div>
+              <h3>Seleção do país</h3>
+              <p>
+                A aplicação organiza moeda e métodos disponíveis.
+              </p>
+            </div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-number">03</div>
+            <div>
+              <h3>Seleção do cartão</h3>
+              <p>
+                O utilizador compara o Premium de 300 MZN e o Básico de 200 MZN.
+              </p>
+            </div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-number">04</div>
+            <div>
+              <h3>Checkout</h3>
+              <p>
+                O checkout correspondente é aberto dentro da aplicação.
+              </p>
+            </div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-number">05</div>
+            <div>
+              <h3>Confirmação</h3>
+              <p>
+                Depois do pagamento, o utilizador pode selecionar “Já paguei”.
+              </p>
+            </div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-number">06</div>
+            <div>
+              <h3>Avaliação</h3>
+              <p>
+                O sistema apresenta uma sequência de verificações simuladas.
+              </p>
+            </div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-number">07</div>
+            <div>
+              <h3>Resultado</h3>
+              <p>
+                O estado final do protótipo é apresentado após o processamento.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <div class="notice">
+
+        <div class="notice-title">
+          Processamento de navegação
+        </div>
+
+        <p>
+          A troca entre abas apresenta uma pequena tela de processamento
+          para representar a transição de dados. O utilizador pode regressar
+          à aba anterior utilizando os controlos da aplicação.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         ABA 6 — DETALHES
+    ================================================== -->
+
+    <section
+      class="tab-page"
+      id="tab-detalhes">
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="section-title">
+              Taxas e conversão
+            </div>
+
+            <div class="section-subtitle">
+              Parâmetros apresentados no protótipo.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="spec-table">
+
+          <div class="spec-row">
+            <span>Cartão Premium</span>
+            <span>300 MZN</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Cartão Básico</span>
+            <span>200 MZN</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Taxa do Básico</span>
+            <span>5%*</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Entrada Premium</span>
+            <span>Até 60 segundos*</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Entrada Básico</span>
+            <span>Até 10 horas*</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Conversão USD</span>
+            <span>Taxa variável</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Retirada</span>
+            <span>Conforme disponibilidade</span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="section-title">
+              Condições de utilização
+            </div>
+
+            <div class="section-subtitle">
+              Pontos que devem ser confirmados antes de uma operação real.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+          <div class="info-card">
+            <div class="info-icon">A</div>
+            <h3>Limites</h3>
+            <p>
+              Limites de entrada, utilização e retirada podem variar.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">B</div>
+            <h3>Comissões</h3>
+            <p>
+              Uma operação pode possuir mais de uma tarifa.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">C</div>
+            <h3>Câmbio</h3>
+            <p>
+              A taxa de conversão pode variar no momento da operação.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">D</div>
+            <h3>Disponibilidade</h3>
+            <p>
+              Serviços móveis e bancários dependem da região.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <div class="notice">
+
+        <div class="notice-title">
+          Nota de realidade financeira
+        </div>
+
+        <p>
+          Esta interface não deve ser utilizada para representar como
+          confirmada uma operação financeira que ainda não tenha sido
+          efetivamente processada. Prazos, taxas e disponibilidade
+          precisam ser confirmados com o fornecedor real.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         ABA 7 — AJUDA
+    ================================================== -->
+
+    <section
+      class="tab-page"
+      id="tab-ajuda">
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="section-title">
+              Perguntas frequentes
+            </div>
+
+            <div class="section-subtitle">
+              Informações rápidas antes de continuar.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="process-list">
+
+          <div class="process-item">
+
+            <div class="process-number">?</div>
+
+            <div>
+
+              <h3>
+                É um cartão físico?
+              </h3>
+
+              <p>
+                Não. A interface apresenta um conceito de cartão virtual
+                destinado a utilização em ambientes digitais compatíveis.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <div class="process-number">?</div>
+
+            <div>
+
+              <h3>
+                Posso retirar para M-Pesa?
+              </h3>
+
+              <p>
+                Somente quando a retirada para M-Pesa estiver realmente
+                disponível para o país, serviço e conta utilizados.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <div class="process-number">?</div>
+
+            <div>
+
+              <h3>
+                Posso retirar para E-Mola?
+              </h3>
+
+              <p>
+                A mesma regra se aplica ao E-Mola: a disponibilidade
+                deve ser confirmada para a região e serviço.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <div class="process-number">?</div>
+
+            <div>
+
+              <h3>
+                O valor entra realmente em 60 segundos?
+              </h3>
+
+              <p>
+                O prazo de 60 segundos é apenas uma referência configurada
+                no protótipo e não constitui garantia de processamento real.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <div class="process-number">?</div>
+
+            <div>
+
+              <h3>
+                E o prazo de 10 horas?
+              </h3>
+
+              <p>
+                O prazo de 10 horas é igualmente um parâmetro demonstrativo
+                associado ao cartão básico nesta interface.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <div class="process-number">?</div>
+
+            <div>
+
+              <h3>
+                A conversão para dólar é fixa?
+              </h3>
+
+              <p>
+                Não deve ser considerada fixa. O câmbio depende da taxa
+                aplicada no momento e do serviço responsável.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <div class="process-number">?</div>
+
+            <div>
+
+              <h3>
+                Posso voltar para uma aba anterior?
+              </h3>
+
+              <p>
+                Sim. A navegação entre as sete abas foi estruturada
+                para permitir retorno e nova consulta.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <div class="footer">
+        CardsMZ — Protótipo de interface para avaliação de conceito.<br>
+        Informações financeiras e prazos devem ser confirmados com o fornecedor.
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<!-- =====================================================
+     ONBOARDING
+====================================================== -->
+
+<div
+  class="overlay"
+  id="onboarding">
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div class="modal-kicker">
+        Configuração inicial
+      </div>
+
+      <div class="modal-title">
+        Prepare o seu perfil
+      </div>
+
+      <div class="modal-subtitle">
+        Algumas informações são utilizadas apenas para organizar
+        a experiência e demonstrar o fluxo do protótipo.
+      </div>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div
+        class="step-indicator"
+        id="stepIndicator">
+
+        <div class="step-line active"></div>
+        <div class="step-line"></div>
+        <div class="step-line"></div>
+        <div class="step-line"></div>
+        <div class="step-line"></div>
+        <div class="step-line"></div>
+
+      </div>
+
+
+      <!-- STEP 1 -->
+
+      <div
+        class="step-page active"
+        data-step="1">
+
+        <div class="step-title">
+          Bem-vindo à CardsMZ
+        </div>
+
+        <div class="step-description">
+          Antes de continuar, vamos configurar o perfil utilizado
+          durante a demonstração.
+        </div>
+
+        <div class="notice">
+
+          <div class="notice-title">
+            Experiência estruturada
+          </div>
+
+          <p>
+            O sistema guarda o progresso localmente para que as
+            informações permaneçam disponíveis durante a utilização.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- STEP 2 -->
+
+      <div
+        class="step-page"
+        data-step="2">
+
+        <div class="step-title">
+          Informe o seu e-mail
+        </div>
+
+        <div class="step-description">
+          Utilize um endereço de e-mail válido para identificar o perfil.
+        </div>
+
+        <div class="input-group">
+
+          <label class="input-label">
+            E-mail
+          </label>
+
+          <input
+            class="input"
+            id="emailInput"
+            type="email"
+            placeholder="seuemail@exemplo.com"
+            autocomplete="email">
+
+        </div>
+
+      </div>
+
+
+      <!-- STEP 3 -->
+
+      <div
+        class="step-page"
+        data-step="3">
+
+        <div class="step-title">
+          Escolha o país
+        </div>
+
+        <div class="step-description">
+          A seleção do país determina quais métodos regionais
+          serão apresentados na aplicação.
+        </div>
+
+        <div class="choice-grid">
+
+          <button
+            class="option country-choice"
+            data-country="Moçambique">
+
+            <div class="country-flag">🇲🇿</div>
+            <strong>Moçambique</strong>
+            <span>MZN</span>
+
+          </button>
+
+
+          <button
+            class="option country-choice"
+            data-country="África do Sul">
+
+            <div class="country-flag">🇿🇦</div>
+            <strong>África do Sul</strong>
+            <span>ZAR</span>
+
+          </button>
+
+
+          <button
+            class="option country-choice"
+            data-country="Brasil">
+
+            <div class="country-flag">🇧🇷</div>
+            <strong>Brasil</strong>
+            <span>BRL</span>
+
+          </button>
+
+
+          <button
+            class="option country-choice"
+            data-country="Portugal">
+
+            <div class="country-flag">🇵🇹</div>
+            <strong>Portugal</strong>
+            <span>EUR</span>
+
+          </button>
+
+
+          <button
+            class="option country-choice"
+            data-country="Estados Unidos">
+
+            <div class="country-flag">🇺🇸</div>
+            <strong>Estados Unidos</strong>
+            <span>USD</span>
+
+          </button>
+
+
+          <button
+            class="option country-choice"
+            data-country="Reino Unido">
+
+            <div class="country-flag">🇬🇧</div>
+            <strong>Reino Unido</strong>
+            <span>GBP</span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- STEP 4 -->
+
+      <div
+        class="step-page"
+        data-step="4">
+
+        <div class="step-title">
+          Como pretende utilizar?
+        </div>
+
+        <div class="step-description">
+          Escolha uma finalidade para organizar a apresentação
+          das informações.
+        </div>
+
+        <div class="option-grid">
+
+          <button
+            class="option"
+            data-region="Compras online">
+
+            <strong>
+              Compras online
+            </strong>
+
+            <span>
+              Lojas e plataformas digitais
+            </span>
+
+          </button>
+
+
+          <button
+            class="option"
+            data-region="Serviços digitais">
+
+            <strong>
+              Serviços digitais
+            </strong>
+
+            <span>
+              Plataformas e subscrições compatíveis
+            </span>
+
+          </button>
+
+
+          <button
+            class="option"
+            data-region="Pagamentos">
+
+            <strong>
+              Pagamentos
+            </strong>
+
+            <span>
+              Pagamentos digitais
+            </span>
+
+          </button>
+
+
+          <button
+            class="option"
+            data-region="Atividades online">
+
+            <strong>
+              Atividades online
+            </strong>
+
+            <span>
+              Outras utilizações digitais
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- STEP 5 -->
+
+      <div
+        class="step-page"
+        data-step="5">
+
+        <div class="step-title">
+          Escolha uma finalidade
+        </div>
+
+        <div class="step-description">
+          Esta informação ajuda a organizar o resumo apresentado
+          durante a avaliação.
+        </div>
+
+        <div class="option-grid">
+
+          <button
+            class="option"
+            data-purpose="Compras pessoais">
+
+            <strong>
+              Compras pessoais
+            </strong>
+
+            <span>
+              Compras e serviços
+            </span>
+
+          </button>
+
+
+          <button
+            class="option"
+            data-purpose="Negócios online">
+
+            <strong>
+              Negócios online
+            </strong>
+
+            <span>
+              Comércio e atividades digitais
+            </span>
+
+          </button>
+
+
+          <button
+            class="option"
+            data-purpose="Pagamentos digitais">
+
+            <strong>
+              Pagamentos digitais
+            </strong>
+
+            <span>
+              Plataformas compatíveis
+            </span>
+
+          </button>
+
+
+          <button
+            class="option"
+            data-purpose="Outros">
+
+            <strong>
+              Outro objetivo
+            </strong>
+
+            <span>
+              Finalidade diferente
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- STEP 6 -->
+
+      <div
+        class="step-page"
+        data-step="6">
+
+        <div class="step-title">
+          Identifique o perfil
+        </div>
+
+        <div class="step-description">
+          Digite o nome que será mostrado na aplicação.
+        </div>
+
+        <div class="input-group">
+
+          <label class="input-label">
+            Nome
+          </label>
+
+          <input
+            class="input"
+            id="nameInput"
+            type="text"
+            placeholder="Digite o seu nome"
+            autocomplete="name">
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="primary-btn"
+        id="continueBtn">
+        Continuar
+      </button>
+
     </div>
 
   </div>
@@ -269,316 +2986,1457 @@ input{
 </div>
 
 
-<!-- INFORMAÇÕES -->
+<!-- =====================================================
+     CHECKOUT
+====================================================== -->
 
-<div class="infoGrid">
+<div
+  class="overlay hidden"
+  id="checkoutOverlay">
 
-  <div class="info">
-    <strong>12</strong>
-    <span>Países disponíveis</span>
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div class="modal-kicker">
+        Checkout
+      </div>
+
+      <div class="modal-title">
+        Finalizar pagamento
+      </div>
+
+      <div
+        class="modal-subtitle"
+        id="checkoutSubtitle">
+        Complete o checkout selecionado.
+      </div>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div class="checkout-summary">
+
+        <div class="summary-row">
+          <span class="summary-label">
+            Produto
+          </span>
+
+          <span
+            class="summary-value"
+            id="checkoutProduct">
+            —
+          </span>
+        </div>
+
+
+        <div class="summary-row">
+          <span class="summary-label">
+            Valor
+          </span>
+
+          <span
+            class="summary-value"
+            id="checkoutPrice">
+            —
+          </span>
+        </div>
+
+
+        <div class="summary-row">
+          <span class="summary-label">
+            País
+          </span>
+
+          <span
+            class="summary-value"
+            id="checkoutCountry">
+            —
+          </span>
+        </div>
+
+
+        <div class="summary-row">
+          <span class="summary-label">
+            Estado
+          </span>
+
+          <span class="summary-value">
+            Aguardando pagamento
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="checkout-frame">
+
+        <iframe
+          id="checkoutFrame"
+          src="about:blank"
+          title="Checkout de pagamento">
+        </iframe>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="paid-btn"
+        onclick="markPaid()">
+        Já paguei
+      </button>
+
+      <button
+        class="back-btn"
+        onclick="closeCheckout()">
+        Voltar
+      </button>
+
+    </div>
+
   </div>
 
-  <div class="info">
-    <strong>24h</strong>
-    <span>Disponibilidade para novos usuários</span>
+</div>
+
+
+<!-- =====================================================
+     ANÁLISE
+====================================================== -->
+
+<div
+  class="overlay hidden"
+  id="analysisOverlay">
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div class="modal-kicker">
+        Avaliação
+      </div>
+
+      <div class="modal-title">
+        Verificação do pedido
+      </div>
+
+      <div class="modal-subtitle">
+        O protótipo organiza os dados e apresenta uma sequência
+        de verificação visual.
+      </div>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div class="checkout-summary">
+
+        <div class="summary-row">
+          <span class="summary-label">
+            Produto
+          </span>
+
+          <span
+            class="summary-value"
+            id="analysisProduct">
+            —
+          </span>
+        </div>
+
+
+        <div class="summary-row">
+          <span class="summary-label">
+            Valor
+          </span>
+
+          <span
+            class="summary-value"
+            id="analysisPrice">
+            —
+          </span>
+        </div>
+
+
+        <div class="summary-row">
+          <span class="summary-label">
+            Nome
+          </span>
+
+          <span
+            class="summary-value"
+            id="analysisName">
+            —
+          </span>
+        </div>
+
+
+        <div class="summary-row">
+          <span class="summary-label">
+            E-mail
+          </span>
+
+          <span
+            class="summary-value"
+            id="analysisEmail">
+            —
+          </span>
+        </div>
+
+
+        <div class="summary-row">
+          <span class="summary-label">
+            País
+          </span>
+
+          <span
+            class="summary-value"
+            id="analysisCountry">
+            —
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="process-list">
+
+        <div
+          class="process-item"
+          id="check1">
+
+          <div class="process-number">
+            1
+          </div>
+
+          <div>
+            <h3>
+              Dados básicos
+            </h3>
+
+            <p>
+              Organização das informações do pedido.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div
+          class="process-item"
+          id="check2">
+
+          <div class="process-number">
+            2
+          </div>
+
+          <div>
+            <h3>
+              Região
+            </h3>
+
+            <p>
+              Verificação da região selecionada.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div
+          class="process-item"
+          id="check3">
+
+          <div class="process-number">
+            3
+          </div>
+
+          <div>
+            <h3>
+              Cartão
+            </h3>
+
+            <p>
+              Organização das características do cartão.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div
+          class="process-item"
+          id="check4">
+
+          <div class="process-number">
+            4
+          </div>
+
+          <div>
+            <h3>
+              Compatibilidade
+            </h3>
+
+            <p>
+              Preparação da verificação regional.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div
+          class="process-item"
+          id="check5">
+
+          <div class="process-number">
+            5
+          </div>
+
+          <div>
+            <h3>
+              Resultado
+            </h3>
+
+            <p>
+              Preparação da apresentação final.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="primary-btn"
+        id="analyzeBtn"
+        onclick="analyzeOrder()">
+        Iniciar avaliação
+      </button>
+
+    </div>
+
   </div>
 
-  <div class="info">
-    <strong>24/7</strong>
-    <span>Acesso à plataforma</span>
+</div>
+
+
+<!-- =====================================================
+     PROCESSAMENTO
+====================================================== -->
+
+<div
+  class="processing hidden"
+  id="processing">
+
+  <div class="processing-inner">
+
+    <div class="loader-ring"></div>
+
+    <h2 id="processingTitle">
+      A preparar
+    </h2>
+
+    <p id="processingText">
+      A organizar as informações.
+    </p>
+
+    <div class="progress-track">
+
+      <div
+        class="progress-bar"
+        id="progressBar">
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="info">
-    <strong>Online</strong>
-    <span>Gestão da conta</span>
-  </div>
-
 </div>
 
 
-<!-- SERVIÇO -->
-
-<div class="panel">
-
-<h2>Sobre o serviço</h2>
-
-<p>
-A plataforma permite consultar o estado da sua conta,
-gerir o seu cartão virtual e acompanhar as opções
-disponíveis para utilização.
-</p>
-
-<p>
-Novos usuários deverão aguardar a abertura do serviço
-antes de poderem concluir o registo e utilizar todas
-as funcionalidades.
-</p>
-
-</div>
-
-
-<!-- PAÍSES -->
-
-<div class="panel">
-
-<h2>Retiradas internacionais</h2>
-
-<p>
-A plataforma apresenta opções de retirada para até
-12 países, dependendo da disponibilidade do serviço
-e dos métodos suportados em cada região.
-</p>
-
-<div class="countries">
-
-  <div class="country">🇲🇿 Moçambique</div>
-  <div class="country">🇿🇦 África do Sul</div>
-  <div class="country">🇦🇴 Angola</div>
-  <div class="country">🇵🇹 Portugal</div>
-  <div class="country">🇧🇷 Brasil</div>
-  <div class="country">🇰🇪 Quénia</div>
-  <div class="country">🇹🇿 Tanzânia</div>
-  <div class="country">🇿🇲 Zâmbia</div>
-  <div class="country">🇳🇬 Nigéria</div>
-  <div class="country">🇬🇭 Gana</div>
-  <div class="country">🇺🇬 Uganda</div>
-  <div class="country">🇷🇼 Ruanda</div>
-
-</div>
-
-</div>
-
-
-<!-- PAGAMENTOS -->
-
-<div class="panel">
-
-<h2>Formas de pagamento</h2>
-
-<p>
-Os métodos apresentados podem variar de acordo com
-o país e a disponibilidade do serviço.
-</p>
-
-<div class="methods">
-
-  <div class="method">M-Pesa</div>
-  <div class="method">e-Mola</div>
-  <div class="method">mKesh</div>
-  <div class="method">Visa</div>
-  <div class="method">Mastercard</div>
-  <div class="method">Transferência bancária</div>
-
-</div>
-
-</div>
-
-
-<!-- ACESSO -->
-
-<div class="panel" id="inicio">
-
-<h2>Acesso à conta</h2>
-
-<p>
-Já possui uma conta? Entre para consultar o estado
-do seu acesso.
-</p>
-
-<button onclick="mostrarLogin()">
-Eu já tenho conta
-</button>
-
-<button class="secondary" onclick="mostrarCadastro()">
-Criar uma nova conta
-</button>
-
-</div>
-
-
-<!-- LOGIN -->
-
-<div class="panel hidden" id="login">
-
-<h2>Entrar na sua conta</h2>
-
-<p>
-Digite o seu e-mail e o código de acesso da conta.
-</p>
-
-<input
-  id="email"
-  type="email"
-  placeholder="Digite o seu e-mail">
-
-<input
-  id="codigo"
-  type="password"
-  placeholder="Código de acesso">
-
-<button onclick="verificarConta()">
-Entrar
-</button>
-
-<div class="back" onclick="voltar()">
-Voltar
-</div>
-
-</div>
-
-
-<!-- CONTA NÃO VERIFICADA -->
-
-<div class="panel hidden" id="resultado">
-
-<div class="status">
-
-<div class="icon">!</div>
-
-<h2>Conta não verificada</h2>
-
-<p>
-A sua conta ainda não está verificada.
-</p>
-
-<p>
-Por favor, aguarde <strong>24 horas</strong>
-para que o registo e a ativação da conta
-estejam disponíveis.
-</p>
-
-</div>
-
-<button onclick="voltar()">
-Voltar
-</button>
-
-</div>
-
-
-<!-- CADASTRO -->
-
-<div class="panel hidden" id="cadastro">
-
-<h2>Criar / Registar</h2>
-
-<p>
-O registo para novos usuários estará disponível
-daqui a <strong>24 horas</strong>.
-</p>
-
-<input
-  type="text"
-  placeholder="Nome">
-
-<input
-  type="email"
-  placeholder="E-mail">
-
-<input
-  type="tel"
-  placeholder="Número de telefone">
-
-<button onclick="mostrarResultado()">
-Criar conta
-</button>
-
-<div class="back" onclick="voltar()">
-Voltar
-</div>
-
-</div>
-
-
-<!-- RETIRADA -->
-
-<div class="panel">
-
-<h2>Retirada</h2>
-
-<p>
-A função de retirada ficará disponível apenas
-quando a conta estiver devidamente verificada
-e o serviço estiver ativo para o usuário.
-</p>
-
-<button onclick="mostrarResultado()">
-Adicionar / Enviar
-</button>
-
-</div>
-
+<div
+  class="toast"
+  id="toast">
 </div>
 
 
 <script>
 
-function esconderTudo(){
+/* =====================================================
+   ESTADO
+===================================================== */
 
-  document.getElementById("inicio").classList.add("hidden");
-  document.getElementById("login").classList.add("hidden");
-  document.getElementById("resultado").classList.add("hidden");
-  document.getElementById("cadastro").classList.add("hidden");
+let userName =
+  localStorage.getItem("cardsmz_name") || "";
+
+let userEmail =
+  localStorage.getItem("cardsmz_email") || "";
+
+let userCountry =
+  localStorage.getItem("cardsmz_country") || "Moçambique";
+
+let userRegion =
+  localStorage.getItem("cardsmz_region") || "";
+
+let userPurpose =
+  localStorage.getItem("cardsmz_purpose") || "";
+
+let currentStep =
+  Number(localStorage.getItem("cardsmz_step") || "1");
+
+let onboardingFinished =
+  localStorage.getItem(
+    "cardsmz_onboarding_finished"
+  ) === "true";
+
+let selectedProduct = "";
+let selectedPrice = "";
+let selectedCheckout = "";
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const onboarding =
+  document.getElementById("onboarding");
+
+const checkoutOverlay =
+  document.getElementById("checkoutOverlay");
+
+const analysisOverlay =
+  document.getElementById("analysisOverlay");
+
+const processing =
+  document.getElementById("processing");
+
+const continueBtn =
+  document.getElementById("continueBtn");
+
+const accountName =
+  document.getElementById("accountName");
+
+const globalStatus =
+  document.getElementById("globalStatus");
+
+const emailInput =
+  document.getElementById("emailInput");
+
+const nameInput =
+  document.getElementById("nameInput");
+
+const stepLines =
+  document.querySelectorAll(".step-line");
+
+const stepPages =
+  document.querySelectorAll(".step-page");
+
+const tabs =
+  document.querySelectorAll(".tab");
+
+const tabPages =
+  document.querySelectorAll(".tab-page");
+
+
+/* =====================================================
+   PROCESSAMENTO GENÉRICO
+===================================================== */
+
+function showProcessing(
+  title,
+  text,
+  callback,
+  duration = 850
+){
+
+  const titleElement =
+    document.getElementById("processingTitle");
+
+  const textElement =
+    document.getElementById("processingText");
+
+  const progress =
+    document.getElementById("progressBar");
+
+  titleElement.textContent = title;
+  textElement.textContent = text;
+
+  progress.style.width = "12%";
+
+  processing.classList.remove("hidden");
+
+  let value = 12;
+
+  const interval =
+    setInterval(function(){
+
+      value += Math.floor(
+        Math.random() * 14
+      ) + 5;
+
+      if(value >= 88){
+
+        value = 88;
+
+        clearInterval(interval);
+
+        setTimeout(function(){
+
+          progress.style.width = "100%";
+
+          setTimeout(function(){
+
+            processing.classList.add("hidden");
+
+            callback();
+
+          },250);
+
+        },250);
+
+      }
+
+      progress.style.width =
+        value + "%";
+
+    },160);
 
 }
 
-function mostrarLogin(){
 
-  esconderTudo();
+/* =====================================================
+   NAVEGAÇÃO DAS 7 ABAS
+===================================================== */
 
-  document.getElementById("login")
-  .classList.remove("hidden");
+tabs.forEach(tab => {
 
-}
+  tab.addEventListener(
+    "click",
+    function(){
 
-function mostrarCadastro(){
+      const target =
+        this.dataset.tab;
 
-  esconderTudo();
+      const current =
+        document.querySelector(
+          ".tab-page.active"
+        );
 
-  document.getElementById("cadastro")
-  .classList.remove("hidden");
+      const targetPage =
+        document.getElementById(
+          "tab-" + target
+        );
 
-}
+      if(!targetPage){
+        return;
+      }
 
-function verificarConta(){
+      if(
+        current &&
+        current.id === "tab-" + target
+      ){
+        return;
+      }
 
-  const email =
-  document.getElementById("email").value.trim();
+      showProcessing(
+        "A mudar de aba",
+        "A preparar as informações da seção selecionada.",
+        function(){
 
-  const codigo =
-  document.getElementById("codigo").value.trim();
+          tabs.forEach(item =>
+            item.classList.remove("active")
+          );
 
-  if(!email || !codigo){
+          tabPages.forEach(page =>
+            page.classList.remove("active")
+          );
 
-    alert("Preencha o e-mail e o código de acesso.");
+          this.classList.add("active");
 
-    return;
+          targetPage.classList.add("active");
+
+          window.scrollTo({
+            top:0,
+            behavior:"smooth"
+          });
+
+        }.bind(this),
+        550
+      );
+
+    }
+  );
+
+});
+
+
+/* =====================================================
+   PAÍSES
+===================================================== */
+
+function updateCountryUI(){
+
+  const paymentCountry =
+    document.getElementById(
+      "paymentCountry"
+    );
+
+  const selectedCountryText =
+    document.getElementById(
+      "selectedCountryText"
+    );
+
+  const checkoutCountry =
+    document.getElementById(
+      "checkoutCountry"
+    );
+
+  if(paymentCountry){
+    paymentCountry.textContent =
+      userCountry;
   }
 
-  esconderTudo();
+  if(checkoutCountry){
+    checkoutCountry.textContent =
+      userCountry;
+  }
 
-  document.getElementById("resultado")
-  .classList.remove("hidden");
+  if(selectedCountryText){
+
+    selectedCountryText.textContent =
+      userCountry +
+      " foi selecionado. Consulte a aba “Pagamentos” para visualizar os meios configurados.";
+
+  }
+
+}
+
+
+document
+  .querySelectorAll("[data-country]")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        document
+          .querySelectorAll("[data-country]")
+          .forEach(item =>
+            item.classList.remove("selected","active")
+          );
+
+        this.classList.add(
+          "selected",
+          "active"
+        );
+
+        userCountry =
+          this.dataset.country;
+
+        localStorage.setItem(
+          "cardsmz_country",
+          userCountry
+        );
+
+        updateCountryUI();
+
+        showToast(
+          "País selecionado: " +
+          userCountry
+        );
+
+      }
+    );
+
+  });
+
+
+/* =====================================================
+   REGIÃO
+===================================================== */
+
+document
+  .querySelectorAll("[data-region]")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        document
+          .querySelectorAll("[data-region]")
+          .forEach(item =>
+            item.classList.remove("selected")
+          );
+
+        this.classList.add("selected");
+
+        userRegion =
+          this.dataset.region;
+
+        localStorage.setItem(
+          "cardsmz_region",
+          userRegion
+        );
+
+      }
+    );
+
+  });
+
+
+/* =====================================================
+   FINALIDADE
+===================================================== */
+
+document
+  .querySelectorAll("[data-purpose]")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        document
+          .querySelectorAll("[data-purpose]")
+          .forEach(item =>
+            item.classList.remove("selected")
+          );
+
+        this.classList.add("selected");
+
+        userPurpose =
+          this.dataset.purpose;
+
+        localStorage.setItem(
+          "cardsmz_purpose",
+          userPurpose
+        );
+
+      }
+    );
+
+  });
+
+
+/* =====================================================
+   MOSTRAR ETAPA DO ONBOARDING
+===================================================== */
+
+function showStep(step){
+
+  if(step < 1){
+    step = 1;
+  }
+
+  if(step > 6){
+    step = 6;
+  }
+
+  currentStep = step;
+
+  localStorage.setItem(
+    "cardsmz_step",
+    String(currentStep)
+  );
+
+  stepPages.forEach(page => {
+
+    page.classList.toggle(
+      "active",
+      Number(page.dataset.step) === currentStep
+    );
+
+  });
+
+  stepLines.forEach(
+    (line,index) => {
+
+      line.classList.toggle(
+        "active",
+        index < currentStep
+      );
+
+    }
+  );
+
+  continueBtn.textContent =
+    currentStep === 6
+      ? "Concluir configuração"
+      : "Continuar";
 
 }
 
-function mostrarResultado(){
 
-  esconderTudo();
+/* =====================================================
+   VALIDAR ETAPA
+===================================================== */
 
-  document.getElementById("resultado")
-  .classList.remove("hidden");
+function validateStep(){
+
+  if(currentStep === 1){
+    return true;
+  }
+
+  if(currentStep === 2){
+
+    const email =
+      emailInput.value.trim();
+
+    if(
+      !email ||
+      !email.includes("@") ||
+      !email.includes(".")
+    ){
+
+      showToast(
+        "Digite um e-mail válido."
+      );
+
+      return false;
+    }
+
+    userEmail = email;
+
+    localStorage.setItem(
+      "cardsmz_email",
+      userEmail
+    );
+
+    return true;
+  }
+
+  if(currentStep === 3){
+
+    if(!userCountry){
+
+      showToast(
+        "Escolha um país."
+      );
+
+      return false;
+    }
+
+    return true;
+  }
+
+  if(currentStep === 4){
+
+    if(!userRegion){
+
+      showToast(
+        "Escolha uma finalidade de utilização."
+      );
+
+      return false;
+    }
+
+    return true;
+  }
+
+  if(currentStep === 5){
+
+    if(!userPurpose){
+
+      showToast(
+        "Escolha uma finalidade."
+      );
+
+      return false;
+    }
+
+    return true;
+  }
+
+  if(currentStep === 6){
+
+    const name =
+      nameInput.value.trim();
+
+    if(name.length < 2){
+
+      showToast(
+        "Digite o seu nome."
+      );
+
+      return false;
+    }
+
+    userName = name;
+
+    localStorage.setItem(
+      "cardsmz_name",
+      userName
+    );
+
+    return true;
+  }
+
+  return true;
 
 }
 
-function voltar(){
 
-  esconderTudo();
+/* =====================================================
+   CONTINUAR ONBOARDING
+===================================================== */
 
-  document.getElementById("inicio")
-  .classList.remove("hidden");
+continueBtn.addEventListener(
+  "click",
+  function(){
+
+    if(!validateStep()){
+      return;
+    }
+
+    if(currentStep < 6){
+
+      currentStep++;
+
+      showStep(currentStep);
+
+      return;
+    }
+
+    finishOnboarding();
+
+  }
+);
+
+
+/* =====================================================
+   TERMINAR ONBOARDING
+===================================================== */
+
+function finishOnboarding(){
+
+  localStorage.setItem(
+    "cardsmz_onboarding_finished",
+    "true"
+  );
+
+  localStorage.setItem(
+    "cardsmz_step",
+    "6"
+  );
+
+  onboardingFinished = true;
+
+  accountName.textContent =
+    userName || "Utilizador";
+
+  globalStatus.textContent =
+    "Perfil preparado";
+
+  showProcessing(
+    "A preparar o perfil",
+    "A organizar país, finalidade e informações básicas.",
+    function(){
+
+      onboarding.classList.add("hidden");
+
+      showToast(
+        "Configuração concluída."
+      );
+
+    }
+  );
 
 }
+
+
+/* =====================================================
+   RESTAURAR DADOS
+===================================================== */
+
+function restoreData(){
+
+  if(userName){
+
+    nameInput.value =
+      userName;
+
+    accountName.textContent =
+      userName;
+
+  }
+
+  if(userEmail){
+
+    emailInput.value =
+      userEmail;
+
+  }
+
+  document
+    .querySelectorAll("[data-country]")
+    .forEach(item => {
+
+      if(
+        item.dataset.country === userCountry
+      ){
+
+        item.classList.add(
+          "selected",
+          "active"
+        );
+
+      }
+
+    });
+
+
+  document
+    .querySelectorAll("[data-region]")
+    .forEach(item => {
+
+      if(
+        item.dataset.region === userRegion
+      ){
+
+        item.classList.add(
+          "selected"
+        );
+
+      }
+
+    });
+
+
+  document
+    .querySelectorAll("[data-purpose]")
+    .forEach(item => {
+
+      if(
+        item.dataset.purpose === userPurpose
+      ){
+
+        item.classList.add(
+          "selected"
+        );
+
+      }
+
+    });
+
+
+  updateCountryUI();
+
+
+  if(onboardingFinished){
+
+    onboarding.classList.add(
+      "hidden"
+    );
+
+    globalStatus.textContent =
+      "Perfil preparado";
+
+  }else{
+
+    showStep(currentStep);
+
+  }
+
+}
+
+
+/* =====================================================
+   CHECKOUT
+===================================================== */
+
+function openCheckout(
+  product,
+  price,
+  url
+){
+
+  selectedProduct =
+    product;
+
+  selectedPrice =
+    price;
+
+  selectedCheckout =
+    url;
+
+
+  document.getElementById(
+    "checkoutProduct"
+  ).textContent =
+    product;
+
+
+  document.getElementById(
+    "checkoutPrice"
+  ).textContent =
+    price;
+
+
+  document.getElementById(
+    "checkoutCountry"
+  ).textContent =
+    userCountry || "—";
+
+
+  document.getElementById(
+    "checkoutSubtitle"
+  ).textContent =
+    "Confira as informações e utilize o checkout correspondente.";
+
+
+  const frame =
+    document.getElementById(
+      "checkoutFrame"
+    );
+
+  frame.src =
+    url;
+
+
+  checkoutOverlay.classList.remove(
+    "hidden"
+  );
+
+  globalStatus.textContent =
+    "Pagamento";
+
+}
+
+
+/* =====================================================
+   FECHAR CHECKOUT
+===================================================== */
+
+function closeCheckout(){
+
+  const frame =
+    document.getElementById(
+      "checkoutFrame"
+    );
+
+  frame.src =
+    "about:blank";
+
+  checkoutOverlay.classList.add(
+    "hidden"
+  );
+
+  globalStatus.textContent =
+    "Perfil";
+
+}
+
+
+/* =====================================================
+   JÁ PAGUEI
+===================================================== */
+
+function markPaid(){
+
+  checkoutOverlay.classList.add(
+    "hidden"
+  );
+
+
+  document.getElementById(
+    "analysisProduct"
+  ).textContent =
+    selectedProduct || "—";
+
+
+  document.getElementById(
+    "analysisPrice"
+  ).textContent =
+    selectedPrice || "—";
+
+
+  document.getElementById(
+    "analysisName"
+  ).textContent =
+    userName || "—";
+
+
+  document.getElementById(
+    "analysisEmail"
+  ).textContent =
+    userEmail || "—";
+
+
+  document.getElementById(
+    "analysisCountry"
+  ).textContent =
+    userCountry || "—";
+
+
+  resetChecks();
+
+
+  analysisOverlay.classList.remove(
+    "hidden"
+  );
+
+  globalStatus.textContent =
+    "Em avaliação";
+
+}
+
+
+/* =====================================================
+   RESET CHECKS
+===================================================== */
+
+function resetChecks(){
+
+  for(let i=1;i<=5;i++){
+
+    const element =
+      document.getElementById(
+        "check" + i
+      );
+
+    if(!element){
+      continue;
+    }
+
+    element.style.borderColor =
+      "";
+
+    const number =
+      element.querySelector(
+        ".process-number"
+      );
+
+    if(number){
+      number.textContent =
+        i;
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   AVALIAÇÃO
+===================================================== */
+
+function analyzeOrder(){
+
+  const button =
+    document.getElementById(
+      "analyzeBtn"
+    );
+
+  button.disabled = true;
+
+
+  const steps = [
+
+    {
+      title:"A verificar dados",
+      text:"A organizar os dados básicos do pedido.",
+      id:1
+    },
+
+    {
+      title:"A verificar região",
+      text:"A confirmar o país e os parâmetros regionais.",
+      id:2
+    },
+
+    {
+      title:"A verificar cartão",
+      text:"A organizar as características do cartão.",
+      id:3
+    },
+
+    {
+      title:"A verificar compatibilidade",
+      text:"A preparar os parâmetros de compatibilidade.",
+      id:4
+    },
+
+    {
+      title:"A preparar resultado",
+      text:"A concluir a sequência demonstrativa.",
+      id:5
+    }
+
+  ];
+
+
+  let index = 0;
+
+
+  function next(){
+
+    if(index >= steps.length){
+
+      globalStatus.textContent =
+        "Avaliação concluída";
+
+      button.disabled =
+        false;
+
+      showToast(
+        "Avaliação do protótipo concluída."
+      );
+
+      return;
+    }
+
+
+    const step =
+      steps[index];
+
+
+    showProcessing(
+      step.title,
+      step.text,
+      function(){
+
+        const element =
+          document.getElementById(
+            "check" + step.id
+          );
+
+        if(element){
+
+          element.style.borderColor =
+            "rgba(25,199,154,.25)";
+
+          const number =
+            element.querySelector(
+              ".process-number"
+            );
+
+          if(number){
+
+            number.textContent =
+              "✓";
+
+            number.style.color =
+              "var(--primary)";
+
+          }
+
+        }
+
+        index++;
+
+        setTimeout(
+          next,
+          350
+        );
+
+      },
+      700
+    );
+
+  }
+
+
+  next();
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+function showToast(message){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(
+      function(){
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2600
+    );
+
+}
+
+
+/* =====================================================
+   VOLTAR DO ANDROID / NAVEGADOR
+===================================================== */
+
+history.pushState(
+  {cardsmz:true},
+  "",
+  location.href
+);
+
+window.addEventListener(
+  "popstate",
+  function(){
+
+    history.pushState(
+      {cardsmz:true},
+      "",
+      location.href
+    );
+
+    if(
+      !checkoutOverlay.classList.contains(
+        "hidden"
+      )
+    ){
+
+      closeCheckout();
+
+      return;
+    }
+
+    showToast(
+      "Utilize as abas para navegar pela aplicação."
+    );
+
+  }
+);
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+restoreData();
 
 </script>
 

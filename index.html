@@ -2,231 +2,3363 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cartão Virtual</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#05080c">
+
+<title>IPEN — Cartões Virtuais</title>
 
 <style>
+:root{
+  --bg:#05080c;
+  --panel:#0c131b;
+  --panel2:#101a23;
+  --line:#202d38;
+  --text:#f7fafc;
+  --muted:#82909d;
+  --primary:#19c79a;
+  --primary2:#0fae87;
+  --cyan:#35d9ff;
+  --green:#23d69b;
+  --yellow:#e6b94f;
+  --blue:#398cff;
+  --grad:linear-gradient(135deg,#19c79a,#35d9ff);
+  --grad-btn:linear-gradient(135deg,#19c79a,#0fae87);
+  --shadow:0 20px 60px -20px rgba(0,0,0,.9);
+}
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+  background:var(--bg);
 }
 
 body{
   min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  font-family:Arial, sans-serif;
-  background:#080b10;
-  color:#fff;
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
+  "Inter",system-ui,"Segoe UI",sans-serif;
+  overflow-x:hidden;
 }
 
-.container{
+button,input,select{
+  font:inherit;
+  color:inherit;
+}
+
+button{
+  cursor:pointer;
+  border:0;
+  background:none;
+}
+
+.app{
   width:100%;
-  max-width:430px;
+  max-width:460px;
+  min-height:100vh;
+  margin:auto;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(900px 450px at 100% -10%,rgba(25,199,154,.15),transparent 55%),
+    radial-gradient(700px 400px at -10% 40%,rgba(53,217,255,.08),transparent 60%),
+    #05080c;
+}
+
+.top{
+  position:sticky;
+  top:0;
+  z-index:20;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  background:rgba(5,8,12,.82);
+  backdrop-filter:blur(22px);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
 }
 
 .logo{
-  text-align:center;
-  font-size:24px;
+  width:38px;
+  height:38px;
+  border-radius:11px;
+  background:linear-gradient(135deg,#10231f,#08131b);
+  display:grid;
+  place-items:center;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.06),
+    0 8px 24px rgba(25,199,154,.22);
+}
+
+.logo svg{
+  width:25px;
+  height:25px;
+}
+
+.brand-txt b{
+  display:block;
+  font-size:16px;
+  font-weight:900;
+  letter-spacing:.3px;
+}
+
+.brand-txt small{
+  display:block;
+  color:#71808c;
+  font-size:8px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-top:2px;
+}
+
+.tag{
+  font-size:9px;
   font-weight:700;
-  margin-bottom:25px;
-  letter-spacing:.5px;
+  color:#c9d3da;
+  border:1px solid #26333d;
+  background:#091017;
+  border-radius:999px;
+  padding:6px 10px;
+}
+
+.processing-dot{
+  width:7px;
+  height:7px;
+  display:inline-block;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px var(--green);
+  animation:pulse 1.3s infinite;
+}
+
+@keyframes pulse{
+  50%{
+    opacity:.4;
+    transform:scale(1.35);
+  }
+}
+
+.page{
+  padding:26px 18px 40px;
+  position:relative;
+  z-index:1;
+  animation:fadeUp .4s ease;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+.eyebrow{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:2.4px;
+  color:var(--primary);
+  font-weight:800;
+  margin-bottom:10px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+
+.eyebrow:before{
+  content:"";
+  width:18px;
+  height:1px;
+  background:var(--primary);
+}
+
+h1{
+  font-size:30px;
+  line-height:1.05;
+  letter-spacing:-1.4px;
+  font-weight:800;
+}
+
+h2{
+  font-size:20px;
+  letter-spacing:-.6px;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.gradient{
+  background:var(--grad);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.stepbar{
+  display:flex;
+  gap:5px;
+  margin:22px 0 12px;
+}
+
+.stepbar i{
+  height:3px;
+  flex:1;
+  border-radius:10px;
+  background:#1b252d;
+  transition:.3s;
+}
+
+.stepbar i.done{
+  background:linear-gradient(90deg,var(--cyan),var(--primary));
+}
+
+.stepbar i.active{
+  background:linear-gradient(90deg,var(--primary),var(--cyan));
+  box-shadow:0 0 12px rgba(25,199,154,.45);
+}
+
+.counter{
+  font-size:10px;
+  color:#788792;
+  margin-bottom:12px;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+  font-weight:700;
 }
 
 .card{
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(16,26,35,.96),rgba(7,12,17,.96));
+  border-radius:20px;
+  padding:20px;
+  margin-top:14px;
+  box-shadow:var(--shadow);
   position:relative;
-  width:100%;
-  height:235px;
-  padding:25px;
-  border-radius:22px;
   overflow:hidden;
-  background:linear-gradient(135deg,#202832,#0c1118);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 25px 60px rgba(0,0,0,.45);
 }
 
-.card::before{
+.card:before{
   content:"";
   position:absolute;
-  width:220px;
-  height:220px;
-  right:-90px;
-  top:-100px;
+  top:0;
+  left:0;
+  right:0;
+  height:1px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(25,199,154,.5),
+    transparent
+  );
+}
+
+.field{
+  margin-top:14px;
+}
+
+.field label{
+  display:block;
+  font-size:11px;
+  color:#c8d1d7;
+  margin:0 0 8px 2px;
+  font-weight:600;
+}
+
+.field input,
+.field select{
+  width:100%;
+  border:1px solid #283641;
+  background:#071017;
+  border-radius:13px;
+  padding:14px;
+  outline:none;
+  font-size:14px;
+  transition:.2s;
+}
+
+.field input:focus,
+.field select:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 4px rgba(25,199,154,.11);
+}
+
+.field input::placeholder{
+  color:#4e5d68;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:10px;
+}
+
+.info{
+  padding:13px 14px;
+  border-radius:13px;
+  margin-top:14px;
+  border:1px solid rgba(53,217,255,.18);
+  background:rgba(53,217,255,.05);
+  color:#a5d5df;
+  font-size:11px;
+  line-height:1.55;
+}
+
+.warning{
+  padding:13px 14px;
+  border-radius:13px;
+  margin-top:14px;
+  border:1px solid rgba(230,185,79,.22);
+  background:rgba(230,185,79,.05);
+  color:#d0bf8d;
+  font-size:11px;
+  line-height:1.55;
+}
+
+.btns{
+  display:flex;
+  gap:10px;
+  margin-top:22px;
+}
+
+.btn{
+  width:100%;
+  border-radius:14px;
+  padding:15px 16px;
+  font-weight:800;
+  font-size:14px;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  transition:.15s;
+}
+
+.btn:active{
+  transform:scale(.97);
+}
+
+.primary{
+  background:var(--grad-btn);
+  box-shadow:0 12px 40px -8px rgba(25,199,154,.35);
+}
+
+.secondary{
+  background:#101820;
+  border:1px solid #2a3740;
+}
+
+.review{
+  display:grid;
+  gap:8px;
+  margin-top:14px;
+}
+
+.review div{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#071017;
+  border:1px solid #1d2932;
+  font-size:12px;
+}
+
+.review span{
+  color:#8997a1;
+  text-align:right;
+  word-break:break-word;
+}
+
+.check{
+  display:flex;
+  gap:11px;
+  margin-top:15px;
+  font-size:11.5px;
+  color:#b0bcc4;
+  line-height:1.5;
+}
+
+.check input{
+  width:16px;
+  height:16px;
+  accent-color:var(--primary);
+  flex-shrink:0;
+}
+
+.error{
+  min-height:16px;
+  margin-top:10px;
+  color:#ff7787;
+  font-size:11.5px;
+  font-weight:600;
+}
+
+.finish{
+  min-height:calc(100vh - 64px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:30px 20px;
+}
+
+.finish-box{
+  width:100%;
+  max-width:340px;
+  text-align:center;
+}
+
+.spinner{
+  width:58px;
+  height:58px;
+  border:3px solid #19242c;
+  border-top-color:var(--primary);
+  border-right-color:var(--cyan);
   border-radius:50%;
-  background:rgba(255,255,255,.08);
+  animation:spin .8s linear infinite;
+  margin:0 auto 22px;
+  box-shadow:0 0 30px rgba(25,199,154,.22);
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.progress-bar{
+  width:100%;
+  height:4px;
+  background:#152029;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:20px;
+}
+
+.progress-bar span{
+  display:block;
+  width:0;
+  height:100%;
+  background:var(--grad-btn);
+  animation:fill 1.5s ease forwards;
+}
+
+@keyframes fill{
+  to{
+    width:100%;
+  }
+}
+
+.secure{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#71808a;
+  font-size:10px;
+  margin-top:16px;
+}
+
+.plans{
+  display:grid;
+  gap:14px;
+  margin-top:18px;
+}
+
+.plan{
+  border:1px solid #25323c;
+  border-radius:20px;
+  background:linear-gradient(180deg,#111b24,#080e13);
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+}
+
+.plan.recommended{
+  border-color:rgba(25,199,154,.48);
+  box-shadow:
+    0 0 0 1px rgba(25,199,154,.10),
+    0 20px 50px -15px rgba(25,199,154,.18);
+}
+
+.plan-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.plan-head h2{
+  font-size:17px;
+}
+
+.badge{
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  padding:6px 9px;
+  border-radius:999px;
+  background:#111c24;
+  border:1px solid #2b3943;
+  color:#aab5bc;
+}
+
+.badge.hot{
+  color:#6de4c1;
+  border-color:rgba(25,199,154,.3);
+  background:rgba(25,199,154,.12);
+}
+
+.price{
+  font-size:32px;
+  font-weight:900;
+  margin:10px 0 6px;
+}
+
+.price small{
+  font-size:13px;
+  color:#84919a;
+  margin-left:4px;
+}
+
+.plan-desc{
+  color:#929fa8;
+  font-size:12px;
+  line-height:1.5;
+}
+
+.plan ul{
+  list-style:none;
+  display:grid;
+  gap:8px;
+  margin-top:14px;
+}
+
+.plan li{
+  font-size:11.5px;
+  color:#c4cdd2;
+}
+
+.plan li:before{
+  content:"✓";
+  color:var(--primary);
+  font-weight:900;
+  margin-right:8px;
+}
+
+.virtual-card{
+  width:100%;
+  min-height:205px;
+  margin:18px 0 4px;
+  padding:22px;
+  border-radius:23px;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 85% 15%,rgba(53,217,255,.30),transparent 30%),
+    linear-gradient(135deg,#0e2928 0%,#0b171e 45%,#071016 100%);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 25px 55px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.virtual-card:after{
+  content:"";
+  position:absolute;
+  width:190px;
+  height:190px;
+  right:-80px;
+  bottom:-90px;
+  border-radius:50%;
+  border:1px solid rgba(25,199,154,.22);
+  box-shadow:0 0 0 30px rgba(25,199,154,.03);
 }
 
 .card-top{
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  align-items:flex-start;
 }
 
-.card-name{
-  font-size:13px;
-  opacity:.65;
-  text-transform:uppercase;
+.card-brand{
+  font-size:24px;
+  font-weight:950;
   letter-spacing:1px;
 }
 
 .card-type{
-  font-size:14px;
-  font-weight:bold;
+  font-size:8px;
+  letter-spacing:1.5px;
+  color:#9bb1b6;
+  margin-top:3px;
 }
 
-.chip{
-  width:45px;
-  height:34px;
-  margin-top:45px;
+.card-chip{
+  width:43px;
+  height:31px;
   border-radius:8px;
-  background:linear-gradient(135deg,#d8d8d8,#777);
-  position:relative;
+  background:
+    linear-gradient(90deg,transparent 47%,rgba(0,0,0,.18) 48%,transparent 51%),
+    linear-gradient(0deg,transparent 47%,rgba(0,0,0,.18) 48%,transparent 51%),
+    #c7ad62;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.22);
 }
 
-.chip::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:0;
-  width:1px;
-  height:100%;
-  background:#555;
-}
-
-.number{
-  margin-top:22px;
+.card-number{
+  margin-top:35px;
   font-size:19px;
-  letter-spacing:3px;
+  letter-spacing:2px;
+  font-weight:700;
 }
 
 .card-bottom{
-  position:absolute;
-  bottom:22px;
-  left:25px;
-  right:25px;
   display:flex;
   justify-content:space-between;
+  margin-top:25px;
+  position:relative;
+  z-index:2;
 }
 
-.label{
+.card-bottom small{
+  display:block;
+  font-size:7px;
+  color:#71838b;
+  text-transform:uppercase;
+  letter-spacing:1.1px;
+}
+
+.card-bottom strong{
+  display:block;
+  font-size:10px;
+  margin-top:4px;
+}
+
+.product-label{
   font-size:9px;
-  opacity:.5;
-  margin-bottom:4px;
+  color:#6e818b;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  margin-top:16px;
+}
+
+.contact-box{
+  margin-top:18px;
+  padding:16px;
+  border-radius:16px;
+  border:1px solid rgba(25,199,154,.25);
+  background:linear-gradient(
+    135deg,
+    rgba(25,199,154,.09),
+    rgba(53,217,255,.04)
+  );
+}
+
+.contact-title{
+  color:#a1adb4;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.5px;
   text-transform:uppercase;
 }
 
-.value{
-  font-size:12px;
+.number-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
 }
 
-.message{
-  margin-top:22px;
+.number{
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.copy-btn{
+  padding:10px 13px;
+  border-radius:11px;
+  background:#111c24;
+  border:1px solid #303e48;
+  font-size:11px;
+  font-weight:800;
+}
+
+.copy-status{
+  min-height:14px;
+  margin-top:8px;
+  color:var(--green);
+  font-size:10px;
+}
+
+.final-instructions{
+  margin-top:18px;
   padding:20px;
-  border-radius:16px;
-  background:#10161e;
-  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  border:1px solid rgba(53,217,255,.20);
+  background:linear-gradient(
+    180deg,
+    rgba(53,217,255,.05),
+    rgba(8,14,19,.95)
+  );
+}
+
+.final-instructions h2{
+  font-size:19px;
+  margin-bottom:12px;
+}
+
+.final-instructions p{
+  color:#a5b0b7;
+  font-size:12px;
+  line-height:1.7;
+  margin-top:10px;
+}
+
+.final-instructions ol{
+  padding-left:19px;
+  margin-top:14px;
+  color:#c8d0d5;
+  font-size:12px;
+  line-height:1.8;
+}
+
+.final-number{
+  margin-top:16px;
+  padding:14px;
+  border-radius:14px;
+  background:#050a0e;
+  border:1px solid #293640;
   text-align:center;
 }
 
-.message h2{
-  font-size:18px;
-  margin-bottom:9px;
+.final-number small{
+  display:block;
+  color:#71808a;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
 }
 
-.message p{
-  color:#9ca7b5;
+.final-number strong{
+  display:block;
+  font-size:24px;
+  margin-top:5px;
+  letter-spacing:1px;
+}
+
+.number-actions{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.number-actions .copy-btn{
+  flex:1;
+}
+
+.generate-btn{
+  flex:1;
+  padding:10px 13px;
+  border-radius:11px;
+  background:#111c24;
+  border:1px solid #303e48;
+  font-size:11px;
+  font-weight:800;
+}
+
+.checkout-app{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:#000;
+  display:flex;
+  flex-direction:column;
+}
+
+.checkout-top{
+  min-height:76px;
+  padding:10px 14px;
+  background:#080e13;
+  border-bottom:1px solid #24313a;
+}
+
+.checkout-top-line{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.checkout-title{
   font-size:14px;
-  line-height:1.5;
+  font-weight:800;
 }
 
-.badge{
-  display:inline-block;
-  margin-top:14px;
-  padding:8px 14px;
-  border-radius:20px;
-  background:#1b2430;
-  color:#dce3eb;
-  font-size:12px;
+.close-checkout{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#152029;
+  border:1px solid #2b3943;
+  font-size:20px;
+  display:grid;
+  place-items:center;
 }
 
-button{
-  width:100%;
-  margin-top:18px;
-  padding:15px;
-  border:0;
-  border-radius:13px;
+.checkout-number{
+  margin-top:7px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:7px 10px;
+  border-radius:9px;
+  background:#101820;
+  border:1px solid #222f38;
+}
+
+.checkout-number span{
+  color:#8b98a0;
+  font-size:9px;
+}
+
+.checkout-number strong{
+  color:#fff;
+  font-size:13px;
+  letter-spacing:.7px;
+}
+
+.checkout-copy{
+  color:var(--cyan);
+  font-size:9px;
+  font-weight:800;
+}
+
+.checkout-body{
+  position:relative;
+  flex:1;
   background:#fff;
-  color:#080b10;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer;
+  overflow:hidden;
 }
 
-button:hover{
-  opacity:.9;
+.checkout-frame{
+  width:100%;
+  height:100%;
+  border:0;
+  background:#fff;
+}
+
+.checkout-loading{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:#05080c;
+  color:#fff;
+}
+
+.checkout-loading .spinner{
+  width:50px;
+  height:50px;
+  margin-bottom:18px;
+}
+
+.checkout-fallback{
+  padding:10px 14px 14px;
+  background:#080e13;
+  border-top:1px solid #222f38;
+}
+
+.checkout-fallback p{
+  font-size:9px;
+  color:#777;
+  text-align:center;
+  margin-bottom:7px;
+}
+
+.tiny{
+  margin-top:20px;
+  text-align:center;
+  color:#53616a;
+  font-size:10px;
+  line-height:1.6;
+}
+
+.hidden{
+  display:none!important;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="app">
 
-  <div class="logo">CARTÃO</div>
+<header class="top">
 
-  <div class="card">
+  <div class="brand">
 
-    <div class="card-top">
-      <div class="card-name">Cartão Virtual</div>
-      <div class="card-type">VIRTUAL</div>
+    <div class="logo">
+      <svg viewBox="0 0 48 48">
+        <rect x="7" y="10" width="34" height="28" rx="6"
+              fill="none"
+              stroke="#19c79a"
+              stroke-width="3"/>
+        <path d="M10 18h28"
+              stroke="#35d9ff"
+              stroke-width="3"/>
+        <circle cx="16" cy="30" r="3"
+                fill="#19c79a"/>
+        <path d="M23 30h11"
+              stroke="#35d9ff"
+              stroke-width="3"
+              stroke-linecap="round"/>
+      </svg>
     </div>
 
-    <div class="chip"></div>
+    <div class="brand-txt">
+      <b>IPEN</b>
+      <small>Cartões · Digitais · Globais</small>
+    </div>
 
-    <div class="number">
-      •••• &nbsp; •••• &nbsp; •••• &nbsp; ••••
+  </div>
+
+  <div class="tag">
+    <span class="processing-dot"></span>
+    ATIVO
+  </div>
+
+</header>
+
+
+<!-- WIZARD -->
+
+<main id="wizard" class="page">
+
+  <div class="eyebrow">Plataforma IPEN</div>
+
+  <h1>
+    Seu cartão
+    <span class="gradient">virtual</span>
+  </h1>
+
+  <p class="muted" style="font-size:13px;margin-top:10px">
+    Consulte as informações, escolha o cartão disponível e avance pelas etapas.
+  </p>
+
+
+  <div class="virtual-card">
+
+    <div class="card-top">
+
+      <div>
+        <div class="card-brand">IPEN</div>
+        <div class="card-type">CARTÃO VIRTUAL</div>
+      </div>
+
+      <div class="card-chip"></div>
+
+    </div>
+
+    <div class="card-number">
+      •••• •••• •••• 4826
     </div>
 
     <div class="card-bottom">
+
       <div>
-        <div class="label">Titular</div>
-        <div class="value">NOVO UTILIZADOR</div>
+        <small>Validade</small>
+        <strong>12/29</strong>
       </div>
 
       <div>
-        <div class="label">Validade</div>
-        <div class="value">--/--</div>
+        <small>Categoria</small>
+        <strong>Virtual</strong>
       </div>
 
       <div>
-        <div class="label">Status</div>
-        <div class="value">PENDENTE</div>
+        <small>Serviço</small>
+        <strong>IPEN</strong>
       </div>
+
     </div>
 
   </div>
 
-  <div class="message">
-    <h2>Serviços em breve</h2>
 
-    <p>
-      Para novos utilizadores, os serviços de cartão virtual
-      estarão disponíveis daqui a <strong>12 horas</strong>.
+  <div class="info">
+    O IPEN apresenta opções de cartões virtuais com condições,
+    valores, métodos de pagamento e informações de utilização
+    apresentadas nas etapas seguintes.
+  </div>
+
+
+  <div class="stepbar">
+
+    <i id="bar1"></i>
+    <i id="bar2"></i>
+    <i id="bar3"></i>
+    <i id="bar4"></i>
+    <i id="bar5"></i>
+    <i id="bar6"></i>
+    <i id="bar7"></i>
+    <i id="bar8"></i>
+
+  </div>
+
+
+  <div id="counter" class="counter">
+    Etapa 1 de 8
+  </div>
+
+
+  <!-- ETAPA 1 -->
+
+  <section class="step" data-step="1">
+
+    <div class="card">
+
+      <div class="eyebrow">01 · Início</div>
+
+      <h2>Comece no IPEN</h2>
+
+      <p class="muted" style="font-size:12px;margin-top:8px">
+        Escolha se pretende criar uma nova conta ou continuar
+        com uma conta existente.
+      </p>
+
+      <div class="field">
+
+        <label>Tipo de acesso</label>
+
+        <select id="accessType">
+
+          <option value="Criar nova conta">
+            Criar nova conta
+          </option>
+
+          <option value="Já tenho conta">
+            Já tenho conta
+          </option>
+
+        </select>
+
+      </div>
+
+      <div class="info">
+        O fluxo apresenta as informações por etapas para que
+        os dados do cartão, condições e seleção do produto
+        sejam consultados antes do pagamento.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ETAPA 2 -->
+
+  <section class="step hidden" data-step="2">
+
+    <div class="card">
+
+      <div class="eyebrow">02 · Conta</div>
+
+      <h2 id="accountTitle">
+        Criar nova conta
+      </h2>
+
+      <p id="accountDescription"
+         class="muted"
+         style="font-size:12px;margin-top:8px">
+        Informe os dados básicos que serão utilizados
+        para identificar a conta.
+      </p>
+
+      <div class="field">
+
+        <label>Nome da conta</label>
+
+        <input id="name"
+               placeholder="Ex.: João Manuel Sitoe">
+
+      </div>
+
+      <div class="field">
+
+        <label>E-mail</label>
+
+        <input id="email"
+               type="email"
+               placeholder="seuemail@exemplo.com">
+
+      </div>
+
+      <div class="field">
+
+        <label>PIN</label>
+
+        <input id="password"
+               type="password"
+               inputmode="numeric"
+               maxlength="8"
+               placeholder="Crie um PIN">
+
+      </div>
+
+      <div class="field">
+
+        <label>Confirmar PIN</label>
+
+        <input id="password2"
+               type="password"
+               inputmode="numeric"
+               maxlength="8"
+               placeholder="Repita o PIN">
+
+      </div>
+
+      <div class="info">
+        Para uma conta existente, os mesmos campos podem
+        ser utilizados para continuar o fluxo de acesso.
+      </div>
+
+      <div class="error" id="err2"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ETAPA 3 -->
+
+  <section class="step hidden" data-step="3">
+
+    <div class="card">
+
+      <div class="eyebrow">03 · Dados</div>
+
+      <h2>Informações da conta</h2>
+
+      <div class="field">
+
+        <label>País</label>
+
+        <select id="country">
+
+          <option value="">
+            Selecione o seu país
+          </option>
+
+          <option>Moçambique</option>
+          <option>África do Sul</option>
+          <option>Portugal</option>
+          <option>Brasil</option>
+          <option>Angola</option>
+          <option>Cabo Verde</option>
+          <option>França</option>
+          <option>Alemanha</option>
+          <option>Espanha</option>
+          <option>Reino Unido</option>
+          <option>Estados Unidos</option>
+          <option>Canadá</option>
+          <option>Outro</option>
+
+        </select>
+
+      </div>
+
+      <div class="field">
+
+        <label>Região / Província / Estado</label>
+
+        <input id="region"
+               placeholder="Ex.: Maputo">
+
+      </div>
+
+      <div class="field">
+
+        <label>Cidade</label>
+
+        <input id="city"
+               placeholder="Ex.: Maputo">
+
+      </div>
+
+      <div class="field">
+
+        <label>Idioma preferido</label>
+
+        <select id="language">
+
+          <option>Português</option>
+          <option>English</option>
+          <option>Français</option>
+          <option>Español</option>
+
+        </select>
+
+      </div>
+
+      <div class="error" id="err3"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ETAPA 4 -->
+
+  <section class="step hidden" data-step="4">
+
+    <div class="card">
+
+      <div class="eyebrow">04 · Utilização</div>
+
+      <h2>Como pretende utilizar?</h2>
+
+      <p class="muted"
+         style="font-size:12px;margin-top:8px">
+        Consulte as possibilidades de utilização do cartão
+        de acordo com as condições apresentadas.
+      </p>
+
+      <div class="field">
+
+        <label>Finalidade principal</label>
+
+        <select id="goal">
+
+          <option>
+            Compras online
+          </option>
+
+          <option>
+            Pagamentos digitais
+          </option>
+
+          <option>
+            Serviços digitais
+          </option>
+
+          <option>
+            Utilização internacional
+          </option>
+
+          <option>
+            Outra finalidade
+          </option>
+
+        </select>
+
+      </div>
+
+      <div class="field">
+
+        <label>Experiência com cartões virtuais</label>
+
+        <select id="experience">
+
+          <option>Iniciante</option>
+          <option>Intermédio</option>
+          <option>Avançado</option>
+
+        </select>
+
+      </div>
+
+      <div class="info">
+        A disponibilidade de determinadas funcionalidades,
+        métodos de pagamento, moedas e utilização internacional
+        pode depender do país e das condições aplicáveis ao cartão.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ETAPA 5 -->
+
+  <section class="step hidden" data-step="5">
+
+    <div class="card">
+
+      <div class="eyebrow">05 · Informações</div>
+
+      <h2>Condições de utilização</h2>
+
+      <div class="review">
+
+        <div>
+          <b>Tipo</b>
+          <span>Cartão virtual</span>
+        </div>
+
+        <div>
+          <b>Finalidade</b>
+          <span>Compras e pagamentos digitais</span>
+        </div>
+
+        <div>
+          <b>Disponibilidade</b>
+          <span>Conforme país e condições</span>
+        </div>
+
+        <div>
+          <b>Utilização internacional</b>
+          <span>Quando disponível</span>
+        </div>
+
+        <div>
+          <b>Métodos de pagamento</b>
+          <span>Conforme opção apresentada no checkout</span>
+        </div>
+
+        <div>
+          <b>Taxas</b>
+          <span>Verificar antes da confirmação</span>
+        </div>
+
+      </div>
+
+      <div class="warning">
+        Antes de concluir qualquer pagamento, confirme o
+        produto escolhido, o valor, as condições e os dados
+        apresentados pelo provedor de pagamento externo.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ETAPA 6 -->
+
+  <section class="step hidden" data-step="6">
+
+    <div class="card">
+
+      <div class="eyebrow">06 · Segurança</div>
+
+      <h2>Dados de contacto</h2>
+
+      <div class="row">
+
+        <div class="field">
+
+          <label>Código</label>
+
+          <select id="dial">
+
+            <option>+258</option>
+            <option>+27</option>
+            <option>+351</option>
+            <option>+244</option>
+            <option>+238</option>
+            <option>+33</option>
+            <option>+49</option>
+            <option>+34</option>
+            <option>+44</option>
+            <option>+1</option>
+            <option>+55</option>
+
+          </select>
+
+        </div>
+
+        <div class="field">
+
+          <label>Telefone</label>
+
+          <input id="phone"
+                 inputmode="tel"
+                 placeholder="00 000 0000">
+
+        </div>
+
+      </div>
+
+      <div class="field">
+
+        <label>Confirmação de idade</label>
+
+        <input id="age"
+               type="number"
+               min="18"
+               max="99"
+               placeholder="18+">
+
+      </div>
+
+      <div class="info">
+        As informações apresentadas nesta demonstração
+        devem ser conferidas antes de qualquer utilização
+        ou pagamento.
+      </div>
+
+      <div class="error" id="err6"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ETAPA 7 -->
+
+  <section class="step hidden" data-step="7">
+
+    <div class="card">
+
+      <div class="eyebrow">07 · Cartões</div>
+
+      <h2>Escolha o cartão</h2>
+
+      <p class="muted"
+         style="font-size:12px;margin-top:8px">
+        Selecione uma das opções disponíveis antes de avançar
+        para a confirmação e pagamento.
+      </p>
+
+
+      <div class="plans">
+
+        <!-- 350 MT -->
+
+        <div class="plan recommended">
+
+          <div class="plan-head">
+
+            <h2>IPEN — Cartão Virtual</h2>
+
+            <span class="badge hot">
+              Disponível
+            </span>
+
+          </div>
+
+          <div class="price">
+            350<small>MT</small>
+          </div>
+
+          <p class="plan-desc">
+            Opção de cartão virtual para utilização conforme
+            as condições apresentadas.
+          </p>
+
+          <ul>
+
+            <li>Cartão virtual IPEN</li>
+            <li>Compras online</li>
+            <li>Pagamentos digitais</li>
+            <li>Utilização internacional quando disponível</li>
+            <li>Condições apresentadas antes do pagamento</li>
+
+          </ul>
+
+          <button
+            type="button"
+            class="btn primary"
+            style="margin-top:16px"
+            onclick="selectPlan('350')">
+
+            Selecionar 350 MT
+
+          </button>
+
+        </div>
+
+
+        <!-- 250 MT -->
+
+        <div class="plan">
+
+          <div class="plan-head">
+
+            <h2>IPEN — Cartão Virtual</h2>
+
+            <span class="badge">
+              Opção
+            </span>
+
+          </div>
+
+          <div class="price">
+            250<small>MT</small>
+          </div>
+
+          <p class="plan-desc">
+            Opção de entrada para cartão virtual, sujeita às
+            condições e disponibilidade apresentadas.
+          </p>
+
+          <ul>
+
+            <li>Cartão virtual IPEN</li>
+            <li>Compras online</li>
+            <li>Pagamentos digitais</li>
+            <li>Disponibilidade conforme país</li>
+            <li>Verificação das condições no checkout</li>
+
+          </ul>
+
+          <button
+            type="button"
+            class="btn secondary"
+            style="margin-top:16px"
+            onclick="selectPlan('250')">
+
+            Selecionar 250 MT
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="info">
+
+        <b>Cartão selecionado:</b>
+
+        <span id="selectedPlanText">
+          Nenhum cartão selecionado
+        </span>
+
+      </div>
+
+      <div class="error" id="err7"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ETAPA 8 -->
+
+  <section class="step hidden" data-step="8">
+
+    <div class="card">
+
+      <div class="eyebrow">08 · Confirmação</div>
+
+      <h2>Reveja as informações</h2>
+
+      <div id="review" class="review"></div>
+
+      <label class="check">
+
+        <input id="terms"
+               type="checkbox">
+
+        <span>
+          Confirmo que revisei as informações, o produto
+          selecionado e as condições apresentadas.
+        </span>
+
+      </label>
+
+      <label class="check">
+
+        <input id="ageConfirm"
+               type="checkbox">
+
+        <span>
+          Confirmo que tenho 18 anos ou mais.
+        </span>
+
+      </label>
+
+      <div class="warning">
+        O pagamento será realizado através de um checkout
+        externo. Confirme o valor e os dados apresentados
+        antes de concluir a operação.
+      </div>
+
+      <div class="error" id="err8"></div>
+
+    </div>
+
+  </section>
+
+
+  <div class="btns">
+
+    <button id="back"
+            class="btn secondary hidden">
+
+      ← Voltar
+
+    </button>
+
+    <button id="next"
+            class="btn primary">
+
+      Continuar →
+
+    </button>
+
+  </div>
+
+
+  <div class="tiny">
+    IPEN — Plataforma de demonstração de cartões virtuais.
+    Consulte sempre as condições apresentadas antes de efetuar um pagamento.
+  </div>
+
+</main>
+
+
+<!-- PROCESSAMENTO -->
+
+<section id="stepProcessing"
+         class="finish hidden">
+
+  <div class="finish-box">
+
+    <div class="spinner"></div>
+
+    <div class="eyebrow"
+         style="justify-content:center">
+
+      Processando
+
+    </div>
+
+    <h1 id="processTitle"
+        style="font-size:22px">
+
+      A verificar…
+
+    </h1>
+
+    <p id="processText"
+       class="muted"
+       style="font-size:12px;margin-top:12px">
+
+      A preparar a próxima etapa.
+
     </p>
 
-    <div class="badge">
-      Disponibilidade programada
+    <div class="progress-bar">
+
+      <span id="processProgress"></span>
+
     </div>
+
+    <div class="secure">
+
+      <span class="processing-dot"></span>
+
+      Processamento em andamento
+
+    </div>
+
   </div>
 
-  <button onclick="location.reload()">
-    Atualizar disponibilidade
-  </button>
+</section>
+
+
+<!-- ABA FINAL -->
+
+<section id="checkout"
+         class="page hidden">
+
+  <div class="eyebrow">
+    Etapa final
+  </div>
+
+  <h1>
+    Preparar o
+    <span class="gradient">checkout</span>
+  </h1>
+
+  <p class="muted"
+     style="font-size:13px;margin-top:10px">
+
+    Primeiro copie o número apresentado. Depois será
+    liberada a opção de avançar para o checkout correspondente
+    ao cartão escolhido.
+
+  </p>
+
+
+  <div class="final-instructions">
+
+    <h2>Confirmação do cartão</h2>
+
+    <p>
+      O cartão selecionado e o valor correspondente são
+      apresentados abaixo. O pagamento será realizado através
+      de um provedor externo.
+    </p>
+
+    <ol>
+
+      <li>
+        Confira o cartão e o valor selecionados.
+      </li>
+
+      <li>
+        Copie o número de atendimento apresentado.
+      </li>
+
+      <li>
+        Se desejar, utilize “Outro número” para apresentar
+        outro contacto disponível.
+      </li>
+
+      <li>
+        Depois da cópia, o botão para avançar ao checkout
+        será liberado.
+      </li>
+
+      <li>
+        No checkout externo, confira novamente o valor,
+        o produto e os dados solicitados antes de concluir.
+      </li>
+
+    </ol>
+
+
+    <div class="final-number">
+
+      <small>
+        Número de atendimento
+      </small>
+
+      <strong id="currentNumber">
+        +258 84 731562849
+      </strong>
+
+      <div class="number-actions">
+
+        <button class="copy-btn"
+                onclick="copyNumber()">
+
+          Copiar número
+
+        </button>
+
+        <button class="generate-btn"
+                onclick="generateNumber()">
+
+          Outro número
+
+        </button>
+
+      </div>
+
+      <div id="copyStatus"
+           class="copy-status">
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="plans">
+
+
+    <!-- PLANO 350 -->
+
+    <div id="checkoutPlan350"
+         class="plan recommended">
+
+      <div class="plan-head">
+
+        <h2>IPEN — Cartão Virtual</h2>
+
+        <span class="badge hot">
+          350 MT
+        </span>
+
+      </div>
+
+      <div class="price">
+        350<small>MT</small>
+      </div>
+
+      <p class="plan-desc">
+
+        Checkout correspondente ao cartão virtual
+        selecionado de 350 MT.
+
+      </p>
+
+      <ul>
+
+        <li>Cartão virtual IPEN</li>
+        <li>Checkout externo</li>
+        <li>Conferência do valor antes do pagamento</li>
+
+      </ul>
+
+      <button
+        id="checkout350Btn"
+        class="btn primary"
+        style="margin-top:16px"
+        disabled
+        onclick="openExternalCheckout('350')">
+
+        Avançar para checkout · 350 MT
+
+      </button>
+
+    </div>
+
+
+    <!-- PLANO 250 -->
+
+    <div id="checkoutPlan250"
+         class="plan">
+
+      <div class="plan-head">
+
+        <h2>IPEN — Cartão Virtual</h2>
+
+        <span class="badge">
+          250 MT
+        </span>
+
+      </div>
+
+      <div class="price">
+        250<small>MT</small>
+      </div>
+
+      <p class="plan-desc">
+
+        Checkout correspondente ao cartão virtual
+        selecionado de 250 MT.
+
+      </p>
+
+      <ul>
+
+        <li>Cartão virtual IPEN</li>
+        <li>Checkout externo</li>
+        <li>Conferência do valor antes do pagamento</li>
+
+      </ul>
+
+      <button
+        id="checkout250Btn"
+        class="btn primary"
+        style="margin-top:16px"
+        disabled
+        onclick="openExternalCheckout('250')">
+
+        Avançar para checkout · 250 MT
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="warning">
+
+    O checkout é aberto fora do portal. Antes de concluir
+    qualquer pagamento, confirme o nome do provedor, o produto,
+    o valor e os dados apresentados.
+
+  </div>
+
+
+  <div class="tiny">
+
+    O progresso das etapas é armazenado localmente neste
+    dispositivo para permitir o retorno ao fluxo.
+
+  </div>
+
+</section>
+
+
+<script>
+
+const TOTAL_STEPS=8;
+
+let step=1;
+
+const STORAGE_KEY='ipen_virtual_cards_state_v1';
+
+const steps=[
+  ...document.querySelectorAll('.step')
+];
+
+const bars=[
+  1,2,3,4,5,6,7,8
+].map(i=>document.getElementById('bar'+i));
+
+
+/* =========================================
+   CHECKOUTS OFICIAIS FORNECIDOS
+========================================= */
+
+const checkoutUrls={
+
+  '250':
+    'https://pagar.co.mz/p/comeca-a-receber-valores-pagamento-online-y7b2uz',
+
+  '350':
+    'https://pagar.co.mz/p/mais-liberdade-para-comprar-online-2drin2'
+
+};
+
+
+/* =========================================
+   NÚMEROS DE ATENDIMENTO
+========================================= */
+
+const contactNumbers=[
+
+  '+258 84 731562849',
+  '+258 84 946271583',
+  '+258 84 582937164',
+  '+258 84 314768925',
+  '+258 84 857241693',
+  '+258 84 629415738',
+  '+258 84 173856492',
+  '+258 84 465293817',
+  '+258 84 918374625',
+  '+258 84 236951784',
+  '+258 84 784316529',
+  '+258 84 351829674',
+  '+258 84 692748315',
+  '+258 84 827563941',
+  '+258 84 519634287',
+  '+258 84 364187952',
+  '+258 84 741925638'
+
+];
+
+let currentNumberIndex=0;
+
+let presentedNumbers=[];
+
+let selectedPlan='';
+
+
+/* =========================================
+   VALORES
+========================================= */
+
+function val(id){
+
+  const el=document.getElementById(id);
+
+  return el ? el.value.trim() : '';
+
+}
+
+
+/* =========================================
+   ERROS
+========================================= */
+
+function error(id,msg){
+
+  const el=document.getElementById(id);
+
+  if(el)
+    el.textContent=msg;
+
+  return false;
+
+}
+
+
+/* =========================================
+   NÚMERO ATUAL
+========================================= */
+
+function getCurrentNumber(){
+
+  return contactNumbers[currentNumberIndex];
+
+}
+
+
+/* =========================================
+   ATUALIZAR NÚMERO
+========================================= */
+
+function updateCurrentNumber(){
+
+  const el=
+    document.getElementById('currentNumber');
+
+  if(el)
+    el.textContent=
+      getCurrentNumber();
+
+}
+
+
+/* =========================================
+   GERAR OUTRO NÚMERO
+========================================= */
+
+function generateNumber(){
+
+  const current=
+    currentNumberIndex;
+
+  const available=[];
+
+  contactNumbers.forEach(
+    (number,index)=>{
+
+      if(
+        index!==current &&
+        !presentedNumbers.includes(index)
+      ){
+
+        available.push(index);
+
+      }
+
+    }
+  );
+
+
+  let newIndex;
+
+
+  if(available.length){
+
+    newIndex=
+      available[
+        Math.floor(
+          Math.random()*available.length
+        )
+      ];
+
+  }else{
+
+    const other=[];
+
+    contactNumbers.forEach(
+      (number,index)=>{
+
+        if(index!==current)
+          other.push(index);
+
+      }
+    );
+
+    newIndex=
+      other[
+        Math.floor(
+          Math.random()*other.length
+        )
+      ];
+
+    presentedNumbers=[];
+
+  }
+
+
+  currentNumberIndex=
+    newIndex;
+
+  presentedNumbers.push(
+    currentNumberIndex
+  );
+
+
+  updateCurrentNumber();
+
+
+  const status=
+    document.getElementById('copyStatus');
+
+  if(status){
+
+    status.textContent=
+      'Novo número selecionado.';
+
+  }
+
+
+  resetCheckoutButtons();
+
+  saveState();
+
+}
+
+
+/* =========================================
+   GUARDAR ESTADO
+========================================= */
+
+function saveState(){
+
+  const data={
+
+    step,
+
+    selectedPlan,
+
+    accessType:
+      val('accessType'),
+
+    name:
+      val('name'),
+
+    email:
+      val('email'),
+
+    password:
+      val('password'),
+
+    password2:
+      val('password2'),
+
+    country:
+      val('country'),
+
+    region:
+      val('region'),
+
+    city:
+      val('city'),
+
+    language:
+      val('language'),
+
+    dial:
+      val('dial'),
+
+    phone:
+      val('phone'),
+
+    age:
+      val('age'),
+
+    goal:
+      val('goal'),
+
+    experience:
+      val('experience'),
+
+    terms:
+      document.getElementById('terms')?.checked || false,
+
+    ageConfirm:
+      document.getElementById('ageConfirm')?.checked || false,
+
+    contactNumberIndex:
+      currentNumberIndex,
+
+    presentedNumbers
+
+  };
+
+
+  try{
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(data)
+    );
+
+  }catch(e){}
+
+}
+
+
+/* =========================================
+   RECUPERAR ESTADO
+========================================= */
+
+function restoreState(){
+
+  try{
+
+    const raw=
+      localStorage.getItem(STORAGE_KEY);
+
+    if(!raw)
+      return;
+
+    const data=
+      JSON.parse(raw);
+
+
+    Object.keys(data).forEach(
+      key=>{
+
+        const el=
+          document.getElementById(key);
+
+        if(!el)
+          return;
+
+
+        if(el.type==='checkbox'){
+
+          el.checked=
+            Boolean(data[key]);
+
+        }else{
+
+          el.value=
+            data[key] ?? '';
+
+        }
+
+      }
+    );
+
+
+    if(
+      Number(data.contactNumberIndex)>=0 &&
+      Number(data.contactNumberIndex)<
+        contactNumbers.length
+    ){
+
+      currentNumberIndex=
+        Number(data.contactNumberIndex);
+
+    }
+
+
+    if(
+      Array.isArray(
+        data.presentedNumbers
+      )
+    ){
+
+      presentedNumbers=
+        data.presentedNumbers;
+
+    }
+
+
+    if(
+      data.selectedPlan==='250' ||
+      data.selectedPlan==='350'
+    ){
+
+      selectedPlan=
+        data.selectedPlan;
+
+    }
+
+
+    updateCurrentNumber();
+
+    updateSelectedPlan();
+
+
+    if(
+      Number(data.step)>=1 &&
+      Number(data.step)<=TOTAL_STEPS
+    ){
+
+      step=
+        Number(data.step);
+
+    }
+
+
+  }catch(e){}
+
+}
+
+
+/* =========================================
+   SELECIONAR CARTÃO
+========================================= */
+
+function selectPlan(plan){
+
+  if(
+    plan!=='250' &&
+    plan!=='350'
+  )
+    return;
+
+
+  selectedPlan=
+    plan;
+
+
+  updateSelectedPlan();
+
+  saveState();
+
+
+  const status=
+    document.getElementById('err7');
+
+  if(status)
+    status.textContent=
+      '';
+
+
+  const text=
+    document.getElementById(
+      'selectedPlanText'
+    );
+
+  if(text){
+
+    text.textContent=
+      'IPEN — Cartão Virtual · '+
+      plan+
+      ' MT';
+
+  }
+
+}
+
+
+/* =========================================
+   ATUALIZAR PRODUTO
+========================================= */
+
+function updateSelectedPlan(){
+
+  const text=
+    document.getElementById(
+      'selectedPlanText'
+    );
+
+  if(text){
+
+    if(selectedPlan){
+
+      text.textContent=
+        'IPEN — Cartão Virtual · '+
+        selectedPlan+
+        ' MT';
+
+    }else{
+
+      text.textContent=
+        'Nenhum cartão selecionado';
+
+    }
+
+  }
+
+}
+
+
+/* =========================================
+   MOSTRAR ETAPA
+========================================= */
+
+function showStep(n){
+
+  step=n;
+
+  saveState();
+
+
+  steps.forEach(
+    section=>{
+
+      section.classList.toggle(
+        'hidden',
+        Number(section.dataset.step)!==n
+      );
+
+    }
+  );
+
+
+  bars.forEach(
+    (bar,index)=>{
+
+      bar.classList.toggle(
+        'done',
+        index<n-1
+      );
+
+      bar.classList.toggle(
+        'active',
+        index===n-1
+      );
+
+    }
+  );
+
+
+  document.getElementById('counter')
+    .textContent=
+      'Etapa '+n+' de '+TOTAL_STEPS;
+
+
+  document.getElementById('back')
+    .classList.toggle(
+      'hidden',
+      n===1
+    );
+
+
+  document.getElementById('next')
+    .textContent=
+      n===TOTAL_STEPS
+        ? 'Finalizar e continuar ✓'
+        : 'Continuar →';
+
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
+
+  if(n===2){
+
+    const type=
+      val('accessType');
+
+    const title=
+      document.getElementById(
+        'accountTitle'
+      );
+
+    const desc=
+      document.getElementById(
+        'accountDescription'
+      );
+
+
+    if(
+      type==='Já tenho conta'
+    ){
+
+      title.textContent=
+        'Aceder à sua conta';
+
+      desc.textContent=
+        'Informe o nome da conta, e-mail e PIN para continuar.';
+
+    }else{
+
+      title.textContent=
+        'Criar nova conta';
+
+      desc.textContent=
+        'Informe os dados básicos para criar a conta.';
+
+    }
+
+  }
+
+
+  if(n===7)
+    updateSelectedPlan();
+
+
+  if(n===8)
+    buildReview();
+
+}
+
+
+/* =========================================
+   VALIDAÇÃO
+========================================= */
+
+function validate(){
+
+  if(step===2){
+
+    if(!val('name'))
+      return error(
+        'err2',
+        'Digite o nome da conta.'
+      );
+
+
+    const email=
+      document.getElementById('email');
+
+
+    if(
+      !val('email') ||
+      !email.checkValidity()
+    )
+      return error(
+        'err2',
+        'Digite um e-mail válido.'
+      );
+
+
+    if(
+      val('password').length<4
+    )
+      return error(
+        'err2',
+        'Digite um PIN válido.'
+      );
+
+
+    if(
+      val('password')!==val('password2')
+    )
+      return error(
+        'err2',
+        'Os PINs não coincidem.'
+      );
+
+
+    document.getElementById(
+      'err2'
+    ).textContent='';
+
+  }
+
+
+  if(step===3){
+
+    if(!val('country'))
+      return error(
+        'err3',
+        'Selecione o seu país.'
+      );
+
+
+    if(!val('region'))
+      return error(
+        'err3',
+        'Digite a sua região.'
+      );
+
+
+    if(!val('city'))
+      return error(
+        'err3',
+        'Digite a sua cidade.'
+      );
+
+
+    document.getElementById(
+      'err3'
+    ).textContent='';
+
+  }
+
+
+  if(step===6){
+
+    if(!val('phone'))
+      return error(
+        'err6',
+        'Digite o seu telefone.'
+      );
+
+
+    if(!val('age'))
+      return error(
+        'err6',
+        'Digite a sua idade.'
+      );
+
+
+    if(
+      Number(val('age'))<18
+    )
+      return error(
+        'err6',
+        'O acesso está configurado para maiores de 18 anos.'
+      );
+
+
+    document.getElementById(
+      'err6'
+    ).textContent='';
+
+  }
+
+
+  if(step===7){
+
+    if(
+      selectedPlan!=='250' &&
+      selectedPlan!=='350'
+    ){
+
+      return error(
+        'err7',
+        'Selecione um cartão para continuar.'
+      );
+
+    }
+
+
+    document.getElementById(
+      'err7'
+    ).textContent='';
+
+  }
+
+
+  if(step===8){
+
+    if(
+      !document.getElementById(
+        'terms'
+      ).checked ||
+
+      !document.getElementById(
+        'ageConfirm'
+      ).checked
+    ){
+
+      return error(
+        'err8',
+        'Marque as duas confirmações para continuar.'
+      );
+
+    }
+
+
+    document.getElementById(
+      'err8'
+    ).textContent='';
+
+  }
+
+
+  saveState();
+
+  return true;
+
+}
+
+
+/* =========================================
+   REVIEW
+========================================= */
+
+function buildReview(){
+
+  const rows=[
+
+    [
+      'Acesso',
+      val('accessType')
+    ],
+
+    [
+      'Nome',
+      val('name')
+    ],
+
+    [
+      'País',
+      val('country')
+    ],
+
+    [
+      'Região',
+      val('region')
+    ],
+
+    [
+      'Cidade',
+      val('city')
+    ],
+
+    [
+      'Idioma',
+      val('language')
+    ],
+
+    [
+      'E-mail',
+      val('email')
+    ],
+
+    [
+      'Telefone',
+      val('dial')+
+      ' '+
+      val('phone')
+    ],
+
+    [
+      'Finalidade',
+      val('goal')
+    ],
+
+    [
+      'Cartão',
+      selectedPlan
+        ? 'IPEN — '+selectedPlan+' MT'
+        : 'Não selecionado'
+    ]
+
+  ];
+
+
+  document.getElementById('review')
+    .innerHTML=
+      rows.map(
+        row=>`
+
+          <div>
+            <b>${escapeHtml(row[0])}</b>
+            <span>${escapeHtml(row[1])}</span>
+          </div>
+
+        `
+      ).join('');
+
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(value){
+
+  return String(value).replace(
+    /[&<>'"]/g,
+    char=>({
+
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      "'":'&#39;',
+      '"':'&quot;'
+
+    }[char])
+  );
+
+}
+
+
+/* =========================================
+   PROCESSAMENTO
+========================================= */
+
+function processNext(callback){
+
+  saveState();
+
+
+  document.getElementById('wizard')
+    .classList.add('hidden');
+
+
+  const screen=
+    document.getElementById(
+      'stepProcessing'
+    );
+
+  screen.classList.remove(
+    'hidden'
+  );
+
+
+  const title=
+    document.getElementById(
+      'processTitle'
+    );
+
+  const text=
+    document.getElementById(
+      'processText'
+    );
+
+  const progress=
+    document.getElementById(
+      'processProgress'
+    );
+
+
+  progress.style.animation='none';
+
+  void progress.offsetWidth;
+
+  progress.style.animation=
+    'fill 1.25s ease forwards';
+
+
+  title.textContent=
+    'A processar etapa '+step+'…';
+
+
+  const messages=[
+
+    'A validar as informações…',
+
+    'A processar os dados…',
+
+    'A preparar a próxima etapa…',
+
+    'Quase concluído…'
+
+  ];
+
+
+  let i=0;
+
+  text.textContent=
+    messages[0];
+
+
+  const timer=
+    setInterval(
+      ()=>{
+
+        i++;
+
+
+        if(
+          i<messages.length
+        ){
+
+          text.textContent=
+            messages[i];
+
+        }else{
+
+          clearInterval(timer);
+
+
+          setTimeout(
+            ()=>{
+
+              screen.classList.add(
+                'hidden'
+              );
+
+
+              document.getElementById(
+                'wizard'
+              ).classList.remove(
+                'hidden'
+              );
+
+
+              callback();
+
+            },
+            220
+          );
+
+        }
+
+      },
+      320
+    );
+
+}
+
+
+/* =========================================
+   CONTINUAR
+========================================= */
+
+document.getElementById('next')
+.addEventListener(
+  'click',
+  ()=>{
+
+    if(!validate())
+      return;
+
+
+    if(step<TOTAL_STEPS){
+
+      const nextStep=
+        step+1;
+
+
+      processNext(
+        ()=>{
+
+          showStep(
+            nextStep
+          );
+
+        }
+      );
+
+
+    }else{
+
+      processNext(
+        ()=>{
+
+          document.getElementById(
+            'wizard'
+          ).classList.add(
+            'hidden'
+          );
+
+
+          document.getElementById(
+            'checkout'
+          ).classList.remove(
+            'hidden'
+          );
+
+
+          localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify({
+
+              ...JSON.parse(
+                localStorage.getItem(
+                  STORAGE_KEY
+                )||'{}'
+              ),
+
+              final:true,
+
+              selectedPlan,
+
+              contactNumberIndex:
+                currentNumberIndex,
+
+              presentedNumbers
+
+            })
+          );
+
+
+          updateCurrentNumber();
+
+          resetCheckoutButtons();
+
+
+          window.scrollTo({
+            top:0
+          });
+
+        }
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   VOLTAR
+========================================= */
+
+document.getElementById('back')
+.addEventListener(
+  'click',
+  ()=>{
+
+    if(step>1){
+
+      const previousStep=
+        step-1;
+
+
+      processNext(
+        ()=>{
+
+          showStep(
+            previousStep
+          );
+
+        }
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   COPIAR NÚMERO
+========================================= */
+
+function copyNumber(){
+
+  const number=
+    getCurrentNumber();
+
+
+  const status=
+    document.getElementById(
+      'copyStatus'
+    );
+
+
+  if(
+    navigator.clipboard &&
+    navigator.clipboard.writeText
+  ){
+
+    navigator.clipboard
+      .writeText(number)
+      .then(
+        ()=>{
+
+          status.textContent=
+            '✓ Número copiado.';
+
+          unlockCheckout();
+
+          saveState();
+
+        }
+      )
+      .catch(
+        ()=>{
+
+          status.textContent=
+            'Número: '+number;
+
+        }
+      );
+
+  }else{
+
+    status.textContent=
+      'Número: '+number;
+
+  }
+
+}
+
+
+/* =========================================
+   LIBERAR CHECKOUT
+========================================= */
+
+function unlockCheckout(){
+
+  const btn250=
+    document.getElementById(
+      'checkout250Btn'
+    );
+
+  const btn350=
+    document.getElementById(
+      'checkout350Btn'
+    );
+
+
+  if(selectedPlan==='250'){
+
+    btn250.disabled=false;
+
+    btn250.style.opacity='1';
+
+    btn350.disabled=true;
+
+    btn350.style.opacity='.45';
+
+  }
+
+
+  if(selectedPlan==='350'){
+
+    btn350.disabled=false;
+
+    btn350.style.opacity='1';
+
+    btn250.disabled=true;
+
+    btn250.style.opacity='.45';
+
+  }
+
+}
+
+
+/* =========================================
+   RESET CHECKOUT
+========================================= */
+
+function resetCheckoutButtons(){
+
+  const btn250=
+    document.getElementById(
+      'checkout250Btn'
+    );
+
+  const btn350=
+    document.getElementById(
+      'checkout350Btn'
+    );
+
+
+  btn250.disabled=true;
+
+  btn350.disabled=true;
+
+  btn250.style.opacity='.45';
+
+  btn350.style.opacity='.45';
+
+
+  const status=
+    document.getElementById(
+      'copyStatus'
+    );
+
+
+  if(status)
+    status.textContent='';
+
+}
+
+
+/* =========================================
+   ABRIR CHECKOUT EXTERNO
+========================================= */
+
+function openExternalCheckout(plan){
+
+  if(
+    plan!==selectedPlan
+  )
+    return;
+
+
+  const url=
+    checkoutUrls[plan];
+
+
+  if(!url)
+    return;
+
+
+  saveState();
+
+
+  const opened=
+    window.open(
+      url,
+      '_blank',
+      'noopener,noreferrer'
+    );
+
+
+  if(!opened){
+
+    window.location.href=
+      url;
+
+  }
+
+}
+
+
+/* =========================================
+   EVENTOS DOS CAMPOS
+========================================= */
+
+document.querySelectorAll(
+  'input,select'
+).forEach(
+  el=>{
+
+    el.addEventListener(
+      'input',
+      saveState
+    );
+
+    el.addEventListener(
+      'change',
+      saveState
+    );
+
+  }
+);
+
+
+/* =========================================
+   ALTERAÇÃO DO TIPO DE CONTA
+========================================= */
+
+document.getElementById(
+  'accessType'
+).addEventListener(
+  'change',
+  ()=>{
+
+    const title=
+      document.getElementById(
+        'accountTitle'
+      );
+
+    const description=
+      document.getElementById(
+        'accountDescription'
+      );
+
+
+    if(
+      val('accessType')===
+      'Já tenho conta'
+    ){
+
+      title.textContent=
+        'Aceder à sua conta';
+
+      description.textContent=
+        'Informe o nome da conta, e-mail e PIN para continuar.';
+
+    }else{
+
+      title.textContent=
+        'Criar nova conta';
+
+      description.textContent=
+        'Informe os dados básicos para criar a conta.';
+
+    }
+
+
+    saveState();
+
+  }
+);
+
+
+/* =========================================
+   VOLTAR AO FLUXO QUANDO NECESSÁRIO
+========================================= */
+
+window.addEventListener(
+  'pageshow',
+  ()=>{
+
+    restoreState();
+
+  }
+);
+
+
+document.addEventListener(
+  'visibilitychange',
+  ()=>{
+
+    if(
+      document.visibilityState===
+      'visible'
+    ){
+
+      restoreState();
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   INICIAR
+========================================= */
+
+restoreState();
+
+
+if(
+  localStorage.getItem(
+    STORAGE_KEY
+  )
+){
+
+  try{
+
+    const saved=
+      JSON.parse(
+        localStorage.getItem(
+          STORAGE_KEY
+        )
+      );
+
+
+    if(
+      saved.final===true
+    ){
+
+      document.getElementById(
+        'wizard'
+      ).classList.add(
+        'hidden'
+      );
+
+
+      document.getElementById(
+        'checkout'
+      ).classList.remove(
+        'hidden'
+      );
+
+
+      updateCurrentNumber();
+
+      updateSelectedPlan();
+
+      resetCheckoutButtons();
+
+    }else{
+
+      showStep(
+        Number(saved.step)||1
+      );
+
+    }
+
+  }catch(e){
+
+    showStep(1);
+
+  }
+
+}else{
+
+  showStep(1);
+
+}
+
+
+/* =========================================
+   ESTADO VISUAL INICIAL DO CHECKOUT
+========================================= */
+
+resetCheckoutButtons();
+
+</script>
 
 </div>
 
 </body>
-          </html>
+  </html>

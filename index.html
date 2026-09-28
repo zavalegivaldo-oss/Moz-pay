@@ -409,70 +409,6 @@ h2{
   font-weight:600;
 }
 
-.finish{
-  min-height:calc(100vh - 64px);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:30px 20px;
-}
-
-.finish-box{
-  width:100%;
-  max-width:340px;
-  text-align:center;
-}
-
-.spinner{
-  width:58px;
-  height:58px;
-  border:3px solid #19242c;
-  border-top-color:var(--primary);
-  border-right-color:var(--cyan);
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-  margin:0 auto 22px;
-  box-shadow:0 0 30px rgba(25,199,154,.22);
-}
-
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-.progress-bar{
-  width:100%;
-  height:4px;
-  background:#152029;
-  border-radius:10px;
-  overflow:hidden;
-  margin-top:20px;
-}
-
-.progress-bar span{
-  display:block;
-  width:0;
-  height:100%;
-  background:var(--grad-btn);
-  animation:fill 1.5s ease forwards;
-}
-
-@keyframes fill{
-  to{
-    width:100%;
-  }
-}
-
-.secure{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  color:#71808a;
-  font-size:10px;
-  margin-top:16px;
-}
-
 .plans{
   display:grid;
   gap:14px;
@@ -648,250 +584,44 @@ h2{
   margin-top:4px;
 }
 
-.product-label{
-  font-size:9px;
-  color:#6e818b;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-  margin-top:16px;
-}
-
-.contact-box{
-  margin-top:18px;
-  padding:16px;
-  border-radius:16px;
-  border:1px solid rgba(25,199,154,.25);
-  background:linear-gradient(
-    135deg,
-    rgba(25,199,154,.09),
-    rgba(53,217,255,.04)
-  );
-}
-
-.contact-title{
-  color:#a1adb4;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-}
-
-.number-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-top:10px;
-}
-
-.number{
-  font-size:22px;
-  font-weight:900;
-  letter-spacing:1px;
-}
-
-.copy-btn{
-  padding:10px 13px;
-  border-radius:11px;
-  background:#111c24;
-  border:1px solid #303e48;
-  font-size:11px;
-  font-weight:800;
-}
-
-.copy-status{
-  min-height:14px;
-  margin-top:8px;
-  color:var(--green);
-  font-size:10px;
-}
-
-.final-instructions{
-  margin-top:18px;
-  padding:20px;
-  border-radius:20px;
-  border:1px solid rgba(53,217,255,.20);
-  background:linear-gradient(
-    180deg,
-    rgba(53,217,255,.05),
-    rgba(8,14,19,.95)
-  );
-}
-
-.final-instructions h2{
-  font-size:19px;
-  margin-bottom:12px;
-}
-
-.final-instructions p{
-  color:#a5b0b7;
-  font-size:12px;
-  line-height:1.7;
-  margin-top:10px;
-}
-
-.final-instructions ol{
-  padding-left:19px;
-  margin-top:14px;
-  color:#c8d0d5;
-  font-size:12px;
-  line-height:1.8;
-}
-
-.final-number{
-  margin-top:16px;
-  padding:14px;
-  border-radius:14px;
-  background:#050a0e;
-  border:1px solid #293640;
-  text-align:center;
-}
-
-.final-number small{
-  display:block;
-  color:#71808a;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-}
-
-.final-number strong{
-  display:block;
-  font-size:24px;
-  margin-top:5px;
-  letter-spacing:1px;
-}
-
-.number-actions{
-  display:flex;
-  gap:8px;
-  margin-top:10px;
-}
-
-.number-actions .copy-btn{
-  flex:1;
-}
-
-.generate-btn{
-  flex:1;
-  padding:10px 13px;
-  border-radius:11px;
-  background:#111c24;
-  border:1px solid #303e48;
-  font-size:11px;
-  font-weight:800;
-}
-
-.checkout-app{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  background:#000;
-  display:flex;
-  flex-direction:column;
-}
-
-.checkout-top{
-  min-height:76px;
-  padding:10px 14px;
-  background:#080e13;
-  border-bottom:1px solid #24313a;
-}
-
-.checkout-top-line{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.checkout-title{
-  font-size:14px;
-  font-weight:800;
-}
-
-.close-checkout{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:#152029;
-  border:1px solid #2b3943;
-  font-size:20px;
+.countdown{
   display:grid;
-  place-items:center;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  margin-top:18px;
 }
 
-.checkout-number{
-  margin-top:7px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  padding:7px 10px;
-  border-radius:9px;
-  background:#101820;
-  border:1px solid #222f38;
-}
-
-.checkout-number span{
-  color:#8b98a0;
-  font-size:9px;
-}
-
-.checkout-number strong{
-  color:#fff;
-  font-size:13px;
-  letter-spacing:.7px;
-}
-
-.checkout-copy{
-  color:var(--cyan);
-  font-size:9px;
-  font-weight:800;
-}
-
-.checkout-body{
-  position:relative;
-  flex:1;
-  background:#fff;
-  overflow:hidden;
-}
-
-.checkout-frame{
-  width:100%;
-  height:100%;
-  border:0;
-  background:#fff;
-}
-
-.checkout-loading{
-  position:absolute;
-  inset:0;
-  z-index:3;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  background:#05080c;
-  color:#fff;
-}
-
-.checkout-loading .spinner{
-  width:50px;
-  height:50px;
-  margin-bottom:18px;
-}
-
-.checkout-fallback{
-  padding:10px 14px 14px;
-  background:#080e13;
-  border-top:1px solid #222f38;
-}
-
-.checkout-fallback p{
-  font-size:9px;
-  color:#777;
+.timebox{
+  padding:12px 5px;
   text-align:center;
-  margin-bottom:7px;
+  border-radius:13px;
+  background:#071017;
+  border:1px solid #26343e;
+}
+
+.timebox strong{
+  display:block;
+  font-size:20px;
+  font-weight:900;
+}
+
+.timebox small{
+  display:block;
+  margin-top:3px;
+  color:#72818b;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.whatsapp-btn{
+  background:#19c79a;
+  color:#04110d;
+  box-shadow:0 12px 35px -10px rgba(25,199,154,.45);
+}
+
+.hidden{
+  display:none!important;
 }
 
 .tiny{
@@ -902,8 +632,15 @@ h2{
   line-height:1.6;
 }
 
-.hidden{
-  display:none!important;
+.temp-success{
+  padding:16px;
+  border-radius:15px;
+  margin-top:16px;
+  border:1px solid rgba(35,214,155,.25);
+  background:rgba(35,214,155,.06);
+  color:#9de5c9;
+  font-size:12px;
+  line-height:1.6;
 }
 </style>
 </head>
@@ -948,8 +685,6 @@ h2{
 
 </header>
 
-
-<!-- WIZARD -->
 
 <main id="wizard" class="page">
 
@@ -1006,10 +741,11 @@ h2{
 
   <div class="info">
     O IPEN apresenta opções de cartões virtuais com condições,
-    valores, métodos de pagamento e informações de utilização
-    apresentadas nas etapas seguintes.
+    valores e informações de utilização apresentadas nas etapas seguintes.
   </div>
 
+
+  <!-- 11 INDICADORES: 8 ORIGINAIS + 3 NOVOS -->
 
   <div class="stepbar">
 
@@ -1021,12 +757,15 @@ h2{
     <i id="bar6"></i>
     <i id="bar7"></i>
     <i id="bar8"></i>
+    <i id="bar9"></i>
+    <i id="bar10"></i>
+    <i id="bar11"></i>
 
   </div>
 
 
   <div id="counter" class="counter">
-    Etapa 1 de 8
+    Etapa 1 de 11
   </div>
 
 
@@ -1041,8 +780,8 @@ h2{
       <h2>Comece no IPEN</h2>
 
       <p class="muted" style="font-size:12px;margin-top:8px">
-        Escolha se pretende criar uma nova conta ou continuar
-        com uma conta existente.
+        Escolha se já possui uma conta ou se pretende iniciar
+        um novo processo de acesso.
       </p>
 
       <div class="field">
@@ -1064,9 +803,9 @@ h2{
       </div>
 
       <div class="info">
-        O fluxo apresenta as informações por etapas para que
-        os dados do cartão, condições e seleção do produto
-        sejam consultados antes do pagamento.
+        Se já possui uma conta, poderá informar o seu e-mail
+        e PIN na próxima etapa. Se for um novo utilizador,
+        o processo seguirá pelas etapas de registo.
       </div>
 
     </div>
@@ -1093,7 +832,7 @@ h2{
         para identificar a conta.
       </p>
 
-      <div class="field">
+      <div class="field" id="nameField">
 
         <label>Nome da conta</label>
 
@@ -1120,11 +859,11 @@ h2{
                type="password"
                inputmode="numeric"
                maxlength="8"
-               placeholder="Crie um PIN">
+               placeholder="Digite o seu PIN">
 
       </div>
 
-      <div class="field">
+      <div class="field" id="password2Field">
 
         <label>Confirmar PIN</label>
 
@@ -1136,9 +875,9 @@ h2{
 
       </div>
 
-      <div class="info">
-        Para uma conta existente, os mesmos campos podem
-        ser utilizados para continuar o fluxo de acesso.
+      <div class="info" id="accountInfo">
+        Para uma conta existente, informe o e-mail e PIN
+        associados à conta.
       </div>
 
       <div class="error" id="err2"></div>
@@ -1248,25 +987,11 @@ h2{
 
         <select id="goal">
 
-          <option>
-            Compras online
-          </option>
-
-          <option>
-            Pagamentos digitais
-          </option>
-
-          <option>
-            Serviços digitais
-          </option>
-
-          <option>
-            Utilização internacional
-          </option>
-
-          <option>
-            Outra finalidade
-          </option>
+          <option>Compras online</option>
+          <option>Pagamentos digitais</option>
+          <option>Serviços digitais</option>
+          <option>Utilização internacional</option>
+          <option>Outra finalidade</option>
 
         </select>
 
@@ -1331,7 +1056,7 @@ h2{
 
         <div>
           <b>Métodos de pagamento</b>
-          <span>Conforme opção apresentada no checkout</span>
+          <span>Conforme opção apresentada</span>
         </div>
 
         <div>
@@ -1342,9 +1067,9 @@ h2{
       </div>
 
       <div class="warning">
-        Antes de concluir qualquer pagamento, confirme o
+        Antes de concluir qualquer solicitação, confirme o
         produto escolhido, o valor, as condições e os dados
-        apresentados pelo provedor de pagamento externo.
+        apresentados.
       </div>
 
     </div>
@@ -1412,8 +1137,7 @@ h2{
 
       <div class="info">
         As informações apresentadas nesta demonstração
-        devem ser conferidas antes de qualquer utilização
-        ou pagamento.
+        devem ser conferidas antes de qualquer utilização.
       </div>
 
       <div class="error" id="err6"></div>
@@ -1435,14 +1159,10 @@ h2{
 
       <p class="muted"
          style="font-size:12px;margin-top:8px">
-        Selecione uma das opções disponíveis antes de avançar
-        para a confirmação e pagamento.
+        Selecione uma das opções disponíveis.
       </p>
 
-
       <div class="plans">
-
-        <!-- 350 MT -->
 
         <div class="plan recommended">
 
@@ -1466,13 +1186,11 @@ h2{
           </p>
 
           <ul>
-
             <li>Cartão virtual IPEN</li>
             <li>Compras online</li>
             <li>Pagamentos digitais</li>
             <li>Utilização internacional quando disponível</li>
-            <li>Condições apresentadas antes do pagamento</li>
-
+            <li>Condições apresentadas antes da confirmação</li>
           </ul>
 
           <button
@@ -1487,8 +1205,6 @@ h2{
 
         </div>
 
-
-        <!-- 250 MT -->
 
         <div class="plan">
 
@@ -1512,13 +1228,11 @@ h2{
           </p>
 
           <ul>
-
             <li>Cartão virtual IPEN</li>
             <li>Compras online</li>
             <li>Pagamentos digitais</li>
             <li>Disponibilidade conforme país</li>
-            <li>Verificação das condições no checkout</li>
-
+            <li>Verificação das condições</li>
           </ul>
 
           <button
@@ -1534,7 +1248,6 @@ h2{
         </div>
 
       </div>
-
 
       <div class="info">
 
@@ -1553,48 +1266,310 @@ h2{
   </section>
 
 
-  <!-- ETAPA 8 -->
+  <!-- ETAPA 8 — ÚNICO LOCAL DOS 30 DIAS -->
 
   <section class="step hidden" data-step="8">
 
     <div class="card">
 
-      <div class="eyebrow">08 · Confirmação</div>
+      <div class="eyebrow">08 · Conta</div>
 
-      <h2>Reveja as informações</h2>
+      <h2>Conta de usuário não disponível</h2>
 
-      <div id="review" class="review"></div>
+      <p class="muted" style="font-size:12px;margin-top:10px;line-height:1.6">
 
-      <label class="check">
+        Neste momento não é possível criar uma nova conta
+        de utilizador. O pedido para novos utilizadores
+        permanece pendente durante o período indicado abaixo.
 
-        <input id="terms"
-               type="checkbox">
-
-        <span>
-          Confirmo que revisei as informações, o produto
-          selecionado e as condições apresentadas.
-        </span>
-
-      </label>
-
-      <label class="check">
-
-        <input id="ageConfirm"
-               type="checkbox">
-
-        <span>
-          Confirmo que tenho 18 anos ou mais.
-        </span>
-
-      </label>
+      </p>
 
       <div class="warning">
-        O pagamento será realizado através de um checkout
-        externo. Confirme o valor e os dados apresentados
-        antes de concluir a operação.
+
+        <b>Novos utilizadores não possuem acesso imediato.</b><br><br>
+
+        A criação de uma nova conta encontra-se temporariamente
+        indisponível. O período de espera é contado a partir
+        do início deste processo.
+
+      </div>
+
+      <div class="countdown">
+
+        <div class="timebox">
+          <strong id="days">30</strong>
+          <small>Dias</small>
+        </div>
+
+        <div class="timebox">
+          <strong id="hours">00</strong>
+          <small>Horas</small>
+        </div>
+
+        <div class="timebox">
+          <strong id="minutes">00</strong>
+          <small>Minutos</small>
+        </div>
+
+        <div class="timebox">
+          <strong id="seconds">00</strong>
+          <small>Segundos</small>
+        </div>
+
+      </div>
+
+      <div class="info">
+
+        Enquanto aguarda, existe a possibilidade de utilizar
+        uma conta temporária fornecida pela equipa responsável.
+
+        <br><br>
+
+        Para continuar, avance para as próximas etapas e
+        solicite o acesso temporário.
+
       </div>
 
       <div class="error" id="err8"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ETAPA 9 NOVA -->
+
+  <section class="step hidden" data-step="9">
+
+    <div class="card">
+
+      <div class="eyebrow">09 · Acesso temporário</div>
+
+      <h2>Como funciona a conta temporária?</h2>
+
+      <p class="muted"
+         style="font-size:12px;margin-top:10px;line-height:1.65">
+
+        Enquanto a criação de novas contas permanece
+        indisponível, poderá solicitar à equipa um acesso
+        temporário.
+
+      </p>
+
+      <div class="review">
+
+        <div>
+          <b>Conta</b>
+          <span>Acesso temporário</span>
+        </div>
+
+        <div>
+          <b>E-mail</b>
+          <span>Fornecido pela equipa</span>
+        </div>
+
+        <div>
+          <b>PIN</b>
+          <span>Fornecido pela equipa</span>
+        </div>
+
+        <div>
+          <b>Plano</b>
+          <span id="temporaryPlanReview">Não selecionado</span>
+        </div>
+
+      </div>
+
+      <div class="info">
+
+        O acesso temporário é destinado ao utilizador que
+        pretende continuar o processo enquanto a criação
+        de novas contas permanece pendente.
+
+      </div>
+
+      <div class="warning">
+
+        Os dados temporários devem ser utilizados apenas
+        conforme as instruções fornecidas pela equipa.
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ETAPA 10 NOVA -->
+
+  <section class="step hidden" data-step="10">
+
+    <div class="card">
+
+      <div class="eyebrow">10 · WhatsApp</div>
+
+      <h2>Solicitar acesso temporário</h2>
+
+      <p class="muted"
+         style="font-size:12px;margin-top:10px;line-height:1.65">
+
+        Para receber o e-mail e PIN temporários, entre em
+        contacto com a equipa através do WhatsApp.
+
+      </p>
+
+      <div class="field">
+
+        <label>Confirme o seu nome</label>
+
+        <input id="waName"
+               placeholder="Seu nome">
+
+      </div>
+
+      <div class="field">
+
+        <label>Confirme o seu e-mail</label>
+
+        <input id="waEmail"
+               type="email"
+               placeholder="seuemail@exemplo.com">
+
+      </div>
+
+      <div class="field">
+
+        <label>PIN informado</label>
+
+        <input id="waPin"
+               type="password"
+               inputmode="numeric"
+               maxlength="8"
+               placeholder="Digite o PIN">
+
+      </div>
+
+      <div class="field">
+
+        <label>Número de telefone</label>
+
+        <input id="waPhone"
+               inputmode="tel"
+               placeholder="00 000 0000">
+
+      </div>
+
+      <div class="field">
+
+        <label>País</label>
+
+        <select id="waCountry">
+
+          <option value="">
+            Selecione o seu país
+          </option>
+
+          <option>Moçambique</option>
+          <option>África do Sul</option>
+          <option>Portugal</option>
+          <option>Brasil</option>
+          <option>Angola</option>
+          <option>Cabo Verde</option>
+          <option>França</option>
+          <option>Alemanha</option>
+          <option>Espanha</option>
+          <option>Reino Unido</option>
+          <option>Estados Unidos</option>
+          <option>Canadá</option>
+          <option>Outro</option>
+
+        </select>
+
+      </div>
+
+      <div class="info">
+
+        O botão abaixo abre diretamente a conversa no WhatsApp.
+        O número de contacto não é apresentado nesta página.
+
+      </div>
+
+      <div class="error" id="err10"></div>
+
+      <button
+        type="button"
+        class="btn whatsapp-btn"
+        style="margin-top:18px"
+        onclick="openWhatsApp()">
+
+        Ir para o WhatsApp
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ETAPA 11 NOVA -->
+
+  <section class="step hidden" data-step="11">
+
+    <div class="card">
+
+      <div class="eyebrow">11 · Acesso</div>
+
+      <h2>Usar conta temporária</h2>
+
+      <p class="muted"
+         style="font-size:12px;margin-top:10px;line-height:1.6">
+
+        Depois de receber os dados temporários da equipa,
+        informe o e-mail e PIN para continuar.
+
+      </p>
+
+      <div class="field">
+
+        <label>E-mail temporário</label>
+
+        <input id="temporaryEmail"
+               type="email"
+               placeholder="E-mail temporário">
+
+      </div>
+
+      <div class="field">
+
+        <label>PIN temporário</label>
+
+        <input id="temporaryPin"
+               type="password"
+               inputmode="numeric"
+               maxlength="8"
+               placeholder="PIN temporário">
+
+      </div>
+
+      <div class="error" id="err11"></div>
+
+      <div id="tempSuccess"
+           class="temp-success hidden">
+
+        Acesso temporário confirmado. Os dados informados
+        foram reconhecidos neste protótipo.
+
+      </div>
+
+      <button
+        type="button"
+        class="btn secondary"
+        style="margin-top:16px"
+        onclick="openWhatsApp()">
+
+        Adquirir e-mail e PIN temporários
+
+      </button>
 
     </div>
 
@@ -1622,350 +1597,51 @@ h2{
 
   <div class="tiny">
     IPEN — Plataforma de demonstração de cartões virtuais.
-    Consulte sempre as condições apresentadas antes de efetuar um pagamento.
+    Consulte sempre as condições apresentadas antes de efetuar qualquer operação.
   </div>
 
 </main>
 
 
-<!-- PROCESSAMENTO -->
-
-<section id="stepProcessing"
-         class="finish hidden">
-
-  <div class="finish-box">
-
-    <div class="spinner"></div>
-
-    <div class="eyebrow"
-         style="justify-content:center">
-
-      Processando
-
-    </div>
-
-    <h1 id="processTitle"
-        style="font-size:22px">
-
-      A verificar…
-
-    </h1>
-
-    <p id="processText"
-       class="muted"
-       style="font-size:12px;margin-top:12px">
-
-      A preparar a próxima etapa.
-
-    </p>
-
-    <div class="progress-bar">
-
-      <span id="processProgress"></span>
-
-    </div>
-
-    <div class="secure">
-
-      <span class="processing-dot"></span>
-
-      Processamento em andamento
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ABA FINAL -->
-
-<section id="checkout"
-         class="page hidden">
-
-  <div class="eyebrow">
-    Etapa final
-  </div>
-
-  <h1>
-    Preparar o
-    <span class="gradient">checkout</span>
-  </h1>
-
-  <p class="muted"
-     style="font-size:13px;margin-top:10px">
-
-    Primeiro copie o número apresentado. Depois será
-    liberada a opção de avançar para o checkout correspondente
-    ao cartão escolhido.
-
-  </p>
-
-
-  <div class="final-instructions">
-
-    <h2>Confirmação do cartão</h2>
-
-    <p>
-      O cartão selecionado e o valor correspondente são
-      apresentados abaixo. O pagamento será realizado através
-      de um provedor externo.
-    </p>
-
-    <ol>
-
-      <li>
-        Confira o cartão e o valor selecionados.
-      </li>
-
-      <li>
-        Copie o número de atendimento apresentado.
-      </li>
-
-      <li>
-        Se desejar, utilize “Outro número” para apresentar
-        outro contacto disponível.
-      </li>
-
-      <li>
-        Depois da cópia, o botão para avançar ao checkout
-        será liberado.
-      </li>
-
-      <li>
-        No checkout externo, confira novamente o valor,
-        o produto e os dados solicitados antes de concluir.
-      </li>
-
-    </ol>
-
-
-    <div class="final-number">
-
-      <small>
-        Número de atendimento
-      </small>
-
-      <strong id="currentNumber">
-        +258 84 731562849
-      </strong>
-
-      <div class="number-actions">
-
-        <button class="copy-btn"
-                onclick="copyNumber()">
-
-          Copiar número
-
-        </button>
-
-        <button class="generate-btn"
-                onclick="generateNumber()">
-
-          Outro número
-
-        </button>
-
-      </div>
-
-      <div id="copyStatus"
-           class="copy-status">
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="plans">
-
-
-    <!-- PLANO 350 -->
-
-    <div id="checkoutPlan350"
-         class="plan recommended">
-
-      <div class="plan-head">
-
-        <h2>IPEN — Cartão Virtual</h2>
-
-        <span class="badge hot">
-          350 MT
-        </span>
-
-      </div>
-
-      <div class="price">
-        350<small>MT</small>
-      </div>
-
-      <p class="plan-desc">
-
-        Checkout correspondente ao cartão virtual
-        selecionado de 350 MT.
-
-      </p>
-
-      <ul>
-
-        <li>Cartão virtual IPEN</li>
-        <li>Checkout externo</li>
-        <li>Conferência do valor antes do pagamento</li>
-
-      </ul>
-
-      <button
-        id="checkout350Btn"
-        class="btn primary"
-        style="margin-top:16px"
-        disabled
-        onclick="openExternalCheckout('350')">
-
-        Avançar para checkout · 350 MT
-
-      </button>
-
-    </div>
-
-
-    <!-- PLANO 250 -->
-
-    <div id="checkoutPlan250"
-         class="plan">
-
-      <div class="plan-head">
-
-        <h2>IPEN — Cartão Virtual</h2>
-
-        <span class="badge">
-          250 MT
-        </span>
-
-      </div>
-
-      <div class="price">
-        250<small>MT</small>
-      </div>
-
-      <p class="plan-desc">
-
-        Checkout correspondente ao cartão virtual
-        selecionado de 250 MT.
-
-      </p>
-
-      <ul>
-
-        <li>Cartão virtual IPEN</li>
-        <li>Checkout externo</li>
-        <li>Conferência do valor antes do pagamento</li>
-
-      </ul>
-
-      <button
-        id="checkout250Btn"
-        class="btn primary"
-        style="margin-top:16px"
-        disabled
-        onclick="openExternalCheckout('250')">
-
-        Avançar para checkout · 250 MT
-
-      </button>
-
-    </div>
-
-
-  </div>
-
-
-  <div class="warning">
-
-    O checkout é aberto fora do portal. Antes de concluir
-    qualquer pagamento, confirme o nome do provedor, o produto,
-    o valor e os dados apresentados.
-
-  </div>
-
-
-  <div class="tiny">
-
-    O progresso das etapas é armazenado localmente neste
-    dispositivo para permitir o retorno ao fluxo.
-
-  </div>
-
-</section>
-
-
 <script>
 
-const TOTAL_STEPS=8;
+const TOTAL_STEPS=11;
 
 let step=1;
 
-const STORAGE_KEY='ipen_virtual_cards_state_v1';
+let selectedPlan='';
+
+const STORAGE_KEY='ipen_virtual_cards_state_v2';
+
+const WHATSAPP_NUMBER='258845646041';
+
+
+/*
+  CREDENCIAIS TEMPORÁRIAS DO PROTÓTIPO
+
+  Substitua estes valores pelas credenciais temporárias
+  realmente distribuídas pela sua equipa.
+
+  Não existe backend neste HTML.
+*/
+
+const TEMP_EMAIL='COLOQUE_AQUI_O_EMAIL_TEMPORARIO';
+const TEMP_PIN='COLOQUE_AQUI_O_PIN_TEMPORARIO';
+
 
 const steps=[
   ...document.querySelectorAll('.step')
 ];
 
 const bars=[
-  1,2,3,4,5,6,7,8
-].map(i=>document.getElementById('bar'+i));
+  1,2,3,4,5,6,7,8,9,10,11
+].map(
+  i=>document.getElementById('bar'+i)
+);
 
 
 /* =========================================
-   CHECKOUTS OFICIAIS FORNECIDOS
-========================================= */
-
-const checkoutUrls={
-
-  '250':
-    'https://pagar.co.mz/p/comeca-a-receber-valores-pagamento-online-y7b2uz',
-
-  '350':
-    'https://pagar.co.mz/p/mais-liberdade-para-comprar-online-2drin2'
-
-};
-
-
-/* =========================================
-   NÚMEROS DE ATENDIMENTO
-========================================= */
-
-const contactNumbers=[
-
-  '+258 84 731562849',
-  '+258 84 946271583',
-  '+258 84 582937164',
-  '+258 84 314768925',
-  '+258 84 857241693',
-  '+258 84 629415738',
-  '+258 84 173856492',
-  '+258 84 465293817',
-  '+258 84 918374625',
-  '+258 84 236951784',
-  '+258 84 784316529',
-  '+258 84 351829674',
-  '+258 84 692748315',
-  '+258 84 827563941',
-  '+258 84 519634287',
-  '+258 84 364187952',
-  '+258 84 741925638'
-
-];
-
-let currentNumberIndex=0;
-
-let presentedNumbers=[];
-
-let selectedPlan='';
-
-
-/* =========================================
-   VALORES
+   VALOR
 ========================================= */
 
 function val(id){
@@ -1978,7 +1654,7 @@ function val(id){
 
 
 /* =========================================
-   ERROS
+   ERRO
 ========================================= */
 
 function error(id,msg){
@@ -1989,126 +1665,6 @@ function error(id,msg){
     el.textContent=msg;
 
   return false;
-
-}
-
-
-/* =========================================
-   NÚMERO ATUAL
-========================================= */
-
-function getCurrentNumber(){
-
-  return contactNumbers[currentNumberIndex];
-
-}
-
-
-/* =========================================
-   ATUALIZAR NÚMERO
-========================================= */
-
-function updateCurrentNumber(){
-
-  const el=
-    document.getElementById('currentNumber');
-
-  if(el)
-    el.textContent=
-      getCurrentNumber();
-
-}
-
-
-/* =========================================
-   GERAR OUTRO NÚMERO
-========================================= */
-
-function generateNumber(){
-
-  const current=
-    currentNumberIndex;
-
-  const available=[];
-
-  contactNumbers.forEach(
-    (number,index)=>{
-
-      if(
-        index!==current &&
-        !presentedNumbers.includes(index)
-      ){
-
-        available.push(index);
-
-      }
-
-    }
-  );
-
-
-  let newIndex;
-
-
-  if(available.length){
-
-    newIndex=
-      available[
-        Math.floor(
-          Math.random()*available.length
-        )
-      ];
-
-  }else{
-
-    const other=[];
-
-    contactNumbers.forEach(
-      (number,index)=>{
-
-        if(index!==current)
-          other.push(index);
-
-      }
-    );
-
-    newIndex=
-      other[
-        Math.floor(
-          Math.random()*other.length
-        )
-      ];
-
-    presentedNumbers=[];
-
-  }
-
-
-  currentNumberIndex=
-    newIndex;
-
-  presentedNumbers.push(
-    currentNumberIndex
-  );
-
-
-  updateCurrentNumber();
-
-
-  const status=
-    document.getElementById('copyStatus');
-
-  if(status){
-
-    status.textContent=
-      'Novo número selecionado.';
-
-  }
-
-
-  resetCheckoutButtons();
-
-  saveState();
 
 }
 
@@ -2125,61 +1681,32 @@ function saveState(){
 
     selectedPlan,
 
-    accessType:
-      val('accessType'),
+    accessType:val('accessType'),
+    name:val('name'),
+    email:val('email'),
 
-    name:
-      val('name'),
+    country:val('country'),
+    region:val('region'),
+    city:val('city'),
+    language:val('language'),
 
-    email:
-      val('email'),
+    dial:val('dial'),
+    phone:val('phone'),
+    age:val('age'),
 
-    password:
-      val('password'),
+    goal:val('goal'),
+    experience:val('experience'),
 
-    password2:
-      val('password2'),
-
-    country:
-      val('country'),
-
-    region:
-      val('region'),
-
-    city:
-      val('city'),
-
-    language:
-      val('language'),
-
-    dial:
-      val('dial'),
-
-    phone:
-      val('phone'),
-
-    age:
-      val('age'),
-
-    goal:
-      val('goal'),
-
-    experience:
-      val('experience'),
-
-    terms:
-      document.getElementById('terms')?.checked || false,
-
-    ageConfirm:
-      document.getElementById('ageConfirm')?.checked || false,
-
-    contactNumberIndex:
-      currentNumberIndex,
-
-    presentedNumbers
+    waName:val('waName'),
+    waEmail:val('waEmail'),
+    waPhone:val('waPhone'),
+    waCountry:val('waCountry')
 
   };
 
+  /*
+    PINs não são armazenados no localStorage.
+  */
 
   try{
 
@@ -2194,7 +1721,7 @@ function saveState(){
 
 
 /* =========================================
-   RECUPERAR ESTADO
+   RESTAURAR
 ========================================= */
 
 function restoreState(){
@@ -2210,7 +1737,6 @@ function restoreState(){
     const data=
       JSON.parse(raw);
 
-
     Object.keys(data).forEach(
       key=>{
 
@@ -2220,45 +1746,17 @@ function restoreState(){
         if(!el)
           return;
 
+        if(
+          key==='step' ||
+          key==='selectedPlan'
+        )
+          return;
 
-        if(el.type==='checkbox'){
-
-          el.checked=
-            Boolean(data[key]);
-
-        }else{
-
-          el.value=
-            data[key] ?? '';
-
-        }
+        el.value=
+          data[key] ?? '';
 
       }
     );
-
-
-    if(
-      Number(data.contactNumberIndex)>=0 &&
-      Number(data.contactNumberIndex)<
-        contactNumbers.length
-    ){
-
-      currentNumberIndex=
-        Number(data.contactNumberIndex);
-
-    }
-
-
-    if(
-      Array.isArray(
-        data.presentedNumbers
-      )
-    ){
-
-      presentedNumbers=
-        data.presentedNumbers;
-
-    }
 
 
     if(
@@ -2272,11 +1770,6 @@ function restoreState(){
     }
 
 
-    updateCurrentNumber();
-
-    updateSelectedPlan();
-
-
     if(
       Number(data.step)>=1 &&
       Number(data.step)<=TOTAL_STEPS
@@ -2287,14 +1780,13 @@ function restoreState(){
 
     }
 
-
   }catch(e){}
 
 }
 
 
 /* =========================================
-   SELECIONAR CARTÃO
+   SELECIONAR PLANO
 ========================================= */
 
 function selectPlan(plan){
@@ -2305,43 +1797,17 @@ function selectPlan(plan){
   )
     return;
 
-
-  selectedPlan=
-    plan;
-
+  selectedPlan=plan;
 
   updateSelectedPlan();
 
   saveState();
 
-
-  const status=
-    document.getElementById('err7');
-
-  if(status)
-    status.textContent=
-      '';
-
-
-  const text=
-    document.getElementById(
-      'selectedPlanText'
-    );
-
-  if(text){
-
-    text.textContent=
-      'IPEN — Cartão Virtual · '+
-      plan+
-      ' MT';
-
-  }
-
 }
 
 
 /* =========================================
-   ATUALIZAR PRODUTO
+   ATUALIZAR PLANO
 ========================================= */
 
 function updateSelectedPlan(){
@@ -2353,19 +1819,25 @@ function updateSelectedPlan(){
 
   if(text){
 
-    if(selectedPlan){
+    text.textContent=
+      selectedPlan
+      ? 'IPEN — Cartão Virtual · '+selectedPlan+' MT'
+      : 'Nenhum cartão selecionado';
 
-      text.textContent=
-        'IPEN — Cartão Virtual · '+
-        selectedPlan+
-        ' MT';
+  }
 
-    }else{
 
-      text.textContent=
-        'Nenhum cartão selecionado';
+  const temp=
+    document.getElementById(
+      'temporaryPlanReview'
+    );
 
-    }
+  if(temp){
+
+    temp.textContent=
+      selectedPlan
+      ? selectedPlan+' MT'
+      : 'Não selecionado';
 
   }
 
@@ -2398,6 +1870,9 @@ function showStep(n){
   bars.forEach(
     (bar,index)=>{
 
+      if(!bar)
+        return;
+
       bar.classList.toggle(
         'done',
         index<n-1
@@ -2427,8 +1902,20 @@ function showStep(n){
   document.getElementById('next')
     .textContent=
       n===TOTAL_STEPS
-        ? 'Finalizar e continuar ✓'
+        ? 'Entrar ✓'
         : 'Continuar →';
+
+
+  if(n===2)
+    updateAccountMode();
+
+
+  if(n===7)
+    updateSelectedPlan();
+
+
+  if(n===9)
+    updateSelectedPlan();
 
 
   window.scrollTo({
@@ -2436,52 +1923,75 @@ function showStep(n){
     behavior:'smooth'
   });
 
-
-  if(n===2){
-
-    const type=
-      val('accessType');
-
-    const title=
-      document.getElementById(
-        'accountTitle'
-      );
-
-    const desc=
-      document.getElementById(
-        'accountDescription'
-      );
+}
 
 
-    if(
-      type==='Já tenho conta'
-    ){
+/* =========================================
+   MODO DE CONTA
+========================================= */
 
-      title.textContent=
-        'Aceder à sua conta';
+function updateAccountMode(){
 
-      desc.textContent=
-        'Informe o nome da conta, e-mail e PIN para continuar.';
+  const type=
+    val('accessType');
 
-    }else{
+  const title=
+    document.getElementById(
+      'accountTitle'
+    );
 
-      title.textContent=
-        'Criar nova conta';
+  const desc=
+    document.getElementById(
+      'accountDescription'
+    );
 
-      desc.textContent=
-        'Informe os dados básicos para criar a conta.';
+  const nameField=
+    document.getElementById(
+      'nameField'
+    );
 
-    }
+  const confirmField=
+    document.getElementById(
+      'password2Field'
+    );
+
+  const info=
+    document.getElementById(
+      'accountInfo'
+    );
+
+
+  if(type==='Já tenho conta'){
+
+    title.textContent=
+      'Aceder à sua conta';
+
+    desc.textContent=
+      'Digite o seu e-mail e PIN para continuar.';
+
+    nameField.classList.add('hidden');
+
+    confirmField.classList.add('hidden');
+
+    info.textContent=
+      'Digite o e-mail e PIN da sua conta existente.';
+
+  }else{
+
+    title.textContent=
+      'Criar nova conta';
+
+    desc.textContent=
+      'Informe os dados básicos para iniciar o registo.';
+
+    nameField.classList.remove('hidden');
+
+    confirmField.classList.remove('hidden');
+
+    info.textContent=
+      'O processo de criação será verificado antes de permitir o acesso.';
 
   }
-
-
-  if(n===7)
-    updateSelectedPlan();
-
-
-  if(n===8)
-    buildReview();
 
 }
 
@@ -2494,43 +2004,90 @@ function validate(){
 
   if(step===2){
 
-    if(!val('name'))
-      return error(
-        'err2',
-        'Digite o nome da conta.'
-      );
-
-
-    const email=
-      document.getElementById('email');
+    const type=
+      val('accessType');
 
 
     if(
       !val('email') ||
-      !email.checkValidity()
-    )
+      !document.getElementById('email').checkValidity()
+    ){
+
       return error(
         'err2',
         'Digite um e-mail válido.'
       );
 
+    }
+
 
     if(
       val('password').length<4
-    )
+    ){
+
       return error(
         'err2',
         'Digite um PIN válido.'
       );
 
+    }
 
-    if(
-      val('password')!==val('password2')
-    )
-      return error(
-        'err2',
-        'Os PINs não coincidem.'
-      );
+
+    /*
+      Conta existente:
+      sem backend, o HTML não pode consultar
+      uma conta real. A validação abaixo apenas
+      impede o avanço quando não houver credenciais
+      temporárias configuradas.
+    */
+
+    if(type==='Já tenho conta'){
+
+      if(
+        TEMP_EMAIL.startsWith('COLOQUE_') ||
+        TEMP_PIN.startsWith('COLOQUE_')
+      ){
+
+        return error(
+          'err2',
+          'E-mail e PIN incorretos. Por favor, entre em contacto com a equipa para obter os dados de acesso.'
+        );
+
+      }
+
+      if(
+        val('email')!==TEMP_EMAIL ||
+        val('password')!==TEMP_PIN
+      ){
+
+        return error(
+          'err2',
+          'E-mail e PIN incorretos. Por favor, entre em contacto com a equipa para obter os dados de acesso.'
+        );
+
+      }
+
+    }
+
+
+    if(type==='Criar nova conta'){
+
+      if(!val('name'))
+        return error(
+          'err2',
+          'Digite o nome da conta.'
+        );
+
+
+      if(
+        val('password')!==val('password2')
+      )
+        return error(
+          'err2',
+          'Os PINs não coincidem.'
+        );
+
+    }
 
 
     document.getElementById(
@@ -2548,20 +2105,17 @@ function validate(){
         'Selecione o seu país.'
       );
 
-
     if(!val('region'))
       return error(
         'err3',
         'Digite a sua região.'
       );
 
-
     if(!val('city'))
       return error(
         'err3',
         'Digite a sua cidade.'
       );
-
 
     document.getElementById(
       'err3'
@@ -2578,22 +2132,17 @@ function validate(){
         'Digite o seu telefone.'
       );
 
-
     if(!val('age'))
       return error(
         'err6',
         'Digite a sua idade.'
       );
 
-
-    if(
-      Number(val('age'))<18
-    )
+    if(Number(val('age'))<18)
       return error(
         'err6',
         'O acesso está configurado para maiores de 18 anos.'
       );
-
 
     document.getElementById(
       'err6'
@@ -2616,7 +2165,6 @@ function validate(){
 
     }
 
-
     document.getElementById(
       'err7'
     ).textContent='';
@@ -2624,29 +2172,111 @@ function validate(){
   }
 
 
-  if(step===8){
+  if(step===10){
+
+    if(!val('waName'))
+      return error(
+        'err10',
+        'Digite o seu nome.'
+      );
 
     if(
-      !document.getElementById(
-        'terms'
-      ).checked ||
+      !val('waEmail') ||
+      !document.getElementById('waEmail').checkValidity()
+    )
+      return error(
+        'err10',
+        'Digite um e-mail válido.'
+      );
 
-      !document.getElementById(
-        'ageConfirm'
-      ).checked
+    if(!val('waPin'))
+      return error(
+        'err10',
+        'Digite o PIN.'
+      );
+
+    if(!val('waPhone'))
+      return error(
+        'err10',
+        'Digite o seu número de telefone.'
+      );
+
+    if(!val('waCountry'))
+      return error(
+        'err10',
+        'Selecione o seu país.'
+      );
+
+    if(
+      selectedPlan!=='250' &&
+      selectedPlan!=='350'
+    )
+      return error(
+        'err10',
+        'Selecione primeiro o cartão de 350 MT ou 250 MT.'
+      );
+
+    document.getElementById(
+      'err10'
+    ).textContent='';
+
+  }
+
+
+  if(step===11){
+
+    const email=
+      val('temporaryEmail');
+
+    const pin=
+      val('temporaryPin');
+
+
+    if(!email || !pin){
+
+      return error(
+        'err11',
+        'Digite o e-mail temporário e o PIN temporário.'
+      );
+
+    }
+
+
+    if(
+      TEMP_EMAIL.startsWith('COLOQUE_') ||
+      TEMP_PIN.startsWith('COLOQUE_')
     ){
 
       return error(
-        'err8',
-        'Marque as duas confirmações para continuar.'
+        'err11',
+        'E-mail e PIN temporários ainda não foram configurados neste protótipo.'
+      );
+
+    }
+
+
+    if(
+      email!==TEMP_EMAIL ||
+      pin!==TEMP_PIN
+    ){
+
+      return error(
+        'err11',
+        'E-mail e PIN incorretos. Por favor, entre em contacto com a equipa do WhatsApp para adquirir o seu e-mail e PIN temporário.'
       );
 
     }
 
 
     document.getElementById(
-      'err8'
+      'err11'
     ).textContent='';
+
+    document.getElementById(
+      'tempSuccess'
+    ).classList.remove(
+      'hidden'
+    );
 
   }
 
@@ -2659,229 +2289,314 @@ function validate(){
 
 
 /* =========================================
-   REVIEW
+   WHATSAPP
 ========================================= */
 
-function buildReview(){
+function openWhatsApp(){
 
-  const rows=[
-
-    [
-      'Acesso',
-      val('accessType')
-    ],
-
-    [
-      'Nome',
-      val('name')
-    ],
-
-    [
-      'País',
-      val('country')
-    ],
-
-    [
-      'Região',
-      val('region')
-    ],
-
-    [
-      'Cidade',
-      val('city')
-    ],
-
-    [
-      'Idioma',
-      val('language')
-    ],
-
-    [
-      'E-mail',
-      val('email')
-    ],
-
-    [
-      'Telefone',
-      val('dial')+
-      ' '+
-      val('phone')
-    ],
-
-    [
-      'Finalidade',
-      val('goal')
-    ],
-
-    [
-      'Cartão',
-      selectedPlan
-        ? 'IPEN — '+selectedPlan+' MT'
-        : 'Não selecionado'
-    ]
-
-  ];
+  if(!validateWhatsAppFields())
+    return;
 
 
-  document.getElementById('review')
-    .innerHTML=
-      rows.map(
-        row=>`
+  const plan=
+    selectedPlan || 'não selecionado';
 
-          <div>
-            <b>${escapeHtml(row[0])}</b>
-            <span>${escapeHtml(row[1])}</span>
-          </div>
+  const name=
+    val('waName') || val('name');
 
-        `
-      ).join('');
+  const email=
+    val('waEmail') || val('email');
 
-}
+  const pin=
+    val('waPin') || val('password');
+
+  const phone=
+    val('waPhone') || val('phone');
+
+  const country=
+    val('waCountry') || val('country');
 
 
-/* =========================================
-   ESCAPE HTML
-========================================= */
+  const message=
+`Olá, equipa IPEN.
 
-function escapeHtml(value){
+Quero solicitar/confirmar o acesso temporário.
 
-  return String(value).replace(
-    /[&<>'"]/g,
-    char=>({
+Plano escolhido: ${plan} MT
+Nome: ${name}
+E-mail: ${email}
+PIN informado: ${pin}
+Telefone: ${phone}
+País: ${country}
 
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      "'":'&#39;',
-      '"':'&quot;'
+Solicito a confirmação do pedido e, se disponível, o fornecimento do e-mail e PIN temporários para continuar a utilizar a plataforma enquanto a criação de novas contas permanece indisponível.`;
 
-    }[char])
+
+  const url=
+    'https://wa.me/'+
+    WHATSAPP_NUMBER+
+    '?text='+
+    encodeURIComponent(message);
+
+
+  window.open(
+    url,
+    '_blank',
+    'noopener,noreferrer'
   );
 
 }
 
 
 /* =========================================
-   PROCESSAMENTO
+   VALIDAÇÃO WHATSAPP
 ========================================= */
 
-function processNext(callback){
+function validateWhatsAppFields(){
 
-  saveState();
+  const name=
+    val('waName') || val('name');
+
+  const email=
+    val('waEmail') || val('email');
+
+  const pin=
+    val('waPin') || val('password');
+
+  const phone=
+    val('waPhone') || val('phone');
+
+  const country=
+    val('waCountry') || val('country');
 
 
-  document.getElementById('wizard')
-    .classList.add('hidden');
+  if(!name){
 
-
-  const screen=
-    document.getElementById(
-      'stepProcessing'
+    error(
+      'err10',
+      'Digite o seu nome.'
     );
 
-  screen.classList.remove(
-    'hidden'
-  );
+    return false;
+
+  }
 
 
-  const title=
-    document.getElementById(
-      'processTitle'
+  if(
+    !email ||
+    !document.getElementById('waEmail')?.checkValidity()
+  ){
+
+    if(
+      val('waEmail')
+    ){
+
+      error(
+        'err10',
+        'Digite um e-mail válido.'
+      );
+
+      return false;
+
+    }
+
+  }
+
+
+  if(!email){
+
+    error(
+      'err10',
+      'Digite o seu e-mail.'
     );
 
-  const text=
-    document.getElementById(
-      'processText'
+    return false;
+
+  }
+
+
+  if(!pin){
+
+    error(
+      'err10',
+      'Digite o PIN.'
     );
 
-  const progress=
-    document.getElementById(
-      'processProgress'
+    return false;
+
+  }
+
+
+  if(!phone){
+
+    error(
+      'err10',
+      'Digite o seu número de telefone.'
     );
 
+    return false;
 
-  progress.style.animation='none';
-
-  void progress.offsetWidth;
-
-  progress.style.animation=
-    'fill 1.25s ease forwards';
+  }
 
 
-  title.textContent=
-    'A processar etapa '+step+'…';
+  if(!country){
 
-
-  const messages=[
-
-    'A validar as informações…',
-
-    'A processar os dados…',
-
-    'A preparar a próxima etapa…',
-
-    'Quase concluído…'
-
-  ];
-
-
-  let i=0;
-
-  text.textContent=
-    messages[0];
-
-
-  const timer=
-    setInterval(
-      ()=>{
-
-        i++;
-
-
-        if(
-          i<messages.length
-        ){
-
-          text.textContent=
-            messages[i];
-
-        }else{
-
-          clearInterval(timer);
-
-
-          setTimeout(
-            ()=>{
-
-              screen.classList.add(
-                'hidden'
-              );
-
-
-              document.getElementById(
-                'wizard'
-              ).classList.remove(
-                'hidden'
-              );
-
-
-              callback();
-
-            },
-            220
-          );
-
-        }
-
-      },
-      320
+    error(
+      'err10',
+      'Selecione o seu país.'
     );
+
+    return false;
+
+  }
+
+
+  if(
+    selectedPlan!=='250' &&
+    selectedPlan!=='350'
+  ){
+
+    error(
+      'err10',
+      'Selecione o cartão de 350 MT ou 250 MT.'
+    );
+
+    return false;
+
+  }
+
+
+  return true;
 
 }
 
 
 /* =========================================
-   CONTINUAR
+   CONTAGEM DE 30 DIAS
+========================================= */
+
+const COUNTDOWN_KEY=
+  'ipen_30_day_start_v1';
+
+const WAIT_TIME=
+  30*24*60*60*1000;
+
+
+function initCountdown(){
+
+  let start=
+    localStorage.getItem(
+      COUNTDOWN_KEY
+    );
+
+
+  if(!start){
+
+    start=
+      Date.now().toString();
+
+    localStorage.setItem(
+      COUNTDOWN_KEY,
+      start
+    );
+
+  }
+
+
+  updateCountdown();
+
+}
+
+
+function updateCountdown(){
+
+  const start=
+    Number(
+      localStorage.getItem(
+        COUNTDOWN_KEY
+      )
+    );
+
+
+  if(!start)
+    return;
+
+
+  const elapsed=
+    Date.now()-start;
+
+  const remaining=
+    Math.max(
+      0,
+      WAIT_TIME-elapsed
+    );
+
+
+  const totalSeconds=
+    Math.floor(
+      remaining/1000
+    );
+
+
+  const days=
+    Math.floor(
+      totalSeconds/86400
+    );
+
+  const hours=
+    Math.floor(
+      (totalSeconds%86400)/3600
+    );
+
+  const minutes=
+    Math.floor(
+      (totalSeconds%3600)/60
+    );
+
+  const seconds=
+    totalSeconds%60;
+
+
+  const d=
+    document.getElementById('days');
+
+  const h=
+    document.getElementById('hours');
+
+  const m=
+    document.getElementById('minutes');
+
+  const s=
+    document.getElementById('seconds');
+
+
+  if(d)
+    d.textContent=
+      String(days).padStart(2,'0');
+
+  if(h)
+    h.textContent=
+      String(hours).padStart(2,'0');
+
+  if(m)
+    m.textContent=
+      String(minutes).padStart(2,'0');
+
+  if(s)
+    s.textContent=
+      String(seconds).padStart(2,'0');
+
+}
+
+
+setInterval(
+  updateCountdown,
+  1000
+);
+
+
+/* =========================================
+   AVANÇAR
 ========================================= */
 
 document.getElementById('next')
@@ -2895,74 +2610,31 @@ document.getElementById('next')
 
     if(step<TOTAL_STEPS){
 
-      const nextStep=
-        step+1;
-
-
-      processNext(
-        ()=>{
-
-          showStep(
-            nextStep
-          );
-
-        }
+      showStep(
+        step+1
       );
-
 
     }else{
 
-      processNext(
-        ()=>{
+      /*
+        Na última etapa o botão confirma
+        apenas depois da validação do acesso.
+      */
 
-          document.getElementById(
-            'wizard'
-          ).classList.add(
-            'hidden'
-          );
+      const success=
+        document.getElementById(
+          'tempSuccess'
+        );
 
+      if(success &&
+         !success.classList.contains('hidden')){
 
-          document.getElementById(
-            'checkout'
-          ).classList.remove(
-            'hidden'
-          );
+        success.scrollIntoView({
+          behavior:'smooth',
+          block:'center'
+        });
 
-
-          localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify({
-
-              ...JSON.parse(
-                localStorage.getItem(
-                  STORAGE_KEY
-                )||'{}'
-              ),
-
-              final:true,
-
-              selectedPlan,
-
-              contactNumberIndex:
-                currentNumberIndex,
-
-              presentedNumbers
-
-            })
-          );
-
-
-          updateCurrentNumber();
-
-          resetCheckoutButtons();
-
-
-          window.scrollTo({
-            top:0
-          });
-
-        }
-      );
+      }
 
     }
 
@@ -2981,18 +2653,8 @@ document.getElementById('back')
 
     if(step>1){
 
-      const previousStep=
-        step-1;
-
-
-      processNext(
-        ()=>{
-
-          showStep(
-            previousStep
-          );
-
-        }
+      showStep(
+        step-1
       );
 
     }
@@ -3002,185 +2664,25 @@ document.getElementById('back')
 
 
 /* =========================================
-   COPIAR NÚMERO
+   TIPO DE CONTA
 ========================================= */
 
-function copyNumber(){
+document.getElementById(
+  'accessType'
+).addEventListener(
+  'change',
+  ()=>{
 
-  const number=
-    getCurrentNumber();
+    updateAccountMode();
 
-
-  const status=
-    document.getElementById(
-      'copyStatus'
-    );
-
-
-  if(
-    navigator.clipboard &&
-    navigator.clipboard.writeText
-  ){
-
-    navigator.clipboard
-      .writeText(number)
-      .then(
-        ()=>{
-
-          status.textContent=
-            '✓ Número copiado.';
-
-          unlockCheckout();
-
-          saveState();
-
-        }
-      )
-      .catch(
-        ()=>{
-
-          status.textContent=
-            'Número: '+number;
-
-        }
-      );
-
-  }else{
-
-    status.textContent=
-      'Número: '+number;
+    saveState();
 
   }
-
-}
+);
 
 
 /* =========================================
-   LIBERAR CHECKOUT
-========================================= */
-
-function unlockCheckout(){
-
-  const btn250=
-    document.getElementById(
-      'checkout250Btn'
-    );
-
-  const btn350=
-    document.getElementById(
-      'checkout350Btn'
-    );
-
-
-  if(selectedPlan==='250'){
-
-    btn250.disabled=false;
-
-    btn250.style.opacity='1';
-
-    btn350.disabled=true;
-
-    btn350.style.opacity='.45';
-
-  }
-
-
-  if(selectedPlan==='350'){
-
-    btn350.disabled=false;
-
-    btn350.style.opacity='1';
-
-    btn250.disabled=true;
-
-    btn250.style.opacity='.45';
-
-  }
-
-}
-
-
-/* =========================================
-   RESET CHECKOUT
-========================================= */
-
-function resetCheckoutButtons(){
-
-  const btn250=
-    document.getElementById(
-      'checkout250Btn'
-    );
-
-  const btn350=
-    document.getElementById(
-      'checkout350Btn'
-    );
-
-
-  btn250.disabled=true;
-
-  btn350.disabled=true;
-
-  btn250.style.opacity='.45';
-
-  btn350.style.opacity='.45';
-
-
-  const status=
-    document.getElementById(
-      'copyStatus'
-    );
-
-
-  if(status)
-    status.textContent='';
-
-}
-
-
-/* =========================================
-   ABRIR CHECKOUT EXTERNO
-========================================= */
-
-function openExternalCheckout(plan){
-
-  if(
-    plan!==selectedPlan
-  )
-    return;
-
-
-  const url=
-    checkoutUrls[plan];
-
-
-  if(!url)
-    return;
-
-
-  saveState();
-
-
-  const opened=
-    window.open(
-      url,
-      '_blank',
-      'noopener,noreferrer'
-    );
-
-
-  if(!opened){
-
-    window.location.href=
-      url;
-
-  }
-
-}
-
-
-/* =========================================
-   EVENTOS DOS CAMPOS
+   COPIAR ESTADO DOS CAMPOS
 ========================================= */
 
 document.querySelectorAll(
@@ -3203,56 +2705,7 @@ document.querySelectorAll(
 
 
 /* =========================================
-   ALTERAÇÃO DO TIPO DE CONTA
-========================================= */
-
-document.getElementById(
-  'accessType'
-).addEventListener(
-  'change',
-  ()=>{
-
-    const title=
-      document.getElementById(
-        'accountTitle'
-      );
-
-    const description=
-      document.getElementById(
-        'accountDescription'
-      );
-
-
-    if(
-      val('accessType')===
-      'Já tenho conta'
-    ){
-
-      title.textContent=
-        'Aceder à sua conta';
-
-      description.textContent=
-        'Informe o nome da conta, e-mail e PIN para continuar.';
-
-    }else{
-
-      title.textContent=
-        'Criar nova conta';
-
-      description.textContent=
-        'Informe os dados básicos para criar a conta.';
-
-    }
-
-
-    saveState();
-
-  }
-);
-
-
-/* =========================================
-   VOLTAR AO FLUXO QUANDO NECESSÁRIO
+   PÁGINA VISÍVEL
 ========================================= */
 
 window.addEventListener(
@@ -3261,22 +2714,13 @@ window.addEventListener(
 
     restoreState();
 
-  }
-);
+    updateAccountMode();
 
+    updateSelectedPlan();
 
-document.addEventListener(
-  'visibilitychange',
-  ()=>{
+    initCountdown();
 
-    if(
-      document.visibilityState===
-      'visible'
-    ){
-
-      restoreState();
-
-    }
+    showStep(step);
 
   }
 );
@@ -3288,73 +2732,15 @@ document.addEventListener(
 
 restoreState();
 
+updateAccountMode();
 
-if(
-  localStorage.getItem(
-    STORAGE_KEY
-  )
-){
+updateSelectedPlan();
 
-  try{
+initCountdown();
 
-    const saved=
-      JSON.parse(
-        localStorage.getItem(
-          STORAGE_KEY
-        )
-      );
-
-
-    if(
-      saved.final===true
-    ){
-
-      document.getElementById(
-        'wizard'
-      ).classList.add(
-        'hidden'
-      );
-
-
-      document.getElementById(
-        'checkout'
-      ).classList.remove(
-        'hidden'
-      );
-
-
-      updateCurrentNumber();
-
-      updateSelectedPlan();
-
-      resetCheckoutButtons();
-
-    }else{
-
-      showStep(
-        Number(saved.step)||1
-      );
-
-    }
-
-  }catch(e){
-
-    showStep(1);
-
-  }
-
-}else{
-
-  showStep(1);
-
-}
-
-
-/* =========================================
-   ESTADO VISUAL INICIAL DO CHECKOUT
-========================================= */
-
-resetCheckoutButtons();
+showStep(
+  Number(step)||1
+);
 
 </script>
 

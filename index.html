@@ -5,7 +5,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#05080c">
-
 <title>IPEN — Cartões Virtuais</title>
 
 <style>
@@ -21,7 +20,6 @@
   --cyan:#35d9ff;
   --green:#23d69b;
   --yellow:#e6b94f;
-  --blue:#398cff;
   --grad:linear-gradient(135deg,#19c79a,#35d9ff);
   --grad-btn:linear-gradient(135deg,#19c79a,#0fae87);
   --shadow:0 20px 60px -20px rgba(0,0,0,.9);
@@ -79,7 +77,7 @@ button{
   align-items:center;
   justify-content:space-between;
   padding:0 18px;
-  background:rgba(5,8,12,.82);
+  background:rgba(5,8,12,.88);
   backdrop-filter:blur(22px);
   border-bottom:1px solid rgba(255,255,255,.05);
 }
@@ -133,21 +131,19 @@ button{
   padding:6px 10px;
 }
 
-.processing-dot{
+.dot{
   width:7px;
   height:7px;
   display:inline-block;
   border-radius:50%;
   background:var(--green);
   box-shadow:0 0 12px var(--green);
+  margin-right:5px;
   animation:pulse 1.3s infinite;
 }
 
 @keyframes pulse{
-  50%{
-    opacity:.4;
-    transform:scale(1.35);
-  }
+  50%{opacity:.4;transform:scale(1.35)}
 }
 
 .page{
@@ -158,14 +154,8 @@ button{
 }
 
 @keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
 }
 
 .eyebrow{
@@ -199,47 +189,13 @@ h2{
   letter-spacing:-.6px;
 }
 
-.muted{
-  color:var(--muted);
-}
+.muted{color:var(--muted)}
 
 .gradient{
   background:var(--grad);
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-}
-
-.stepbar{
-  display:flex;
-  gap:5px;
-  margin:22px 0 12px;
-}
-
-.stepbar i{
-  height:3px;
-  flex:1;
-  border-radius:10px;
-  background:#1b252d;
-  transition:.3s;
-}
-
-.stepbar i.done{
-  background:linear-gradient(90deg,var(--cyan),var(--primary));
-}
-
-.stepbar i.active{
-  background:linear-gradient(90deg,var(--primary),var(--cyan));
-  box-shadow:0 0 12px rgba(25,199,154,.45);
-}
-
-.counter{
-  font-size:10px;
-  color:#788792;
-  margin-bottom:12px;
-  letter-spacing:1.4px;
-  text-transform:uppercase;
-  font-weight:700;
 }
 
 .card{
@@ -260,17 +216,10 @@ h2{
   left:0;
   right:0;
   height:1px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(25,199,154,.5),
-    transparent
-  );
+  background:linear-gradient(90deg,transparent,rgba(25,199,154,.5),transparent);
 }
 
-.field{
-  margin-top:14px;
-}
+.field{margin-top:14px}
 
 .field label{
   display:block;
@@ -298,9 +247,7 @@ h2{
   box-shadow:0 0 0 4px rgba(25,199,154,.11);
 }
 
-.field input::placeholder{
-  color:#4e5d68;
-}
+.field input::placeholder{color:#4e5d68}
 
 .row{
   display:grid;
@@ -308,26 +255,24 @@ h2{
   gap:10px;
 }
 
-.info{
+.info,.warning{
   padding:13px 14px;
   border-radius:13px;
   margin-top:14px;
+  font-size:11px;
+  line-height:1.65;
+}
+
+.info{
   border:1px solid rgba(53,217,255,.18);
   background:rgba(53,217,255,.05);
   color:#a5d5df;
-  font-size:11px;
-  line-height:1.55;
 }
 
 .warning{
-  padding:13px 14px;
-  border-radius:13px;
-  margin-top:14px;
   border:1px solid rgba(230,185,79,.22);
   background:rgba(230,185,79,.05);
   color:#d0bf8d;
-  font-size:11px;
-  line-height:1.55;
 }
 
 .btns{
@@ -349,9 +294,7 @@ h2{
   transition:.15s;
 }
 
-.btn:active{
-  transform:scale(.97);
-}
+.btn:active{transform:scale(.97)}
 
 .primary{
   background:var(--grad-btn);
@@ -361,6 +304,12 @@ h2{
 .secondary{
   background:#101820;
   border:1px solid #2a3740;
+}
+
+.whatsapp{
+  background:#19c779;
+  color:#04110d;
+  box-shadow:0 12px 35px -10px rgba(25,199,154,.45);
 }
 
 .review{
@@ -380,26 +329,12 @@ h2{
   font-size:12px;
 }
 
+.review b{color:#dce5e9}
+
 .review span{
   color:#8997a1;
   text-align:right;
   word-break:break-word;
-}
-
-.check{
-  display:flex;
-  gap:11px;
-  margin-top:15px;
-  font-size:11.5px;
-  color:#b0bcc4;
-  line-height:1.5;
-}
-
-.check input{
-  width:16px;
-  height:16px;
-  accent-color:var(--primary);
-  flex-shrink:0;
 }
 
 .error{
@@ -436,11 +371,10 @@ h2{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:10px;
 }
 
-.plan-head h2{
-  font-size:17px;
-}
+.plan-head h2{font-size:17px}
 
 .badge{
   font-size:8px;
@@ -452,6 +386,7 @@ h2{
   background:#111c24;
   border:1px solid #2b3943;
   color:#aab5bc;
+  white-space:nowrap;
 }
 
 .badge.hot{
@@ -524,12 +459,15 @@ h2{
   border-radius:50%;
   border:1px solid rgba(25,199,154,.22);
   box-shadow:0 0 0 30px rgba(25,199,154,.03);
+  pointer-events:none;
 }
 
 .card-top{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
+  position:relative;
+  z-index:1;
 }
 
 .card-brand{
@@ -561,6 +499,8 @@ h2{
   font-size:19px;
   letter-spacing:2px;
   font-weight:700;
+  position:relative;
+  z-index:1;
 }
 
 .card-bottom{
@@ -585,45 +525,39 @@ h2{
   margin-top:4px;
 }
 
-.countdown{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
-  margin-top:18px;
+.stepbar{
+  display:flex;
+  gap:5px;
+  margin:22px 0 12px;
 }
 
-.timebox{
-  padding:12px 5px;
-  text-align:center;
-  border-radius:13px;
-  background:#071017;
-  border:1px solid #26343e;
+.stepbar i{
+  height:3px;
+  flex:1;
+  border-radius:10px;
+  background:#1b252d;
+  transition:.3s;
 }
 
-.timebox strong{
-  display:block;
-  font-size:20px;
-  font-weight:900;
+.stepbar i.done{
+  background:linear-gradient(90deg,var(--cyan),var(--primary));
 }
 
-.timebox small{
-  display:block;
-  margin-top:3px;
-  color:#72818b;
-  font-size:8px;
+.stepbar i.active{
+  background:linear-gradient(90deg,var(--primary),var(--cyan));
+  box-shadow:0 0 12px rgba(25,199,154,.45);
+}
+
+.counter{
+  font-size:10px;
+  color:#788792;
+  margin-bottom:12px;
+  letter-spacing:1.4px;
   text-transform:uppercase;
-  letter-spacing:1px;
+  font-weight:700;
 }
 
-.whatsapp-btn{
-  background:#19c79a;
-  color:#04110d;
-  box-shadow:0 12px 35px -10px rgba(25,199,154,.45);
-}
-
-.hidden{
-  display:none!important;
-}
+.hidden{display:none!important}
 
 .tiny{
   margin-top:20px;
@@ -633,2040 +567,851 @@ h2{
   line-height:1.6;
 }
 
-.temp-success{
-  padding:16px;
-  border-radius:15px;
-  margin-top:16px;
-  border:1px solid rgba(35,214,155,.25);
-  background:rgba(35,214,155,.06);
-  color:#9de5c9;
+.pending-wrap{
+  padding:25px 18px 45px;
+  animation:fadeUp .4s ease;
+}
+
+.pending-card{
+  border:1px solid #263640;
+  border-radius:22px;
+  padding:23px;
+  background:linear-gradient(180deg,#111c25,#080e13);
+  text-align:center;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.pending-card:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(25,199,154,.5),transparent);
+}
+
+.pending-icon{
+  width:66px;
+  height:66px;
+  border-radius:20px;
+  margin:0 auto 15px;
+  display:grid;
+  place-items:center;
+  background:rgba(230,185,79,.09);
+  border:1px solid rgba(230,185,79,.22);
+  color:var(--yellow);
+  font-size:32px;
+}
+
+.pending-label{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:20px;
+  color:#f0ca70;
+  background:#302817;
+  border:1px solid rgba(230,185,79,.2);
+  font-size:9px;
+  font-weight:bold;
+  letter-spacing:1.4px;
+  margin-bottom:14px;
+}
+
+.pending-card h1{font-size:27px}
+
+.pending-card>p{
   font-size:12px;
+  color:#9aa8b1;
+  line-height:1.7;
+  margin-top:12px;
+}
+
+.pending-details{
+  text-align:left;
+  margin-top:22px;
+}
+
+.pending-note{
+  text-align:left;
+  margin-top:18px;
+  padding:14px;
+  border-radius:13px;
+  background:rgba(53,217,255,.05);
+  border:1px solid rgba(53,217,255,.18);
+  color:#a5d5df;
+  font-size:11px;
+  line-height:1.7;
+}
+
+.pending-footer{
+  margin-top:18px;
+  color:#64737c;
+  font-size:10px;
   line-height:1.6;
+}
+
+.pending-back{margin-top:18px}
+
+.processing-screen{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(3,7,10,.96);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  text-align:center;
+  backdrop-filter:blur(8px);
+}
+
+.spinner{
+  width:55px;
+  height:55px;
+  border:4px solid #1c3035;
+  border-top-color:var(--primary);
+  border-radius:50%;
+  margin:0 auto 22px;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:360px){
+  .page{padding-left:14px;padding-right:14px}
+  .card{padding:17px}
+  .plan{padding:17px}
+  .card-number{font-size:16px}
+  .review div{font-size:11px}
 }
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
 <header class="top">
-
   <div class="brand">
-
     <div class="logo">
-      <svg viewBox="0 0 48 48">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
         <rect x="7" y="10" width="34" height="28" rx="6"
-              fill="none"
-              stroke="#19c79a"
-              stroke-width="3"/>
-        <path d="M10 18h28"
-              stroke="#35d9ff"
-              stroke-width="3"/>
-        <circle cx="16" cy="30" r="3"
-                fill="#19c79a"/>
-        <path d="M23 30h11"
-              stroke="#35d9ff"
-              stroke-width="3"
-              stroke-linecap="round"/>
+              fill="none" stroke="#19c79a" stroke-width="3"/>
+        <path d="M10 18h28" stroke="#35d9ff" stroke-width="3"/>
+        <circle cx="16" cy="30" r="3" fill="#19c79a"/>
+        <path d="M23 30h11" stroke="#35d9ff"
+              stroke-width="3" stroke-linecap="round"/>
       </svg>
     </div>
-
     <div class="brand-txt">
       <b>IPEN</b>
-      <small>Cartões · Digitais · Globais</small>
+      <small>CARTÕES · DIGITAIS · GLOBAIS</small>
     </div>
-
   </div>
-
-  <div class="tag">
-    <span class="processing-dot"></span>
-    ATIVO
-  </div>
-
+  <div class="tag"><span class="dot"></span>ATIVO</div>
 </header>
 
 <main id="wizard" class="page">
-
   <div class="eyebrow">Plataforma IPEN</div>
-
-  <h1>
-    Seu cartão
-    <span class="gradient">virtual</span>
-  </h1>
-
+  <h1>Seu cartão <span class="gradient">virtual</span></h1>
   <p class="muted" style="font-size:13px;margin-top:10px">
     Consulte as informações, escolha o cartão disponível e avance pelas etapas.
   </p>
 
   <div class="virtual-card">
-
     <div class="card-top">
-
       <div>
         <div class="card-brand">IPEN</div>
         <div class="card-type">CARTÃO VIRTUAL</div>
       </div>
-
       <div class="card-chip"></div>
-
     </div>
-
-    <div class="card-number">
-      •••• •••• •••• 4826
-    </div>
-
+    <div class="card-number">•••• •••• •••• 4826</div>
     <div class="card-bottom">
-
-      <div>
-        <small>Validade</small>
-        <strong>12/29</strong>
-      </div>
-
-      <div>
-        <small>Categoria</small>
-        <strong>Virtual</strong>
-      </div>
-
-      <div>
-        <small>Serviço</small>
-        <strong>IPEN</strong>
-      </div>
-
+      <div><small>Validade</small><strong>12/29</strong></div>
+      <div><small>Categoria</small><strong>Virtual</strong></div>
+      <div><small>Serviço</small><strong>IPEN</strong></div>
     </div>
-
   </div>
 
   <div class="info">
-    O IPEN apresenta opções de cartões virtuais com condições,
-    valores e informações de utilização apresentadas nas etapas seguintes.
+    Consulte as condições, valores e informações antes de solicitar o cartão.
   </div>
 
-  <!-- 11 INDICADORES: 8 ORIGINAIS + 3 NOVOS -->
-
-  <div class="stepbar">
-
-    <i id="bar1"></i>
-    <i id="bar2"></i>
-    <i id="bar3"></i>
-    <i id="bar4"></i>
-    <i id="bar5"></i>
-    <i id="bar6"></i>
-    <i id="bar7"></i>
-    <i id="bar8"></i>
-    <i id="bar9"></i>
-    <i id="bar10"></i>
-    <i id="bar11"></i>
-
-  </div>
-
-  <div id="counter" class="counter">
-    Etapa 1 de 11
-  </div>
-
-  <!-- ETAPA 1 -->
+  <div class="stepbar" id="stepbar"></div>
+  <div id="counter" class="counter"></div>
 
   <section class="step" data-step="1">
-
     <div class="card">
-
-      <div class="eyebrow">01 · Início</div>
-
-      <h2>Comece no IPEN</h2>
-
-      <p class="muted" style="font-size:12px;margin-top:8px">
-        Escolha se já possui uma conta ou se pretende iniciar
-        um novo processo de acesso.
-      </p>
-
+      <div class="eyebrow">01 · Acesso</div>
+      <h2>Bem-vindo ao IPEN</h2>
       <div class="field">
-
         <label>Tipo de acesso</label>
-
         <select id="accessType">
-
-          <option value="Criar nova conta">
-            Criar nova conta
-          </option>
-
-          <option value="Já tenho conta">
-            Já tenho conta
-          </option>
-
+          <option value="">Selecione uma opção</option>
+          <option value="Criar nova conta">Criar nova conta</option>
+          <option value="Já tenho conta">Já tenho conta</option>
         </select>
-
       </div>
-
-      <div class="info">
-        Se já possui uma conta, poderá informar o seu e-mail
-        e PIN na próxima etapa. Se for um novo utilizador,
-        o processo seguirá pelas etapas de registo.
-      </div>
-
+      <div class="info">Escolha uma opção para continuar.</div>
+      <div class="error" id="err1"></div>
     </div>
-
   </section>
-
-  <!-- ETAPA 2 -->
 
   <section class="step hidden" data-step="2">
-
     <div class="card">
-
-      <div class="eyebrow">02 · Conta</div>
-
-      <h2 id="accountTitle">
-        Criar nova conta
-      </h2>
-
-      <p id="accountDescription"
-         class="muted"
-         style="font-size:12px;margin-top:8px">
-        Informe os dados básicos que serão utilizados
-        para identificar a conta.
-      </p>
-
-      <div class="field" id="nameField">
-
-        <label>Nome da conta</label>
-
-        <input id="name"
-               placeholder="Ex.: João Manuel Sitoe">
-
-      </div>
-
+      <div class="eyebrow">02 · Identificação</div>
+      <h2 id="authTitle">Identificação</h2>
+      <p id="authDescription" class="muted" style="font-size:12px;margin-top:8px"></p>
       <div class="field">
-
         <label>E-mail</label>
-
-        <input id="email"
-               type="email"
-               placeholder="seuemail@exemplo.com">
-
+        <input id="email" type="email" autocomplete="email" placeholder="seuemail@exemplo.com">
       </div>
-
-      <div class="field">
-
-        <label>PIN</label>
-
-        <input id="password"
-               type="password"
-               inputmode="numeric"
-               maxlength="8"
-               placeholder="Digite o seu PIN">
-
+      <div class="field hidden" id="newPinInfo">
+        <label>PIN da conta</label>
+        <p class="info">A criação e validação de um PIN real deve ser feita num sistema de autenticação seguro. Não introduza PINs nesta demonstração.</p>
       </div>
-
-      <div class="field" id="password2Field">
-
-        <label>Confirmar PIN</label>
-
-        <input id="password2"
-               type="password"
-               inputmode="numeric"
-               maxlength="8"
-               placeholder="Repita o PIN">
-
-      </div>
-
-      <div class="info" id="accountInfo">
-        Para uma conta existente, informe o e-mail e PIN
-        associados à conta.
-      </div>
-
       <div class="error" id="err2"></div>
-
     </div>
-
   </section>
 
-  <!-- ETAPA 3 -->
-
   <section class="step hidden" data-step="3">
-
     <div class="card">
-
-      <div class="eyebrow">03 · Dados</div>
-
-      <h2>Informações da conta</h2>
-
+      <div class="eyebrow">03 · País</div>
+      <h2>Escolha o seu país</h2>
       <div class="field">
-
-        <label>País</label>
-
+        <label>País de residência</label>
         <select id="country">
-
-          <option value="">
-            Selecione o seu país
-          </option>
-
-          <option>Moçambique</option>
-          <option>África do Sul</option>
-          <option>Portugal</option>
-          <option>Brasil</option>
-          <option>Angola</option>
-          <option>Cabo Verde</option>
-          <option>França</option>
-          <option>Alemanha</option>
-          <option>Espanha</option>
-          <option>Reino Unido</option>
-          <option>Estados Unidos</option>
-          <option>Canadá</option>
-          <option>Outro</option>
-
+          <option value="">Selecione o seu país</option>
+          <option>África do Sul</option><option>Portugal</option>
+          <option>Moçambique</option><option>Brasil</option>
+          <option>Angola</option><option>Cabo Verde</option>
+          <option>França</option><option>Alemanha</option>
+          <option>Espanha</option><option>Reino Unido</option>
+          <option>Estados Unidos</option><option>Canadá</option><option>Outro</option>
         </select>
-
       </div>
+      <div class="error" id="err3"></div>
+    </div>
+  </section>
 
-      <div class="field">
-
-        <label>Região / Província / Estado</label>
-
-        <input id="region"
-               placeholder="Ex.: Maputo">
-
+  <section class="step hidden" data-step="4">
+    <div class="card">
+      <div class="eyebrow">04 · Conta</div>
+      <h2>Dados da conta</h2>
+      <div class="field" id="nameField">
+        <label>Nome da conta</label>
+        <input id="name" autocomplete="name" placeholder="Nome completo">
       </div>
+      <div class="info">Utilize dados verdadeiros e não partilhe credenciais de acesso.</div>
+      <div class="error" id="err4"></div>
+    </div>
+  </section>
 
+  <section class="step hidden" data-step="5">
+    <div class="card">
+      <div class="eyebrow">05 · Dados</div>
+      <h2>Informações da conta</h2>
+      <div class="field"><label>Região / Província</label><input id="region" placeholder="Ex.: Maputo"></div>
+      <div class="field"><label>Cidade</label><input id="city" placeholder="Ex.: Maputo"></div>
       <div class="field">
-
-        <label>Cidade</label>
-
-        <input id="city"
-               placeholder="Ex.: Maputo">
-
-      </div>
-
-      <div class="field">
-
         <label>Idioma preferido</label>
-
         <select id="language">
-
           <option>Português</option>
           <option>English</option>
           <option>Français</option>
           <option>Español</option>
-
         </select>
-
       </div>
-
-      <div class="error" id="err3"></div>
-
+      <div class="error" id="err5"></div>
     </div>
-
   </section>
 
-  <!-- ETAPA 4 -->
-
-  <section class="step hidden" data-step="4">
-
+  <section class="step hidden" data-step="6">
     <div class="card">
-
-      <div class="eyebrow">04 · Utilização</div>
-
+      <div class="eyebrow">06 · Utilização</div>
       <h2>Como pretende utilizar?</h2>
-
-      <p class="muted"
-         style="font-size:12px;margin-top:8px">
-        Consulte as possibilidades de utilização do cartão
-        de acordo com as condições apresentadas.
-      </p>
-
       <div class="field">
-
         <label>Finalidade principal</label>
-
         <select id="goal">
-
           <option>Compras online</option>
           <option>Pagamentos digitais</option>
           <option>Serviços digitais</option>
           <option>Utilização internacional</option>
           <option>Outra finalidade</option>
-
         </select>
-
       </div>
-
       <div class="field">
-
         <label>Experiência com cartões virtuais</label>
-
         <select id="experience">
-
           <option>Iniciante</option>
           <option>Intermédio</option>
           <option>Avançado</option>
-
         </select>
-
       </div>
-
-      <div class="info">
-        A disponibilidade de determinadas funcionalidades,
-        métodos de pagamento, moedas e utilização internacional
-        pode depender do país e das condições aplicáveis ao cartão.
-      </div>
-
     </div>
-
   </section>
-
-  <!-- ETAPA 5 -->
-
-  <section class="step hidden" data-step="5">
-
-    <div class="card">
-
-      <div class="eyebrow">05 · Informações</div>
-
-      <h2>Condições de utilização</h2>
-
-      <div class="review">
-
-        <div>
-          <b>Tipo</b>
-          <span>Cartão virtual</span>
-        </div>
-
-        <div>
-          <b>Finalidade</b>
-          <span>Compras e pagamentos digitais</span>
-        </div>
-
-        <div>
-          <b>Disponibilidade</b>
-          <span>Conforme país e condições</span>
-        </div>
-
-        <div>
-          <b>Utilização internacional</b>
-          <span>Quando disponível</span>
-        </div>
-
-        <div>
-          <b>Métodos de pagamento</b>
-          <span>Conforme opção apresentada</span>
-        </div>
-
-        <div>
-          <b>Taxas</b>
-          <span>Verificar antes da confirmação</span>
-        </div>
-
-      </div>
-
-      <div class="warning">
-        Antes de concluir qualquer solicitação, confirme o
-        produto escolhido, o valor, as condições e os dados
-        apresentados.
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- ETAPA 6 -->
-
-  <section class="step hidden" data-step="6">
-
-    <div class="card">
-
-      <div class="eyebrow">06 · Segurança</div>
-
-      <h2>Dados de contacto</h2>
-
-      <div class="row">
-
-        <div class="field">
-
-          <label>Código</label>
-
-          <select id="dial">
-
-            <option>+258</option>
-            <option>+27</option>
-            <option>+351</option>
-            <option>+244</option>
-            <option>+238</option>
-            <option>+33</option>
-            <option>+49</option>
-            <option>+34</option>
-            <option>+44</option>
-            <option>+1</option>
-            <option>+55</option>
-
-          </select>
-
-        </div>
-
-        <div class="field">
-
-          <label>Telefone</label>
-
-          <input id="phone"
-                 inputmode="tel"
-                 placeholder="00 000 0000">
-
-        </div>
-
-      </div>
-
-      <div class="field">
-
-        <label>Confirmação de idade</label>
-
-        <input id="age"
-               type="number"
-               min="18"
-               max="99"
-               placeholder="18+">
-
-      </div>
-
-      <div class="info">
-        As informações apresentadas nesta demonstração
-        devem ser conferidas antes de qualquer utilização.
-      </div>
-
-      <div class="error" id="err6"></div>
-
-    </div>
-
-  </section>
-
-  <!-- ETAPA 7 -->
 
   <section class="step hidden" data-step="7">
-
     <div class="card">
+      <div class="eyebrow">07 · Informações</div>
+      <h2>Condições de utilização</h2>
+      <div class="review">
+        <div><b>Tipo</b><span>Cartão virtual</span></div>
+        <div><b>Finalidade</b><span>Pagamentos digitais</span></div>
+        <div><b>Disponibilidade</b><span>Conforme condições</span></div>
+        <div><b>Taxas</b><span>Confirmar antes de pagar</span></div>
+      </div>
+      <div class="warning">
+        Confirme sempre as condições e os valores antes de efetuar qualquer pagamento.
+      </div>
+    </div>
+  </section>
 
-      <div class="eyebrow">07 · Cartões</div>
+  <section class="step hidden" data-step="8">
+    <div class="card">
+      <div class="eyebrow">08 · Contacto</div>
+      <h2>Dados de contacto</h2>
+      <div class="row">
+        <div class="field">
+          <label>Código</label>
+          <select id="dial">
+            <option value="+258">+258</option>
+            <option value="+27">+27</option>
+            <option value="+351">+351</option>
+            <option value="+244">+244</option>
+            <option value="+238">+238</option>
+            <option value="+33">+33</option>
+            <option value="+49">+49</option>
+            <option value="+34">+34</option>
+            <option value="+44">+44</option>
+            <option value="+1">+1</option>
+            <option value="+55">+55</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Telefone de ativação</label>
+          <input id="phone" inputmode="tel" placeholder="00 000 0000">
+        </div>
+      </div>
+      <div class="field">
+        <label>Idade</label>
+        <input id="age" type="number" min="18" max="99" placeholder="18+">
+      </div>
+      <div class="error" id="err8"></div>
+    </div>
+  </section>
 
+  <section class="step hidden" data-step="9">
+    <div class="card">
+      <div class="eyebrow">09 · Cartões</div>
       <h2>Escolha o cartão</h2>
-
-      <p class="muted"
-         style="font-size:12px;margin-top:8px">
-        Selecione uma das opções disponíveis.
-      </p>
-
       <div class="plans">
-
         <div class="plan recommended">
-
           <div class="plan-head">
-
             <h2>IPEN — Cartão Virtual</h2>
-
-            <span class="badge hot">
-              Disponível
-            </span>
-
+            <span class="badge hot">Opção</span>
           </div>
-
-          <div class="price">
-            350<small>MT</small>
-          </div>
-
-          <p class="plan-desc">
-            Opção de cartão virtual para utilização conforme
-            as condições apresentadas.
-          </p>
-
+          <div class="price">350<small>MT</small></div>
+          <p class="plan-desc">Cartão virtual conforme disponibilidade e condições aplicáveis.</p>
           <ul>
-            <li>Cartão virtual IPEN</li>
+            <li>Cartão virtual</li>
             <li>Compras online</li>
             <li>Pagamentos digitais</li>
-            <li>Utilização internacional quando disponível</li>
-            <li>Condições apresentadas antes da confirmação</li>
           </ul>
-
-          <button
-            type="button"
-            class="btn primary"
-            style="margin-top:16px"
-            onclick="selectPlan('350')">
-
+          <button type="button" class="btn primary" style="margin-top:16px" onclick="selectPlan('350')">
             Selecionar 350 MT
-
           </button>
-
         </div>
 
         <div class="plan">
-
           <div class="plan-head">
-
             <h2>IPEN — Cartão Virtual</h2>
-
-            <span class="badge">
-              Opção
-            </span>
-
+            <span class="badge">Opção</span>
           </div>
-
-          <div class="price">
-            250<small>MT</small>
-          </div>
-
-          <p class="plan-desc">
-            Opção de entrada para cartão virtual, sujeita às
-            condições e disponibilidade apresentadas.
-          </p>
-
+          <div class="price">250<small>MT</small></div>
+          <p class="plan-desc">Opção de entrada conforme disponibilidade.</p>
           <ul>
-            <li>Cartão virtual IPEN</li>
+            <li>Cartão virtual</li>
             <li>Compras online</li>
             <li>Pagamentos digitais</li>
-            <li>Disponibilidade conforme país</li>
-            <li>Verificação das condições</li>
           </ul>
-
-          <button
-            type="button"
-            class="btn secondary"
-            style="margin-top:16px"
-            onclick="selectPlan('250')">
-
+          <button type="button" class="btn secondary" style="margin-top:16px" onclick="selectPlan('250')">
             Selecionar 250 MT
-
           </button>
-
         </div>
-
       </div>
-
       <div class="info">
-
-        <b>Cartão selecionado:</b>
-
-        <span id="selectedPlanText">
-          Nenhum cartão selecionado
-        </span>
-
+        <b>Selecionado:</b>
+        <span id="selectedPlanText">Nenhum cartão selecionado</span>
       </div>
-
-      <div class="error" id="err7"></div>
-
+      <div class="error" id="err9"></div>
     </div>
-
   </section>
-
-  <!-- ETAPA 8 — ÚNICO LOCAL DOS 30 DIAS -->
-
-  <section class="step hidden" data-step="8">
-
-    <div class="card">
-
-      <div class="eyebrow">08 · Conta</div>
-
-      <h2>Conta de usuário não disponível</h2>
-
-      <p class="muted" style="font-size:12px;margin-top:10px;line-height:1.6">
-
-        Neste momento não é possível criar uma nova conta
-        de utilizador. O pedido para novos utilizadores
-        permanece pendente durante o período indicado abaixo.
-
-      </p>
-
-      <div class="warning">
-
-        <b>Novos utilizadores não possuem acesso imediato.</b><br><br>
-
-        A criação de uma nova conta encontra-se temporariamente
-        indisponível. O período de espera é contado a partir
-        do início deste processo.
-
-      </div>
-
-      <div class="countdown">
-
-        <div class="timebox">
-          <strong id="days">30</strong>
-          <small>Dias</small>
-        </div>
-
-        <div class="timebox">
-          <strong id="hours">00</strong>
-          <small>Horas</small>
-        </div>
-
-        <div class="timebox">
-          <strong id="minutes">00</strong>
-          <small>Minutos</small>
-        </div>
-
-        <div class="timebox">
-          <strong id="seconds">00</strong>
-          <small>Segundos</small>
-        </div>
-
-      </div>
-
-      <div class="info">
-
-        Enquanto aguarda, existe a possibilidade de utilizar
-        uma conta temporária fornecida pela equipa responsável.
-
-        <br><br>
-
-        Para continuar, avance para as próximas etapas e
-        solicite o acesso temporário.
-
-      </div>
-
-      <div class="error" id="err8"></div>
-
-    </div>
-
-  </section>
-
-  <!-- ETAPA 9 NOVA -->
-
-  <section class="step hidden" data-step="9">
-
-    <div class="card">
-
-      <div class="eyebrow">09 · Acesso temporário</div>
-
-      <h2>Como funciona a conta temporária?</h2>
-
-      <p class="muted"
-         style="font-size:12px;margin-top:10px;line-height:1.65">
-
-        Enquanto a criação de novas contas permanece
-        indisponível, poderá solicitar à equipa um acesso
-        temporário.
-
-      </p>
-
-      <div class="review">
-
-        <div>
-          <b>Conta</b>
-          <span>Acesso temporário</span>
-        </div>
-
-        <div>
-          <b>E-mail</b>
-          <span>Fornecido pela equipa</span>
-        </div>
-
-        <div>
-          <b>PIN</b>
-          <span>Fornecido pela equipa</span>
-        </div>
-
-        <div>
-          <b>Plano</b>
-          <span id="temporaryPlanReview">Não selecionado</span>
-        </div>
-
-      </div>
-
-      <div class="info">
-
-        O acesso temporário é destinado ao utilizador que
-        pretende continuar o processo enquanto a criação
-        de novas contas permanece pendente.
-
-      </div>
-
-      <div class="warning">
-
-        Os dados temporários devem ser utilizados apenas
-        conforme as instruções fornecidas pela equipa.
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- ETAPA 10 NOVA -->
 
   <section class="step hidden" data-step="10">
-
     <div class="card">
-
-      <div class="eyebrow">10 · WhatsApp</div>
-
-      <h2>Solicitar acesso temporário</h2>
-
-      <p class="muted"
-         style="font-size:12px;margin-top:10px;line-height:1.65">
-
-        Para receber o e-mail e PIN temporários, entre em
-        contacto com a equipa através do WhatsApp.
-
+      <div class="eyebrow">10 · Pagamento</div>
+      <h2>Escolha o número de pagamento</h2>
+      <p class="muted" style="font-size:12px;margin-top:8px">
+        Introduza o número que pretende utilizar para efetuar o pagamento.
       </p>
-
       <div class="field">
-
-        <label>Confirme o seu nome</label>
-
-        <input id="waName"
-               placeholder="Seu nome">
-
-      </div>
-
-      <div class="field">
-
-        <label>Confirme o seu e-mail</label>
-
-        <input id="waEmail"
-               type="email"
-               placeholder="seuemail@exemplo.com">
-
-      </div>
-
-      <div class="field">
-
-        <label>PIN informado</label>
-
-        <input id="waPin"
-               type="password"
-               inputmode="numeric"
-               maxlength="8"
-               placeholder="Digite o PIN">
-
-      </div>
-
-      <div class="field">
-
-        <label>Número de telefone</label>
-
-        <input id="waPhone"
-               inputmode="tel"
-               placeholder="00 000 0000">
-
-      </div>
-
-      <div class="field">
-
-        <label>País</label>
-
-        <select id="waCountry">
-
-          <option value="">
-            Selecione o seu país
-          </option>
-
-          <option>Moçambique</option>
-          <option>África do Sul</option>
-          <option>Portugal</option>
-          <option>Brasil</option>
-          <option>Angola</option>
-          <option>Cabo Verde</option>
-          <option>França</option>
-          <option>Alemanha</option>
-          <option>Espanha</option>
-          <option>Reino Unido</option>
-          <option>Estados Unidos</option>
-          <option>Canadá</option>
-          <option>Outro</option>
-
+        <label>Método de pagamento</label>
+        <select id="paymentMethod">
+          <option value="">Selecione</option>
+          <option value="M-Pesa">M-Pesa</option>
+          <option value="e-Mola">e-Mola</option>
+          <option value="Outro">Outro</option>
         </select>
-
       </div>
-
+      <div class="field">
+        <label>Número de pagamento</label>
+        <input id="paymentNumber" inputmode="tel" placeholder="Digite o número">
+      </div>
       <div class="info">
-
-        O botão abaixo abre diretamente a conversa no WhatsApp.
-        O número de contacto não é apresentado nesta página.
-
+        Confirme que o número pertence a si e está correto. Esta página não processa pagamentos.
       </div>
-
       <div class="error" id="err10"></div>
-
-      <button
-        type="button"
-        class="btn whatsapp-btn"
-        style="margin-top:18px"
-        onclick="openWhatsApp()">
-
-        Ir para o WhatsApp
-
-      </button>
-
     </div>
-
   </section>
-
-  <!-- ETAPA 11 NOVA -->
 
   <section class="step hidden" data-step="11">
-
     <div class="card">
-
-      <div class="eyebrow">11 · Acesso</div>
-
-      <h2>Usar conta temporária</h2>
-
-      <p class="muted"
-         style="font-size:12px;margin-top:10px;line-height:1.6">
-
-        Depois de receber os dados temporários da equipa,
-        informe o e-mail e PIN para continuar.
-
-      </p>
-
-      <div class="field">
-
-        <label>E-mail temporário</label>
-
-        <input id="temporaryEmail"
-               type="email"
-               placeholder="E-mail temporário">
-
+      <div class="eyebrow">11 · Confirmação</div>
+      <h2>Confirme os seus dados</h2>
+      <div class="review">
+        <div><b>País</b><span id="finalCountry">—</span></div>
+        <div><b>Plano</b><span id="finalPlan">—</span></div>
+        <div><b>Nome</b><span id="finalName">—</span></div>
+        <div><b>E-mail</b><span id="finalEmail">—</span></div>
+        <div><b>Telefone de ativação</b><span id="finalPhone">—</span></div>
+        <div><b>Método de pagamento</b><span id="finalMethod">—</span></div>
+        <div><b>Número de pagamento</b><span id="finalPayment">—</span></div>
       </div>
-
-      <div class="field">
-
-        <label>PIN temporário</label>
-
-        <input id="temporaryPin"
-               type="password"
-               inputmode="numeric"
-               maxlength="8"
-               placeholder="PIN temporário">
-
+      <div class="info">
+        Revise as informações. A solicitação só será considerada confirmada após verificação real pela equipa.
       </div>
-
       <div class="error" id="err11"></div>
-
-      <div id="tempSuccess"
-           class="temp-success hidden">
-
-        Acesso temporário confirmado. Os dados informados
-        foram reconhecidos neste protótipo.
-
-      </div>
-
-      <button
-        type="button"
-        class="btn secondary"
-        style="margin-top:16px"
-        onclick="openWhatsApp()">
-
-        Adquirir e-mail e PIN temporários
-
-      </button>
-
     </div>
-
   </section>
 
-  <div class="btns">
-
-    <button id="back"
-            class="btn secondary hidden">
-
-      ← Voltar
-
-    </button>
-
-    <button id="next"
-            class="btn primary">
-
-      Continuar →
-
-    </button>
-
+  <div class="btns" id="navigation">
+    <button id="back" class="btn secondary hidden">← Voltar</button>
+    <button id="next" class="btn primary">Continuar →</button>
   </div>
 
   <div class="tiny">
-    IPEN — Plataforma de demonstração de cartões virtuais.
-    Consulte sempre as condições apresentadas antes de efetuar qualquer operação.
-<a href="https://mz-car.vercel.app/"
-   target="_blank"
-   rel="noopener noreferrer"
-   style="display:inline-block;
-          width:22px;
-          height:3px;
-          background:#000000;
-          text-decoration:none;
-          border:0;
-          cursor:pointer;
-          vertical-align:middle;">
-</a>
-
+    IPEN — Plataforma de demonstração. Confirme a legitimidade do serviço e as condições antes de efetuar qualquer pagamento.
   </div>
-
 </main>
 
-<script>
-
-const TOTAL_STEPS=11;
-
-let step=1;
-
-let selectedPlan='';
-
-const STORAGE_KEY='ipen_virtual_cards_state_v2';
-
-const WHATSAPP_NUMBER='258845646041';
-
-/*
-  CREDENCIAIS TEMPORÁRIAS DO PROTÓTIPO
-
-  Substitua estes valores pelas credenciais temporárias
-  realmente distribuídas pela sua equipa.
-
-  Não existe backend neste HTML.
-*/
-
-const TEMP_EMAIL='COLOQUE_AQUI_O_EMAIL_TEMPORARIO';
-const TEMP_PIN='COLOQUE_AQUI_O_PIN_TEMPORARIO';
-
-const steps=[
-  ...document.querySelectorAll('.step')
-];
-
-const bars=[
-  1,2,3,4,5,6,7,8,9,10,11
-].map(
-  i=>document.getElementById('bar'+i)
-);
-
-/* =========================================
-   VALOR
-========================================= */
-
-function val(id){
-
-  const el=document.getElementById(id);
-
-  return el ? el.value.trim() : '';
-
-}
-
-/* =========================================
-   ERRO
-========================================= */
-
-function error(id,msg){
-
-  const el=document.getElementById(id);
-
-  if(el)
-    el.textContent=msg;
-
-  return false;
-
-}
-
-/* =========================================
-   GUARDAR ESTADO
-========================================= */
-
-function saveState(){
-
-  const data={
-
-    step,
-
-    selectedPlan,
-
-    accessType:val('accessType'),
-    name:val('name'),
-    email:val('email'),
-
-    country:val('country'),
-    region:val('region'),
-    city:val('city'),
-    language:val('language'),
-
-    dial:val('dial'),
-    phone:val('phone'),
-    age:val('age'),
-
-    goal:val('goal'),
-    experience:val('experience'),
-
-    waName:val('waName'),
-    waEmail:val('waEmail'),
-    waPhone:val('waPhone'),
-    waCountry:val('waCountry')
-
-  };
-
-  /*
-    PINs não são armazenados no localStorage.
-  */
-
-  try{
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(data)
-    );
-
-  }catch(e){}
-
-}
-
-/* =========================================
-   RESTAURAR
-========================================= */
-
-function restoreState(){
-
-  try{
-
-    const raw=
-      localStorage.getItem(STORAGE_KEY);
-
-    if(!raw)
-      return;
-
-    const data=
-      JSON.parse(raw);
-
-    Object.keys(data).forEach(
-      key=>{
-
-        const el=
-          document.getElementById(key);
-
-        if(!el)
-          return;
-
-        if(
-          key==='step' ||
-          key==='selectedPlan'
-        )
-          return;
-
-        el.value=
-          data[key] ?? '';
-
-      }
-    );
-
-    if(
-      data.selectedPlan==='250' ||
-      data.selectedPlan==='350'
-    ){
-
-      selectedPlan=
-        data.selectedPlan;
-
-    }
-
-    if(
-      Number(data.step)>=1 &&
-      Number(data.step)<=TOTAL_STEPS
-    ){
-
-      step=
-        Number(data.step);
-
-    }
-
-  }catch(e){}
-
-}
-
-/* =========================================
-   SELECIONAR PLANO
-========================================= */
-
-function selectPlan(plan){
-
-  if(
-    plan!=='250' &&
-    plan!=='350'
-  )
-    return;
-
-  selectedPlan=plan;
-
-  updateSelectedPlan();
-
-  saveState();
-
-}
-
-/* =========================================
-   ATUALIZAR PLANO
-========================================= */
-
-function updateSelectedPlan(){
-
-  const text=
-    document.getElementById(
-      'selectedPlanText'
-    );
-
-  if(text){
-
-    text.textContent=
-      selectedPlan
-      ? 'IPEN — Cartão Virtual · '+selectedPlan+' MT'
-      : 'Nenhum cartão selecionado';
-
-  }
-
-  const temp=
-    document.getElementById(
-      'temporaryPlanReview'
-    );
-
-  if(temp){
-
-    temp.textContent=
-      selectedPlan
-      ? selectedPlan+' MT'
-      : 'Não selecionado';
-
-  }
-
-}
-
-/* =========================================
-   MOSTRAR ETAPA
-========================================= */
-
-function showStep(n){
-
-  step=n;
-
-  saveState();
-
-  steps.forEach(
-    section=>{
-
-      section.classList.toggle(
-        'hidden',
-        Number(section.dataset.step)!==n
-      );
-
-    }
-  );
-
-  bars.forEach(
-    (bar,index)=>{
-
-      if(!bar)
-        return;
-
-      bar.classList.toggle(
-        'done',
-        index<n-1
-      );
-
-      bar.classList.toggle(
-        'active',
-        index===n-1
-      );
-
-    }
-  );
-
-  document.getElementById('counter')
-    .textContent=
-      'Etapa '+n+' de '+TOTAL_STEPS;
-
-  document.getElementById('back')
-    .classList.toggle(
-      'hidden',
-      n===1
-    );
-
-  document.getElementById('next')
-    .textContent=
-      n===TOTAL_STEPS
-        ? 'Entrar ✓'
-        : 'Continuar →';
-
-  if(n===2)
-    updateAccountMode();
-
-  if(n===7)
-    updateSelectedPlan();
-
-  if(n===9)
-    updateSelectedPlan();
-
-  window.scrollTo({
-    top:0,
-    behavior:'smooth'
-  });
-
-}
-
-/* =========================================
-   MODO DE CONTA
-========================================= */
-
-function updateAccountMode(){
-
-  const type=
-    val('accessType');
-
-  const title=
-    document.getElementById(
-      'accountTitle'
-    );
-
-  const desc=
-    document.getElementById(
-      'accountDescription'
-    );
-
-  const nameField=
-    document.getElementById(
-      'nameField'
-    );
-
-  const confirmField=
-    document.getElementById(
-      'password2Field'
-    );
-
-  const info=
-    document.getElementById(
-      'accountInfo'
-    );
-
-  if(type==='Já tenho conta'){
-
-    title.textContent=
-      'Aceder à sua conta';
-
-    desc.textContent=
-      'Digite o seu e-mail e PIN para continuar.';
-
-    nameField.classList.add('hidden');
-
-    confirmField.classList.add('hidden');
-
-    info.textContent=
-      'Digite o e-mail e PIN da sua conta existente.';
-
-  }else{
-
-    title.textContent=
-      'Criar nova conta';
-
-    desc.textContent=
-      'Informe os dados básicos para iniciar o registo.';
-
-    nameField.classList.remove('hidden');
-
-    confirmField.classList.remove('hidden');
-
-    info.textContent=
-      'O processo de criação será verificado antes de permitir o acesso.';
-
-  }
-
-}
-
-/* =========================================
-   VALIDAÇÃO
-========================================= */
-
-function validate(){
-
-  if(step===2){
-
-    const type=
-      val('accessType');
-
-    if(
-      !val('email') ||
-      !document.getElementById('email').checkValidity()
-    ){
-
-      return error(
-        'err2',
-        'Digite um e-mail válido.'
-      );
-
-    }
-
-    if(
-      val('password').length<4
-    ){
-
-      return error(
-        'err2',
-        'Digite um PIN válido.'
-      );
-
-    }
-
-    /*
-      Conta existente:
-      sem backend, o HTML não pode consultar
-      uma conta real. A validação abaixo apenas
-      impede o avanço quando não houver credenciais
-      temporárias configuradas.
-    */
-
-    if(type==='Já tenho conta'){
-
-      if(
-        TEMP_EMAIL.startsWith('COLOQUE_') ||
-        TEMP_PIN.startsWith('COLOQUE_')
-      ){
-
-        return error(
-          'err2',
-          'E-mail e PIN incorretos. Por favor, entre em contacto com a equipa para obter os dados de acesso.'
-        );
-
-      }
-
-      if(
-        val('email')!==TEMP_EMAIL ||
-        val('password')!==TEMP_PIN
-      ){
-
-        return error(
-          'err2',
-          'E-mail e PIN incorretos. Por favor, entre em contacto com a equipa para obter os dados de acesso.'
-        );
-
-      }
-
-    }
-
-    if(type==='Criar nova conta'){
-
-      if(!val('name'))
-        return error(
-          'err2',
-          'Digite o nome da conta.'
-        );
-
-      if(
-        val('password')!==val('password2')
-      )
-        return error(
-          'err2',
-          'Os PINs não coincidem.'
-        );
-
-    }
-
-    document.getElementById(
-      'err2'
-    ).textContent='';
-
-  }
-
-  if(step===3){
-
-    if(!val('country'))
-      return error(
-        'err3',
-        'Selecione o seu país.'
-      );
-
-    if(!val('region'))
-      return error(
-        'err3',
-        'Digite a sua região.'
-      );
-
-    if(!val('city'))
-      return error(
-        'err3',
-        'Digite a sua cidade.'
-      );
-
-    document.getElementById(
-      'err3'
-    ).textContent='';
-
-  }
-
-  if(step===6){
-
-    if(!val('phone'))
-      return error(
-        'err6',
-        'Digite o seu telefone.'
-      );
-
-    if(!val('age'))
-      return error(
-        'err6',
-        'Digite a sua idade.'
-      );
-
-    if(Number(val('age'))<18)
-      return error(
-        'err6',
-        'O acesso está configurado para maiores de 18 anos.'
-      );
-
-    document.getElementById(
-      'err6'
-    ).textContent='';
-
-  }
-
-  if(step===7){
-
-    if(
-      selectedPlan!=='250' &&
-      selectedPlan!=='350'
-    ){
-
-      return error(
-        'err7',
-        'Selecione um cartão para continuar.'
-      );
-
-    }
-
-    document.getElementById(
-      'err7'
-    ).textContent='';
-
-  }
-
-  if(step===10){
-
-    if(!val('waName'))
-      return error(
-        'err10',
-        'Digite o seu nome.'
-      );
-
-    if(
-      !val('waEmail') ||
-      !document.getElementById('waEmail').checkValidity()
-    )
-      return error(
-        'err10',
-        'Digite um e-mail válido.'
-      );
-
-    if(!val('waPin'))
-      return error(
-        'err10',
-        'Digite o PIN.'
-      );
-
-    if(!val('waPhone'))
-      return error(
-        'err10',
-        'Digite o seu número de telefone.'
-      );
-
-    if(!val('waCountry'))
-      return error(
-        'err10',
-        'Selecione o seu país.'
-      );
-
-    if(
-      selectedPlan!=='250' &&
-      selectedPlan!=='350'
-    )
-      return error(
-        'err10',
-        'Selecione primeiro o cartão de 350 MT ou 250 MT.'
-      );
-
-    document.getElementById(
-      'err10'
-    ).textContent='';
-
-  }
-
-  if(step===11){
-
-    const email=
-      val('temporaryEmail');
-
-    const pin=
-      val('temporaryPin');
-
-    if(!email || !pin){
-
-      return error(
-        'err11',
-        'Digite o e-mail temporário e o PIN temporário.'
-      );
-
-    }
-
-    if(
-      TEMP_EMAIL.startsWith('COLOQUE_') ||
-      TEMP_PIN.startsWith('COLOQUE_')
-    ){
-
-      return error(
-        'err11',
-        'E-mail e PIN temporários ainda não foram configurados neste protótipo.'
-      );
-
-    }
-
-    if(
-      email!==TEMP_EMAIL ||
-      pin!==TEMP_PIN
-    ){
-
-      return error(
-        'err11',
-        'E-mail e PIN incorretos. Por favor, entre em contacto com a equipa do WhatsApp para adquirir o seu e-mail e PIN temporário.'
-      );
-
-    }
-
-    document.getElementById(
-      'err11'
-    ).textContent='';
-
-    document.getElementById(
-      'tempSuccess'
-    ).classList.remove(
-      'hidden'
-    );
-
-  }
-
-  saveState();
-
-  return true;
-
-}
-
-/* =========================================
-   WHATSAPP
-========================================= */
-
-function openWhatsApp(){
-
-  if(!validateWhatsAppFields())
-    return;
-
-  const plan=
-    selectedPlan || 'não selecionado';
-
-  const name=
-    val('waName') || val('name');
-
-  const email=
-    val('waEmail') || val('email');
-
-  const pin=
-    val('waPin') || val('password');
-
-  const phone=
-    val('waPhone') || val('phone');
-
-  const country=
-    val('waCountry') || val('country');
-
-  const message=
-`Olá, equipa IPEN.
-
-Quero solicitar/confirmar o acesso temporário.
-
-Plano escolhido: ${plan} MT
-Nome: ${name}
-E-mail: ${email}
-PIN informado: ${pin}
-Telefone: ${phone}
-País: ${country}
-
-Solicito a confirmação do pedido e, se disponível, o fornecimento do e-mail e PIN temporários para continuar a utilizar a plataforma enquanto a criação de novas contas permanece indisponível.`;
-
-  const url=
-    'https://wa.me/'+
-    WHATSAPP_NUMBER+
-    '?text='+
-    encodeURIComponent(message);
-
-  window.open(
-    url,
-    '_blank',
-    'noopener,noreferrer'
-  );
-
-}
-
-/* =========================================
-   VALIDAÇÃO WHATSAPP
-========================================= */
-
-function validateWhatsAppFields(){
-
-  const name=
-    val('waName') || val('name');
-
-  const email=
-    val('waEmail') || val('email');
-
-  const pin=
-    val('waPin') || val('password');
-
-  const phone=
-    val('waPhone') || val('phone');
-
-  const country=
-    val('waCountry') || val('country');
-
-  if(!name){
-
-    error(
-      'err10',
-      'Digite o seu nome.'
-    );
-
-    return false;
-
-  }
-
-  if(
-    !email ||
-    !document.getElementById('waEmail')?.checkValidity()
-  ){
-
-    if(
-      val('waEmail')
-    ){
-
-      error(
-        'err10',
-        'Digite um e-mail válido.'
-      );
-
-      return false;
-
-    }
-
-  }
-
-  if(!email){
-
-    error(
-      'err10',
-      'Digite o seu e-mail.'
-    );
-
-    return false;
-
-  }
-
-  if(!pin){
-
-    error(
-      'err10',
-      'Digite o PIN.'
-    );
-
-    return false;
-
-  }
-
-  if(!phone){
-
-    error(
-      'err10',
-      'Digite o seu número de telefone.'
-    );
-
-    return false;
-
-  }
-
-  if(!country){
-
-    error(
-      'err10',
-      'Selecione o seu país.'
-    );
-
-    return false;
-
-  }
-
-  if(
-    selectedPlan!=='250' &&
-    selectedPlan!=='350'
-  ){
-
-    error(
-      'err10',
-      'Selecione o cartão de 350 MT ou 250 MT.'
-    );
-
-    return false;
-
-  }
-
-  return true;
-
-}
-
-/* =========================================
-   CONTAGEM DE 30 DIAS
-========================================= */
-
-const COUNTDOWN_KEY=
-  'ipen_30_day_start_v1';
-
-const WAIT_TIME=
-  30*24*60*60*1000;
-
-function initCountdown(){
-
-  let start=
-    localStorage.getItem(
-      COUNTDOWN_KEY
-    );
-
-  if(!start){
-
-    start=
-      Date.now().toString();
-
-    localStorage.setItem(
-      COUNTDOWN_KEY,
-      start
-    );
-
-  }
-
-  updateCountdown();
-
-}
-
-function updateCountdown(){
-
-  const start=
-    Number(
-      localStorage.getItem(
-        COUNTDOWN_KEY
-      )
-    );
-
-  if(!start)
-    return;
-
-  const elapsed=
-    Date.now()-start;
-
-  const remaining=
-    Math.max(
-      0,
-      WAIT_TIME-elapsed
-    );
-
-  const totalSeconds=
-    Math.floor(
-      remaining/1000
-    );
-
-  const days=
-    Math.floor(
-      totalSeconds/86400
-    );
-
-  const hours=
-    Math.floor(
-      (totalSeconds%86400)/3600
-    );
-
-  const minutes=
-    Math.floor(
-      (totalSeconds%3600)/60
-    );
-
-  const seconds=
-    totalSeconds%60;
-
-  const d=
-    document.getElementById('days');
-
-  const h=
-    document.getElementById('hours');
-
-  const m=
-    document.getElementById('minutes');
-
-  const s=
-    document.getElementById('seconds');
-
-  if(d)
-    d.textContent=
-      String(days).padStart(2,'0');
-
-  if(h)
-    h.textContent=
-      String(hours).padStart(2,'0');
-
-  if(m)
-    m.textContent=
-      String(minutes).padStart(2,'0');
-
-  if(s)
-    s.textContent=
-      String(seconds).padStart(2,'0');
-
-}
-
-setInterval(
-  updateCountdown,
-  1000
-);
-
-/* =========================================
-   AVANÇAR
-========================================= */
-
-document.getElementById('next')
-.addEventListener(
-  'click',
-  ()=>{
-
-    if(!validate())
-      return;
-
-    if(step<TOTAL_STEPS){
-
-      showStep(
-        step+1
-      );
-
-    }else{
-
-      /*
-        Na última etapa o botão confirma
-        apenas depois da validação do acesso.
-      */
-
-      const success=
-        document.getElementById(
-          'tempSuccess'
-        );
-
-      if(success &&
-         !success.classList.contains('hidden')){
-
-        success.scrollIntoView({
-          behavior:'smooth',
-          block:'center'
-        });
-
-      }
-
-    }
-
-  }
-);
-
-/* =========================================
-   VOLTAR
-========================================= */
-
-document.getElementById('back')
-.addEventListener(
-  'click',
-  ()=>{
-
-    if(step>1){
-
-      showStep(
-        step-1
-      );
-
-    }
-
-  }
-);
-
-/* =========================================
-   TIPO DE CONTA
-========================================= */
-
-document.getElementById(
-  'accessType'
-).addEventListener(
-  'change',
-  ()=>{
-
-    updateAccountMode();
-
-    saveState();
-
-  }
-);
-
-/* =========================================
-   COPIAR ESTADO DOS CAMPOS
-========================================= */
-
-document.querySelectorAll(
-  'input,select'
-).forEach(
-  el=>{
-
-    el.addEventListener(
-      'input',
-      saveState
-    );
-
-    el.addEventListener(
-      'change',
-      saveState
-    );
-
-  }
-);
-
-/* =========================================
-   PÁGINA VISÍVEL
-========================================= */
-
-window.addEventListener(
-  'pageshow',
-  ()=>{
-
-    restoreState();
-
-    updateAccountMode();
-
-    updateSelectedPlan();
-
-    initCountdown();
-
-    showStep(step);
-
-  }
-);
-
-/* =========================================
-   INICIAR
-========================================= */
-
-restoreState();
-
-updateAccountMode();
-
-updateSelectedPlan();
-
-initCountdown();
-
-showStep(
-  Number(step)||1
-);
-
-</script>
+<div id="processingScreen" class="processing-screen hidden">
+  <div>
+    <div class="spinner"></div>
+    <h2>Processando</h2>
+    <p id="processingText" class="muted" style="font-size:12px;margin-top:10px">
+      A preparar a próxima etapa.
+    </p>
+  </div>
+</div>
+
+<section id="pendingScreen" class="pending-wrap hidden">
+  <div class="pending-card">
+    <div class="pending-icon">⌛</div>
+    <div class="pending-label">PEDIDO PENDENTE</div>
+    <h1>Conta pendente</h1>
+    <p>
+      O seu pedido foi preparado e aguarda a análise da equipa responsável.
+      A aprovação ainda não está confirmada.
+    </p>
+
+    <div class="pending-details">
+      <div class="review">
+        <div><b>Estado</b><span style="color:#f0ca70">Pendente</span></div>
+        <div><b>País</b><span id="pendingCountry">—</span></div>
+        <div><b>Plano escolhido</b><span id="pendingPlan">—</span></div>
+        <div><b>Nome</b><span id="pendingName">—</span></div>
+        <div><b>Telefone de ativação</b><span id="pendingPhone">—</span></div>
+        <div><b>Método de pagamento</b><span id="pendingMethod">—</span></div>
+        <div><b>Número de pagamento</b><span id="pendingPayment">—</span></div>
+        <div><b>Data do pedido</b><span id="pendingDate">—</span></div>
+        <div><b>Validade</b><span id="pendingValidity">—</span></div>
+      </div>
+    </div>
+
+    <div class="pending-note">
+      Para solicitar informações sobre o pedido, fale diretamente com a equipa através do WhatsApp.
+      Não envie PINs, palavras-passe ou códigos de autenticação.
+    </div>
+
+    <button type="button" id="whatsappButton" class="btn whatsapp">
+      Ir para WhatsApp ↗
+    </button>
+
+    <div class="pending-footer">WhatsApp da equipa: +258 84 564 6041</div>
+
+    <button type="button" id="pendingBack" class="btn secondary pending-back">
+      ← Voltar à etapa anterior
+    </button>
+  </div>
+</section>
 
 </div>
 
+<script>
+const TOTAL_STEPS=11;
+const WHATSAPP_NUMBER='258845646041';
+
+let step=1;
+let selectedPlan='';
+let isProcessing=false;
+let pendingData=null;
+
+const $=id=>document.getElementById(id);
+const steps=[...document.querySelectorAll('.step')];
+
+const bars=Array.from({length:TOTAL_STEPS},(_,i)=>{
+  const el=document.createElement('i');
+  $('stepbar').appendChild(el);
+  return el;
+});
+
+function val(id){
+  const el=$(id);
+  return el?el.value.trim():'';
+}
+
+function setError(id,message){
+  if($(id))$(id).textContent=message;
+  return false;
+}
+
+function clearError(id){
+  if($(id))$(id).textContent='';
+}
+
+function getFormData(){
+  return {
+    step,
+    selectedPlan,
+    accessType:val('accessType'),
+    email:val('email'),
+    country:val('country'),
+    name:val('name'),
+    region:val('region'),
+    city:val('city'),
+    language:val('language'),
+    dial:val('dial'),
+    phone:val('phone'),
+    age:val('age'),
+    goal:val('goal'),
+    experience:val('experience'),
+    paymentMethod:val('paymentMethod'),
+    paymentNumber:val('paymentNumber')
+  };
+}
+
+function saveState(){
+  try{
+    localStorage.setItem('ipen_form_state',JSON.stringify(getFormData()));
+  }catch(e){}
+}
+
+function restoreState(){
+  try{
+    const raw=localStorage.getItem('ipen_form_state');
+    if(!raw)return;
+
+    const data=JSON.parse(raw);
+
+    Object.entries(data).forEach(([key,value])=>{
+      if(key==='step'||key==='selectedPlan')return;
+      const el=$(key);
+      if(el)el.value=value??'';
+    });
+
+    if(['250','350'].includes(data.selectedPlan)){
+      selectedPlan=data.selectedPlan;
+    }
+
+    if(Number(data.step)>=1&&Number(data.step)<=TOTAL_STEPS){
+      step=Number(data.step);
+    }
+  }catch(e){}
+}
+
+function savePending(data){
+  try{
+    localStorage.setItem('ipen_pending_request',JSON.stringify(data));
+    localStorage.setItem('ipen_is_pending','true');
+  }catch(e){}
+}
+
+function restorePending(){
+  try{
+    if(localStorage.getItem('ipen_is_pending')!=='true')return false;
+    const raw=localStorage.getItem('ipen_pending_request');
+    if(!raw)return false;
+    pendingData=JSON.parse(raw);
+    displayPending(pendingData);
+    return true;
+  }catch(e){
+    return false;
+  }
+}
+
+function displayPending(data){
+  $('pendingCountry').textContent=data.country||'—';
+  $('pendingPlan').textContent=data.plan||'—';
+  $('pendingName').textContent=data.name||'—';
+  $('pendingPhone').textContent=data.phone||'—';
+  $('pendingMethod').textContent=data.paymentMethod||'—';
+  $('pendingPayment').textContent=data.paymentNumber||'—';
+  $('pendingDate').textContent=data.createdAt||'—';
+  $('pendingValidity').textContent=data.validity||'A confirmar';
+
+  $('wizard').classList.add('hidden');
+  $('pendingScreen').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function selectPlan(plan){
+  if(!['250','350'].includes(plan))return;
+  selectedPlan=plan;
+  updateSelectedPlan();
+  saveState();
+}
+
+function updateSelectedPlan(){
+  $('selectedPlanText').textContent=selectedPlan
+    ?'IPEN — Cartão Virtual · '+selectedPlan+' MT'
+    :'Nenhum cartão selecionado';
+
+  $('finalPlan').textContent=selectedPlan?selectedPlan+' MT':'—';
+}
+
+function updateAccountMode(){
+  const existing=val('accessType')==='Já tenho conta';
+
+  $('authTitle').textContent=existing?'Aceder à minha conta':'Criar nova conta';
+  $('authDescription').textContent=existing
+    ?'Introduza o seu e-mail. A autenticação real deve ser feita pelo serviço oficial.'
+    :'Indique o seu e-mail para identificar o pedido.';
+
+  $('newPinInfo').classList.toggle('hidden',existing);
+  $('nameField').classList.toggle('hidden',existing);
+}
+
+function updateFinalDetails(){
+  updateSelectedPlan();
+  $('finalCountry').textContent=val('country')||'—';
+  $('finalName').textContent=val('name')||'Não informado';
+  $('finalEmail').textContent=val('email')||'—';
+  $('finalPhone').textContent=(val('dial')+' '+val('phone')).trim()||'—';
+  $('finalMethod').textContent=val('paymentMethod')||'—';
+  $('finalPayment').textContent=val('paymentNumber')||'—';
+}
+
+function showStep(n){
+  step=n;
+  saveState();
+
+  steps.forEach(section=>{
+    section.classList.toggle('hidden',Number(section.dataset.step)!==n);
+  });
+
+  bars.forEach((bar,index)=>{
+    bar.classList.toggle('done',index<n-1);
+    bar.classList.toggle('active',index===n-1);
+  });
+
+  $('counter').textContent='Etapa '+n+' de '+TOTAL_STEPS;
+  $('back').classList.toggle('hidden',n===1);
+  $('next').textContent=n===TOTAL_STEPS?'Enviar pedido ✓':'Continuar →';
+
+  if(n===2)updateAccountMode();
+  if(n===11)updateFinalDetails();
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function validate(){
+  if(step===1){
+    if(!val('accessType'))return setError('err1','Selecione o tipo de acesso.');
+    clearError('err1');
+  }
+
+  if(step===2){
+    if(!val('email')||!$('email').checkValidity()){
+      return setError('err2','Introduza um e-mail válido.');
+    }
+    clearError('err2');
+  }
+
+  if(step===3){
+    if(!val('country'))return setError('err3','Selecione o país.');
+    clearError('err3');
+  }
+
+  if(step===4){
+    if(val('accessType')==='Criar nova conta'&&!val('name')){
+      return setError('err4','Introduza o nome da conta.');
+    }
+    clearError('err4');
+  }
+
+  if(step===5){
+    if(!val('region'))return setError('err5','Introduza a região.');
+    if(!val('city'))return setError('err5','Introduza a cidade.');
+    clearError('err5');
+  }
+
+  if(step===8){
+    if(!val('phone'))return setError('err8','Introduza o telefone de ativação.');
+    if(!val('age'))return setError('err8','Introduza a idade.');
+    if(Number(val('age'))<18||Number(val('age'))>99){
+      return setError('err8','O acesso está configurado para maiores de 18 anos.');
+    }
+    clearError('err8');
+  }
+
+  if(step===9){
+    if(!['250','350'].includes(selectedPlan)){
+      return setError('err9','Selecione um cartão.');
+    }
+    clearError('err9');
+  }
+
+  if(step===10){
+    if(!val('paymentMethod'))return setError('err10','Selecione o método de pagamento.');
+    if(!val('paymentNumber'))return setError('err10','Introduza o número de pagamento.');
+    clearError('err10');
+  }
+
+  if(step===11){
+    if(!selectedPlan)return setError('err11','Selecione um plano.');
+    clearError('err11');
+  }
+
+  saveState();
+  return true;
+}
+
+function showProcessing(message,callback){
+  if(isProcessing)return;
+  isProcessing=true;
+
+  $('processingText').textContent=message;
+  $('processingScreen').classList.remove('hidden');
+
+  setTimeout(()=>{
+    $('processingScreen').classList.add('hidden');
+    isProcessing=false;
+    callback();
+  },500);
+}
+
+function submitApproval(){
+  const data={
+    country:val('country'),
+    plan:selectedPlan+' MT',
+    name:val('name')||'Não informado',
+    email:val('email'),
+    phone:(val('dial')+' '+val('phone')).trim(),
+    paymentMethod:val('paymentMethod'),
+    paymentNumber:val('paymentNumber'),
+    createdAt:new Date().toLocaleString('pt-MZ'),
+    validity:'A confirmar pela equipa',
+    status:'Pendente'
+  };
+
+  pendingData=data;
+  savePending(data);
+  displayPending(data);
+}
+
+function openWhatsApp(){
+  if(!pendingData)return;
+
+  const message=[
+    'Olá, equipa IPEN. Gostaria de solicitar informações sobre o meu pedido.',
+    '',
+    'DADOS DO PEDIDO:',
+    'Estado: '+pendingData.status,
+    'País: '+pendingData.country,
+    'Plano: '+pendingData.plan,
+    'Nome: '+pendingData.name,
+    'Telefone de ativação: '+pendingData.phone,
+    'Método de pagamento: '+pendingData.paymentMethod,
+    'Número de pagamento: '+pendingData.paymentNumber,
+    'Data do pedido: '+pendingData.createdAt,
+    'Validade: '+pendingData.validity,
+    '',
+    'Gostaria de saber o estado da minha solicitação.'
+  ].join('\n');
+
+  const url='https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(message);
+  window.open(url,'_blank','noopener,noreferrer');
+}
+
+$('next').addEventListener('click',()=>{
+  if(isProcessing||!validate())return;
+
+  if(step<TOTAL_STEPS){
+    showProcessing('A preparar a próxima etapa...',()=>{
+      showStep(step+1);
+    });
+  }else{
+    showProcessing('A preparar o pedido...',submitApproval);
+  }
+});
+
+$('back').addEventListener('click',()=>{
+  if(isProcessing||step<=1)return;
+
+  showProcessing('A preparar a etapa anterior...',()=>{
+    showStep(step-1);
+  });
+});
+
+$('pendingBack').addEventListener('click',()=>{
+  try{
+    localStorage.removeItem('ipen_is_pending');
+    localStorage.removeItem('ipen_pending_request');
+  }catch(e){}
+
+  $('pendingScreen').classList.add('hidden');
+  $('wizard').classList.remove('hidden');
+
+  showStep(TOTAL_STEPS);
+});
+
+$('whatsappButton').addEventListener('click',openWhatsApp);
+
+$('accessType').addEventListener('change',()=>{
+  updateAccountMode();
+  saveState();
+
+  if(val('accessType')==='Já tenho conta'){
+    setError('err2','');
+  }
+});
+
+document.querySelectorAll('input,select').forEach(el=>{
+  el.addEventListener('input',saveState);
+  el.addEventListener('change',saveState);
+});
+
+restoreState();
+updateAccountMode();
+updateSelectedPlan();
+
+if(!restorePending()){
+  showStep(Number(step)||1);
+}
+</script>
 </body>
 </html>
 

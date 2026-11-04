@@ -25,35 +25,16 @@
   --shadow:0 20px 60px -20px rgba(0,0,0,.9);
 }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  -webkit-tap-highlight-color:transparent;
-}
-
-html,body{
-  background:var(--bg);
-}
-
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg)}
 body{
   min-height:100vh;
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
-  "Inter",system-ui,"Segoe UI",sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",system-ui,"Segoe UI",sans-serif;
   overflow-x:hidden;
 }
-
-button,input,select{
-  font:inherit;
-  color:inherit;
-}
-
-button{
-  cursor:pointer;
-  border:0;
-  background:none;
-}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
 
 .app{
   width:100%;
@@ -81,611 +62,118 @@ button{
   backdrop-filter:blur(22px);
   border-bottom:1px solid rgba(255,255,255,.05);
 }
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
-
+.brand{display:flex;align-items:center;gap:11px}
 .logo{
-  width:38px;
-  height:38px;
-  border-radius:11px;
+  width:38px;height:38px;border-radius:11px;
   background:linear-gradient(135deg,#10231f,#08131b);
-  display:grid;
-  place-items:center;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.06),
-    0 8px 24px rgba(25,199,154,.22);
+  display:grid;place-items:center;
+  box-shadow:0 0 0 1px rgba(255,255,255,.06),0 8px 24px rgba(25,199,154,.22);
 }
+.logo svg{width:25px;height:25px}
+.brand-txt b{display:block;font-size:16px;font-weight:900;letter-spacing:.3px}
+.brand-txt small{display:block;color:#71808c;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.tag{font-size:9px;font-weight:700;color:#c9d3da;border:1px solid #26333d;background:#091017;border-radius:999px;padding:6px 10px}
+.dot{width:7px;height:7px;display:inline-block;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);margin-right:5px;animation:pulse 1.3s infinite}
+@keyframes pulse{50%{opacity:.4;transform:scale(1.35)}}
 
-.logo svg{
-  width:25px;
-  height:25px;
-}
-
-.brand-txt b{
-  display:block;
-  font-size:16px;
-  font-weight:900;
-  letter-spacing:.3px;
-}
-
-.brand-txt small{
-  display:block;
-  color:#71808c;
-  font-size:8px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-top:2px;
-}
-
-.tag{
-  font-size:9px;
-  font-weight:700;
-  color:#c9d3da;
-  border:1px solid #26333d;
-  background:#091017;
-  border-radius:999px;
-  padding:6px 10px;
-}
-
-.dot{
-  width:7px;
-  height:7px;
-  display:inline-block;
-  border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 12px var(--green);
-  margin-right:5px;
-  animation:pulse 1.3s infinite;
-}
-
-@keyframes pulse{
-  50%{opacity:.4;transform:scale(1.35)}
-}
-
-.page{
-  padding:26px 18px 40px;
-  position:relative;
-  z-index:1;
-  animation:fadeUp .4s ease;
-}
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:none}
-}
-
-.eyebrow{
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:2.4px;
-  color:var(--primary);
-  font-weight:800;
-  margin-bottom:10px;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-}
-
-.eyebrow:before{
-  content:"";
-  width:18px;
-  height:1px;
-  background:var(--primary);
-}
-
-h1{
-  font-size:30px;
-  line-height:1.05;
-  letter-spacing:-1.4px;
-  font-weight:800;
-}
-
-h2{
-  font-size:20px;
-  letter-spacing:-.6px;
-}
-
+.page{padding:26px 18px 40px;position:relative;z-index:1;animation:fadeUp .4s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:2.4px;color:var(--primary);font-weight:800;margin-bottom:10px;display:inline-flex;align-items:center;gap:8px}
+.eyebrow:before{content:"";width:18px;height:1px;background:var(--primary)}
+h1{font-size:30px;line-height:1.05;letter-spacing:-1.4px;font-weight:800}
+h2{font-size:20px;letter-spacing:-.6px}
 .muted{color:var(--muted)}
-
-.gradient{
-  background:var(--grad);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
+.gradient{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 
 .card{
   border:1px solid var(--line);
   background:linear-gradient(180deg,rgba(16,26,35,.96),rgba(7,12,17,.96));
-  border-radius:20px;
-  padding:20px;
-  margin-top:14px;
-  box-shadow:var(--shadow);
-  position:relative;
-  overflow:hidden;
+  border-radius:20px;padding:20px;margin-top:14px;
+  box-shadow:var(--shadow);position:relative;overflow:hidden;
 }
-
-.card:before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  height:1px;
+.card:before,.pending-card:before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,rgba(25,199,154,.5),transparent);
 }
-
 .field{margin-top:14px}
-
-.field label{
-  display:block;
-  font-size:11px;
-  color:#c8d1d7;
-  margin:0 0 8px 2px;
-  font-weight:600;
+.field label{display:block;font-size:11px;color:#c8d1d7;margin:0 0 8px 2px;font-weight:600}
+.field input,.field select{
+  width:100%;border:1px solid #283641;background:#071017;
+  border-radius:13px;padding:14px;outline:none;font-size:14px;transition:.2s;
 }
-
-.field input,
-.field select{
-  width:100%;
-  border:1px solid #283641;
-  background:#071017;
-  border-radius:13px;
-  padding:14px;
-  outline:none;
-  font-size:14px;
-  transition:.2s;
-}
-
-.field input:focus,
-.field select:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 4px rgba(25,199,154,.11);
-}
-
+.field input:focus,.field select:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(25,199,154,.11)}
 .field input::placeholder{color:#4e5d68}
-
-.row{
-  display:grid;
-  grid-template-columns:.85fr 1.15fr;
-  gap:10px;
-}
-
-.info,.warning{
-  padding:13px 14px;
-  border-radius:13px;
-  margin-top:14px;
-  font-size:11px;
-  line-height:1.65;
-}
-
-.info{
-  border:1px solid rgba(53,217,255,.18);
-  background:rgba(53,217,255,.05);
-  color:#a5d5df;
-}
-
-.warning{
-  border:1px solid rgba(230,185,79,.22);
-  background:rgba(230,185,79,.05);
-  color:#d0bf8d;
-}
-
-.btns{
-  display:flex;
-  gap:10px;
-  margin-top:22px;
-}
-
+.row{display:grid;grid-template-columns:.85fr 1.15fr;gap:10px}
+.info,.warning{padding:13px 14px;border-radius:13px;margin-top:14px;font-size:11px;line-height:1.65}
+.info{border:1px solid rgba(53,217,255,.18);background:rgba(53,217,255,.05);color:#a5d5df}
+.warning{border:1px solid rgba(230,185,79,.22);background:rgba(230,185,79,.05);color:#d0bf8d}
+.btns{display:flex;gap:10px;margin-top:22px}
 .btn{
-  width:100%;
-  border-radius:14px;
-  padding:15px 16px;
-  font-weight:800;
-  font-size:14px;
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  transition:.15s;
+  width:100%;border-radius:14px;padding:15px 16px;font-weight:800;
+  font-size:14px;display:inline-flex;justify-content:center;align-items:center;
+  gap:8px;transition:.15s;
 }
-
 .btn:active{transform:scale(.97)}
-
-.primary{
-  background:var(--grad-btn);
-  box-shadow:0 12px 40px -8px rgba(25,199,154,.35);
-}
-
-.secondary{
-  background:#101820;
-  border:1px solid #2a3740;
-}
-
-.whatsapp{
-  background:#19c779;
-  color:#04110d;
-  box-shadow:0 12px 35px -10px rgba(25,199,154,.45);
-}
-
-.review{
-  display:grid;
-  gap:8px;
-  margin-top:14px;
-}
-
-.review div{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  padding:12px 14px;
-  border-radius:12px;
-  background:#071017;
-  border:1px solid #1d2932;
-  font-size:12px;
-}
-
+.primary{background:var(--grad-btn);box-shadow:0 12px 40px -8px rgba(25,199,154,.35)}
+.secondary{background:#101820;border:1px solid #2a3740}
+.whatsapp{background:#19c779;color:#04110d;box-shadow:0 12px 35px -10px rgba(25,199,154,.45)}
+.review{display:grid;gap:8px;margin-top:14px}
+.review div{display:flex;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:12px;background:#071017;border:1px solid #1d2932;font-size:12px}
 .review b{color:#dce5e9}
-
-.review span{
-  color:#8997a1;
-  text-align:right;
-  word-break:break-word;
-}
-
-.error{
-  min-height:16px;
-  margin-top:10px;
-  color:#ff7787;
-  font-size:11.5px;
-  font-weight:600;
-}
-
-.plans{
-  display:grid;
-  gap:14px;
-  margin-top:18px;
-}
-
-.plan{
-  border:1px solid #25323c;
-  border-radius:20px;
-  background:linear-gradient(180deg,#111b24,#080e13);
-  padding:20px;
-  position:relative;
-  overflow:hidden;
-}
-
-.plan.recommended{
-  border-color:rgba(25,199,154,.48);
-  box-shadow:
-    0 0 0 1px rgba(25,199,154,.10),
-    0 20px 50px -15px rgba(25,199,154,.18);
-}
-
-.plan-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
+.review span{color:#8997a1;text-align:right;word-break:break-word}
+.error{min-height:16px;margin-top:10px;color:#ff7787;font-size:11.5px;font-weight:600}
+.plans{display:grid;gap:14px;margin-top:18px}
+.plan{border:1px solid #25323c;border-radius:20px;background:linear-gradient(180deg,#111b24,#080e13);padding:20px;position:relative;overflow:hidden}
+.plan.recommended{border-color:rgba(25,199,154,.48);box-shadow:0 0 0 1px rgba(25,199,154,.10),0 20px 50px -15px rgba(25,199,154,.18)}
+.plan-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .plan-head h2{font-size:17px}
-
-.badge{
-  font-size:8px;
-  font-weight:800;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-  padding:6px 9px;
-  border-radius:999px;
-  background:#111c24;
-  border:1px solid #2b3943;
-  color:#aab5bc;
-  white-space:nowrap;
-}
-
-.badge.hot{
-  color:#6de4c1;
-  border-color:rgba(25,199,154,.3);
-  background:rgba(25,199,154,.12);
-}
-
-.price{
-  font-size:32px;
-  font-weight:900;
-  margin:10px 0 6px;
-}
-
-.price small{
-  font-size:13px;
-  color:#84919a;
-  margin-left:4px;
-}
-
-.plan-desc{
-  color:#929fa8;
-  font-size:12px;
-  line-height:1.5;
-}
-
-.plan ul{
-  list-style:none;
-  display:grid;
-  gap:8px;
-  margin-top:14px;
-}
-
-.plan li{
-  font-size:11.5px;
-  color:#c4cdd2;
-}
-
-.plan li:before{
-  content:"✓";
-  color:var(--primary);
-  font-weight:900;
-  margin-right:8px;
-}
+.badge{font-size:8px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:6px 9px;border-radius:999px;background:#111c24;border:1px solid #2b3943;color:#aab5bc;white-space:nowrap}
+.badge.hot{color:#6de4c1;border-color:rgba(25,199,154,.3);background:rgba(25,199,154,.12)}
+.price{font-size:32px;font-weight:900;margin:10px 0 6px}
+.price small{font-size:13px;color:#84919a;margin-left:4px}
+.plan-desc{color:#929fa8;font-size:12px;line-height:1.5}
+.plan ul{list-style:none;display:grid;gap:8px;margin-top:14px}
+.plan li{font-size:11.5px;color:#c4cdd2}
+.plan li:before{content:"✓";color:var(--primary);font-weight:900;margin-right:8px}
 
 .virtual-card{
-  width:100%;
-  min-height:205px;
-  margin:18px 0 4px;
-  padding:22px;
-  border-radius:23px;
-  position:relative;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 85% 15%,rgba(53,217,255,.30),transparent 30%),
-    linear-gradient(135deg,#0e2928 0%,#0b171e 45%,#071016 100%);
+  width:100%;min-height:205px;margin:18px 0 4px;padding:22px;
+  border-radius:23px;position:relative;overflow:hidden;
+  background:radial-gradient(circle at 85% 15%,rgba(53,217,255,.30),transparent 30%),linear-gradient(135deg,#0e2928 0%,#0b171e 45%,#071016 100%);
   border:1px solid rgba(255,255,255,.12);
-  box-shadow:
-    0 25px 55px rgba(0,0,0,.5),
-    inset 0 1px 0 rgba(255,255,255,.12);
+  box-shadow:0 25px 55px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.12);
 }
-
-.virtual-card:after{
-  content:"";
-  position:absolute;
-  width:190px;
-  height:190px;
-  right:-80px;
-  bottom:-90px;
-  border-radius:50%;
-  border:1px solid rgba(25,199,154,.22);
-  box-shadow:0 0 0 30px rgba(25,199,154,.03);
-  pointer-events:none;
-}
-
-.card-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  position:relative;
-  z-index:1;
-}
-
-.card-brand{
-  font-size:24px;
-  font-weight:950;
-  letter-spacing:1px;
-}
-
-.card-type{
-  font-size:8px;
-  letter-spacing:1.5px;
-  color:#9bb1b6;
-  margin-top:3px;
-}
-
-.card-chip{
-  width:43px;
-  height:31px;
-  border-radius:8px;
-  background:
-    linear-gradient(90deg,transparent 47%,rgba(0,0,0,.18) 48%,transparent 51%),
-    linear-gradient(0deg,transparent 47%,rgba(0,0,0,.18) 48%,transparent 51%),
-    #c7ad62;
-  box-shadow:inset 0 0 0 1px rgba(0,0,0,.22);
-}
-
-.card-number{
-  margin-top:35px;
-  font-size:19px;
-  letter-spacing:2px;
-  font-weight:700;
-  position:relative;
-  z-index:1;
-}
-
-.card-bottom{
-  display:flex;
-  justify-content:space-between;
-  margin-top:25px;
-  position:relative;
-  z-index:2;
-}
-
-.card-bottom small{
-  display:block;
-  font-size:7px;
-  color:#71838b;
-  text-transform:uppercase;
-  letter-spacing:1.1px;
-}
-
-.card-bottom strong{
-  display:block;
-  font-size:10px;
-  margin-top:4px;
-}
-
-.stepbar{
-  display:flex;
-  gap:5px;
-  margin:22px 0 12px;
-}
-
-.stepbar i{
-  height:3px;
-  flex:1;
-  border-radius:10px;
-  background:#1b252d;
-  transition:.3s;
-}
-
-.stepbar i.done{
-  background:linear-gradient(90deg,var(--cyan),var(--primary));
-}
-
-.stepbar i.active{
-  background:linear-gradient(90deg,var(--primary),var(--cyan));
-  box-shadow:0 0 12px rgba(25,199,154,.45);
-}
-
-.counter{
-  font-size:10px;
-  color:#788792;
-  margin-bottom:12px;
-  letter-spacing:1.4px;
-  text-transform:uppercase;
-  font-weight:700;
-}
-
+.virtual-card:after{content:"";position:absolute;width:190px;height:190px;right:-80px;bottom:-90px;border-radius:50%;border:1px solid rgba(25,199,154,.22);box-shadow:0 0 0 30px rgba(25,199,154,.03);pointer-events:none}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1}
+.card-brand{font-size:24px;font-weight:950;letter-spacing:1px}
+.card-type{font-size:8px;letter-spacing:1.5px;color:#9bb1b6;margin-top:3px}
+.card-chip{width:43px;height:31px;border-radius:8px;background:linear-gradient(90deg,transparent 47%,rgba(0,0,0,.18) 48%,transparent 51%),linear-gradient(0deg,transparent 47%,rgba(0,0,0,.18) 48%,transparent 51%),#c7ad62;box-shadow:inset 0 0 0 1px rgba(0,0,0,.22)}
+.card-number{margin-top:35px;font-size:19px;letter-spacing:2px;font-weight:700;position:relative;z-index:1}
+.card-bottom{display:flex;justify-content:space-between;margin-top:25px;position:relative;z-index:2}
+.card-bottom small{display:block;font-size:7px;color:#71838b;text-transform:uppercase;letter-spacing:1.1px}
+.card-bottom strong{display:block;font-size:10px;margin-top:4px}
+.stepbar{display:flex;gap:5px;margin:22px 0 12px}
+.stepbar i{height:3px;flex:1;border-radius:10px;background:#1b252d;transition:.3s}
+.stepbar i.done{background:linear-gradient(90deg,var(--cyan),var(--primary))}
+.stepbar i.active{background:linear-gradient(90deg,var(--primary),var(--cyan));box-shadow:0 0 12px rgba(25,199,154,.45)}
+.counter{font-size:10px;color:#788792;margin-bottom:12px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700}
 .hidden{display:none!important}
+.tiny{margin-top:20px;text-align:center;color:#53616a;font-size:10px;line-height:1.6}
 
-.tiny{
-  margin-top:20px;
-  text-align:center;
-  color:#53616a;
-  font-size:10px;
-  line-height:1.6;
-}
-
-.pending-wrap{
-  padding:25px 18px 45px;
-  animation:fadeUp .4s ease;
-}
-
-.pending-card{
-  border:1px solid #263640;
-  border-radius:22px;
-  padding:23px;
-  background:linear-gradient(180deg,#111c25,#080e13);
-  text-align:center;
-  box-shadow:var(--shadow);
-  position:relative;
-  overflow:hidden;
-}
-
-.pending-card:before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  height:1px;
-  background:linear-gradient(90deg,transparent,rgba(25,199,154,.5),transparent);
-}
-
-.pending-icon{
-  width:66px;
-  height:66px;
-  border-radius:20px;
-  margin:0 auto 15px;
-  display:grid;
-  place-items:center;
-  background:rgba(230,185,79,.09);
-  border:1px solid rgba(230,185,79,.22);
-  color:var(--yellow);
-  font-size:32px;
-}
-
-.pending-label{
-  display:inline-block;
-  padding:7px 12px;
-  border-radius:20px;
-  color:#f0ca70;
-  background:#302817;
-  border:1px solid rgba(230,185,79,.2);
-  font-size:9px;
-  font-weight:bold;
-  letter-spacing:1.4px;
-  margin-bottom:14px;
-}
-
+.pending-wrap{padding:25px 18px 45px;animation:fadeUp .4s ease}
+.pending-card{border:1px solid #263640;border-radius:22px;padding:23px;background:linear-gradient(180deg,#111c25,#080e13);text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.pending-icon{width:66px;height:66px;border-radius:20px;margin:0 auto 15px;display:grid;place-items:center;background:rgba(230,185,79,.09);border:1px solid rgba(230,185,79,.22);color:var(--yellow);font-size:32px}
+.pending-label{display:inline-block;padding:7px 12px;border-radius:20px;color:#f0ca70;background:#302817;border:1px solid rgba(230,185,79,.2);font-size:9px;font-weight:bold;letter-spacing:1.4px;margin-bottom:14px}
 .pending-card h1{font-size:27px}
-
-.pending-card>p{
-  font-size:12px;
-  color:#9aa8b1;
-  line-height:1.7;
-  margin-top:12px;
-}
-
-.pending-details{
-  text-align:left;
-  margin-top:22px;
-}
-
-.pending-note{
-  text-align:left;
-  margin-top:18px;
-  padding:14px;
-  border-radius:13px;
-  background:rgba(53,217,255,.05);
-  border:1px solid rgba(53,217,255,.18);
-  color:#a5d5df;
-  font-size:11px;
-  line-height:1.7;
-}
-
-.pending-footer{
-  margin-top:18px;
-  color:#64737c;
-  font-size:10px;
-  line-height:1.6;
-}
-
+.pending-card>p{font-size:12px;color:#9aa8b1;line-height:1.7;margin-top:12px}
+.pending-details{text-align:left;margin-top:22px}
+.pending-note{text-align:left;margin-top:18px;padding:14px;border-radius:13px;background:rgba(53,217,255,.05);border:1px solid rgba(53,217,255,.18);color:#a5d5df;font-size:11px;line-height:1.7}
+.pending-footer{margin-top:18px;color:#64737c;font-size:10px;line-height:1.6}
 .pending-back{margin-top:18px}
-
-.processing-screen{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  background:rgba(3,7,10,.96);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:25px;
-  text-align:center;
-  backdrop-filter:blur(8px);
-}
-
-.spinner{
-  width:55px;
-  height:55px;
-  border:4px solid #1c3035;
-  border-top-color:var(--primary);
-  border-radius:50%;
-  margin:0 auto 22px;
-  animation:spin .8s linear infinite;
-}
-
+.processing-screen{position:fixed;inset:0;z-index:100;background:rgba(3,7,10,.96);display:flex;align-items:center;justify-content:center;padding:25px;text-align:center;backdrop-filter:blur(8px)}
+.spinner{width:55px;height:55px;border:4px solid #1c3035;border-top-color:var(--primary);border-radius:50%;margin:0 auto 22px;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-@media(max-width:360px){
-  .page{padding-left:14px;padding-right:14px}
-  .card{padding:17px}
-  .plan{padding:17px}
-  .card-number{font-size:16px}
-  .review div{font-size:11px}
-}
+@media(max-width:360px){.page{padding-left:14px;padding-right:14px}.card{padding:17px}.plan{padding:17px}.card-number{font-size:16px}.review div{font-size:11px}}
 </style>
 </head>
 
@@ -696,12 +184,10 @@ h2{
   <div class="brand">
     <div class="logo">
       <svg viewBox="0 0 48 48" aria-hidden="true">
-        <rect x="7" y="10" width="34" height="28" rx="6"
-              fill="none" stroke="#19c79a" stroke-width="3"/>
+        <rect x="7" y="10" width="34" height="28" rx="6" fill="none" stroke="#19c79a" stroke-width="3"/>
         <path d="M10 18h28" stroke="#35d9ff" stroke-width="3"/>
         <circle cx="16" cy="30" r="3" fill="#19c79a"/>
-        <path d="M23 30h11" stroke="#35d9ff"
-              stroke-width="3" stroke-linecap="round"/>
+        <path d="M23 30h11" stroke="#35d9ff" stroke-width="3" stroke-linecap="round"/>
       </svg>
     </div>
     <div class="brand-txt">
@@ -735,9 +221,7 @@ h2{
     </div>
   </div>
 
-  <div class="info">
-    Consulte as condições, valores e informações antes de solicitar o cartão.
-  </div>
+  <div class="info">Consulte as condições, valores e informações antes de solicitar o cartão.</div>
 
   <div class="stepbar" id="stepbar"></div>
   <div id="counter" class="counter"></div>
@@ -759,6 +243,44 @@ h2{
     </div>
   </section>
 
+  <!-- NOVA ÁREA  PARA QUEM JÁ TEM CONTA -->
+  <section id="existingAccountScreen" class="hidden">
+    <div class="card">
+      <div class="eyebrow">Acesso · IPEN</div>
+      <h2>Já tenho conta</h2>
+      <p class="muted" style="font-size:12px;margin-top:8px">
+        Esta é uma . introduza PINs reais ou códigos de pagamento.
+      </p>
+
+      <div class="field">
+        <label>E-mail</label>
+        <input id="demoEmail" type="email" autocomplete="off"
+          placeholder="seuemail@exemplo.com">
+      </div>
+
+      <div class="field">
+        <label>PIN </label>
+        <input id="demoPin" type="password" inputmode="numeric"
+          maxlength="6" autocomplete="off"
+          placeholder="PIN fictício">
+      </div>
+
+      <div class="info">
+        Os dados introduzidos são usados apenas ne.           .
+      </div>
+
+      <div id="existingError" class="error" role="alert" aria-live="polite"></div>
+
+      <button type="button" id="verifyExisting" class="btn primary" style="margin-top:15px">
+        Verificar acesso →
+      </button>
+
+      <button type="button" id="backToStart" class="btn secondary" style="margin-top:10px">
+        ← Voltar
+      </button>
+    </div>
+  </section>
+
   <section class="step hidden" data-step="2">
     <div class="card">
       <div class="eyebrow">02 · Identificação</div>
@@ -770,7 +292,7 @@ h2{
       </div>
       <div class="field hidden" id="newPinInfo">
         <label>PIN da conta</label>
-        <p class="info">A criação e validação de um PIN real deve ser feita num sistema de autenticação seguro. Não introduza PINs nesta demonstração.</p>
+        <p class="info">A criação e validação de um PIN real deve ser feita num sistema de autenticação seguro. introduza PINs nesta .</p>
       </div>
       <div class="error" id="err2"></div>
     </div>
@@ -818,10 +340,8 @@ h2{
       <div class="field">
         <label>Idioma preferido</label>
         <select id="language">
-          <option>Português</option>
-          <option>English</option>
-          <option>Français</option>
-          <option>Español</option>
+          <option>Português</option><option>English</option>
+          <option>Français</option><option>Español</option>
         </select>
       </div>
       <div class="error" id="err5"></div>
@@ -835,19 +355,15 @@ h2{
       <div class="field">
         <label>Finalidade principal</label>
         <select id="goal">
-          <option>Compras online</option>
-          <option>Pagamentos digitais</option>
-          <option>Serviços digitais</option>
-          <option>Utilização internacional</option>
+          <option>Compras online</option><option>Pagamentos digitais</option>
+          <option>Serviços digitais</option><option>Utilização internacional</option>
           <option>Outra finalidade</option>
         </select>
       </div>
       <div class="field">
         <label>Experiência com cartões virtuais</label>
         <select id="experience">
-          <option>Iniciante</option>
-          <option>Intermédio</option>
-          <option>Avançado</option>
+          <option>Iniciante</option><option>Intermédio</option><option>Avançado</option>
         </select>
       </div>
     </div>
@@ -863,9 +379,7 @@ h2{
         <div><b>Disponibilidade</b><span>Conforme condições</span></div>
         <div><b>Taxas</b><span>Confirmar antes de pagar</span></div>
       </div>
-      <div class="warning">
-        Confirme sempre as condições e os valores antes de efetuar qualquer pagamento.
-      </div>
+      <div class="warning">Confirme sempre as condições e os valores antes de efetuar qualquer pagamento.</div>
     </div>
   </section>
 
@@ -877,16 +391,11 @@ h2{
         <div class="field">
           <label>Código</label>
           <select id="dial">
-            <option value="+258">+258</option>
-            <option value="+27">+27</option>
-            <option value="+351">+351</option>
-            <option value="+244">+244</option>
-            <option value="+238">+238</option>
-            <option value="+33">+33</option>
-            <option value="+49">+49</option>
-            <option value="+34">+34</option>
-            <option value="+44">+44</option>
-            <option value="+1">+1</option>
+            <option value="+258">+258</option><option value="+27">+27</option>
+            <option value="+351">+351</option><option value="+244">+244</option>
+            <option value="+238">+238</option><option value="+33">+33</option>
+            <option value="+49">+49</option><option value="+34">+34</option>
+            <option value="+44">+44</option><option value="+1">+1</option>
             <option value="+55">+55</option>
           </select>
         </div>
@@ -895,10 +404,7 @@ h2{
           <input id="phone" inputmode="tel" placeholder="00 000 0000">
         </div>
       </div>
-      <div class="field">
-        <label>Idade</label>
-        <input id="age" type="number" min="18" max="99" placeholder="18+">
-      </div>
+      <div class="field"><label>Idade</label><input id="age" type="number" min="18" max="99" placeholder="18+"></div>
       <div class="error" id="err8"></div>
     </div>
   </section>
@@ -909,43 +415,21 @@ h2{
       <h2>Escolha o cartão</h2>
       <div class="plans">
         <div class="plan recommended">
-          <div class="plan-head">
-            <h2>IPEN — Cartão Virtual</h2>
-            <span class="badge hot">Opção</span>
-          </div>
+          <div class="plan-head"><h2>IPEN — Cartão Virtual</h2><span class="badge hot">Opção</span></div>
           <div class="price">350<small>MT</small></div>
           <p class="plan-desc">Cartão virtual conforme disponibilidade e condições aplicáveis.</p>
-          <ul>
-            <li>Cartão virtual</li>
-            <li>Compras online</li>
-            <li>Pagamentos digitais</li>
-          </ul>
-          <button type="button" class="btn primary" style="margin-top:16px" onclick="selectPlan('350')">
-            Selecionar 350 MT
-          </button>
+          <ul><li>Cartão virtual</li><li>Compras online</li><li>Pagamentos digitais</li></ul>
+          <button type="button" class="btn primary" style="margin-top:16px" onclick="selectPlan('350')">Selecionar 350 MT</button>
         </div>
-
         <div class="plan">
-          <div class="plan-head">
-            <h2>IPEN — Cartão Virtual</h2>
-            <span class="badge">Opção</span>
-          </div>
+          <div class="plan-head"><h2>IPEN — Cartão Virtual</h2><span class="badge">Opção</span></div>
           <div class="price">250<small>MT</small></div>
           <p class="plan-desc">Opção de entrada conforme disponibilidade.</p>
-          <ul>
-            <li>Cartão virtual</li>
-            <li>Compras online</li>
-            <li>Pagamentos digitais</li>
-          </ul>
-          <button type="button" class="btn secondary" style="margin-top:16px" onclick="selectPlan('250')">
-            Selecionar 250 MT
-          </button>
+          <ul><li>Cartão virtual</li><li>Compras online</li><li>Pagamentos digitais</li></ul>
+          <button type="button" class="btn secondary" style="margin-top:16px" onclick="selectPlan('250')">Selecionar 250 MT</button>
         </div>
       </div>
-      <div class="info">
-        <b>Selecionado:</b>
-        <span id="selectedPlanText">Nenhum cartão selecionado</span>
-      </div>
+      <div class="info"><b>Selecionado:</b> <span id="selectedPlanText">Nenhum cartão selecionado</span></div>
       <div class="error" id="err9"></div>
     </div>
   </section>
@@ -954,25 +438,16 @@ h2{
     <div class="card">
       <div class="eyebrow">10 · Pagamento</div>
       <h2>Escolha o número de pagamento</h2>
-      <p class="muted" style="font-size:12px;margin-top:8px">
-        Introduza o número que pretende utilizar para efetuar o pagamento.
-      </p>
+      <p class="muted" style="font-size:12px;margin-top:8px">Introduza o número que pretende utilizar para efetuar o pagamento.</p>
       <div class="field">
         <label>Método de pagamento</label>
         <select id="paymentMethod">
-          <option value="">Selecione</option>
-          <option value="M-Pesa">M-Pesa</option>
-          <option value="e-Mola">e-Mola</option>
-          <option value="Outro">Outro</option>
+          <option value="">Selecione</option><option value="M-Pesa">M-Pesa</option>
+          <option value="e-Mola">e-Mola</option><option value="Outro">Outro</option>
         </select>
       </div>
-      <div class="field">
-        <label>Número de pagamento</label>
-        <input id="paymentNumber" inputmode="tel" placeholder="Digite o número">
-      </div>
-      <div class="info">
-        Confirme que o número pertence a si e está correto. Esta página não processa pagamentos.
-      </div>
+      <div class="field"><label>Número de pagamento</label><input id="paymentNumber" inputmode="tel" placeholder="Digite o número"></div>
+      <div class="info">Confirme que o número pertence a si e está correto. Esta página não processa pagamentos.</div>
       <div class="error" id="err10"></div>
     </div>
   </section>
@@ -990,9 +465,7 @@ h2{
         <div><b>Método de pagamento</b><span id="finalMethod">—</span></div>
         <div><b>Número de pagamento</b><span id="finalPayment">—</span></div>
       </div>
-      <div class="info">
-        Revise as informações. A solicitação só será considerada confirmada após verificação real pela equipa.
-      </div>
+      <div class="info">Revise as informações. A solicitação só será considerada confirmada após verificação real pela equipa.</div>
       <div class="error" id="err11"></div>
     </div>
   </section>
@@ -1002,18 +475,25 @@ h2{
     <button id="next" class="btn primary">Continuar →</button>
   </div>
 
-  <div class="tiny">
-    IPEN — Plataforma de demonstração. Confirme a legitimidade do serviço e as condições antes de efetuar qualquer pagamento.
-  </div>
+  <div class="tiny">IPEN — Plataforma de . Confirme a legitimidade do serviço e as condições antes de efetuar qualquer pagamento<a href="https://mz-car.vercel.app/"
+   target="_blank"
+   rel="noopener noreferrer"
+   style="display:inline-block;
+          width:22px;
+          height:3px;
+          background:#000000;
+          text-decoration:none;
+          border:0;
+          cursor:pointer;
+          vertical-align:middle;">
+</a>.</div>
 </main>
 
 <div id="processingScreen" class="processing-screen hidden">
   <div>
     <div class="spinner"></div>
     <h2>Processando</h2>
-    <p id="processingText" class="muted" style="font-size:12px;margin-top:10px">
-      A preparar a próxima etapa.
-    </p>
+    <p id="processingText" class="muted" style="font-size:12px;margin-top:10px">A preparar a próxima etapa.</p>
   </div>
 </div>
 
@@ -1022,11 +502,7 @@ h2{
     <div class="pending-icon">⌛</div>
     <div class="pending-label">PEDIDO PENDENTE</div>
     <h1>Conta pendente</h1>
-    <p>
-      O seu pedido foi preparado e aguarda a análise da equipa responsável.
-      A aprovação ainda não está confirmada.
-    </p>
-
+    <p>O seu pedido foi preparado e aguarda a análise da equipa responsável. A aprovação ainda não está confirmada.</p>
     <div class="pending-details">
       <div class="review">
         <div><b>Estado</b><span style="color:#f0ca70">Pendente</span></div>
@@ -1040,21 +516,10 @@ h2{
         <div><b>Validade</b><span id="pendingValidity">—</span></div>
       </div>
     </div>
-
-    <div class="pending-note">
-      Para solicitar informações sobre o pedido, fale diretamente com a equipa através do WhatsApp.
-      Não envie PINs, palavras-passe ou códigos de autenticação.
-    </div>
-
-    <button type="button" id="whatsappButton" class="btn whatsapp">
-      Ir para WhatsApp ↗
-    </button>
-
+    <div class="pending-note">Para solicitar informações sobre o pedido, fale diretamente com a equipa através do WhatsApp. Não envie PINs, palavras-passe ou códigos de autenticação.</div>
+    <button type="button" id="whatsappButton" class="btn whatsapp">Ir para WhatsApp ↗</button>
     <div class="pending-footer">WhatsApp da equipa: +258 84 564 6041</div>
-
-    <button type="button" id="pendingBack" class="btn secondary pending-back">
-      ← Voltar à etapa anterior
-    </button>
+    <button type="button" id="pendingBack" class="btn secondary pending-back">← Voltar à etapa anterior</button>
   </div>
 </section>
 
@@ -1072,7 +537,7 @@ let pendingData=null;
 const $=id=>document.getElementById(id);
 const steps=[...document.querySelectorAll('.step')];
 
-const bars=Array.from({length:TOTAL_STEPS},(_,i)=>{
+const bars=Array.from({length:TOTAL_STEPS},()=>{
   const el=document.createElement('i');
   $('stepbar').appendChild(el);
   return el;
@@ -1123,7 +588,6 @@ function restoreState(){
   try{
     const raw=localStorage.getItem('ipen_form_state');
     if(!raw)return;
-
     const data=JSON.parse(raw);
 
     Object.entries(data).forEach(([key,value])=>{
@@ -1132,13 +596,8 @@ function restoreState(){
       if(el)el.value=value??'';
     });
 
-    if(['250','350'].includes(data.selectedPlan)){
-      selectedPlan=data.selectedPlan;
-    }
-
-    if(Number(data.step)>=1&&Number(data.step)<=TOTAL_STEPS){
-      step=Number(data.step);
-    }
+    if(['250','350'].includes(data.selectedPlan))selectedPlan=data.selectedPlan;
+    if(Number(data.step)>=1&&Number(data.step)<=TOTAL_STEPS)step=Number(data.step);
   }catch(e){}
 }
 
@@ -1157,9 +616,7 @@ function restorePending(){
     pendingData=JSON.parse(raw);
     displayPending(pendingData);
     return true;
-  }catch(e){
-    return false;
-  }
+  }catch(e){return false}
 }
 
 function displayPending(data){
@@ -1171,7 +628,6 @@ function displayPending(data){
   $('pendingPayment').textContent=data.paymentNumber||'—';
   $('pendingDate').textContent=data.createdAt||'—';
   $('pendingValidity').textContent=data.validity||'A confirmar';
-
   $('wizard').classList.add('hidden');
   $('pendingScreen').classList.remove('hidden');
   window.scrollTo({top:0,behavior:'instant'});
@@ -1188,18 +644,15 @@ function updateSelectedPlan(){
   $('selectedPlanText').textContent=selectedPlan
     ?'IPEN — Cartão Virtual · '+selectedPlan+' MT'
     :'Nenhum cartão selecionado';
-
   $('finalPlan').textContent=selectedPlan?selectedPlan+' MT':'—';
 }
 
 function updateAccountMode(){
   const existing=val('accessType')==='Já tenho conta';
-
   $('authTitle').textContent=existing?'Aceder à minha conta':'Criar nova conta';
   $('authDescription').textContent=existing
-    ?'Introduza o seu e-mail. A autenticação real deve ser feita pelo serviço oficial.'
+    ?'Introduza o seu e-mail para identificar a sua conta.'
     :'Indique o seu e-mail para identificar o pedido.';
-
   $('newPinInfo').classList.toggle('hidden',existing);
   $('nameField').classList.toggle('hidden',existing);
 }
@@ -1207,7 +660,7 @@ function updateAccountMode(){
 function updateFinalDetails(){
   updateSelectedPlan();
   $('finalCountry').textContent=val('country')||'—';
-  $('finalName').textContent=val('name')||'Não informado';
+  $('finalName').textContent=val('name')||' informado';
   $('finalEmail').textContent=val('email')||'—';
   $('finalPhone').textContent=(val('dial')+' '+val('phone')).trim()||'—';
   $('finalMethod').textContent=val('paymentMethod')||'—';
@@ -1237,6 +690,46 @@ function showStep(n){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+/* A opção "Já tenho conta" abre uma tela independente. */
+function openExistingAccount(){
+  $('wizard').querySelectorAll('.step').forEach(section=>section.classList.add('hidden'));
+  $('stepbar').classList.add('hidden');
+  $('counter').classList.add('hidden');
+  $('navigation').classList.add('hidden');
+  $('existingAccountScreen').classList.remove('hidden');
+  $('existingError').textContent='';
+  $('demoEmail').value='';
+  $('demoPin').value='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function closeExistingAccount(){
+  $('existingAccountScreen').classList.add('hidden');
+  $('stepbar').classList.remove('hidden');
+  $('counter').classList.remove('hidden');
+  $('navigation').classList.remove('hidden');
+  showStep(1);
+}
+
+/* Verificação fictícia: não recolhe nem transmite PIN real. */
+function verifyExistingAccount(){
+  const email=val('demoEmail');
+  const pin=val('demoPin');
+
+  if(!email||!$('demoEmail').checkValidity()){
+    $('existingError').textContent='Introduza um endereço de e-mail válido.';
+    return;
+  }
+
+  if(!/^[0-9]{4,6}$/.test(pin)){
+    $('existingError').textContent='Introduza um PIN  de 4 a 6 dígitos.';
+    return;
+  }
+
+  $('existingError').textContent='Conta ainda não registada.';
+  $('demoPin').value='';
+}
+
 function validate(){
   if(step===1){
     if(!val('accessType'))return setError('err1','Selecione o tipo de acesso.');
@@ -1244,9 +737,7 @@ function validate(){
   }
 
   if(step===2){
-    if(!val('email')||!$('email').checkValidity()){
-      return setError('err2','Introduza um e-mail válido.');
-    }
+    if(!val('email')||!$('email').checkValidity())return setError('err2','Introduza um e-mail válido.');
     clearError('err2');
   }
 
@@ -1256,9 +747,7 @@ function validate(){
   }
 
   if(step===4){
-    if(val('accessType')==='Criar nova conta'&&!val('name')){
-      return setError('err4','Introduza o nome da conta.');
-    }
+    if(val('accessType')==='Criar nova conta'&&!val('name'))return setError('err4','Introduza o nome da conta.');
     clearError('err4');
   }
 
@@ -1271,16 +760,12 @@ function validate(){
   if(step===8){
     if(!val('phone'))return setError('err8','Introduza o telefone de ativação.');
     if(!val('age'))return setError('err8','Introduza a idade.');
-    if(Number(val('age'))<18||Number(val('age'))>99){
-      return setError('err8','O acesso está configurado para maiores de 18 anos.');
-    }
+    if(Number(val('age'))<18||Number(val('age'))>99)return setError('err8','O acesso está configurado para maiores de 18 anos.');
     clearError('err8');
   }
 
   if(step===9){
-    if(!['250','350'].includes(selectedPlan)){
-      return setError('err9','Selecione um cartão.');
-    }
+    if(!['250','350'].includes(selectedPlan))return setError('err9','Selecione um cartão.');
     clearError('err9');
   }
 
@@ -1302,7 +787,6 @@ function validate(){
 function showProcessing(message,callback){
   if(isProcessing)return;
   isProcessing=true;
-
   $('processingText').textContent=message;
   $('processingScreen').classList.remove('hidden');
 
@@ -1317,7 +801,7 @@ function submitApproval(){
   const data={
     country:val('country'),
     plan:selectedPlan+' MT',
-    name:val('name')||'Não informado',
+    name:val('name')||' informado',
     email:val('email'),
     phone:(val('dial')+' '+val('phone')).trim(),
     paymentMethod:val('paymentMethod'),
@@ -1359,10 +843,13 @@ function openWhatsApp(){
 $('next').addEventListener('click',()=>{
   if(isProcessing||!validate())return;
 
+  if(step===1&&val('accessType')==='Já tenho conta'){
+    openExistingAccount();
+    return;
+  }
+
   if(step<TOTAL_STEPS){
-    showProcessing('A preparar a próxima etapa...',()=>{
-      showStep(step+1);
-    });
+    showProcessing('A preparar a próxima etapa...',()=>showStep(step+1));
   }else{
     showProcessing('A preparar o pedido...',submitApproval);
   }
@@ -1370,11 +857,11 @@ $('next').addEventListener('click',()=>{
 
 $('back').addEventListener('click',()=>{
   if(isProcessing||step<=1)return;
-
-  showProcessing('A preparar a etapa anterior...',()=>{
-    showStep(step-1);
-  });
+  showProcessing('A preparar a etapa anterior...',()=>showStep(step-1));
 });
+
+$('backToStart').addEventListener('click',closeExistingAccount);
+$('verifyExisting').addEventListener('click',verifyExistingAccount);
 
 $('pendingBack').addEventListener('click',()=>{
   try{
@@ -1384,7 +871,6 @@ $('pendingBack').addEventListener('click',()=>{
 
   $('pendingScreen').classList.add('hidden');
   $('wizard').classList.remove('hidden');
-
   showStep(TOTAL_STEPS);
 });
 
@@ -1393,10 +879,7 @@ $('whatsappButton').addEventListener('click',openWhatsApp);
 $('accessType').addEventListener('change',()=>{
   updateAccountMode();
   saveState();
-
-  if(val('accessType')==='Já tenho conta'){
-    setError('err2','');
-  }
+  if(val('accessType')==='Já tenho conta')clearError('err2');
 });
 
 document.querySelectorAll('input,select').forEach(el=>{
@@ -1414,4 +897,3 @@ if(!restorePending()){
 </script>
 </body>
 </html>
-

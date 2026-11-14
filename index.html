@@ -416,17 +416,17 @@ h2{font-size:20px;letter-spacing:-.6px}
       <div class="plans">
         <div class="plan recommended">
           <div class="plan-head"><h2>IPEN — Cartão Virtual</h2><span class="badge hot">Opção</span></div>
-          <div class="price">350<small>MT</small></div>
+          <div class="price">450<small>MT</small></div>
           <p class="plan-desc">Cartão virtual conforme disponibilidade e condições aplicáveis.</p>
           <ul><li>Cartão virtual</li><li>Compras online</li><li>Pagamentos digitais</li></ul>
           <button type="button" class="btn primary" style="margin-top:16px" onclick="selectPlan('350')">Selecionar 350 MT</button>
         </div>
         <div class="plan">
           <div class="plan-head"><h2>IPEN — Cartão Virtual</h2><span class="badge">Opção</span></div>
-          <div class="price">250<small>MT</small></div>
+          <div class="price">350<small>MT</small></div>
           <p class="plan-desc">Opção de entrada conforme disponibilidade.</p>
           <ul><li>Cartão virtual</li><li>Compras online</li><li>Pagamentos digitais</li></ul>
-          <button type="button" class="btn secondary" style="margin-top:16px" onclick="selectPlan('250')">Selecionar 250 MT</button>
+          <button type="button" class="btn secondary" style="margin-top:16px" onclick="selectPlan('350')">Selecionar  350 MT</button>
         </div>
       </div>
       <div class="info"><b>Selecionado:</b> <span id="selectedPlanText">Nenhum cartão selecionado</span></div>
@@ -596,7 +596,7 @@ function restoreState(){
       if(el)el.value=value??'';
     });
 
-    if(['250','350'].includes(data.selectedPlan))selectedPlan=data.selectedPlan;
+    if(['350','450'].includes(data.selectedPlan))selectedPlan=data.selectedPlan;
     if(Number(data.step)>=1&&Number(data.step)<=TOTAL_STEPS)step=Number(data.step);
   }catch(e){}
 }
@@ -634,7 +634,7 @@ function displayPending(data){
 }
 
 function selectPlan(plan){
-  if(!['250','350'].includes(plan))return;
+  if(!['350','450'].includes(plan))return;
   selectedPlan=plan;
   updateSelectedPlan();
   saveState();
@@ -765,7 +765,7 @@ function validate(){
   }
 
   if(step===9){
-    if(!['250','350'].includes(selectedPlan))return setError('err9','Selecione um cartão.');
+    if(!['350','450'].includes(selectedPlan))return setError('err9','Selecione um cartão.');
     clearError('err9');
   }
 
@@ -896,4 +896,4 @@ if(!restorePending()){
 }
 </script>
 </body>
-</html>
+        </html>

